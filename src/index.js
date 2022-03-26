@@ -3,11 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Login from './pages/Login';
+import {Login} from './pages/Login';
+import Tab from './components/Tab'
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <Tab/>
+    <Login/>
   </React.StrictMode>,
   document.getElementById("root")
 );
