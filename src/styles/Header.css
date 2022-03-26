@@ -1,0 +1,23 @@
+.Header {
+  position: relative;
+  width: 100vw;
+  height: 20vw;
+  max-width: 100%;
+  background: linear-gradient(
+      rgba(239, 239, 239, 0.5),
+      rgba(239, 239, 239, 0.5)
+    ),
+    url("/public/images/header_dog.jpg");
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.Header-Text {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  color: darkorange;
+  font-weight: 700;
+  font-size: x-large;
+}

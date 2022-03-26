@@ -1,0 +1,36 @@
+.Tab-Bar {
+    background: black;
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+    white-space: nowrap;
+  /* padding: 1rem; */
+  /* background: transparent;
+  height: 70px;
+
+
+  display: flex; */
+  /* background-origin: border-box;
+  border-top-width: 0.1px;
+  border-top-style: solid;
+  border-top-color: lightgray;
+   */
+}
+
+.Tab li {
+    font-size: 1rem;
+    font-weight: 300;
+    display: inline-block;
+    color: black;
+    padding: 1rem;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.Tab li.active {
+    background-color: #6f03b7;
+    height: 100%;
+  /* background-color: aqua;
+  height: 100%; */
+}
