@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import styles from "../styles/Login.module.css";
-<<<<<<< HEAD
 
 
 export const Login = () => {
