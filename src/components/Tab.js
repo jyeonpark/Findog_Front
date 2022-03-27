@@ -8,12 +8,14 @@ import MyPage from "../pages/MyPage";
 import classNames from "classnames";
 import SignUp from "../pages/SignUp";
 
-const tabMenuList = {
-  0: <AbandonedAnimal />,
-  1: <Board />,
-  2: <CenterMap />,
-  3: <MyPage />,
-};
+import { Link } from "react-router-dom";
+
+// const tabMenuList = {
+//   0: <AbandonedAnimal />,
+//   1: <Board />,
+//   2: <CenterMap />,
+//   3: <MyPage />,
+// };
 
 function Tab(props) {
   const [menu, setMenu] = useState(0);
@@ -23,26 +25,32 @@ function Tab(props) {
     <div className="Tab-Wrap">
       <div className="Tab-Bar">
         <ul className="Tab">
-          <li
-            className={classNames(Tab, `${menu === 0 ? "active" : ""}`)}
-            onClick={() => {
-              setMenu(0);
-            }}
-          >
-            유기동물
-          </li>
-          <li
-            className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
-            onClick={() => setMenu(1)}
-          >
-            게시판
-          </li>
-          <li
-            className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
-            onClick={() => setMenu(2)}
-          >
-            유기센터
-          </li>
+          <Link to="/">
+            <li
+              className={classNames(Tab, `${menu === 0 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(0);
+              }}
+            >
+              유기동물
+            </li>
+          </Link>
+          <Link to="/login">
+            <li
+              className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
+              onClick={() => setMenu(1)}
+            >
+              게시판
+            </li>
+          </Link>
+          <Link to="/signUp">
+            <li
+              className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
+              onClick={() => setMenu(2)}
+            >
+              유기센터
+            </li>
+          </Link>
           <li
             className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
             onClick={() => setMenu(3)}
@@ -51,7 +59,7 @@ function Tab(props) {
           </li>
         </ul>
       </div>
-      <div className="Tab-Content">{tabMenuList[menu]}</div>
+      {/* <div className="Tab-Content">{tabMenuList[menu]}</div> */}
     </div>
   );
 }
