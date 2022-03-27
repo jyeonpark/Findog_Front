@@ -1,0 +1,59 @@
+.flex {
+    display: flex;
+}
+
+.container {
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 2000px;
+}
+
+.header {
+    width: 35%;
+    text-align: center;
+    color: orange;
+    font-size: 40px;
+    padding: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.boxContainer {
+    border-left: orange;
+}
+
+.box {
+    width: 35%;
+    height: 60px;
+    margin-top: 10px;
+    cursor: auto;
+}
+
+.loginBtn{
+    width: 35.4%;
+    height: 60px;
+    margin-top: 15px;
+    font-size: 20px;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.one{
+    display: flex;
+    font-size: 20px;
+}
+
+.two{
+    margin-right: 20%;
+}
+
+.three {
+    margin-right: 15px;
+}
+
+.four {
+    margin-left: 15px;
+}

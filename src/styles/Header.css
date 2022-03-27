@@ -1,14 +1,13 @@
 .Header {
   position: relative;
-  white-space: nowrap;
   width: 100vw;
-  height: 20vw;
+  height: 200px;
   max-width: 100%;
   background: linear-gradient(
       rgba(239, 239, 239, 0.5),
       rgba(239, 239, 239, 0.5)
     ),
-    url("/public/images/header_dog.jpg");
+    url("../images/header_dog.jpg");
   background-position: center;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.3);

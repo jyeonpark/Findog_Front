@@ -1,0 +1,112 @@
+.container {
+  width: 800px;
+  height: 2000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.SignUp-header {
+  text-align: center;
+  white-space: nowrap;
+  color: orange;
+  font-size: 40px;
+  padding: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.SignUp-boxContainer {
+  white-space: nowrap;
+  border-left: orange;
+}
+
+.SignUp-box {
+  margin-left: 10px;
+  margin-top: 20px;
+  cursor: auto;
+}
+
+.SignUp-boxText {
+  width: 150px;
+  text-align: left;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.SignUp-boxInput {
+  width: 400px;
+  display: inline-block;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+.SignUp-boxInput:focus {
+  outline: 2px solid gray;
+}
+
+.SignUp-duplicateBtn {
+  width: 100px;
+  height: 100%;
+  line-height: 35px;
+  background-color: orange;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  display: inline-block;
+  margin-left: 1px;
+}
+
+.SignUp-profile {
+  margin-left: 10px;
+  margin-top: 30px;
+  cursor: auto;
+}
+
+.SignUp-profileText {
+  width: 150px;
+  text-align: left;
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.SignUp-profileImageWrap {
+  width: 400px;
+  display: inline-block;
+  text-align: left;
+}
+
+.SignUp-profileImage {
+  width: 70px;
+  display: inline-block;
+  content: url("../images/profileImage.png");
+}
+
+.SignUp-Btn-Wrap {
+  white-space: nowrap;
+}
+
+.SignUp-Btn {
+  width: 350px;
+  height: 60px;
+  margin-top: 50px;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 300px;
+  margin-right: 20px;
+  border: none;
+
+  &.cancel {
+    background-color: lightgray;
+  }
+
+  &.signUp {
+    background-color: orange;
+  }
+}
