@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import Header from "../components/Header";
 import Tab from "../components/Tab";
 
-function Login() {
+function SignUp() {
   return (
-    <div className="Login">로그인</div>
+    <div className="SignUp">
+
+      <div className="SignUp-Text">회원가입</div>
+    </div>
   );
 }
 
-export default Login;
+export default SignUp;
