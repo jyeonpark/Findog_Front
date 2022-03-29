@@ -16,17 +16,16 @@ export const Login = () => {
                     </div>
                 </div>
                 <button className={styles.loginBtn}>로그인</button>
-                <div className={styles.one}>
-                    <span className={styles.two}>회원가입</span>
-                    <div>
-                        <span className={styles.three}>아이디 찾기</span>
-                        <span>|</span>
-                        <span className={styles.four}>비밀번호 찾기</span>
+                <div className={styles.bottom}>
+                    <span className={styles.signup}>회원가입</span>
+                    <div className={styles.bottomRight}>
+                        <div className={styles.idSearch}>아이디 찾기</div>
+                        <div>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                        <div className={styles.pwSearch}>비밀번호 찾기</div>
                     </div>
                 </div>
             </div>
     );
-
 }
 
 export default Login;

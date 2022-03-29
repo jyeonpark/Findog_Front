@@ -10,16 +10,15 @@ import SignUp from "../pages/SignUp";
 
 import { Link } from "react-router-dom";
 
-// const tabMenuList = {
-//   0: <AbandonedAnimal />,
-//   1: <Board />,
-//   2: <CenterMap />,
-//   3: <MyPage />,
-// };
+const tabMenuList = {
+  0: <AbandonedAnimal />,
+  1: <Board />,
+  2: <CenterMap />,
+  3: <MyPage />,
+};
 
 function Tab(props) {
   const [menu, setMenu] = useState(0);
-  //   const [tabVisible, setTabVisibility] = useState(props.name === "회원가입" ? false : true);
 
   return (
     <div className="Tab-Wrap">
@@ -35,7 +34,7 @@ function Tab(props) {
               유기동물
             </li>
           </Link>
-          <Link to="/login">
+          <Link to="/board">
             <li
               className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
               onClick={() => setMenu(1)}
@@ -43,7 +42,7 @@ function Tab(props) {
               게시판
             </li>
           </Link>
-          <Link to="/signUp">
+          <Link to="*">
             <li
               className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
               onClick={() => setMenu(2)}
@@ -51,12 +50,14 @@ function Tab(props) {
               유기센터
             </li>
           </Link>
-          <li
-            className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
-            onClick={() => setMenu(3)}
-          >
-            마이페이지
-          </li>
+          <Link to="/mypage">
+            <li
+              className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
+              onClick={() => setMenu(3)}
+            >
+              마이페이지
+            </li>
+          </Link>
         </ul>
       </div>
       {/* <div className="Tab-Content">{tabMenuList[menu]}</div> */}

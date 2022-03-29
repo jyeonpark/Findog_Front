@@ -7,10 +7,12 @@
 }
 
 .container {
-    width: 600px;
-    height: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 800px;
+  height: fit-content;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .header {
@@ -23,7 +25,10 @@
 }
 
 .boxContainer {
+    width: 600px;
     border-left: orange;
+    text-align: left;
+    margin-left: 100px;
 }
 
 .box {
@@ -43,23 +48,19 @@
     font-weight: bold;
     margin-bottom: 20px;
     border: none;
+    margin-left: 100px;
 }
 
-.one{
-
+.bottom{
+    width: 610px;
     display: flex;
+    margin-left: 100px;
     font-size: 20px;
+    margin-bottom: 300px;
+    justify-content: space-between;
 }
 
-.two{
-    margin-left: 2px;
-    margin-right: 293px;
-}
-
-.three {
-    margin-right: 15px;
-}
-
-.four {
-    margin-left: 15px;
+.bottomRight{
+    float: right;
+    display: flex;
 }

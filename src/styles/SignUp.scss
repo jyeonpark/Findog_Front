@@ -1,6 +1,7 @@
 .container {
   width: 800px;
-  height: 2000px;
+  height: fit-content;
+  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -21,8 +22,10 @@
 }
 
 .SignUp-box {
-  margin-left: 10px;
-  margin-top: 20px;
+  width: 600px;
+  text-align: left;
+  margin-left: 50px;
+  margin-top: 30px;
   cursor: auto;
 }
 
@@ -36,7 +39,7 @@
 .SignUp-boxInput {
   width: 400px;
   display: inline-block;
-  height: 30px;
+  height: 40px;
   border: 1px solid lightgray;
   border-radius: 3px;
   vertical-align: top;
@@ -50,7 +53,7 @@
 .SignUp-duplicateBtn {
   width: 100px;
   height: 100%;
-  line-height: 35px;
+  line-height: 45px;
   background-color: orange;
   border-radius: 3px;
   color: white;
@@ -62,7 +65,9 @@
 }
 
 .SignUp-profile {
-  margin-left: 10px;
+  width: 600px;
+  text-align: left;
+  margin-left: 50px;
   margin-top: 30px;
   cursor: auto;
 }
@@ -82,7 +87,7 @@
 }
 
 .SignUp-profileImage {
-  width: 70px;
+  width: 100px;
   display: inline-block;
   content: url("../images/profileImage.png");
 }
@@ -92,9 +97,9 @@
 }
 
 .SignUp-Btn {
-  width: 350px;
+  width: 380px;
   height: 60px;
-  margin-top: 50px;
+  margin-top: 80px;
   font-size: 20px;
   color: white;
   font-weight: bold;
