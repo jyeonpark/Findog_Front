@@ -58,6 +58,28 @@
     font-size: 20px;
     margin-bottom: 300px;
     justify-content: space-between;
+    
+}
+
+.signup{
+    font-size: 1rem;
+    font-weight: 300;
+    display: inline-block;
+    color: black;
+}
+
+.idSearch{
+    font-size: 1rem;
+    font-weight: 300;
+    display: inline-block;
+    color: black;
+}
+
+.pwSearch{
+    font-size: 1rem;
+    font-weight: 300;
+    display: inline-block;
+    color: black;
 }
 
 .bottomRight{

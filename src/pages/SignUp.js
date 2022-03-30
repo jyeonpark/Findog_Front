@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "../styles/SignUp.scss";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
+
 
 function SignUp() {
   return (
@@ -53,9 +55,12 @@ function SignUp() {
       </div>
 
       <div className="SignUp-Btn-Wrap">
-        <span className="SignUp-Btn">
-          <button className={classNames("SignUp-Btn", "cancel")}>취소</button>
-        </span>
+        <Link to="/login">
+          <span className="SignUp-Btn">
+            <button className={classNames("SignUp-Btn", "cancel")}>취소</button>
+          </span>
+        </Link>
+
         <span className="SignUp-Btn">
           <button className={classNames("SignUp-Btn", "signUp")}>
             회원가입

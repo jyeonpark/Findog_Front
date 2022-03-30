@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
@@ -12,11 +12,21 @@ import MyPage from "./pages/MyPage";
 import Board from "./pages/Board";
 
 function App() {
+  const [tabMenu, setTabMenu] = useState(0);
+  console.log(tabMenu);
+
+  const tabMenuChange = (tabMenu) => {
+    setTabMenu(tabMenu);
+    console.log(tabMenu);
+    console.log("tab menu 바뀜");
+  };
+  
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-        <Tab />
+        <Header tabMenu={tabMenu} tabMenuChange={tabMenuChange} />
+        <Tab tabMenu={tabMenu} tabMenuChange={tabMenuChange} />
         <Routes>
           <Route path="/" element={<AbandonedAnimal />}></Route>
           <Route path="/board" element={<Board />}></Route>
