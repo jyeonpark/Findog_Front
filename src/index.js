@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import { Login } from "./pages/Login";
 import Tab from "./components/Tab";
 import SignUp from "./pages/SignUp";
+import {BoardEditor} from "./components/BoardEditor"
 
 ReactDOM.render(
   <React.StrictMode>

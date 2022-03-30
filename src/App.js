@@ -7,6 +7,8 @@ import {Main} from "./pages/Main";
 import {Login} from "./pages/Login";
 import {NotFound} from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
+import {BoardEditor} from "./components/BoardEditor";
+
 
 function App() {
     return (
@@ -19,6 +21,7 @@ function App() {
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="*" element={<NotFound />}></Route>
                     <Route path="/signUp" element={<SignUp />}></Route>
+                    <Route path="/board/edit" element={<BoardEditor />}></Route>
                 </Routes>
 
             </BrowserRouter>
