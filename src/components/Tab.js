@@ -1,25 +1,29 @@
-import { tab } from "@testing-library/user-event/dist/tab";
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "../styles/Tab.css";
 import AbandonedAnimal from "../pages/AbandonedAnimal";
 import Board from "../pages/Board";
 import CenterMap from "../pages/CenterMap";
 import MyPage from "../pages/MyPage";
 import classNames from "classnames";
-import SignUp from "../pages/SignUp";
 
 import { Link } from "react-router-dom";
 
-// const tabMenuList = {
-//   0: <AbandonedAnimal />,
-//   1: <Board />,
-//   2: <CenterMap />,
-//   3: <MyPage />,
-// };
-
 function Tab(props) {
   const [menu, setMenu] = useState(0);
-  //   const [tabVisible, setTabVisibility] = useState(props.name === "회원가입" ? false : true);
+
+  useEffect(() => {
+    if (props.tabMenu == 0){
+      console.log("useeffect");
+      console.log(props.tabMenu);
+      console.log("\n");
+      setMenu(props.tabMenu);
+    }
+  }, [props.tabMenu]);
+
+  function setTabMenu() {
+    console.log("tabmenuset");
+    props.tabMenuChange(menu);
+  }
 
   return (
     <div className="Tab-Wrap">
@@ -27,39 +31,50 @@ function Tab(props) {
         <ul className="Tab">
           <Link to="/">
             <li
-              className={classNames(Tab, `${menu === 0 ? "active" : ""}`)}
+              className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
               onClick={() => {
-                setMenu(0);
+                setMenu(() => 1);
+                setTabMenu();
               }}
             >
               유기동물
             </li>
           </Link>
-          <Link to="/login">
+          <Link to="/board">
             <li
-              className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
-              onClick={() => setMenu(1)}
+              className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(() => 2);
+                setTabMenu();
+              }}
             >
               게시판
             </li>
           </Link>
-          <Link to="/signUp">
+          <Link to="*">
             <li
-              className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
-              onClick={() => setMenu(2)}
+              className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(() => 3);
+                setTabMenu();
+              }}
             >
               유기센터
             </li>
           </Link>
-          <li
-            className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
-            onClick={() => setMenu(3)}
-          >
-            마이페이지
-          </li>
+          <Link to="/mypage">
+            <li
+              className={classNames(Tab, `${menu === 4 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(() => 4);
+                setTabMenu();
+              }}
+            >
+              마이페이지
+            </li>
+          </Link>
         </ul>
       </div>
-      {/* <div className="Tab-Content">{tabMenuList[menu]}</div> */}
     </div>
   );
 }
