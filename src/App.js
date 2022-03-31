@@ -1,10 +1,10 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Tab from "./components/Tab";
 import { Main } from "./pages/Main";
-import { Login } from "./pages/Login";
+import Login from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
@@ -17,10 +17,12 @@ function App() {
 
   const tabMenuChange = (tabMenu) => {
     setTabMenu(tabMenu);
-    console.log(tabMenu);
-    console.log("tab menu 바뀜");
+    console.log("tab menu 바뀜", tabMenu);
   };
-  
+
+  useEffect(() => {
+    console.log("app rerendering", tabMenu);
+  }, [tabMenu]);
 
   return (
     <div className="App">
