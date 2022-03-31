@@ -13,7 +13,7 @@ import {Board} from "./pages/Board";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Board />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

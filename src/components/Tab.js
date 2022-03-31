@@ -36,7 +36,7 @@ function Tab(props) {
               유기동물
             </li>
           </Link>
-          <Link to="/board/edit">
+          <Link to="/board">
             <li
               className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
               onClick={() => setMenu(1)}

@@ -23,6 +23,7 @@ function App() {
                     <Route path="*" element={<NotFound />}></Route>
                     <Route path="/signUp" element={<SignUp />}></Route>
                     <Route path="/board/edit" element={<BoardEditor />}></Route>
+                    <Route path="/board" element={<Board />}></Route>
                 </Routes>
 
             </BrowserRouter>
