@@ -9,10 +9,11 @@ import { Login } from "./pages/Login";
 import Tab from "./components/Tab";
 import SignUp from "./pages/SignUp";
 import {BoardEditor} from "./components/BoardEditor"
+import {Board} from "./pages/Board";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Board />
   </React.StrictMode>,
   document.getElementById("root")
 );

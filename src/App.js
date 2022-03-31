@@ -8,6 +8,7 @@ import {Login} from "./pages/Login";
 import {NotFound} from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
 import {BoardEditor} from "./components/BoardEditor";
+import {Board} from "./pages/Board";
 
 
 function App() {
