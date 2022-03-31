@@ -3,23 +3,15 @@ import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
 function Header(props) {
-  function setTabMenu() {
-    props.tabMenuChange(0);
+  function setTabMenu(menu) {
+    console.log("settabmenu");
+    console.log(menu);
+    props.tabMenuChange(menu);
   }
 
-  return  (
+  return (
     <div className="Header">
       <div className="Container">
-        {/* <Link to="/signup">
-          <div
-            className="Container-Text"
-            onClick={() => {
-              setTabMenu();
-            }}
-          >
-            회원가입
-          </div>
-        </Link> */}
         <Link to="/login">
           <div
             className="Container-Text"
@@ -27,12 +19,21 @@ function Header(props) {
               setTabMenu(0);
             }}
           >
+            {" "}
             로그인
           </div>
         </Link>
       </div>
       <Link to="/">
-        <div className="Header-Text"> Findog</div>
+        <div
+          className="Header-Text"
+          onClick={() => {
+            setTabMenu(1);
+          }}
+        >
+          {" "}
+          Findog
+        </div>
       </Link>
     </div>
   );

@@ -12,18 +12,13 @@ function Tab(props) {
   const [menu, setMenu] = useState(0);
 
   useEffect(() => {
-    if (props.tabMenu == 0){
-      console.log("useeffect");
-      console.log(props.tabMenu);
-      console.log("\n");
-      setMenu(props.tabMenu);
-    }
+    console.log("useeffect", props.tabMenu);
+    setMenu(props.tabMenu);
   }, [props.tabMenu]);
 
-  function setTabMenu() {
-    console.log("tabmenuset");
+  const setTabMenu = (menu) => {
     props.tabMenuChange(menu);
-  }
+  };
 
   return (
     <div className="Tab-Wrap">
@@ -34,7 +29,7 @@ function Tab(props) {
               className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
               onClick={() => {
                 setMenu(() => 1);
-                setTabMenu();
+                setTabMenu(1);
               }}
             >
               유기동물
@@ -45,7 +40,7 @@ function Tab(props) {
               className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
               onClick={() => {
                 setMenu(() => 2);
-                setTabMenu();
+                setTabMenu(2);
               }}
             >
               게시판
@@ -56,7 +51,7 @@ function Tab(props) {
               className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
               onClick={() => {
                 setMenu(() => 3);
-                setTabMenu();
+                setTabMenu(3);
               }}
             >
               유기센터
@@ -67,7 +62,7 @@ function Tab(props) {
               className={classNames(Tab, `${menu === 4 ? "active" : ""}`)}
               onClick={() => {
                 setMenu(() => 4);
-                setTabMenu();
+                setTabMenu(4);
               }}
             >
               마이페이지
