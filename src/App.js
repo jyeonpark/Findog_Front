@@ -7,9 +7,10 @@ import { Main } from "./pages/Main";
 import Login from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
+import {BoardEditor} from "./components/BoardEditor";
+import {Board} from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
-import Board from "./pages/Board";
 
 function App() {
   const [tabMenu, setTabMenu] = useState(0);
@@ -35,6 +36,7 @@ function App() {
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/board/edit" element={<BoardEditor />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
       </BrowserRouter>

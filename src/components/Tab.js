@@ -1,3 +1,5 @@
+
+import {tab} from "@testing-library/user-event/dist/tab";
 import React, { Component, useEffect, useState } from "react";
 import "../styles/Tab.css";
 import AbandonedAnimal from "../pages/AbandonedAnimal";
@@ -5,10 +7,12 @@ import Board from "../pages/Board";
 import CenterMap from "../pages/CenterMap";
 import MyPage from "../pages/MyPage";
 import classNames from "classnames";
+import SignUp from "../pages/SignUp";
+import {Link} from "react-router-dom";
 
-import { Link } from "react-router-dom";
 
 function Tab(props) {
+
   const [menu, setMenu] = useState(0);
 
   useEffect(() => {

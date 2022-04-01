@@ -1,0 +1,94 @@
+.container {
+    width: 820px;
+    /* background-color: rgb(207, 196, 196); */
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.container__search {
+    display: flex;
+}
+
+.box__search {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.box__region {
+
+}
+
+.box__cate {
+
+}
+
+.box__filter {
+
+}
+
+.box__date {
+    margin-top: 20px;
+    display: flex;
+    background-color: white;
+
+}
+
+.box__option {
+    display: flex;
+    margin-top: 20px;
+}
+
+.btn__edit {
+    border: none;
+    background-color: orange;
+    color: white;
+    width: 150px;
+    height: 50px;
+}
+
+.box__check {
+    margin-left: 540px;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+.label__check {
+    margin-left: 10px;
+}
+
+.input__search {
+    width: 400px;
+    height: 30px;
+    border: none;
+    padding-inline-start: 10px;
+}
+
+.btn__search {
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: rgb(255, 224, 166);
+}
+
+.input__picker {
+    width: 100px;
+    height: 30px;
+    margin-left: 20px;
+    text-align: center;
+
+}
+.text__date {
+    font-size: 15px;
+}
+
+.input__date {
+    width: 100px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import {BoardTab} from "../components/BoardTab";
+import {BoardBox} from "../components/BoardBox";
 
-function Board() {
+export const Board = () => {
   return (
-    <div>게시판</div>
+    <div>
+      <BoardTab />
+      <BoardBox />
+    </div>
+    
   );
 }
 

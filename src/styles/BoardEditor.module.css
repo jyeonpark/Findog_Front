@@ -1,0 +1,55 @@
+.frag {
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    border-color: orange;
+    background-color: white;
+   
+    border: 3px solid orange;
+}
+
+.title {
+    width: 955px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.content {
+    width: 955px;
+    height: 440px;
+    margin-top: 20px;
+
+}
+
+.file__container {
+    
+}
+
+.btn__container {
+    margin-top: 20px;
+}
+
+.btn__cancel {
+    width: 300px;
+    height: 50px;
+    margin-right: 20px;
+    border: none;
+    background-color: #ecececdc;
+
+}
+
+.btn__confirm {
+    width: 300px;
+    height: 50px;
+    margin-left: 20px;
+    border: none;
+    background-color: orange;
+    color: white;
+}
