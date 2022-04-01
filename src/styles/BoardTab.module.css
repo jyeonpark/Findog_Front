@@ -65,6 +65,7 @@
     width: 400px;
     height: 30px;
     border: none;
+    padding-inline-start: 10px;
 }
 
 .btn__search {
@@ -78,6 +79,7 @@
     width: 100px;
     height: 30px;
     margin-left: 20px;
+    text-align: center;
 
 }
 .text__date {

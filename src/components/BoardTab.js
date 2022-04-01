@@ -8,7 +8,7 @@ export const BoardTab = () => {
                 <div className={styles.container__search}>
                     {/* 검색 */}
                     <div className={styles.box__search}>
-                        <input className={styles.input__search}/>
+                        <input className={styles.input__search} placeholder="내용을 입력해주세요"/>
                         <button className={styles.btn__search}>검색</button>
                     </div>
                     {/* 지역 카테고리 */}
@@ -44,11 +44,11 @@ export const BoardTab = () => {
                 <div className={styles.box__date}>
                     <div className={styles.text__date}>기간 :
                     </div>
-                    <input className={styles.input__date}/>
+                    <input className={styles.input__date} placeholder="2021.04.10"/>
                     <div>
                         ~
                     </div>
-                    <input className={styles.input__date}/>
+                    <input className={styles.input__date} placeholder="2022.04.10"/>
                 </div>
                 {/* 글쓰기, 관심목록 */}
                 <div className={styles.box__option}>

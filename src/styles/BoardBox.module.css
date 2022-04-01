@@ -22,9 +22,11 @@
 }
 
 .title {
+    width: 550px;
     font-weight: bold;
     font-size: large;
-
+    text-align: start;
+    padding-inline-start: 4px;
 }
 
 .content {
