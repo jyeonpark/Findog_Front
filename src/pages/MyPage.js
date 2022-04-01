@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
 function MyPage() {
-  return (
-    <div>게시판</div>
-  );
+  return <div>마이페이지</div>;
 }
 
 export default MyPage;

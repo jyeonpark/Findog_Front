@@ -2,19 +2,39 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
+function Header(props) {
+  function setTabMenu(menu) {
+    console.log("settabmenu");
+    console.log(menu);
+    props.tabMenuChange(menu);
+  }
 
-function Header() {
   return (
     <div className="Header">
       <div className="Container">
-        <Link to="/signUp">
-          <div className="Container-Text">회원가입</div>
-        </Link>
         <Link to="/login">
-          <div className="Container-Text">로그인</div>
+          <div
+            className="Container-Text"
+            onClick={() => {
+              setTabMenu(0);
+            }}
+          >
+            {" "}
+            로그인
+          </div>
         </Link>
       </div>
-      <div className="Header-Text">Findog</div>
+      <Link to="/">
+        <div
+          className="Header-Text"
+          onClick={() => {
+            setTabMenu(1);
+          }}
+        >
+          {" "}
+          Findog
+        </div>
+      </Link>
     </div>
   );
 }

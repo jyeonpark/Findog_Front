@@ -1,5 +1,6 @@
+
 import {tab} from "@testing-library/user-event/dist/tab";
-import React, {Component, useState} from "react";
+import React, { Component, useEffect, useState } from "react";
 import "../styles/Tab.css";
 import AbandonedAnimal from "../pages/AbandonedAnimal";
 import Board from "../pages/Board";
@@ -10,17 +11,18 @@ import SignUp from "../pages/SignUp";
 import {Link} from "react-router-dom";
 
 
-// const tabMenuList = {
-//   0: <AbandonedAnimal />,
-//   1: <Board />,
-//   2: <CenterMap />,
-//   3: <MyPage />,
-// };
-
 function Tab(props) {
-    const [menu, setMenu] = useState(0);
-    // const [tabVisible, setTabVisibility] = useState(props.name === "회원가입" ? false
-    // : true);
+
+  const [menu, setMenu] = useState(0);
+
+  useEffect(() => {
+    console.log("useeffect", props.tabMenu);
+    setMenu(props.tabMenu);
+  }, [props.tabMenu]);
+
+  const setTabMenu = (menu) => {
+    props.tabMenuChange(menu);
+  };
 
   return (
     <div className="Tab-Wrap">
@@ -28,9 +30,10 @@ function Tab(props) {
         <ul className="Tab">
           <Link to="/">
             <li
-              className={classNames(Tab, `${menu === 0 ? "active" : ""}`)}
+              className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
               onClick={() => {
-                setMenu(0);
+                setMenu(() => 1);
+                setTabMenu(1);
               }}
             >
               유기동물
@@ -38,29 +41,39 @@ function Tab(props) {
           </Link>
           <Link to="/board">
             <li
-              className={classNames(Tab, `${menu === 1 ? "active" : ""}`)}
-              onClick={() => setMenu(1)}
+              className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(() => 2);
+                setTabMenu(2);
+              }}
             >
               게시판
             </li>
           </Link>
-          <Link to="/signUp">
+          <Link to="*">
             <li
-              className={classNames(Tab, `${menu === 2 ? "active" : ""}`)}
-              onClick={() => setMenu(2)}
+              className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(() => 3);
+                setTabMenu(3);
+              }}
             >
               유기센터
             </li>
           </Link>
-          <li
-            className={classNames(Tab, `${menu === 3 ? "active" : ""}`)}
-            onClick={() => setMenu(3)}
-          >
-            마이페이지
-          </li>
+          <Link to="/mypage">
+            <li
+              className={classNames(Tab, `${menu === 4 ? "active" : ""}`)}
+              onClick={() => {
+                setMenu(() => 4);
+                setTabMenu(4);
+              }}
+            >
+              마이페이지
+            </li>
+          </Link>
         </ul>
       </div>
-      {/* <div className="Tab-Content">{tabMenuList[menu]}</div> */}
     </div>
   );
 }
