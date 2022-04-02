@@ -13,7 +13,7 @@ import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 
 function App() {
-  const [tabMenu, setTabMenu] = useState(0);
+  const [tabMenu, setTabMenu] = useState(1);
   console.log(tabMenu);
 
   const tabMenuChange = (tabMenu) => {

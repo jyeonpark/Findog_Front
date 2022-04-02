@@ -1,11 +1,12 @@
 .container {
-    width: 820px;
+    width: 850px;
     height: 160px;
     background-color: rgb(251, 223, 169);
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    padding: 20px;
+    padding: 20px; 
+    margin-bottom: 30px;
 }
 
 .box1 {
@@ -27,6 +28,7 @@
     font-size: large;
     text-align: start;
     padding-inline-start: 4px;
+   
 }
 
 .content {
@@ -67,7 +69,7 @@
 
 .photo {
     object-fit: fill;
-    width: 200px;
+    width: 230px;
     height: 120px;
 
 }
