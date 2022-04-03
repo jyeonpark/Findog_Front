@@ -10,7 +10,6 @@ const Container = styled.div`
   height: 250px;
   background-color: ${(props) =>
     props.IsRecruiting === "공고중" ? "rgb(251, 223, 169)" : "rgba(128, 128, 128, 0.2)"};
-  margin-right: 30px;
 `;
 
 const Box = styled.div`
@@ -59,29 +58,29 @@ const DogInfo = styled.div`
 const DogInfoDetail = styled.div`
 `;
 
-function AnimalList({ IsRecruiting, Gender, IsLike, Kind, RegisterDate, Location, RescuePlace }) {
+function AnimalItem({item, onClick}) {
+
+  const {IsRecruiting, Gender, isLike, Kind, RegisterDate, Location, RescuePlace} = item;
   return (
-    <Container IsRecruiting={IsRecruiting}>
+    <Container IsRecruiting={IsRecruiting} onClick={onClick}>
       <Box>
         <HeaderLeft>
           <RecruitState IsRecruiting={IsRecruiting}>{IsRecruiting}</RecruitState>
           <AnimalGender>{Gender}</AnimalGender>
         </HeaderLeft>
-        <LikeIcon size='2x' 
-        icon={IsLike ? solidHeart : regularHeart}
-        IsLike={IsLike}></LikeIcon>
+        <LikeIcon size='2x' icon={isLike ? solidHeart : regularHeart}></LikeIcon>
       </Box>
       <Box>
         <DogImage src={dogImage}></DogImage>
         <DogInfo>
           <DogInfoDetail>품종 : {Kind}</DogInfoDetail>
           <DogInfoDetail>등록일 : {RegisterDate}</DogInfoDetail>
-          <DogInfoDetail>지역 : {Location}</DogInfoDetail>
-          <DogInfoDetail>구조장소 : {RescuePlace}</DogInfoDetail>
+          <DogInfoDetail>지역 : {Location.slice(0,10)}</DogInfoDetail>
+          <DogInfoDetail>구조장소 : {RescuePlace.length < 30 ? RescuePlace : RescuePlace.slice(0,27) + '...'}</DogInfoDetail>
         </DogInfo>
       </Box>
     </Container>
   );
 }
 
-export default AnimalList;
+export default AnimalItem;
