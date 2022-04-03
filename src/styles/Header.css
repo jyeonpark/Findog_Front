@@ -25,8 +25,8 @@
   top: 15%;
   left: 50%;
   color: rgb(243, 156, 18);
-  font-weight: 700;
-  font-size: x-large;
+  font-weight: 800;
+  font-size: 30px;
 }
 
 .Container {
@@ -39,8 +39,8 @@
 
 .Container-Text {
   padding-left: 10px;
-  font-size: 1rem;
-  font-weight: 1000;
+  font-size: 23px;
+  font-weight: 800;
   display: inline-block;
   color: rgb(243, 156, 18);
 }
