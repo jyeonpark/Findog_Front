@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 
 const Container = styled.div`
   width: 1100px;
@@ -187,7 +189,10 @@ function OptionTab({
       </BoxDate>
       {/* 글쓰기, 관심목록 */}
       <BoxOption>
-        <BtnWrite WriteVisibility={WriteVisibility}>글쓰기</BtnWrite>
+        <Link to="/board/edit">
+          <BtnWrite WriteVisibility={WriteVisibility}>글쓰기</BtnWrite>
+        </Link>
+
         <BoxCheckInterest>
           <input type="checkbox"></input>
           <LabelCheck htmlFor="checkbox">{InterestText}</LabelCheck>

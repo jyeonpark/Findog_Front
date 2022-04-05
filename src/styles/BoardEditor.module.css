@@ -1,7 +1,5 @@
 .frag {
-    text-align: center;
-    flex-direction: column;
-    justify-content: space-between;
+
     margin: 0 auto;
 }
 
@@ -12,19 +10,23 @@
     border-color: orange;
     background-color: white;
     border: 3px solid orange;
+    margin-top: 100px;
 }
 
 .title {
     width: 955px;
     height: 40px;
     margin-bottom: 20px;
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .content {
     width: 955px;
     height: 440px;
     margin-top: 20px;
-
+    border-color: rgba(0, 0, 0, 0.2);
+    text-align: left;
+    padding: 10px
 }
 
 .file__container {
@@ -32,11 +34,12 @@
 }
 
 .btn__container {
-    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .btn__cancel {
-    width: 300px;
+    width: 480px;
     height: 50px;
     margin-right: 20px;
     border: none;
@@ -45,7 +48,7 @@
 }
 
 .btn__confirm {
-    width: 300px;
+    width: 480px;
     height: 50px;
     margin-left: 20px;
     border: none;
