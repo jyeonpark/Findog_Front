@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 const TabBar = styled.div`
   background: transparent;
-  width: 20%;
+  width: max-content;
   margin-bottom: 1rem;
   white-space: nowrap;
   margin-top: 80px;
+  padding-right: 50px;
 `;
 
 const TabUl = styled.ul``;
@@ -15,9 +16,11 @@ const TabUl = styled.ul``;
 const TabLi = styled.div`
   font-size: 1rem;
   font-weight: 300;
+  white-space: nowrap;
   color: black;
-  width: 80%;
   padding-top: 1rem;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 1rem;
   border-width: 1px;
   border-style: solid;
@@ -30,13 +33,25 @@ const TabLi = styled.div`
   }
 `;
 
+const TabLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
 function MyPageTab() {
   const [menu, setMenu] = useState(1);
 
   return (
     <TabBar>
       <TabUl>
-        <Link to="my_board">
+        <TabLink to="my_board">
           <TabLi
             className={menu === 1 ? "active" : ""}
             onClick={() => {
@@ -45,8 +60,8 @@ function MyPageTab() {
           >
             내가 작성한 글
           </TabLi>
-        </Link>
-        <Link to="my_comment">
+        </TabLink>
+        <TabLink to="my_comment">
           <TabLi
             className={menu === 2 ? "active" : ""}
             onClick={() => {
@@ -55,8 +70,8 @@ function MyPageTab() {
           >
             내가 작성한 댓글
           </TabLi>
-        </Link>
-        <Link to="my_interested_animal">
+        </TabLink>
+        <TabLink to="my_interested_animal">
           <TabLi
             className={menu === 3 ? "active" : ""}
             onClick={() => {
@@ -65,8 +80,8 @@ function MyPageTab() {
           >
             관심있는 동물
           </TabLi>
-        </Link>
-        <Link to="my_interested_board">
+        </TabLink>
+        <TabLink to="my_interested_board">
           <TabLi
             className={menu === 4 ? "active" : ""}
             onClick={() => {
@@ -75,8 +90,8 @@ function MyPageTab() {
           >
             관심있는 글
           </TabLi>
-        </Link>
-        <Link to="edit_info">
+        </TabLink>
+        <TabLink to="edit_info">
           <TabLi
             className={menu === 5 ? "active" : ""}
             onClick={() => {
@@ -85,7 +100,7 @@ function MyPageTab() {
           >
             내 정보 수정
           </TabLi>
-        </Link>
+        </TabLink>
       </TabUl>
     </TabBar>
   );
