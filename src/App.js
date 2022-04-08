@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Tab from "./components/Tab";
-import { Main } from "./pages/Main";
 import Login from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
@@ -34,7 +33,7 @@ function App() {
           <Route path="/" element={<AbandonedAnimal />}></Route>
           <Route path="/board" element={<Board />}></Route>
           <Route path="*" element={<NotFound />}></Route>
-          <Route path="/mypage" element={<MyPage />}></Route>
+          <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/board/edit" element={<BoardEditor />}></Route>
           <Route path="/login" element={<Login />}></Route>
