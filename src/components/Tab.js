@@ -12,8 +12,7 @@ const TabBar = styled.div`
   margin-top: 80px;
 `;
 
-const TabUl = styled.ul`
-`;
+const TabUl = styled.ul``;
 
 const TabLi = styled.div`
   font-size: 1rem;
@@ -37,7 +36,7 @@ const TabLi = styled.div`
 `;
 
 function Tab(props) {
-  const [menu, setMenu] = useState(1);
+  const [menu, setMenu] = useState(props.tabMenu);
 
   useEffect(() => {
     console.log("useeffect", props.tabMenu);
@@ -76,7 +75,7 @@ function Tab(props) {
           </Link>
           <Link to="*">
             <TabLi
-             className={menu === 3 ? "active" : ""}
+              className={menu === 3 ? "active" : ""}
               onClick={() => {
                 setMenu(() => 3);
                 setTabMenu(3);
@@ -87,7 +86,7 @@ function Tab(props) {
           </Link>
           <Link to="/mypage">
             <TabLi
-            className={menu === 4 ? "active" : ""}
+              className={menu === 4 ? "active" : ""}
               onClick={() => {
                 setMenu(() => 4);
                 setTabMenu(4);
