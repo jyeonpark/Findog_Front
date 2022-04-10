@@ -1,16 +1,17 @@
 import React, { Component, useState } from "react";
-import OptionTab from "../components/OptionTab";
 import AnimalItem from "../components/AnimalItem";
 import styled from "styled-components";
 import AnimalPopup from "../components/AnimalPopup";
 
 const Container = styled.div`
   width: fit-content;
+  height: fit-content;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 100px;
   display: grid;
-  grid-gap: 30px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const Body = styled.div`
