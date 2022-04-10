@@ -73,6 +73,7 @@ const CloseBtn = styled(FontAwesomeIcon)`
   width: 50px;
   height: 50px;
   float: right;
+  cursor: pointer;
 `;
 
 const ImageBox = styled.div`

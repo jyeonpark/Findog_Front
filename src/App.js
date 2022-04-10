@@ -12,7 +12,9 @@ import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 
 function App() {
-  const [tabMenu, setTabMenu] = useState(1);
+  const [tabMenu, setTabMenu] = useState(
+    () => JSON.parse(window.localStorage.getItem("tabMenu")) || 1
+  );
   console.log(tabMenu);
 
   const tabMenuChange = (tabMenu) => {
@@ -22,6 +24,7 @@ function App() {
 
   useEffect(() => {
     console.log("app rerendering", tabMenu);
+    window.localStorage.setItem("tabMenu", JSON.stringify(tabMenu));
   }, [tabMenu]);
 
   return (
