@@ -12,20 +12,22 @@ import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 
 function App() {
-  const [tabMenu, setTabMenu] = useState(
-    () => JSON.parse(window.localStorage.getItem("tabMenu")) || 1
-  );
-  console.log(tabMenu);
+
+  const currentTab = () => {
+    let path = window.location.pathname;
+    console.log("경로", path);
+    if (path === "/") return 1;
+    else if (path === "/board") return 2;
+    else if (path === "*") return 3;
+    else if (path === "/mypage/*") return 4;
+  };
+
+  const [tabMenu, setTabMenu] = useState(currentTab);
 
   const tabMenuChange = (tabMenu) => {
     setTabMenu(tabMenu);
     console.log("tab menu 바뀜", tabMenu);
   };
-
-  useEffect(() => {
-    console.log("app rerendering", tabMenu);
-    window.localStorage.setItem("tabMenu", JSON.stringify(tabMenu));
-  }, [tabMenu]);
 
   return (
     <div className="App">
