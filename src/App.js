@@ -6,20 +6,19 @@ import Tab from "./components/Tab";
 import Login from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
-import {BoardEditor} from "./components/BoardEditor";
-import {Board} from "./pages/Board";
+import { BoardEditor } from "./components/BoardEditor";
+import { Board } from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 
 function App() {
-
   const currentTab = () => {
     let path = window.location.pathname;
     console.log("경로", path);
-    if (path === "/") return 1;
-    else if (path === "/board") return 2;
-    else if (path === "*") return 3;
-    else if (path === "/mypage/*") return 4;
+    if (path == "/") return 1;
+    else if (path == "/board") return 2;
+    else if (path == "/*") return 3;
+    else if (path.includes("/mypage/")) return 4;
   };
 
   const [tabMenu, setTabMenu] = useState(currentTab);

@@ -18,6 +18,7 @@ const Box = styled.div`
   display: flex;
   padding: 12px;
   justify-content: space-between;
+  white-space: normal;
 `;
 
 const HeaderLeft = styled.div`
@@ -56,6 +57,7 @@ const DogInfo = styled.div`
 `;
 
 const DogInfoDetail = styled.div`
+overflow-x: hidden;
 `;
 
 function AnimalItem({item, onClick}) {
