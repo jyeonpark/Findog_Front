@@ -46,12 +46,22 @@ const TabLink = styled(Link)`
 `;
 
 function MyPageTab() {
-  const [menu, setMenu] = useState(1);
+  const currentTab = () => {
+    let path = window.location.pathname;
+    console.log("경로", path);
+    if (path === "/mypage") return 1;
+    else if (path === "/mypage/my_comment") return 2;
+    else if (path === "/mypage/my_interested_animal") return 3;
+    else if (path === "/mypage/my_interested_board") return 4;
+    else if (path === "/mypage/edit_info") return 5;
+  };
+
+  const [menu, setMenu] = useState(currentTab);
 
   return (
     <TabBar>
       <TabUl>
-        <TabLink to="my_board">
+        <TabLink to="">
           <TabLi
             className={menu === 1 ? "active" : ""}
             onClick={() => {
