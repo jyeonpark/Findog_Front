@@ -135,7 +135,7 @@ const LikeIcon = styled(FontAwesomeIcon)`
   float: right;
 `;
 
-function AnimalPopup({ onClose, visible }) {
+function AnimalPopup({ item, onClose, visible }) {
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
 
@@ -150,19 +150,22 @@ function AnimalPopup({ onClose, visible }) {
 
   if (!animate && !localVisible) return null;
 
-  const IsRecruiting = "공고중",
-    KeyNumber = "경남-창원시-2022-00107",
-    PreviewInfo = "암컷(중성화 X) / 흰색 + 크림색 / 3(kg)",
-    NoticePeriod = "2022-03-11 ~ 2022-03-19",
-    SpecialFeature = "L-3-1-8 흰색 + 크림색",
-    ProtectionCenter = "창원유기동물보호소(Tel: 055-225-5701)",
-    ManageCenter = "경상남도 창원시 의창성산구청 (Tel:123-345-2324)",
-    Gender = "수컷(중성화O)",
-    isLike = true,
-    Kind = "[개] 푸들",
-    RegisterDate = "2022-04-01",
-    Location = "전남 화순",
-    RescuePlace = "전라남도 화순군 화순읍 부영 6차 아파트";
+  const {
+    IsRecruiting,
+    KeyNumber,
+    PreviewInfo,
+    NoticePeriod,
+    SpecialFeature,
+    ProtectionCenter,
+    ManageCenter,
+    Gender,
+    isLike,
+    Kind,
+    RegisterDate,
+    Location,
+    RescuePlace,
+  } = item;
+
   return (
     <DarkBackground>
       <DialogBlock>
@@ -172,11 +175,11 @@ function AnimalPopup({ onClose, visible }) {
         <Body>
           <ImageBox>
             <DogImage src={dogImage}></DogImage>
-            <RecruiteState IsRecruiting={IsRecruiting}>공고중</RecruiteState>
+            <RecruiteState IsRecruiting={IsRecruiting}>{IsRecruiting}</RecruiteState>
           </ImageBox>
           <TextBox>
             <ImageBottomBox>
-              <DogKind>[개] 포메라니안</DogKind>
+              <DogKind>{Kind}</DogKind>
               <LikeIcon
                 size="2x"
                 icon={isLike ? solidHeart : regularHeart}

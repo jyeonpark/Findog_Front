@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidHeart} from "@fortawesome/free-solid-svg-icons";
-import dogImage from '../images/dog2.jpeg';
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import dogImage from "../images/dog2.jpeg";
 
 const Container = styled.div`
-  width: 350px;
+  width: 360px;
   height: 250px;
   background-color: ${(props) =>
-    props.IsRecruiting === "공고중" ? "rgb(251, 223, 169)" : "rgba(128, 128, 128, 0.2)"};
+    props.IsRecruiting === "공고중"
+      ? "rgb(251, 223, 169)"
+      : "rgba(128, 128, 128, 0.2)"};
 `;
 
 const Box = styled.div`
@@ -57,28 +59,53 @@ const DogInfo = styled.div`
 `;
 
 const DogInfoDetail = styled.div`
-overflow-x: hidden;
+  overflow: hidden;
 `;
 
-function AnimalItem({item, onClick}) {
+function AnimalItem({ item, onClick, onView }) {
+  const {
+    IsRecruiting,
+    KeyNumber,
+    Gender,
+    isLike,
+    Kind,
+    RegisterDate,
+    Location,
+    RescuePlace,
+  } = item;
 
-  const {IsRecruiting, Gender, isLike, Kind, RegisterDate, Location, RescuePlace} = item;
   return (
-    <Container IsRecruiting={IsRecruiting} onClick={onClick}>
+    <Container
+      IsRecruiting={IsRecruiting}
+      onClick={() => {
+        onClick();
+        onView(item.KeyNumber);
+      }}
+    >
       <Box>
         <HeaderLeft>
-          <RecruitState IsRecruiting={IsRecruiting}>{IsRecruiting}</RecruitState>
+          <RecruitState IsRecruiting={IsRecruiting}>
+            {IsRecruiting}
+          </RecruitState>
           <AnimalGender>{Gender}</AnimalGender>
         </HeaderLeft>
-        <LikeIcon size='2x' icon={isLike ? solidHeart : regularHeart}></LikeIcon>
+        <LikeIcon
+          size="2x"
+          icon={isLike ? solidHeart : regularHeart}
+        ></LikeIcon>
       </Box>
       <Box>
         <DogImage src={dogImage}></DogImage>
         <DogInfo>
           <DogInfoDetail>품종 : {Kind}</DogInfoDetail>
           <DogInfoDetail>등록일 : {RegisterDate}</DogInfoDetail>
-          <DogInfoDetail>지역 : {Location.slice(0,10)}</DogInfoDetail>
-          <DogInfoDetail>구조장소 : {RescuePlace.length < 30 ? RescuePlace : RescuePlace.slice(0,27) + '...'}</DogInfoDetail>
+          <DogInfoDetail>지역 : {Location.slice(0, 10)}</DogInfoDetail>
+          <DogInfoDetail>
+            구조장소 :{" "}
+            {RescuePlace.length < 30
+              ? RescuePlace
+              : RescuePlace.slice(0, 27) + "..."}
+          </DogInfoDetail>
         </DogInfo>
       </Box>
     </Container>
