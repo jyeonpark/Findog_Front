@@ -31,6 +31,10 @@ const Box = styled.input`
   width: 600px;
   height: 60px;
   margin-top: 10px;
+  border-color: rgba(0, 0, 0, 0.2);
+  :focus {
+    outline: 2px solid gray;
+  }
   cursor: auto;
 `;
 

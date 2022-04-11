@@ -13,7 +13,6 @@ import MyComment from "./../components/MyComment";
 import MyInterestedAnimal from "./../components/MyInterestedAnimal";
 import MyInterestedBoard from "./../components/MyInterestedBoard";
 import EditMyInfo from "./../components/EditMyInfo";
-import { Nav } from "react-bootstrap";
 
 const Container = styled.div`
   width: 1200px;

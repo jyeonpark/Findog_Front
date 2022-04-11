@@ -6,7 +6,7 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import dogImage from "../images/dog2.jpeg";
 
 const Container = styled.div`
-  width: 350px;
+  width: 360px;
   height: 250px;
   background-color: ${(props) =>
     props.IsRecruiting === "공고중"
@@ -59,7 +59,7 @@ const DogInfo = styled.div`
 `;
 
 const DogInfoDetail = styled.div`
-  overflow-x: hidden;
+  overflow: hidden;
 `;
 
 function AnimalItem({ item, onClick, onView }) {

@@ -6,14 +6,14 @@ import headerImage from "../images/header_dog.jpg"
 const Top = styled.div`
   position: relative;
   white-space: nowrap;
-  width: 1000px;
+  width: 1200px;
   min-width: 100%;
   max-width: 1000%;
   height: 300px;
   overflow: visible;
   text-align: center;
   object-fit: fill;
-  /* max-width: 100%; */
+
   background: linear-gradient(
       rgba(239, 239, 239, 0.6),
       rgba(239, 239, 239, 0.6)

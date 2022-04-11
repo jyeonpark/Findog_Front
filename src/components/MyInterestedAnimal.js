@@ -4,18 +4,26 @@ import styled from "styled-components";
 import AnimalPopup from "../components/AnimalPopup";
 
 const Container = styled.div`
-  width: fit-content;
+  width: 900px;
   height: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
+  margin-bottom: 100px;
   display: grid;
-  grid-gap: 50px;
+  grid-row-gap: 50px;
   grid-template-columns: 1fr 1fr;
+  justify-items: center;
 `;
 
-const Body = styled.div`
-  margin-bottom: 100px;
+const Title = styled.div`
+  margin-top: 100px;
+  font-weight: 700;
+  margin-bottom: 30px;
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgb(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 `;
 
 function MyInterestedAnimal() {
@@ -86,20 +94,21 @@ function MyInterestedAnimal() {
 
   return (
     <div>
-      <Body>
-        <Container>
-          {animals.map((item) => {
-            return (
-              <AnimalItem
-                item={item}
-                key={item.KeyNumber}
-                onClick={onClick}
-                onView={onView}
-              ></AnimalItem>
-            );
-          })}
-        </Container>
-      </Body>
+      <Title> 관심있는 동물</Title>
+      <Divider></Divider>
+      <Container>
+        {animals.map((item) => {
+          return (
+            <AnimalItem
+              item={item}
+              key={item.KeyNumber}
+              onClick={onClick}
+              onView={onView}
+            ></AnimalItem>
+          );
+        })}
+      </Container>
+
       <AnimalPopup
         item={currentAnimal}
         key={currentAnimal.KeyNumber}

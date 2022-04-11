@@ -27,7 +27,7 @@ const BoxContainer = styled.div`
 `;
 
 const Box = styled.div`
-  width: 600px;
+  width: 700px;
   text-align: left;
   margin-left: 50px;
   margin-top: 30px;
@@ -39,32 +39,6 @@ const BoxText = styled.div`
   text-align: left;
   display: inline-block;
   margin-right: 10px;
-`;
-
-const BoxInput = styled.input`
-  width: 400px;
-  display: inline-block;
-  height: 40px;
-  border: 1px solid lightgray;
-  border-radius: 3px;
-  vertical-align: top;
-  margin: 0 auto;
-  :focus {
-    outline: 2px solid gray;
-  }
-`;
-
-const DuplicateBtn = styled.div`
-  width: 100px;
-  height: 100%;
-  line-height: 43px;
-  background-color: orange;
-  border-radius: 3px;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  display: inline-block;
-  margin-left: 1px;
 `;
 
 const Profile = styled.div`
@@ -84,17 +58,17 @@ const ProfileText = styled.div`
 `;
 
 const ProfileImageWrap = styled.div`
-  width: 400px;
+  width: 100px;
+  border: 1px solid lightgray;
   display: inline-block;
   text-align: left;
 `;
 
-const ProfileImage = styled.img.attrs({
-  src: `${ProfileIcon}`,
-})`
+const ProfileImage = styled.img`
   width: 100px;
   display: inline-block;
-  content: url("../images/profileImage.png");
+  justify-content: center;
+  padding: 3px;
 `;
 
 const BtnWrap = styled.div`
@@ -115,51 +89,82 @@ const Btn = styled.button`
   background-color: ${(props) => props.background};
 `;
 
+const BoxSearch = styled.div`
+  width: fit-content;
+  height: fit-content;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  margin-top: auto;
+  margin-bottom: auto;
+  display: inline-block;
+  border-radius: 3px;
+`;
+
+const InputSearch = styled.input`
+  width: 400px;
+  height: 40px;
+  border: none;
+  padding-inline: 10px;
+  :focus {
+    outline: 2px solid gray;
+  }
+`;
+
+const BtnSearch = styled.button`
+  width: 100px;
+  height: 40px;
+  border: none;
+  background-color: rgb(255, 224, 166);
+`;
+
 function SignUp() {
   return (
     <Container>
       <Header>회원가입</Header>
       <BoxContainer>
-        <div>
-          <Box>
-            <BoxText>아이디(이메일)</BoxText>
-            <BoxInput />
-            <DuplicateBtn>중복확인</DuplicateBtn>
-          </Box>
-        </div>
-        <div>
-          <Box>
-            <BoxText>닉네임</BoxText>
-            <BoxInput />
-            <DuplicateBtn>중복확인</DuplicateBtn>
-          </Box>
-        </div>
-        <div>
-          <Box>
-            <BoxText>비밀번호</BoxText>
-            <BoxInput />
-          </Box>
-        </div>
-        <div>
-          <Box>
-            <BoxText>비밀번호 확인</BoxText>
-            <BoxInput />
-          </Box>
-        </div>
-        <div>
-          <Box>
-            <BoxText>연락처</BoxText>
-            <BoxInput />
-          </Box>
-        </div>
-        <div>
-          <Profile>
-            <ProfileText>프로필사진</ProfileText>
-            <ProfileImageWrap>
-              <ProfileImage></ProfileImage>
-            </ProfileImageWrap>
-          </Profile>
-        </div>
+        <Profile>
+          <ProfileText>프로필사진</ProfileText>
+          <ProfileImageWrap>
+            <ProfileImage src={ProfileIcon}></ProfileImage>
+          </ProfileImageWrap>
+        </Profile>
+        <Box>
+          <BoxText>아이디(이메일)</BoxText>
+          <BoxSearch>
+            <InputSearch />
+            <BtnSearch>중복확인</BtnSearch>
+          </BoxSearch>
+        </Box>
+
+        <Box>
+          <BoxText>닉네임</BoxText>
+          <BoxSearch>
+            <InputSearch />
+            <BtnSearch>중복확인</BtnSearch>
+          </BoxSearch>
+        </Box>
+
+        <Box>
+          <BoxText>비밀번호</BoxText>
+          <BoxSearch>
+            <InputSearch />
+          </BoxSearch>
+        </Box>
+
+        <Box>
+          <BoxText>비밀번호 확인</BoxText>
+          <BoxSearch>
+            <InputSearch />
+          </BoxSearch>
+        </Box>
+
+        <Box>
+          <BoxText>연락처</BoxText>
+          <BoxSearch>
+            <InputSearch />
+          </BoxSearch>
+        </Box>
       </BoxContainer>
 
       <BtnWrap>
