@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ProfileIcon from "../images/profileImage.png";
@@ -46,6 +46,8 @@ const Profile = styled.div`
   text-align: left;
   margin-left: 50px;
   margin-top: 30px;
+  display: flex;
+  flex-direction: row;
   cursor: auto;
 `;
 
@@ -53,19 +55,29 @@ const ProfileText = styled.div`
   width: 150px;
   text-align: left;
   vertical-align: top;
-  display: inline-block;
   margin-right: 10px;
 `;
 
-const ProfileImageWrap = styled.div`
-  width: 100px;
+const SelectProfileBox = styled.div`
+  width: fit-content;
+  text-align: left;
+  vertical-align: top;
+  margin-top: 5px;
+  margin-right: 10px;
+  padding: 2px;
   border: 1px solid lightgray;
+  cursor: pointer;
+`;
+
+const ProfileImageWrap = styled.div`
+  width: 200px;
   display: inline-block;
   text-align: left;
 `;
 
 const ProfileImage = styled.img`
   width: 100px;
+  height: 100px;
   display: inline-block;
   justify-content: center;
   padding: 3px;
@@ -119,6 +131,28 @@ const BtnSearch = styled.button`
 `;
 
 function SignUp() {
+  const [Image, setImage] = useState(ProfileIcon);
+  const [defaultImg, setDefaultImg] = useState(true);
+  const fileInput = useRef(null);
+
+  const OnProfileChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    } else {
+      //업로드 취소할 시
+      setImage(Image);
+      return;
+    }
+    //화면에 프로필 사진 표시
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   return (
     <Container>
       <Header>회원가입</Header>
@@ -126,7 +160,31 @@ function SignUp() {
         <Profile>
           <ProfileText>프로필사진</ProfileText>
           <ProfileImageWrap>
-            <ProfileImage src={ProfileIcon}></ProfileImage>
+            <ProfileImage src={Image}></ProfileImage>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept="image/*"
+              name="profile_img"
+              onChange={OnProfileChange}
+              ref={fileInput}
+            />
+            <div style={{ display: "flex" }}>
+              <SelectProfileBox
+                onClick={() => {
+                  fileInput.current.click();
+                }}
+              >
+                사진 업로드
+              </SelectProfileBox>
+              <SelectProfileBox
+                onClick={() => {
+                  setImage(ProfileIcon);
+                }}
+              >
+                기본 이미지 설정
+              </SelectProfileBox>
+            </div>
           </ProfileImageWrap>
         </Profile>
         <Box>
