@@ -1,9 +1,8 @@
 import React, { Component, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ProfileIcon from "../images/profileImage.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faL } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import API from "./../utils/api";
 import axios from "axios";
 
@@ -168,9 +167,11 @@ function SignUp() {
   const { id, nickname, password, passwordCheck, phoneNumber } = inputs; // 비구조화 할당을 통해 값 추출
 
   /** 사진 관리 변수 */
+  const default_profile_img = "https://ifh.cc/g/jLgWsT.png";
+
   const [image, setImage] = useState({
     image_file: "",
-    preview_URL: "../images/profileImage.png",
+    preview_URL: default_profile_img,
   });
   const [defaultImg, setDefaultImg] = useState(true);
   const fileInput = useRef(null);
@@ -205,6 +206,8 @@ function SignUp() {
 
   /** 연락처 관리 변수 */
   const [isPhonenumChecked, setIsPhonenumChecked] = useState(false);
+  const [phoneNumNotification, setPhoneNumNotification] = useState(false); // 유효한 형식
+  const phoneNumNotiText = "핸드폰 번호 양식이 올바르지 않습니다.";
 
   const [isAllChecked, setIsAllChecked] = useState(false);
 
@@ -315,29 +318,41 @@ function SignUp() {
 
   /** 연락처 자동 하이픈 & 유효성 검사 */
   useEffect(() => {
-    if (phoneNumber.length === 10) {
-      setInputs({
-        ...inputs, // 기존의 input 객체를 복사
-        ["phoneNumber"]: phoneNumber.replace(
-          /(\d{3})(\d{3})(\d{4})/,
-          "$1-$2-$3"
-        ),
-      });
-    }
-
-    if (phoneNumber.length === 13) {
-      setInputs({
-        ...inputs, // 기존의 input 객체를 복사
-        ["phoneNumber"]: phoneNumber
-          .replace(/-/g, "")
-          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
-      });
-    }
-
-    if (phoneNumber.length === 13 && /^[0-9\b -]{0,13}$/.test(phoneNumber)) {
-      setIsPhonenumChecked(true);
+    if (phoneNumber === "") {
+      setPhoneNumNotification(false);
     } else {
-      setIsPhonenumChecked(false);
+      if (phoneNumber.length === 10) {
+        setInputs({
+          ...inputs, // 기존의 input 객체를 복사
+          ["phoneNumber"]: phoneNumber.replace(
+            /(\d{3})(\d{3})(\d{4})/,
+            "$1-$2-$3"
+          ),
+        });
+      }
+
+      if (phoneNumber.length === 13) {
+        setInputs({
+          ...inputs, // 기존의 input 객체를 복사
+          ["phoneNumber"]: phoneNumber
+            .replace(/-/g, "")
+            .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
+        });
+      }
+
+      if (phoneNumber.length === 13 && /^[0-9\b -]{0,13}$/.test(phoneNumber)) {
+        var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+        if (regPhone.test(phoneNumber) === true) {
+          setPhoneNumNotification(false);
+          setIsPhonenumChecked(true);
+        } else {
+          setPhoneNumNotification(true);
+          setIsPhonenumChecked(false);
+        }
+      } else {
+        setPhoneNumNotification(true);
+        setIsPhonenumChecked(false);
+      }
     }
   }, [phoneNumber]);
 
@@ -415,23 +430,21 @@ function SignUp() {
         console.log("사진 있음");
         console.log(image.image_file);
         formData.append("profileImg", image.image_file);
-      } else {
-        formData.append("profileImg", null);
       }
 
       await axios
         .post("http://3.39.156.161:8080/users/sign-up", formData, {
           headers: {
-            // Accept: "application/json",
             "Content-Type": "multipart/form-data",
           },
-          // transformRequest: (data, headers) => {
-          //   return formData;
-          // },
           data: formData,
         })
         .then((response) => {
           console.log(response);
+          if (response.data.isSuccess) {
+          } else {
+            alert(response.data.message);
+          }
         })
         .catch((error) => {
           console.log(error.response);
@@ -469,8 +482,8 @@ function SignUp() {
               <SelectProfileBox
                 onClick={() => {
                   setImage({
-                    image_file: '',
-                    preview_URL: {ProfileIcon},
+                    image_file: "",
+                    preview_URL: default_profile_img,
                   });
                   setDefaultImg(true);
                 }}
@@ -581,6 +594,9 @@ function SignUp() {
               <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
             )}
           </Box>
+          {phoneNumNotification && (
+            <ErrorNotification>{phoneNumNotiText}</ErrorNotification>
+          )}
         </BoxWrapper>
       </BoxContainer>
 
