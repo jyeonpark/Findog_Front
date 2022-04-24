@@ -1,4 +1,5 @@
 import React, { Component, useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -156,6 +157,7 @@ const BtnSearch = styled.button`
 `;
 
 function SignUp() {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     id: "",
     nickname: "",
@@ -440,9 +442,28 @@ function SignUp() {
           data: formData,
         })
         .then((response) => {
-          console.log(response);
           if (response.data.isSuccess) {
-          } else {
+            alert("회원가입에 성공했습니다.");
+            try{
+              axios.get("http://3.39.156.161:8080/users/auto-logIn", {
+                headers: {
+                  "X-ACCESS-TOKEN": response.data.result.userJWT,
+                }
+              })
+              .then((response) =>{
+                localStorage.setItem("userJWT", response.data.result.userJWT);
+                localStorage.setItem("userID", response.data.result.userId);
+                localStorage.setItem(
+                  "profileImgUrl",
+                  response.data.result.profileImgUrl
+                );
+                navigate("/");
+              })
+            } catch (e){
+              console.log(e.response);
+            }
+          } 
+          else {
             alert(response.data.message);
           }
         })
@@ -453,6 +474,10 @@ function SignUp() {
       console.log(e.response);
     }
   };
+
+  async function onAutoLogin({userJWT}) {
+    
+  }
 
   return (
     <Container>
