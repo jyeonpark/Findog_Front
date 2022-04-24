@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import React, { Component } from "react";
 
 
 const Container = styled.div`

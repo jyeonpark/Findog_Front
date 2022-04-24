@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { Component, useEffect, useState  } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
