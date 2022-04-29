@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import React, { Component } from "react";
 
 
 const Container = styled.div`
@@ -8,11 +9,12 @@ const Container = styled.div`
   margin-right: auto;
   margin-top: 30px;
   margin-bottom: 10px;
-  padding-left: 80px;
+  padding-left: 100px;
 `;
 
 const ContainerSearch = styled.div`
   display: flex;
+
 `;
 
 const BoxSearch = styled.div`
@@ -42,7 +44,7 @@ const BoxDate = styled.div`
   margin-top: 10px;
   line-height: 20px;
   display: flex;
-  background-color: white;
+
 `;
 
 const BoxOption = styled.div`
@@ -75,6 +77,12 @@ const BtnImgSearch = styled.button`
 const BoxCheckInterest = styled.div`
   margin-top: auto;
   margin-bottom: auto;
+`;
+
+
+const InterestCheckbox = styled.input`
+  width: 17px;
+  height: 17px;
 `;
 
 const LabelCheck = styled.label`
@@ -116,13 +124,6 @@ const InputDate = styled.input`
   border-color: rgba(0, 0, 0, 0.2);
 `;
 
-const InterestCheckbox = styled.input.attrs({
-  type: "checkbox",
-  checked: true,
-})`
-  border-radius: 5px;
-  color: red;
-`;
 
 function OptionTab({
   FilterVisibility,
@@ -194,8 +195,8 @@ function OptionTab({
         </Link>
 
         <BoxCheckInterest>
-          <input type="checkbox"></input>
-          <LabelCheck htmlFor="checkbox">{InterestText}</LabelCheck>
+          <InterestCheckbox type="checkbox" id="interestCheck"></InterestCheckbox>
+          <LabelCheck htmlFor="interestCheck">{InterestText}</LabelCheck>
         </BoxCheckInterest>
       </BoxOption>
     </Container>

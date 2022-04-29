@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 import {Fragment} from "react"
 import styled, { keyframes } from "styled-components";
 import myImage from '../images/dog.jpeg';

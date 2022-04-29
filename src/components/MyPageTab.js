@@ -54,7 +54,7 @@ function MyPageTab() {
     else if (path === "/mypage/my_interested_animal") return 3;
     else if (path === "/mypage/my_interested_board") return 4;
     else if (path === "/mypage/edit_info") return 5;
-    else if (path.includes( "/mypage")) return 1;
+    else if (path.includes("/mypage")) return 1;
   };
 
   const [menu, setMenu] = useState(currentTab);
