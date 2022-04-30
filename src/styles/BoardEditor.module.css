@@ -1,5 +1,4 @@
 .frag {
-
     margin: 0 auto;
 }
 
@@ -29,9 +28,7 @@
     padding: 10px
 }
 
-.file__container {
-    
-}
+
 
 .btn__container {
     margin-top: 50px;
@@ -54,4 +51,26 @@
     border: none;
     background-color: orange;
     color: white;
+}
+
+.ImageSelect {
+    text-align: center;
+    padding-left: 100px;
+}
+
+.file__container {
+    flex-wrap: wrap;
+    display: flex;
+    text-align: center;
+}
+
+.imageContainer {
+    width: 200px;
+    height: 200px;
+    object-fit: fill;
+    margin: 10px;
+}
+
+.ImageBox {
+    flex-direction: column;
 }

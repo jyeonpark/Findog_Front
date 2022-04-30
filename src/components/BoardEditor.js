@@ -11,6 +11,39 @@ const InputPicker = styled.select`
 `;
 
 export const BoardEditor = () => {
+
+  const [showImages, setShowImages] = useState([]);
+
+  const [inputs, setInputs] = useState({
+    categoy: "",
+    content: "",
+    imgFiles: "",
+    title: "",
+    id:"",
+  });
+
+  const handleAddImages = (event) => {
+    const imageLists = event.target.files;
+    let imageUrlLists = [...showImages];
+
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+
+    if(imageUrlLists.length > 10) {
+      imageUrlLists = imageUrlLists.slice(0, 10);
+    }
+
+    setShowImages(imageUrlLists);
+  }
+
+  const handleDeleteImage = (id) => {
+    setShowImages(showImages.filter((_, index) => index !== id));
+  }
+
+
+
   return (
     <div className={styles.frag}>
       <div className={styles.container}>
@@ -30,16 +63,21 @@ export const BoardEditor = () => {
           <textarea type="textarea" className={styles.content} />
         </div>
         {/* 파일 업로드 부분 */}
-        <div className={styles.file__container}>
+        <div>
           <div>
-            <strong>업로드 이미지</strong>
-            <div>
-              <img src="" alt="" />
+            {/* <strong>업로드 이미지</strong> */}
+            <div className={styles.file__container}>
+              {showImages.map((image,id) => (
+                <div className={styles.ImageBox} key = {id}>
+                  <img className={styles.imageContainer} src={image} alt={`${image}-${id}`} />
+                  <div><button onClick={() => handleDeleteImage(id)} >삭제</button></div>
+                </div>
+              ))}
             </div>
           </div>
-          <form>
-            <input type="file" id="image" accept="img/*" multiple="multiple" />
-            <label htmlFor="image">파일 선택하기</label>
+          <form className={styles.ImageSelect}>
+            <input type="file" id="image" accept="img/*" multiple="multiple" onChange={handleAddImages} />
+            <label htmlFor="image"></label>
           </form>
         </div>
       </div>
