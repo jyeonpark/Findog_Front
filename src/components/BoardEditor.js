@@ -1,7 +1,9 @@
-import React, { Component, useEffect, useState  } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
+import axios from 'axios';
+
 
 const InputPicker = styled.select`
   width: 955px;
@@ -12,16 +14,32 @@ const InputPicker = styled.select`
 
 export const BoardEditor = () => {
 
-  const [showImages, setShowImages] = useState([]);
+  let [showImages, setShowImages] = useState([]);
 
   const [inputs, setInputs] = useState({
-    categoy: "",
+    categoy: 1,
     content: "",
-    imgFiles: "",
     title: "",
-    id:"",
+    userId: 1,
   });
 
+  /** input 입력 시 title, content 내용 변경 */
+  const onChangeData = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  // category select
+  const handleSelect = (e) => {
+    setInputs({
+      ...inputs,
+      categoy: (e.target.value)
+    })
+  }
+
+  /** 사진 추가 */
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
@@ -31,44 +49,86 @@ export const BoardEditor = () => {
       imageUrlLists.push(currentImageUrl);
     }
 
-    if(imageUrlLists.length > 10) {
+    if (imageUrlLists.length > 10) {
       imageUrlLists = imageUrlLists.slice(0, 10);
     }
 
     setShowImages(imageUrlLists);
   }
 
+  /** 사진 삭제 */
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
   }
 
+  /** 확인버튼 누르면 데이터 서버로 전송 */
+  const onClickUpload = async () => {
+
+    try {
+      console.log("클릭");
+      const formData = new FormData();
+
+      formData.append("category", inputs.category);
+      formData.append("content", inputs.content);
+      formData.append("title", inputs.title);
+      formData.append("userId", inputs.userId);
+
+      console.log(inputs.title);
+      console.log(inputs.content);
+
+      showImages.map((eachfile) => {
+        formData.append("imgFiles", eachfile)
+      })
+
+
+      await axios
+        .post("http://3.39.156.161:8080/boards/post", formData, {
+          method: "post",
+          data: formData,
+        })
+        .then((response) => {
+          if (response.data.isSuccess) {
+            alert("게시물이 저장되었습니다.");
+          }
+          else {
+            alert(response.data.message);
+          }
+        })
+
+
+
+    } catch (e) {
+      console.log(e.response);
+    }
+  }
 
 
   return (
     <div className={styles.frag}>
       <div className={styles.container}>
+        {/* title */}
         <div>
-          <input className={styles.title} type="text" placeholder=" 제목" />
+          <input className={styles.title} type="text" placeholder=" 제목" id="title" name="title" onChange={onChangeData} />
         </div>
         <div>
-        <InputPicker>
-            <option>카테고리</option>
-            <option>찾아주세요</option>
-            <option>봤어요</option>
-            <option>도와주세요</option>
-            <option>기타</option>
+          <InputPicker onChange={handleSelect}>
+            <option key={1} value={1}>기타</option>
+            <option key={2} value={2}>찾아주세요</option>
+            <option key={3} value={3}>봤어요</option>
+            <option key={4} value={4}>도와주세요</option>
           </InputPicker>
         </div>
+        {/* content */}
         <div>
-          <textarea type="textarea" className={styles.content} />
+          <textarea type="textarea" className={styles.content} id="content" name="content" onChange={onChangeData} />
         </div>
         {/* 파일 업로드 부분 */}
         <div>
           <div>
             {/* <strong>업로드 이미지</strong> */}
             <div className={styles.file__container}>
-              {showImages.map((image,id) => (
-                <div className={styles.ImageBox} key = {id}>
+              {showImages.map((image, id) => (
+                <div className={styles.ImageBox} key={id}>
                   <img className={styles.imageContainer} src={image} alt={`${image}-${id}`} />
                   <div><button onClick={() => handleDeleteImage(id)} >삭제</button></div>
                 </div>
@@ -85,7 +145,9 @@ export const BoardEditor = () => {
         <Link to="/board">
           <button className={styles.btn__cancel}>취소</button>
         </Link>
-        <button className={styles.btn__confirm}>확인</button>
+        <Link to="/board">
+          <button className={styles.btn__confirm} onClick={onClickUpload}>확인</button>
+        </Link>
       </div>
     </div>
   );
