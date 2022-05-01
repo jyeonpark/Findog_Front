@@ -68,29 +68,45 @@ export const BoardEditor = () => {
       console.log("클릭");
       const formData = new FormData();
 
-      formData.append("category", inputs.category);
-      formData.append("content", inputs.content);
-      formData.append("title", inputs.title);
       formData.append("userId", inputs.userId);
+      formData.append("title", inputs.title);
+      formData.append("category", Number(inputs.category));
+      formData.append("content", inputs.content);
+      
 
-      console.log(inputs.title);
-      console.log(inputs.content);
+      console.log("type check start")
+
+      // console.log("cate: ", typeof(Number(inputs.category)))
+      // console.log("title: ", typeof(inputs.title));
+      // console.log("content: ", typeof(inputs.content));
+      // console.log("userId: ", typeof(inputs.userId));
+      
+
 
       showImages.map((eachfile) => {
         formData.append("imgFiles", eachfile)
       })
 
+      console.log("showImages: ", typeof(showImages));
+
+      
+      
+      // console.log("type check end");
 
       await axios
         .post("http://3.39.156.161:8080/boards/post", formData, {
           method: "post",
+          headers: {"Content-Type": "multipart/form-data",
+        },
           data: formData,
         })
         .then((response) => {
+          console.log(response.data.isSuccess);
           if (response.data.isSuccess) {
             alert("게시물이 저장되었습니다.");
           }
           else {
+            console.log(response.data.isSuccess);
             alert(response.data.message);
           }
         })
