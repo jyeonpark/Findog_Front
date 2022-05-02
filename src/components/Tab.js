@@ -39,7 +39,6 @@ function Tab(props) {
   const [menu, setMenu] = useState(props.tabMenu);
 
   useEffect(() => {
-    console.log("useeffect", props.tabMenu);
     setMenu(props.tabMenu);
   }, [props.tabMenu]);
 

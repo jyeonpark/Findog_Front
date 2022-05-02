@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
@@ -10,11 +10,22 @@ import { BoardEditor } from "./components/BoardEditor";
 import { Board } from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
+import { AuthLogin } from "./utils/utils";
 
 function App() {
+  // 로그인 상태 관리
+  const [isLogin, setIsLogin] = useState(sessionStorage.getItem("userJWT") != null ? true : false);
+
+  useEffect(() => {
+    if (isLogin === false) {
+      console.log("false");
+    } else {
+      console.log("true");
+    }
+  });
+
   const currentTab = () => {
     let path = window.location.pathname;
-    console.log("경로", path);
     if (path == "/") return 1;
     else if (path == "/board") return 2;
     else if (path == "/*") return 3;
@@ -25,13 +36,16 @@ function App() {
 
   const tabMenuChange = (tabMenu) => {
     setTabMenu(tabMenu);
-    console.log("tab menu 바뀜", tabMenu);
+  };
+
+  const isLoginChange = (isLogin) => {
+    setIsLogin(isLogin);
   };
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header tabMenu={tabMenu} tabMenuChange={tabMenuChange} />
+        <Header tabMenu={tabMenu} tabMenuChange={tabMenuChange} isLogin={isLogin} isLoginChange={isLoginChange}/>
         <Tab tabMenu={tabMenu} tabMenuChange={tabMenuChange} />
         <Routes>
           <Route path="/" element={<AbandonedAnimal />}></Route>

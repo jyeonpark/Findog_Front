@@ -1,6 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component, useState, useRef, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   width: 800px;
@@ -87,18 +89,80 @@ const BottomRight = styled.div`
 `;
 
 function Login() {
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = inputs;
+
+  const onInputChange = (e) => {
+    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+
+    setInputs({
+      ...inputs, // 기존의 input 객체를 복사한 뒤
+      [name]: value, // name 키를 가진 값을 value 로 설정
+    });
+  };
+
+  /** 로그인 api 호출 */
+  const onSubmit = async () => {
+    try {
+      let data = {
+        email: email,
+        password: password,
+      };
+      await axios
+        .post("http://3.39.156.161:8080/users/log-in", JSON.stringify(data), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          if (response.data.isSuccess) {
+            alert("로그인 되었습니다.");
+            sessionStorage.setItem("userJWT", response.data.result.userJWT);
+            sessionStorage.setItem("userID", response.data.result.userId);
+            sessionStorage.setItem(
+              "profileImgUrl",
+              response.data.result.profileImgUrl
+            );
+            navigate("/");
+            window.location.reload();
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } catch (e) {
+      console.log(e.response);
+    }
+  };
+
   return (
     <Container>
       <Header>로그인</Header>
       <BoxContainer>
         <div>
-          <Box placeholder="아이디" />
+          <Box
+            placeholder="아이디(이메일)"
+            name={"email"}
+            onChange={onInputChange}
+            value={email}
+          ></Box>
         </div>
         <div>
-          <Box placeholder="비밀번호" />
+          <Box
+            placeholder="비밀번호"
+            name={"password"}
+            onChange={onInputChange}
+            value={password}
+          ></Box>
         </div>
       </BoxContainer>
-      <LoginBtn>로그인</LoginBtn>
+      <LoginBtn onClick={onSubmit}>로그인</LoginBtn>
       <Bottom>
         <Link to="/signup">
           <Signup>회원가입</Signup>
