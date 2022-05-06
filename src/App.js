@@ -10,6 +10,7 @@ import { BoardEditor } from "./components/BoardEditor";
 import { Board } from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
+import { BoardDetail } from "./pages/BoardDetail";
 
 function App() {
   const currentTab = () => {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/board/edit" element={<BoardEditor />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          {/* <Route path="/board/detail/*" element={<BoardDetail />}></Route> */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -17,7 +17,7 @@ export const BoardEditor = () => {
   let [showImages, setShowImages] = useState([]);
 
   const [inputs, setInputs] = useState({
-    categoy: 1,
+    category: 1,
     content: "",
     title: "",
     userId: 1,
