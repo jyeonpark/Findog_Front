@@ -15,6 +15,7 @@ const InputPicker = styled.select`
 export const BoardEditor = () => {
 
   let [showImages, setShowImages] = useState([]);
+  const [sendingImg, setSendingImg] = useState([]);
 
   const [inputs, setInputs] = useState({
     category: 1,
@@ -22,6 +23,7 @@ export const BoardEditor = () => {
     title: "",
     userId: 1,
   });
+
 
   /** input 입력 시 title, content 내용 변경 */
   const onChangeData = (e) => {
@@ -41,16 +43,22 @@ export const BoardEditor = () => {
 
   /** 사진 추가 */
   const handleAddImages = (event) => {
+
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
+
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
       imageUrlLists.push(currentImageUrl);
+      
+      sendingImg.push(imageLists[i]);
+
     }
 
     if (imageUrlLists.length > 10) {
       imageUrlLists = imageUrlLists.slice(0, 10);
+      sendingImg = sendingImg.slice(0,10);
     }
 
     setShowImages(imageUrlLists);
@@ -59,6 +67,7 @@ export const BoardEditor = () => {
   /** 사진 삭제 */
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
+    setSendingImg(sendingImg.filter((_, index) => index !== id));
   }
 
   /** 확인버튼 누르면 데이터 서버로 전송 */
@@ -68,7 +77,7 @@ export const BoardEditor = () => {
       console.log("클릭");
       const formData = new FormData();
 
-      formData.append("userId", inputs.userId);
+      formData.append("userId", Number(inputs.userId));
       formData.append("title", inputs.title);
       formData.append("category", Number(inputs.category));
       formData.append("content", inputs.content);
@@ -76,46 +85,65 @@ export const BoardEditor = () => {
 
       console.log("type check start")
 
-      // console.log("cate: ", typeof(Number(inputs.category)))
-      // console.log("title: ", typeof(inputs.title));
-      // console.log("content: ", typeof(inputs.content));
-      // console.log("userId: ", typeof(inputs.userId));
+      console.log("cate: ", typeof(Number(inputs.category)))
+      console.log("title: ", typeof(inputs.title));
+      console.log("content: ", typeof(inputs.content));
+      console.log("userId: ", typeof(inputs.userId));
       
 
+      // showImages.map((eachfile) => {
+      //   formData.append("imgFiles", eachfile)
+      // })
 
-      showImages.map((eachfile) => {
-        formData.append("imgFiles", eachfile)
-      })
+      if (sendingImg.length > 0) {
 
-      console.log("showImages: ", typeof(showImages));
+        // const sendingImg = [];
+
+        // showImages.map((eachfiles) => {
+        //   sendingImg.push(eachfiles)
+        // })
+
+        // sendingImg.forEach(image => formData.append("imgFiles", image));
+
+        sendingImg.map((e) => {
+          formData.append("imageFiles", e)
+        })
+
+
+        // formData.append("imgFiles", sendingImg);
+        // formData.append("imgFiles",showImages);
+        console.log("sendingImg: ", typeof(sendingImg));
+        console.log("sendingImg: ", sendingImg);
+        // formData.push("imgFiles", showImages);
+
+    }
 
       
       
       // console.log("type check end");
-
+      console.log("전송시작");
       await axios
-        .post("http://3.39.156.161:8080/boards/post", formData, {
-          method: "post",
+        .post("http://3.39.156.161:8080/boards/post", formData,{
+          method: "POST",
           headers: {"Content-Type": "multipart/form-data",
         },
           data: formData,
         })
         .then((response) => {
           console.log(response.data.isSuccess);
+          
           if (response.data.isSuccess) {
-            alert("게시물이 저장되었습니다.");
+            console.log("게시물이 저장되었습니다.");
           }
           else {
             console.log(response.data.isSuccess);
-            alert(response.data.message);
+            console.log(response.data.message);
           }
         })
-
-
-
     } catch (e) {
       console.log(e.response);
     }
+    console.log("전송끝");
   }
 
 

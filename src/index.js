@@ -8,8 +8,8 @@ import {Main} from "./pages/Main";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <BoardDetail />
+    <App />
+    {/* <BoardDetail /> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

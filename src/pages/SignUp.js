@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import API from "./../utils/api";
 import axios from "axios";
+import { type } from "@testing-library/user-event/dist/type";
 
 const Container = styled.div`
   width: 800px;
@@ -432,6 +433,7 @@ function SignUp() {
         console.log("사진 있음");
         console.log(image.image_file);
         formData.append("profileImg", image.image_file);
+        console.log(type(image.image_file));
       }
 
       await axios
