@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import API from "./../utils/api";
 import axios from "axios";
+import { type } from "@testing-library/user-event/dist/type";
 import { AuthLogin } from "../utils/utils";
 
 const Container = styled.div`
@@ -432,6 +433,7 @@ function SignUp() {
         console.log("사진 있음");
         console.log(image.image_file);
         formData.append("profileImg", image.image_file);
+        console.log(type(image.image_file));
       }
 
       await axios
@@ -445,7 +447,7 @@ function SignUp() {
           if (response.data.isSuccess) {
             alert("회원가입에 성공했습니다.");
             AuthLogin(response.data.result.userJWT);
-            navigate('/');
+            navigate("/");
             window.location.reload();
           } else {
             alert(response.data.message);
@@ -458,7 +460,6 @@ function SignUp() {
       console.log(e.response);
     }
   };
-
 
   return (
     <Container>

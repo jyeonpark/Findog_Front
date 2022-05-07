@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { BoardComment } from "../components/BoardComment";
 import { BoardContent } from "../components/BoardContent";
 
-export const Main = () => {
+
+export const BoardDetail = () => {
+
+
     return (
         <Fragment>
             <div>
@@ -13,5 +16,5 @@ export const Main = () => {
                 <BoardComment />
             </div>
         </Fragment>
-    )
+    );
 }
