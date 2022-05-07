@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
-
 const Container = styled.div`
   width: 1100px;
   margin-left: auto;
@@ -14,7 +13,6 @@ const Container = styled.div`
 
 const ContainerSearch = styled.div`
   display: flex;
-
 `;
 
 const BoxSearch = styled.div`
@@ -44,7 +42,6 @@ const BoxDate = styled.div`
   margin-top: 10px;
   line-height: 20px;
   display: flex;
-
 `;
 
 const BoxOption = styled.div`
@@ -78,7 +75,6 @@ const BoxCheckInterest = styled.div`
   margin-top: auto;
   margin-bottom: auto;
 `;
-
 
 const InterestCheckbox = styled.input`
   width: 17px;
@@ -124,13 +120,18 @@ const InputDate = styled.input`
   border-color: rgba(0, 0, 0, 0.2);
 `;
 
-
 function OptionTab({
   FilterVisibility,
   WriteVisibility,
   InterestText,
   ImgSearchVisibility,
 }) {
+  const popUp = () => {
+    if (sessionStorage.getItem("userID") === null) {
+      alert("로그인을 하신 후에 게시물을 등록할 수 있습니다.");
+    }
+  };
+
   return (
     <Container>
       <ContainerSearch>
@@ -191,11 +192,15 @@ function OptionTab({
       {/* 글쓰기, 관심목록 */}
       <BoxOption>
         <Link to="/board/edit">
-          <BtnWrite WriteVisibility={WriteVisibility}>글쓰기</BtnWrite>
+          <BtnWrite WriteVisibility={WriteVisibility} onClick={popUp}>
+            글쓰기
+          </BtnWrite>
         </Link>
-
         <BoxCheckInterest>
-          <InterestCheckbox type="checkbox" id="interestCheck"></InterestCheckbox>
+          <InterestCheckbox
+            type="checkbox"
+            id="interestCheck"
+          ></InterestCheckbox>
           <LabelCheck htmlFor="interestCheck">{InterestText}</LabelCheck>
         </BoxCheckInterest>
       </BoxOption>
