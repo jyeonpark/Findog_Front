@@ -7,6 +7,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import API from "./../utils/api";
 import axios from "axios";
 import { type } from "@testing-library/user-event/dist/type";
+import { AuthLogin } from "../utils/utils";
 
 const Container = styled.div`
   width: 800px;
@@ -384,7 +385,6 @@ function SignUp() {
   const checkDuplicateId = async () => {
     try {
       const params = { email: id };
-      console.log("파라미터", params);
       const res = await API.get("/users/chk-email", { params }); // API 가 get 해올 때까지 기다리고, 결과 값을 res 에 담음
       console.log(res.data);
       if (res.data.isSuccess) {
@@ -446,26 +446,10 @@ function SignUp() {
         .then((response) => {
           if (response.data.isSuccess) {
             alert("회원가입에 성공했습니다.");
-            try{
-              axios.get("http://3.39.156.161:8080/users/auto-logIn", {
-                headers: {
-                  "X-ACCESS-TOKEN": response.data.result.userJWT,
-                }
-              })
-              .then((response) =>{
-                localStorage.setItem("userJWT", response.data.result.userJWT);
-                localStorage.setItem("userID", response.data.result.userId);
-                localStorage.setItem(
-                  "profileImgUrl",
-                  response.data.result.profileImgUrl
-                );
-                navigate("/");
-              })
-            } catch (e){
-              console.log(e.response);
-            }
-          } 
-          else {
+            AuthLogin(response.data.result.userJWT);
+            navigate("/");
+            window.location.reload();
+          } else {
             alert(response.data.message);
           }
         })
@@ -476,10 +460,6 @@ function SignUp() {
       console.log(e.response);
     }
   };
-
-  async function onAutoLogin({userJWT}) {
-    
-  }
 
   return (
     <Container>

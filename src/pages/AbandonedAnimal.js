@@ -124,7 +124,6 @@ function AbandonedAnimal() {
   };
 
   const onClick = () => {
-    console.log("클릭");
     setDialog(true);
   };
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import headerImage from "../images/header_dog.jpg"
+import headerImage from "../images/header_dog.jpg";
 
 const Top = styled.div`
   position: relative;
@@ -48,29 +48,51 @@ const ContainerText = styled.div`
   font-weight: 800;
   display: inline-block;
   color: rgb(243, 156, 18);
+  cursor: pointer;
 `;
-
 
 function Header(props) {
   function setTabMenu(menu) {
-    console.log("settabmenu");
-    console.log(menu);
     props.tabMenuChange(menu);
+  }
+
+  function logout(){
+    sessionStorage.removeItem("userJWT");
+    sessionStorage.removeItem("userID");
+    sessionStorage.removeItem(
+      "profileImgUrl"
+    );
+    props.isLoginChange(false);
+    alert("로그아웃 되었습니다.");
   }
 
   return (
     <Top>
       <Container>
-        <Link to="/login">
-          <ContainerText
-            onClick={() => {
-              setTabMenu(0);
-            }}
-          >
-            {" "}
-            로그인
-          </ContainerText>
-        </Link>
+        {!props.isLogin && (
+          <Link to="/login">
+            <ContainerText
+              onClick={() => {
+                setTabMenu(0);
+              }}
+            >
+              {" "}
+              로그인
+            </ContainerText>
+          </Link>
+        )}
+        {props.isLogin && (
+            <ContainerText
+              onClick={() => {
+                setTabMenu(0);
+                logout();
+                // 로그아웃 함수
+              }}
+            >
+              {" "}
+              로그아웃
+            </ContainerText>
+        )}
       </Container>
       <Link to="/">
         <HeaderText

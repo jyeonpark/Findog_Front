@@ -48,7 +48,6 @@ const TabLink = styled(Link)`
 function MyPageTab() {
   const currentTab = () => {
     let path = window.location.pathname;
-    console.log("경로", path);
 
     if (path === "/mypage/my_comment") return 2;
     else if (path === "/mypage/my_interested_animal") return 3;
