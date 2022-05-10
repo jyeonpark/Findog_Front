@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import OptionTab from "../components/OptionTab";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
 import { propTypes } from "react-bootstrap/esm/Image";
@@ -14,19 +15,7 @@ const BoardBody = styled.div`
 `;
 
 export const Board = () => {
-
-  const [input, setinputs] = useState({
-    title: "",
-    content: "",
-    profileImg: "",
-    imageURL: [],
-    nickName: "",
-    likeCount: "",
-    hitCount: "",
-    contentCount: "",
-  })
-
-
+  const postId = 0;
   return (
     <BoardContainer>
       <Fragment>
@@ -37,7 +26,9 @@ export const Board = () => {
         ></OptionTab>
       </Fragment>
       <BoardBody>
-        <BoardBox postId={0}/>
+        <Link to={"/board/detail/" + postId} style={{ textDecoration: 'none', color:"black"}}>
+          <BoardBox />
+        </Link>
         <BoardBox />
         <BoardBox />
         <BoardBox />
