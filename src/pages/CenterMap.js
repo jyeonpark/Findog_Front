@@ -7,4 +7,3 @@ function CenterMap() {
 }
 
 export default CenterMap;
-as

@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import OptionTab from "../components/OptionTab";
 import { Fragment } from "react";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const BoardContainer = styled.div`
   padding-bottom: 100px;
@@ -13,6 +14,19 @@ const BoardBody = styled.div`
 `;
 
 export const Board = () => {
+
+  const [input, setinputs] = useState({
+    title: "",
+    content: "",
+    profileImg: "",
+    imageURL: [],
+    nickName: "",
+    likeCount: "",
+    hitCount: "",
+    contentCount: "",
+  })
+
+
   return (
     <BoardContainer>
       <Fragment>
@@ -23,7 +37,7 @@ export const Board = () => {
         ></OptionTab>
       </Fragment>
       <BoardBody>
-        <BoardBox />
+        <BoardBox postId={0}/>
         <BoardBox />
         <BoardBox />
         <BoardBox />
@@ -34,3 +48,12 @@ export const Board = () => {
 };
 
 export default Board;
+
+
+BoardBox.defaultProps = {
+  postId: '0'
+}
+
+BoardBox.propsTypes = {
+  postId: propTypes.number
+}

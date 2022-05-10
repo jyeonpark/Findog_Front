@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 import styled from "styled-components";
-// import axios from "axios";
+import axios from "axios";
 import {propTypes} from "react-bootstrap/esm/Image";
 
 const Container = styled.div `
@@ -95,7 +95,7 @@ export const BoardContent = ({postId}) => {
     // 3: "봤어요",
     // 4: "도와주세요",
     
-    const [categoryText, setCategoryText] = useState("기타")
+    const [categoryText, setCategoryText] = useState("기타");
     
     
     const [inputs, setInputs] = useState({
@@ -113,12 +113,13 @@ export const BoardContent = ({postId}) => {
     });
 
     useEffect(() => {     
-        // axios.get('http://3.39.156.161:8080/boards/${postId}')
-        // .then((e) => {setInputs({
-        //     ...inputs,
-        //     [e.target.name]:e.target.value})})
-        // .then((response) => console.log("response:", respose.isSuccess))
-        // .catch(err =>console.log("error:", err)); 
+        console.log("Content component start");
+        axios.get('http://3.39.156.161:8080/boards/' + postId)
+        .then((e) => {setInputs({
+            ...inputs,
+            [e.target.name]:e.target.value})})
+        .then((response) => console.log("response:", response.isSuccess))
+        .catch(err =>console.log("error:", err)); 
 
         switch (inputs.category) {
             case 1:
@@ -174,8 +175,4 @@ export const BoardContent = ({postId}) => {
 
 BoardContent.defaultProps = {
     postId: 0
-}
-
-BoardContent.propTypes = {
-    postId: propTypes.number
 }
