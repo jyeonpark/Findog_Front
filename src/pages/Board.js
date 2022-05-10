@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import OptionTab from "../components/OptionTab";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
 
@@ -13,6 +14,7 @@ const BoardBody = styled.div`
 `;
 
 export const Board = () => {
+  const postId = 0;
   return (
     <BoardContainer>
       <Fragment>
@@ -23,7 +25,9 @@ export const Board = () => {
         ></OptionTab>
       </Fragment>
       <BoardBody>
-        <BoardBox />
+        <Link to={"/board/detail/" + postId} style={{ textDecoration: 'none', color:"black"}}>
+          <BoardBox />
+        </Link>
         <BoardBox />
         <BoardBox />
         <BoardBox />

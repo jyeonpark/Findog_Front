@@ -126,9 +126,10 @@ function OptionTab({
   InterestText,
   ImgSearchVisibility,
 }) {
-  const popUp = () => {
+  const popUp = (event) => {
     if (sessionStorage.getItem("userID") === null) {
       alert("로그인을 하신 후에 게시물을 등록할 수 있습니다.");
+      event.preventDefault();
     }
   };
 
