@@ -7,6 +7,8 @@ const Container = styled.div `
     width: 1000px;
     height: auto;
     padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
     /* border-color: orange; */
     border: 2px orange solid;
 `;
@@ -63,6 +65,8 @@ const ContentBox = styled.div `
 `;
 const ExtraBox = styled.div `
     width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
