@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import styled from "styled-components";
 import axios from "axios";
 import {propTypes} from "react-bootstrap/esm/Image";
+import setAuthorizationToken from "../utils/setAuthorizationToken";
 
 const Container = styled.div `
     width: 1000px;
@@ -102,29 +103,59 @@ export const BoardContent = ({postId}) => {
     const [categoryText, setCategoryText] = useState("기타");
     
     
+    // const [inputs, setInputs] = useState({
+    //     category: 2,
+    //     content: "Test Content 뚱뚱이는 저에게 유일한 가족입니다... ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ니ㅓㅇㅊㅁ오밍ㅁㅈ니ㅏㅇㅁㅈ니ㅏ오ㅓ마ㅓㅗ임지ㅏㅓㅇㅁ지낭미ㅏ",
+    //     hits: 205,
+    //     userImgUrl: "",
+    //     imgUrl: [],
+    //     likeCount: 50,
+    //     postCreateAt: "2020.02.02 (목) 22:45",
+    //     title: "Test Title",
+    //     userId: 0,
+    //     nickName: "Test NickName",
+    //     commentCount: 7
+    // });
+
     const [inputs, setInputs] = useState({
-        category: 2,
-        content: "Test Content 뚱뚱이는 저에게 유일한 가족입니다... ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ니ㅓㅇㅊㅁ오밍ㅁㅈ니ㅏㅇㅁㅈ니ㅏ오ㅓ마ㅓㅗ임지ㅏㅓㅇㅁ지낭미ㅏ",
-        hits: 205,
-        userImgUrl: [],
-        imgUrl: [],
-        likeCount: 50,
-        postCreateAt: "2020.02.02 (목) 22:45",
-        title: "Test Title",
-        userId: 0,
-        nickName: "Test NickName",
-        commentCount: 7
+        userId: 1,
+        nickname: "",
+        userImgUrl: "",
+        title: "",
+        category: 0,
+        content: "",
+        postCreateAt: "",
+        likeCount: 0,
+        commentCount: 0,
+        hits: 0,
+        userLiked: false
     });
 
-    useEffect(() => {     
+    useEffect(() => {
+
         console.log("Content component start");
-        axios.get('http://3.39.156.161:8080/boards/' + postId)
-        .then((e) => {setInputs({
-            ...inputs,
-            [e.target.name]:e.target.value})})
-        .then((response) => console.log("response:", response.isSuccess))
+        console.log("postId: " + postId)
+
+        // const token = sessionStorage.getItem("userJWT");
+
+        const token = `eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4Ijo1LCJpYXQiOjE2NDk2MDYyMDcsImV4cCI6MTY1MTA3NzQzNn0.07rVukHXhvj1-9hozUKzlRcZai5radF4CIY1eYLixtA`;
+
+        console.log(token);
+
+
+        axios.get('http://3.39.156.161:8080/boards/' + postId, {
+            headers: {
+                Authorization: `X-ACCESS-TOKEN ` + token
+            },
+        })
+        .then((response) => console.log("response:", response.data))
         .catch(err =>console.log("error:", err)); 
 
+        
+    
+
+
+        // 카테고리
         switch (inputs.category) {
             case 1:
                 setCategoryText("기타");
@@ -178,5 +209,5 @@ export const BoardContent = ({postId}) => {
 }
 
 BoardContent.defaultProps = {
-    postId: 0
+    postId: 1
 }

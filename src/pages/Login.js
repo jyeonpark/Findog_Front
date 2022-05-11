@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import setAuthorizationToken from "../utils/setAuthorizationToken";
 
 const Container = styled.div`
   width: 800px;
@@ -127,6 +128,9 @@ function Login() {
               "profileImgUrl",
               response.data.result.profileImgUrl
             );
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.result.userJWT}`;
+            // setAuthorizationToken(response.data.result.userJWT);
+            console.log(response.data.result.userJWT);
             navigate("/");
             window.location.reload();
           } else {
