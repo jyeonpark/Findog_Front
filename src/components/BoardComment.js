@@ -19,6 +19,7 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: 80px;
+  margin-bottom: 100px;
 `;
 
 export const BoardComment = ({ postId }) => {
@@ -50,7 +51,7 @@ export const BoardComment = ({ postId }) => {
             );
           }
         })}
-        <CommentWrite parentCommentId={0} postId={postId}></CommentWrite>
+        <CommentWrite parentCommentId={0} postId={postId} reply={false} ></CommentWrite>
       </div>
     </Container>
   );

@@ -55,13 +55,14 @@ const Box = styled.div`
   margin-bottom: 5px;
 `;
 
-export const CommentWrite = ({
-  parentCommentId,
+export const CommentUpdate = ({
+  commentId,
   postId,
-  reply
+  commentValue,
+  onCancle,
 }) => {
-  const [commentInput, setCommentInput] = useState('');
-  const [textAreaCount, setTextAreaCount] = useState(0);
+  const [commentInput, setCommentInput] = useState(commentValue);
+  const [textAreaCount, setTextAreaCount] = useState(commentValue.length);
 
   const onInputChange = (e) => {
     setCommentInput(e.currentTarget.value);
@@ -71,11 +72,12 @@ export const CommentWrite = ({
   const onSubmit = async () => {
     try {
       let data = {
-        parentCommentId: parentCommentId,
+        commentId: commentId,
+        userId: Number(sessionStorage.getItem("userID")),
         postId: Number(postId),
         content: commentInput,
       };
-      await API.post("/comments", JSON.stringify(data), {
+      await API.patch("/comments", JSON.stringify(data), {
         headers: {
           "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
           "Content-Type": "application/json",
@@ -83,11 +85,11 @@ export const CommentWrite = ({
       })
         .then((response) => {
           if (response.data.isSuccess) {
-            alert("댓글이 등록되었습니다.");
+            alert("댓글이 수정되었습니다.");
             window.location.reload();
           } else {
             console.log(response);
-            alert("댓글 등록에 실패했습니다.");
+            alert("댓글 수정에 실패했습니다.");
           }
         })
         .catch((error) => {
@@ -110,7 +112,8 @@ export const CommentWrite = ({
         maxLength={199}
       ></CommentInput>
       <Box>
-        <Btn onClick={onSubmit}>등록</Btn>
+        <Btn onClick={onCancle}>취소</Btn>
+        <Btn onClick={onSubmit}>수정</Btn>
       </Box>
     </Container>
   );
