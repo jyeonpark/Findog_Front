@@ -128,9 +128,6 @@ function Login() {
               "profileImgUrl",
               response.data.result.profileImgUrl
             );
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.result.userJWT}`;
-            // setAuthorizationToken(response.data.result.userJWT);
-            console.log(response.data.result.userJWT);
             navigate("/");
             window.location.reload();
           } else {

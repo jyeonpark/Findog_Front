@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import {propTypes} from "react-bootstrap/esm/Image";
 import setAuthorizationToken from "../utils/setAuthorizationToken";
+import { getAllByPlaceholderText } from "@testing-library/react";
 
 const Container = styled.div `
     width: 1000px;
@@ -122,7 +123,7 @@ export const BoardContent = ({postId}) => {
         nickname: "",
         userImgUrl: "",
         title: "",
-        category: 0,
+        category: 1,
         content: "",
         postCreateAt: "",
         likeCount: 0,
@@ -136,24 +137,34 @@ export const BoardContent = ({postId}) => {
         console.log("Content component start");
         console.log("postId: " + postId)
 
-        // const token = sessionStorage.getItem("userJWT");
-
-        const token = `eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4Ijo1LCJpYXQiOjE2NDk2MDYyMDcsImV4cCI6MTY1MTA3NzQzNn0.07rVukHXhvj1-9hozUKzlRcZai5radF4CIY1eYLixtA`;
-
-        console.log(token);
-
 
         axios.get('http://3.39.156.161:8080/boards/' + postId, {
             headers: {
-                Authorization: `X-ACCESS-TOKEN ` + token
+                "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
             },
         })
-        .then((response) => console.log("response:", response.data))
+        // .then((response) => setInputs({
+        //     userId: response.data.result.board.userId,
+        //     nickname: response.data.result.board.nickname,
+        //     userImgUrl: response.data.result.board.userImgUrl,
+        //     title: response.data.result.board.title,
+        //     category: response.data.result.board.category,
+        //     content: response.data.result.board.content,
+        //     postCreateAt: response.data.result.board.postCreateAt,
+        //     likeCount: response.data.result.board.likeCount,
+        //     commentCount: response.data.result.board.commentCount,
+        //     hits: response.data.result.board.hits,
+        //     userLiked: response.data.result.board.userLiked
+        // }))
+        .then((response) => console.log(response.data.result))
+        // .then((response) => console.log("response:", response.data))
         .catch(err =>console.log("error:", err)); 
 
         
     
-
+        var date = new Date(inputs.postCreateAt);
+        date = date.getFullYear() + "." + (date.getMonth()+1) + "." + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+        console.log(date)
 
         // 카테고리
         switch (inputs.category) {
@@ -174,7 +185,7 @@ export const BoardContent = ({postId}) => {
                 break;
         }
 
-    }, []);
+    }, [inputs.category]);
 
     return (
         <Fragment>
