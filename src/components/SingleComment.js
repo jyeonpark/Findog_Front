@@ -8,15 +8,18 @@ import React, {
 } from "react";
 import API from "../utils/api";
 import styled from "styled-components";
+import { CommentWrite } from "./CommentWrite";
+import { CommentUpdate } from "./CommentUpdate";
 
 const Container = styled.div`
-  width: "1000px";
+  width: 1000px;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
   display: flex;
   margin-top: 20px;
+  padding-left: ${(props) => (props.reply ? "50px" : "0px")};
 `;
 
 const ProfileImage = styled.div`
@@ -38,7 +41,7 @@ const ProfileName = styled.div`
 
 const ContentBox = styled.div`
   font-size: 20px;
-  width: 900px;
+  width: ${(props) => (props.reply ? "850px" : "900px")};
   margin-top: 5px;
 `;
 
@@ -65,28 +68,115 @@ const Divider = styled.div`
 `;
 
 export const SingleComment = ({ comment, postId, reply }) => {
+  const [isEditChecked, setIsEditChecked] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
+
+  if (reply === true) {
+    console.log("대댓글 : ", postId, comment);
+  } else {
+    console.log("댓글 : ", postId, comment);
+  }
+
+  const onClickEdit = () => {
+    setIsEditChecked(!isEditChecked);
+  };
+
+  const onClickReply = () => {
+    setIsReplying(!isReplying);
+  };
+
+  const onEditCancle = () => {
+    setIsEditChecked(!isEditChecked);
+  };
+
+  const onDelete = async () => {
+    try {
+      await API.delete("/comments" + "/" + postId, {
+        data: {
+          // 서버에서 req.body.{} 로 확인할 수 있다.
+          commentId: comment.commentId,
+          userId: Number(sessionStorage.getItem("userID")),
+        },
+        headers: {
+          "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.data.isSuccess) {
+            alert("댓글이 삭제되었습니다.");
+            window.location.reload();
+          } else {
+            console.log(response);
+            alert("댓글 삭제에 실패했습니다.");
+          }
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } catch (e) {
+      console.log(e.response);
+    }
+  };
+
   return (
-    <Fragment>
-      <Container>
-        <ProfileImage>
-          <ProfileImageShow src="https://findog-bucket.s3.ap-northeast-2.amazonaws.com/images/a7d381d1-18c6-49db-8666-47c11d816b95.png" />
-        </ProfileImage>
-        <div>
-          <ProfileName>{comment.nickname}</ProfileName>
-          <ContentBox>{comment.content}</ContentBox>
-          <ExtraInfo>
-            <Box>
-              <BoxContent>{comment.commentUpdateAt}</BoxContent>
-              <BoxContent>답글쓰기</BoxContent>
-            </Box>
-            <Box>
-              <BoxContent>수정</BoxContent>
-              <BoxContent>삭제</BoxContent>
-            </Box>
-          </ExtraInfo>
-        </div>
-      </Container>
+    <div>
+      {!isEditChecked && (
+        <Container reply={reply}>
+          <ProfileImage>
+            <ProfileImageShow
+              src={comment.profileImgUrl}
+              referrerpolicy="no-referrer"
+            />
+          </ProfileImage>
+          <div>
+            <ProfileName>{comment.nickname}</ProfileName>
+            <ContentBox reply={reply}>{comment.content}</ContentBox>
+            <ExtraInfo>
+              <Box>
+                <BoxContent>{comment.commentUpdateAt}</BoxContent>
+                {!reply && (
+                  <BoxContent
+                    style={{ cursor: "pointer" }}
+                    onClick={onClickReply}
+                  >
+                    답글쓰기
+                  </BoxContent>
+                )}
+              </Box>
+              {Number(sessionStorage.getItem("userID")) === comment.userId && (
+                <Box>
+                  <BoxContent
+                    style={{ cursor: "pointer" }}
+                    onClick={onClickEdit}
+                  >
+                    수정
+                  </BoxContent>
+                  <BoxContent style={{ cursor: "pointer" }} onClick={onDelete}>
+                    삭제
+                  </BoxContent>
+                </Box>
+              )}
+            </ExtraInfo>
+          </div>
+        </Container>
+      )}
+      {isEditChecked && (
+        <CommentUpdate
+          commentId={comment.commentId}
+          postId={postId}
+          commentValue={comment.content}
+          onCancle={onEditCancle}
+        ></CommentUpdate>
+      )}
+      {isReplying && (
+        <CommentWrite
+          parentCommentId={comment.commentId}
+          postId={postId}
+          reply={true}
+        ></CommentWrite>
+      )}
       <Divider></Divider>
-    </Fragment>
+    </div>
   );
 };
