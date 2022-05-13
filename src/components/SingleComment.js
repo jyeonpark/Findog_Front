@@ -71,12 +71,6 @@ export const SingleComment = ({ comment, postId, reply }) => {
   const [isEditChecked, setIsEditChecked] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
 
-  if (reply === true) {
-    console.log("대댓글 : ", postId, comment);
-  } else {
-    console.log("댓글 : ", postId, comment);
-  }
-
   const onClickEdit = () => {
     setIsEditChecked(!isEditChecked);
   };
