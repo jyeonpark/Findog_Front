@@ -16,6 +16,7 @@ const BoardBody = styled.div`
 
 export const Board = () => {
   const postId = 92;
+
   return (
     <BoardContainer>
       <Fragment>

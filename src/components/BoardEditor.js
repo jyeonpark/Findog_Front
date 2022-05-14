@@ -4,6 +4,7 @@ import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
 import axios from "axios";
 import { BoardDetail } from "../pages/BoardDetail";
+import API from './../utils/api';
 
 const InputPicker = styled.select`
   width: 955px;
@@ -124,8 +125,8 @@ export const BoardEditor = () => {
 
       // console.log("type check end");
       console.log("전송시작");
-      await axios
-        .post("http://3.39.156.161:8080/boards/post", formData, {
+      await API
+        .post("/boards/post", formData, {
           method: "POST",
           headers: { "Content-Type": "multipart/form-data" },
           data: formData,

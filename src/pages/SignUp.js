@@ -436,8 +436,8 @@ function SignUp() {
         console.log(type(image.image_file));
       }
 
-      await axios
-        .post("http://3.39.156.161:8080/users/sign-up", formData, {
+      await API
+        .post("/users/sign-up", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

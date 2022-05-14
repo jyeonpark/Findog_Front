@@ -72,7 +72,7 @@ function Tab(props) {
               게시판
             </TabLi>
           </Link>
-          <Link to="*">
+          <Link to="/centermap">
             <TabLi
               className={menu === 3 ? "active" : ""}
               onClick={() => {

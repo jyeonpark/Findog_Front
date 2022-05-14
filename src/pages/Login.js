@@ -2,8 +2,10 @@ import React, { Component, useState, useRef, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import axios from "axios";
 import setAuthorizationToken from "../utils/setAuthorizationToken";
+import API from './../utils/api';
 
 const Container = styled.div`
   width: 800px;
@@ -113,8 +115,8 @@ function Login() {
         email: email,
         password: password,
       };
-      await axios
-        .post("http://3.39.156.161:8080/users/log-in", JSON.stringify(data), {
+      await API
+        .post("/users/log-in", JSON.stringify(data), {
           headers: {
             "Content-Type": "application/json",
           },

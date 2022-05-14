@@ -1,10 +1,11 @@
 import axios from "axios";
+import API from './api';
 
 export function AuthLogin(jwt) {
   console.log(jwt);
   try {
-    axios
-      .get("http://3.39.156.161:8080/users/auto-logIn", {
+    API
+      .get("/users/auto-logIn", {
         headers: {
           "X-ACCESS-TOKEN": jwt,
         },
