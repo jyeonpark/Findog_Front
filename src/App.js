@@ -11,7 +11,7 @@ import { Board } from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 import { BoardDetail } from "./pages/BoardDetail";
-import { AuthLogin } from "./utils/utils";
+import CenterMap from './pages/CenterMap';
 
 
 function App() {
@@ -52,12 +52,13 @@ function App() {
         <Routes>
           <Route path="/" element={<AbandonedAnimal />}></Route>
           <Route path="/board" element={<Board />}></Route>
+          <Route path="/centermap" element={<CenterMap/>}></Route>
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/board/edit" element={<BoardEditor />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/board/detail/:postId"  element={<BoardDetail/>}></Route>
+          <Route path="/board/detail/:postId"  element={<BoardDetail />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
