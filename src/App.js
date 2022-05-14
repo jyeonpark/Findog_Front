@@ -11,7 +11,6 @@ import { Board } from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 import { BoardDetail } from "./pages/BoardDetail";
-import { AuthLogin } from "./utils/utils";
 import CenterMap from './pages/CenterMap';
 
 

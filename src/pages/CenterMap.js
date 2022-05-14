@@ -1,6 +1,5 @@
 /*global kakao */
 import React, { useEffect, useState } from "react";
-import { markerData } from "../assets/markerData";
 import styled from "styled-components";
 
 const MapWrapper = styled.div`
@@ -8,7 +7,7 @@ const MapWrapper = styled.div`
   margin-bottom: 100px;
   border-radius: 5px;
   position: relative;
-  width: 80%;
+  width: 50%;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -19,7 +18,7 @@ const ListWrapper = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 350px;
   margin: 10px 0 30px 10px;
   padding: 5px;
   overflow-y: auto;
@@ -53,39 +52,54 @@ const Pagination = styled.div`
 `;
 
 const PlacesList = styled.ul`
-  &.markerbg {
-    float: left;
-    position: absolute;
-    width: 36px;
-    height: 37px;
-    margin: 10px 0 0 10px;
-    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-      no-repeat;
+  margin-top: 20px;
+
+  li {
+    list-style: none;
+
+    &.item {
+      position: relative;
+      border-bottom: 1px solid #888;
+      overflow: hidden;
+      cursor: pointer;
+      min-height: 65px;
+
+      span {
+        display: block;
+        margin-top: 4px;
+      }
+    }
   }
 `;
 
 export default function CenterMap() {
-  var searchPlace = "유기동물 보호소";
-  // 검색결과 배열에 담아줌
-  const [Places, setPlaces] = useState([]);
+  var keyword = "유기동물 보호소";
+
+  var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+  var markers = [];
+  const options = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667),
+    level: 13,
+  };
 
   useEffect(() => {
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-    var markers = [];
     const container = document.getElementById("myMap");
-    const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 13,
-    };
     const map = new kakao.maps.Map(container, options);
 
     const ps = new kakao.maps.services.Places();
 
-    ps.keywordSearch(searchPlace, placesSearchCB);
+    searchPlaces();
+
+    // 키워드 검색을 요청하는 함수입니다
+    function searchPlaces() {
+      // // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+      ps.keywordSearch(keyword, placesSearchCB);
+    }
 
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
         let bounds = new kakao.maps.LatLngBounds();
+        map.setBounds(bounds);
         displayPlaces(data);
         displayPagination(pagination);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
@@ -156,10 +170,6 @@ export default function CenterMap() {
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
         (function (marker, title) {
-          let content = (
-            <div style="padding:5px;font-size:12px;"> + title + </div>
-          );
-
           kakao.maps.event.addListener(marker, "mouseover", function () {
             displayInfowindow(marker, title);
           });
@@ -189,30 +199,37 @@ export default function CenterMap() {
     }
 
     // 검색결과 항목을 Element로 반환하는 함수입니다
-    function getListItem(index, places) {
+    function getListItem(index, place) {
+      const imgHeight = 10 + index * 46;
       var el = document.createElement("li"),
         itemStr =
           '<span class="markerbg marker_' +
           (index + 1) +
-          '"></span>' +
-          '<div class="info">' +
+          '" style="float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;  background-position: 0 -' +
+          imgHeight +
+          'px;"></span>' +
+          '<div class="info" style="padding:10px 0 10px 55px;">' +
           "   <h5>" +
-          places.place_name +
+          place.place_name +
           "</h5>";
 
-      if (places.road_address_name) {
+      if (place.road_address_name) {
         itemStr +=
           "    <span>" +
-          places.road_address_name +
+          place.road_address_name +
           "</span>" +
-          '   <span class="jibun gray">' +
-          places.address_name +
+          '   <span class="jibun gray" style="color:#8a8a8a; padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;">' +
+          place.address_name +
           "</span>";
       } else {
-        itemStr += "    <span>" + places.address_name + "</span>";
+        itemStr += "    <span>" + place.address_name + "</span>";
       }
 
-      itemStr += '  <span class="tel">' + places.phone + "</span>" + "</div>";
+      itemStr +=
+        '  <span class="tel" style="color:#009900;">' +
+        place.phone +
+        "</span>" +
+        "</div>";
 
       el.innerHTML = itemStr;
       el.className = "item";
@@ -257,7 +274,8 @@ export default function CenterMap() {
     // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
     // 인포윈도우에 장소명을 표시합니다
     function displayInfowindow(marker, title) {
-      var content = '<div style="padding:5px;z-index:1;">' + title + "</div>";
+      var content =
+        '<div style="padding:10px; width:max-content;">' + title + "</div>";
 
       infowindow.setContent(content);
       infowindow.open(map, marker);
@@ -269,18 +287,18 @@ export default function CenterMap() {
         el.removeChild(el.lastChild);
       }
     }
-  }, [searchPlace]);
+  }, []);
 
   return (
     <MapWrapper>
       <Map id="myMap"></Map>
       <ListWrapper id="menu_wrap">
-        <div class="option">
+        {/* <div class="option">
           <div>
-            <form style={{ textAlign: "center" }}>
+            <form style={{ textAlign: "center" }} onsubmit={onSubmit}>
               <input
                 type="text"
-                value="유기동물 보호소"
+                value={searchPlace}
                 id="keyword"
                 size="20"
                 style={{
@@ -290,6 +308,7 @@ export default function CenterMap() {
                   borderColor: "rgba(0,0,0,0.2)",
                   borderWidth: "1px",
                 }}
+                onChange={onInputChange}
               ></input>
               <button
                 type="submit"
@@ -303,89 +322,10 @@ export default function CenterMap() {
               </button>
             </form>
           </div>
-        </div>
-        {/* {Places.map((item, i) => (
-          <div key={i} style={{ marginTop: "20px" }}>
-            <span>{i + 1}</span>
-            <div>
-              <h5>{item.place_name}</h5>
-              {item.road_address_name ? (
-                <div>
-                  <span>{item.road_address_name}</span>
-                  <span>{item.address_name}</span>
-                </div>
-              ) : (
-                <span>{item.address_name}</span>
-              )}
-              <span>{item.phone}</span>
-            </div>
-          </div>
-        ))} */}
+        </div> */}
         <PlacesList id="placesList"></PlacesList>
         <Pagination id="pagination"></Pagination>
       </ListWrapper>
     </MapWrapper>
   );
 }
-
-// 맨 처음 방법
-// useEffect(() => {
-//   mapscript();
-// }, []);
-
-// const mapscript = () => {
-//   let container = document.getElementById("map");
-//   let options = {
-//     center: new kakao.maps.LatLng(35.95, 128.25),
-//     level: 13,
-//   };
-
-//   //map
-//   const map = new kakao.maps.Map(container, options);
-
-//   markerData.forEach((el) => {
-//     var imageSrc = "https://cdn-icons-png.flaticon.com/512/1759/1759401.png",
-//       imageSize = new kakao.maps.Size(45, 45), // 마커이미지의 크기입니다
-//       imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-//     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-//     var markerImage = new kakao.maps.MarkerImage(
-//       imageSrc,
-//       imageSize,
-//       imageOption
-//     );
-
-//     // 마커를 생성합니다
-//     let marker = new kakao.maps.Marker({
-//       //마커가 표시 될 지도
-//       map: map,
-//       //마커가 표시 될 위치
-//       position: new kakao.maps.LatLng(el.lat, el.lng),
-//       image: markerImage,
-//       // clickable: true,
-//     });
-
-//     let content =
-//       '<div class="customoverlay">' +
-//       '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-//       '    <span class="title">구의야구공원</span>' +
-//       "  </a>" +
-//       "</div>";
-
-//     let customOverlay = new kakao.maps.CustomOverlay({
-//       position: position,
-//       content: content,
-//     });
-
-//     kakao.maps.event.addListener(
-//       marker,
-//       "mouseover",
-//       makeOverListener(map, marker, infowindow)
-//     );
-//     kakao.maps.event.addListener(
-//       marker,
-//       "mouseout",
-//       makeOutListener(infowindow)
-//     );
-//   });
-// };
