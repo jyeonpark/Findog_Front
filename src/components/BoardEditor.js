@@ -157,11 +157,11 @@ export const BoardEditor = () => {
 
   // }, [postId]);
 
-  // const goToPost = () => {
-  //   // setLoading(false);
-  //   navigate(`/board/detail/${postId}`);
-  //   console.log("==포스트 이동==")
-  // }
+  const goToPost = () => {
+    // setLoading(false);
+    navigate(`/board/detail/${postId}`);
+    console.log("==포스트 이동==")
+  }
 
   useEffect(() => {
     if(postId!=999) {
@@ -247,7 +247,7 @@ export const BoardEditor = () => {
         </Link>
           <button className={styles.btn__confirm} onClick={() => {
             onClickUpload();
-            // goToPost();
+            goToPost();
           }}>
             확인
           </button>

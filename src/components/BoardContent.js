@@ -67,6 +67,7 @@ const Title = styled.div`
 `;
 const ContentBox = styled.div`
   font-size: 20px;
+  text-align: left;
 `;
 const ExtraBox = styled.div`
   width: 1000px;
@@ -96,9 +97,13 @@ const Button = styled.button`
   border: 2px solid rgba(64, 64, 64, 0.5);
 `;
 
+const ImgBox = styled.div`
+    text-align: left;
+`;
+
 const Img = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 300px;
+    height: 300px;
 `;
 
 export const BoardContent = ({ postId }) => {
@@ -112,20 +117,25 @@ export const BoardContent = ({ postId }) => {
     const [deleteCheck, setDeleteCheck] = useState(false);
 
     const WEEKDAY = ['월', '화', '수', '목', '금', '토', '일'];
+
+    // input 받을 것
     const [inputs, setInputs] = useState({
+        postId: 92,
         userId: 43,
         nickname: "",
         userImgUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.princeton.edu%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fhalf_2x%2Fpublic%2Fimages%2F2022%2F02%2FKOA_Nassau_2697x1517.jpg%3Fitok%3DiQEwihUn&imgrefurl=https%3A%2F%2Fwww.princeton.edu%2Fnews%2F2022%2F02%2F02%2Fwhat-your-dogs-lifespan-you-might-be-surprised&tbnid=vEgZce8uNit9PM&vet=12ahUKEwiEj9TAi9r3AhV8xosBHTBpAGYQMygAegUIARC3AQ..i&docid=y-9b3DnaEkm6oM&w=1920&h=1080&q=dog&ved=2ahUKEwiEj9TAi9r3AhV8xosBHTBpAGYQMygAegUIARC3AQ",
         title: "",
         category: 1,
+        thumbnail: "",
         content: "",
         postCreateAt: "",
         likeCount: 0,
         commentCount: 0,
         hits: 0,
-        userLiked: false,
-        imgList: []
     });
+
+    const [userLiked, setUserLiked] = useState(false);
+    const [imgList, setImgList] = useState([]);
 
     useEffect(() => {
 
@@ -135,21 +145,27 @@ export const BoardContent = ({ postId }) => {
             },
         })
             .then((response) => {
+                // input 받는 부분
                 setInputs({
+                    postId: response.data.result.board.postId,
                     userId: response.data.result.board.userId,
                     nickname: response.data.result.board.nickname,
-                    // userImgUrl: response.data.result.board.userImgUrl,
+                    userImgUrl: response.data.result.board.userImgUrl,
                     title: response.data.result.board.title,
                     category: response.data.result.board.category,
                     content: response.data.result.board.content,
+                    thumbnail: "",
                     postCreateAt: response.data.result.board.postCreateAt,
                     likeCount: response.data.result.board.likeCount,
                     commentCount: response.data.result.board.commentCount,
                     hits: response.data.result.board.hits,
-                    userLiked: response.data.result.board.userLiked,
-                    imgList: response.data.result.imgList
-
                 });
+
+                console.log("imgList 출력");
+                console.log(response.data.result.board.imgList);
+
+                setUserLiked(response.data.result.imgList);
+                setImgList(response.data.result.imgList);
 
                 // console.log(response.data);
                 // console.log(inputs);
@@ -164,25 +180,6 @@ export const BoardContent = ({ postId }) => {
             setCheckState(false);
         }
 
-
-        // // 카테고리
-        // switch (inputs.category) {
-        //     case 1:
-        //         setCategoryText("기타");
-        //         break;
-        //     case 2:
-        //         setCategoryText("찾아주세요");
-        //         break;
-        //     case 3:
-        //         setCategoryText("봤어요");
-        //         break;
-        //     case 4:
-        //         setCategoryText("도와주세요");
-        //         break;
-        //     default:
-        //         setCategoryText("default");
-        //         break;
-        // }
     }, []);
 
     useEffect(() => {
@@ -206,25 +203,6 @@ export const BoardContent = ({ postId }) => {
         }
     }, [inputs.category]);
 
-    // useEffect(() => {
-    //     if(deleteCheck == true) {
-    //         API.delete("/boards/" + postId, {
-    //             headers: {
-    //                 "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT")
-    //             },
-    //             body: {
-    //                 userId: sessionStorage.getItem("userID")
-    //             }
-    //         })
-    //         .then((response) => console.log(response.data))
-    //     }
-    //     setDeleteCheck(false);
-
-    //     // console.log("userID Check");
-    //     // console.log(sessionStorage.getItem("userID"));
-    //     // console.log(inputs.userId);
-
-    // }, [deleteCheck]);
 
     // Date객체 내용 빼서 형식에 맞춰서 return
     const dateTrans = () => {
@@ -288,8 +266,15 @@ export const BoardContent = ({ postId }) => {
 
                 <ContentBox>
                     {inputs.content}
-
                 </ContentBox>
+                <ImgBox>
+                    {imgList.map((image) => (
+                        <Img
+                            src={image}
+                        />
+                    ))}
+                </ImgBox>
+                
             </Container>
             <ExtraBox>
                 <ExtraInfo>
