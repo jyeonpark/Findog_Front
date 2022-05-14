@@ -7,6 +7,9 @@ import axios from "axios";
 import API from "./../utils/api";
 import dogImg from "../images/dog.jpeg";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 
 const Container = styled.div`
   width: 1000px;
@@ -160,15 +163,12 @@ export const BoardContent = ({ postId }) => {
                     commentCount: response.data.result.board.commentCount,
                     hits: response.data.result.board.hits,
                 });
-
-                console.log("imgList 출력");
-                console.log(response.data.result.board.imgList);
-
-                setUserLiked(response.data.result.imgList);
+                setUserLiked(response.data.result.userLiked);
                 setImgList(response.data.result.imgList);
 
-                // console.log(response.data);
-                // console.log(inputs);
+                console.log("BoardContent inputs test");
+                console.log(response.data);
+                console.log(inputs);
             })
             .catch((err) => console.log("error:", err));
 
@@ -231,6 +231,42 @@ export const BoardContent = ({ postId }) => {
 
     }
 
+    const onClickLiked = () => {
+
+        const data = {
+            "userId": sessionStorage.getItem("userID")
+        }
+
+        if(userLiked == true) {
+            API.delete("/boards/like", {
+                headers: {
+                    "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT")
+                },
+                body: {
+                    userId: sessionStorage.getItem("userID")
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                setUserLiked(false);
+            })
+            console.log("unlike");
+        }
+        else {
+            API.post("/boards/like", data, {
+                headers: {
+                    "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT")
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                setUserLiked(true);
+            })
+            console.log("like");
+        }
+        // window.location.reload();
+    }
+
     const onClickDelete = () => {
         API.delete("/boards/" + postId, {
             headers: {
@@ -278,9 +314,14 @@ export const BoardContent = ({ postId }) => {
             </Container>
             <ExtraBox>
                 <ExtraInfo>
-                    좋아요 {inputs.likeCount} 댓글 {inputs.commentCount} 조회수{" "}
-                    {inputs.hits}
+                    좋아요 {inputs.likeCount} 댓글 {inputs.commentCount} 조회수 {inputs.hits} {" "}
+                    {userLiked ? 
+                    <FontAwesomeIcon style={{color: "black"}} icon={faHeart} onClick={onClickLiked}/>
+                    :
+                    <FontAwesomeIcon style={{color: "#BDBDBD"}} icon={faHeart} onClick={onClickLiked} />    
+                    }
                 </ExtraInfo>
+                
                 <ExtraButton>
                     {checkState ? (<Button>수정</Button>) : null}
                     <Link to="/board">

@@ -4,7 +4,6 @@ import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
 import axios from "axios";
 import { BoardDetail } from "../pages/BoardDetail";
-import API from './../utils/api';
 
 const InputPicker = styled.select`
   width: 955px;
@@ -104,14 +103,6 @@ export const BoardEditor = () => {
       // })
 
       if (sendingImg.length > 0) {
-        // const sendingImg = [];
-
-        // showImages.map((eachfiles) => {
-        //   sendingImg.push(eachfiles)
-        // })
-
-        // sendingImg.forEach(image => formData.append("imgFiles", image));
-
         sendingImg.map((e) => {
           formData.append("imageFiles", e);
         });
@@ -123,10 +114,22 @@ export const BoardEditor = () => {
         // formData.push("imgFiles", showImages);
       }
 
+      console.log("formData checking");
+      
+      for (let key of formData.keys()) {
+        console.log(key);
+      }
+
+      for (let value of formData.values()) {
+        console.log(value);
+      }
+
+      
+
       // console.log("type check end");
       console.log("전송시작");
-      await API
-        .post("/boards/post", formData, {
+      await axios
+        .post("http://3.39.156.161:8080/boards/post", formData, {
           method: "POST",
           headers: { "Content-Type": "multipart/form-data" },
           data: formData,
@@ -138,8 +141,6 @@ export const BoardEditor = () => {
             console.log("게시물이 저장되었습니다.");
             alert("게시물이 등록되었습니다!");
             setPostId(response.data.result.postId);
-            // console.log("postId ", response.data.result.postId);
-            // console.log("userId", response.data.result.userId);
           } else {
             console.log(response.data.isSuccess);
             console.log(response.data.message);
@@ -157,14 +158,14 @@ export const BoardEditor = () => {
 
   // }, [postId]);
 
-  const goToPost = () => {
-    // setLoading(false);
-    navigate(`/board/detail/${postId}`);
-    console.log("==포스트 이동==")
-  }
+  // const goToPost = () => {
+  //   // setLoading(false);
+  //   navigate(`/board/detail/${postId}`);
+  //   console.log("==포스트 이동==")
+  // }
 
   useEffect(() => {
-    if(postId!=999) {
+    if (postId != 999) {
       navigate(`/board/detail/${postId}`);
       console.log("==포스트 이동==")
     }
@@ -245,12 +246,12 @@ export const BoardEditor = () => {
         <Link to="/board">
           <button className={styles.btn__cancel}>취소</button>
         </Link>
-          <button className={styles.btn__confirm} onClick={() => {
-            onClickUpload();
-            goToPost();
-          }}>
-            확인
-          </button>
+        <button className={styles.btn__confirm} onClick={() => {
+          onClickUpload();
+          // goToPost();
+        }}>
+          확인
+        </button>
       </div>
     </div>
   );
