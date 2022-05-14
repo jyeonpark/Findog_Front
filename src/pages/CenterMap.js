@@ -1,14 +1,33 @@
 /*global kakao */
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import doghouse from "../images/doghouse.png";
+
+const Container = styled.div`
+  margin-top: 100px;
+  display: flex;
+  margin-left: 15%;
+  margin-bottom: 10px;
+`;
+const HomeImg = styled.img`
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+`;
+
+const Intro = styled.div`
+  font-size: x-large;
+  font-weight: bolder;
+  text-align: left;
+  color: orange;
+`;
 
 const MapWrapper = styled.div`
   /* position: sticky; */
   margin-bottom: 100px;
-  border-radius: 5px;
   position: relative;
-  width: 50%;
-  height: 500px;
+  width: 70%;
+  height: 600px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -34,6 +53,10 @@ const Map = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+  border-radius: 10px;
+  border: solid;
+  border-color: orange;
+  border-width: 5px;
 `;
 
 const Pagination = styled.div`
@@ -290,10 +313,16 @@ export default function CenterMap() {
   }, []);
 
   return (
-    <MapWrapper>
-      <Map id="myMap"></Map>
-      <ListWrapper id="menu_wrap">
-        {/* <div class="option">
+    <div>
+      <Container>
+        <HomeImg src={doghouse}></HomeImg>
+        <Intro>전국 유기동물 보호소</Intro>
+      </Container>
+
+      <MapWrapper>
+        <Map id="myMap"></Map>
+        <ListWrapper id="menu_wrap">
+          {/* <div class="option">
           <div>
             <form style={{ textAlign: "center" }} onsubmit={onSubmit}>
               <input
@@ -323,10 +352,10 @@ export default function CenterMap() {
             </form>
           </div>
         </div> */}
-        <PlacesList id="placesList"></PlacesList>
-        <Pagination id="pagination"></Pagination>
-      </ListWrapper>
-    </MapWrapper>
+          <PlacesList id="placesList"></PlacesList>
+          <Pagination id="pagination"></Pagination>
+        </ListWrapper>
+      </MapWrapper>
+    </div>
   );
 }
-
