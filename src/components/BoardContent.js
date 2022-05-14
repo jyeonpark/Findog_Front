@@ -76,7 +76,6 @@ const ExtraBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 const ExtraInfo = styled.div`
   border: 2px solid rgba(64, 64, 64, 0.5);
   padding-left: 10px;
@@ -97,11 +96,9 @@ const Button = styled.button`
   border: 2px solid rgba(64, 64, 64, 0.5);
 `;
 
-
 const Img = styled.img`
     width: 50px;
     height: 50px;
-
 `;
 
 export const BoardContent = ({ postId }) => {
@@ -316,138 +313,3 @@ export const BoardContent = ({ postId }) => {
 BoardContent.defaultProps = {
     postId: 1,
 };
-=======
-export const BoardContent = ({ postId }) => {
-  // 1: "기타",
-  // 2: "찾아주세요",
-  // 3: "봤어요",
-  // 4: "도와주세요",
-
-  const [categoryText, setCategoryText] = useState("기타");
-
-  // const [inputs, setInputs] = useState({
-  //     category: 2,
-  //     content: "Test Content 뚱뚱이는 저에게 유일한 가족입니다... ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ니ㅓㅇㅊㅁ오밍ㅁㅈ니ㅏㅇㅁㅈ니ㅏ오ㅓ마ㅓㅗ임지ㅏㅓㅇㅁ지낭미ㅏ",
-  //     hits: 205,
-  //     userImgUrl: "",
-  //     imgUrl: [],
-  //     likeCount: 50,
-  //     postCreateAt: "2020.02.02 (목) 22:45",
-  //     title: "Test Title",
-  //     userId: 0,
-  //     nickName: "Test NickName",
-  //     commentCount: 7
-  // });
-
-  const [inputs, setInputs] = useState({
-    userId: 1,
-    nickname: "",
-    userImgUrl: "",
-    title: "",
-    category: 1,
-    content: "",
-    postCreateAt: "",
-    likeCount: 0,
-    commentCount: 0,
-    hits: 0,
-    userLiked: false,
-  });
-
-  useEffect(() => {
-    API.get("/boards/" + 1, {
-      headers: {
-        "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
-      },
-    })
-      .then((response) => {
-        setInputs({
-          userId: response.data.result.board.userId,
-          nickname: response.data.result.board.nickname,
-          userImgUrl: response.data.result.board.userImgUrl,
-          title: response.data.result.board.title,
-          category: response.data.result.board.category,
-          content: response.data.result.board.content,
-          postCreateAt: response.data.result.board.postCreateAt,
-          likeCount: response.data.result.board.likeCount,
-          commentCount: response.data.result.board.commentCount,
-          hits: response.data.result.board.hits,
-          userLiked: response.data.result.board.userLiked,
-        });
-        console.log(response.data);
-      })
-
-      // .then((response) => console.log("response:", response.data))
-      .catch((err) => console.log("error:", err));
-
-    console.log("inputs : ", inputs);
-    var date = new Date(inputs.postCreateAt);
-    date =
-      date.getFullYear() +
-      "." +
-      (date.getMonth() + 1) +
-      "." +
-      date.getDate() +
-      " " +
-      date.getHours() +
-      ":" +
-      date.getMinutes();
-    console.log(date);
-
-    // 카테고리
-    switch (inputs.category) {
-      case 1:
-        setCategoryText("기타");
-        break;
-      case 2:
-        setCategoryText("찾아주세요");
-        break;
-      case 3:
-        setCategoryText("봤어요");
-        break;
-      case 4:
-        setCategoryText("도와주세요");
-        break;
-      default:
-        setCategoryText("default");
-        break;
-    }
-  }, [inputs.category]);
-
-  return (
-    <Fragment>
-      <Container>
-        <ProfileBox>
-          <ProfileImage>
-            <ProfileImageShow src={inputs.userImgUrl} />
-          </ProfileImage>
-          <ProfileInfo>
-            <ProfileName>{inputs.nickname}</ProfileName>
-            <ProfileDate>{inputs.postCreateAt}</ProfileDate>
-          </ProfileInfo>
-        </ProfileBox>
-        <TitleBox>
-          <Category>{categoryText}</Category>
-          <Title>{inputs.title}</Title>
-        </TitleBox>
-        <hr />
-
-        <ContentBox>{inputs.content}</ContentBox>
-      </Container>
-      <ExtraBox>
-        <ExtraInfo>
-          좋아요 {inputs.likeCount} 댓글 {inputs.commentCount} 조회수{" "}
-          {inputs.hits}
-        </ExtraInfo>
-        <ExtraButton>
-          <Button>수정</Button>
-          <Button>삭제</Button>
-        </ExtraButton>
-      </ExtraBox>
-    </Fragment>
-  );
-};
-
-BoardContent.defaultProps = {
-  postId: 1,
-};
-
