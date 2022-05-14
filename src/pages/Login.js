@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import axios from "axios";
+import setAuthorizationToken from "../utils/setAuthorizationToken";
 import API from './../utils/api';
 
 const Container = styled.div`

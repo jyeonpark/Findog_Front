@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import OptionTab from "../components/OptionTab";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const BoardContainer = styled.div`
   padding-bottom: 100px;
@@ -14,7 +15,8 @@ const BoardBody = styled.div`
 `;
 
 export const Board = () => {
-  const postId = 1;
+  const postId = 92;
+
   return (
     <BoardContainer>
       <Fragment>
@@ -38,3 +40,12 @@ export const Board = () => {
 };
 
 export default Board;
+
+
+BoardBox.defaultProps = {
+  postId: '0'
+}
+
+BoardBox.propsTypes = {
+  postId: propTypes.number
+}
