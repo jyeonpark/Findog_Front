@@ -19,6 +19,7 @@ export const BoardEditor = () => {
 
   const [inputs, setInputs] = useState({
     category: 1,
+    region: 1,
     content: "",
     title: "",
     userId: sessionStorage.getItem("userID"),
@@ -42,6 +43,13 @@ export const BoardEditor = () => {
       ...inputs,
       category: e.target.value
     });
+  }
+
+  const onChangeRegion = (e) => {
+    setInputs({
+      ...inputs,
+      region: e.target.value
+    })
   }
 
   // category select
@@ -90,6 +98,7 @@ export const BoardEditor = () => {
       formData.append("title", inputs.title);
       formData.append("category", Number(inputs.category));
       formData.append("content", inputs.content);
+      formData.append("region", inputs.region);
 
       console.log("type check start");
 
@@ -115,16 +124,7 @@ export const BoardEditor = () => {
       }
 
       console.log("formData checking");
-      
-      for (let key of formData.keys()) {
-        console.log(key);
-      }
-
-      for (let value of formData.values()) {
-        console.log(value);
-      }
-
-      
+          
 
       // console.log("type check end");
       console.log("전송시작");
@@ -186,7 +186,7 @@ export const BoardEditor = () => {
           />
         </div>
         <div>
-          <InputPicker onChange={onChangeCategory}>
+          <InputPicker style={{marginBottom: "20px"}} onChange={onChangeCategory}>
             <option key={1} value={1}>
               기타
             </option>
@@ -199,6 +199,33 @@ export const BoardEditor = () => {
             <option key={4} value={4}>
               도와주세요
             </option>
+          </InputPicker>
+          <InputPicker onChange={onChangeRegion}>
+            <option key={1} value={1}>
+              서울
+            </option>
+            <option key={2} value={2}>
+              경기도
+            </option>
+            <option key={3} value={3}>
+              인천
+            </option>
+            <option key={4} value={4}>
+              강원도
+            </option>
+            <option key={5} value={5}>
+              충청도
+            </option>
+            <option key={6} value={6}>
+              경상도
+            </option>
+            <option key={7} value={7}>
+              전라도
+            </option>
+            <option key={8} value={8}>
+              제주도
+            </option>
+            
           </InputPicker>
         </div>
         {/* content */}
