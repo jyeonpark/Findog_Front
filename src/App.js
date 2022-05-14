@@ -57,7 +57,7 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/board/edit" element={<BoardEditor />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/board/detail/:postId"  element={<BoardDetail/>}></Route>
+          <Route path="/board/detail/:postId"  element={<BoardDetail />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

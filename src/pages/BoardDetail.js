@@ -7,7 +7,10 @@ import { BoardContent } from "../components/BoardContent";
 
 export const BoardDetail = () => {
     let { postId } = useParams();
+    console.log("==BoardDetail Start==");
     console.log("postId : ",postId);
+
+    
 
     return (
         <Fragment>

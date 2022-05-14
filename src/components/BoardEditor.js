@@ -1,8 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
 import axios from "axios";
+import { BoardDetail } from "../pages/BoardDetail";
 
 const InputPicker = styled.select`
   width: 955px;
@@ -14,6 +15,7 @@ const InputPicker = styled.select`
 export const BoardEditor = () => {
   let [showImages, setShowImages] = useState([]);
   const [sendingImg, setSendingImg] = useState([]);
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     category: 1,
@@ -21,6 +23,11 @@ export const BoardEditor = () => {
     title: "",
     userId: sessionStorage.getItem("userID"),
   });
+
+  const [editLink, setEditLink] = useState("");
+  const [postId, setPostId] = useState(999);
+
+  // const [postId, setPostId] = useState(0);
 
   /** input 입력 시 title, content 내용 변경 */
   const onChangeData = (e) => {
@@ -30,12 +37,21 @@ export const BoardEditor = () => {
     });
   };
 
+  const onChangeCategory = (e) => {
+    setInputs({
+      ...inputs,
+      category: e.target.value
+    });
+  }
+
   // category select
   const handleSelect = (e) => {
     setInputs({
       ...inputs,
       categoy: e.target.value,
     });
+    console.log("handle select");
+    console.log(e.target.value);
   };
 
   /** 사진 추가 */
@@ -120,8 +136,9 @@ export const BoardEditor = () => {
           if (response.data.isSuccess) {
             console.log("게시물이 저장되었습니다.");
             alert("게시물이 등록되었습니다!");
-            console.log("postId ", response.data.result.postId);
-            console.log("userId", response.data.result.userId);
+            setPostId(response.data.result.postId);
+            // console.log("postId ", response.data.result.postId);
+            // console.log("userId", response.data.result.userId);
           } else {
             console.log(response.data.isSuccess);
             console.log(response.data.message);
@@ -131,7 +148,26 @@ export const BoardEditor = () => {
       console.log(e.response);
     }
     console.log("전송끝");
+
   };
+
+  // useEffect(() => {
+  //   navigate(`/board/detail/${postId}`);
+
+  // }, [postId]);
+
+  // const goToPost = () => {
+  //   // setLoading(false);
+  //   navigate(`/board/detail/${postId}`);
+  //   console.log("==포스트 이동==")
+  // }
+
+  useEffect(() => {
+    if(postId!=999) {
+      navigate(`/board/detail/${postId}`);
+      console.log("==포스트 이동==")
+    }
+  }, [postId]);
 
   return (
     <div className={styles.frag}>
@@ -148,7 +184,7 @@ export const BoardEditor = () => {
           />
         </div>
         <div>
-          <InputPicker onChange={handleSelect}>
+          <InputPicker onChange={onChangeCategory}>
             <option key={1} value={1}>
               기타
             </option>
@@ -208,11 +244,12 @@ export const BoardEditor = () => {
         <Link to="/board">
           <button className={styles.btn__cancel}>취소</button>
         </Link>
-        <Link to="/board">
-          <button className={styles.btn__confirm} onClick={onClickUpload}>
+          <button className={styles.btn__confirm} onClick={() => {
+            onClickUpload();
+            // goToPost();
+          }}>
             확인
           </button>
-        </Link>
       </div>
     </div>
   );
