@@ -71,6 +71,7 @@ const Title = styled.div`
 const ContentBox = styled.div`
   font-size: 20px;
   text-align: left;
+  white-space: pre-wrap;
 `;
 const ExtraBox = styled.div`
   width: 1000px;
@@ -267,6 +268,7 @@ export const BoardContent = ({ postId }) => {
         // window.location.reload();
     }
 
+    // 게시물 삭제
     const onClickDelete = () => {
         API.delete("/boards/" + postId, {
             headers: {

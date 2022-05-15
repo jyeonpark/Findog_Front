@@ -12,7 +12,7 @@ const InputPicker = styled.select`
   border-color: rgba(0, 0, 0, 0.2);
 `;
 
-export const BoardEditor = () => {
+export const BoardEditor = (props) => {
   let [showImages, setShowImages] = useState([]);
   const [sendingImg, setSendingImg] = useState([]);
   const navigate = useNavigate();
@@ -27,8 +27,24 @@ export const BoardEditor = () => {
 
   const [editLink, setEditLink] = useState("");
   const [postId, setPostId] = useState(999);
+  const [patchState, setPatchState] = useState(props.patchState);
+  const [patchPostId, setPatchPostId] = useState(props.patchPostId);
 
   // const [postId, setPostId] = useState(0);
+
+  // useEffect(() => {
+  //   if(pathState == true) {
+  //     setInputs({
+  //       category: props.category,
+  //       region: props.region,
+  //       title: props.title,
+  //       content: props.content,
+  //     });
+  //     if(props.imgList.length > 0) {
+  //       setShowImages(props.imgList);
+  //     }
+  //   }
+  // }, [patchState]);
 
   /** input 입력 시 title, content 내용 변경 */
   const onChangeData = (e) => {
@@ -90,66 +106,76 @@ export const BoardEditor = () => {
 
   /** 확인버튼 누르면 데이터 서버로 전송 */
   const onClickUpload = async () => {
-    try {
-      console.log("클릭");
-      const formData = new FormData();
 
-      formData.append("userId", Number(inputs.userId));
-      formData.append("title", inputs.title);
-      formData.append("category", Number(inputs.category));
-      formData.append("content", inputs.content);
-      formData.append("region", inputs.region);
+    if (patchState == false) {
+      try {
+        console.log("클릭");
+        const formData = new FormData();
 
-      console.log("type check start");
+        formData.append("userId", Number(inputs.userId));
+        formData.append("title", inputs.title);
+        formData.append("category", Number(inputs.category));
+        formData.append("content", inputs.content);
+        formData.append("region", inputs.region);
 
-      console.log("cate: ", typeof Number(inputs.category));
-      console.log("title: ", typeof inputs.title);
-      console.log("content: ", typeof inputs.content);
-      console.log("userId: ", typeof inputs.userId);
+        console.log("type check start");
 
-      // showImages.map((eachfile) => {
-      //   formData.append("imgFiles", eachfile)
-      // })
+        console.log("cate: ", typeof Number(inputs.category));
+        console.log("title: ", typeof inputs.title);
+        console.log("content: ", typeof inputs.content);
+        console.log("userId: ", typeof inputs.userId);
 
-      if (sendingImg.length > 0) {
-        sendingImg.map((e) => {
-          formData.append("imageFiles", e);
-        });
+        // showImages.map((eachfile) => {
+        //   formData.append("imgFiles", eachfile)
+        // })
 
-        // formData.append("imgFiles", sendingImg);
-        // formData.append("imgFiles",showImages);
-        console.log("sendingImg: ", typeof sendingImg);
-        console.log("sendingImg: ", sendingImg);
-        // formData.push("imgFiles", showImages);
-      }
+        if (sendingImg.length > 0) {
+          sendingImg.map((e) => {
+            formData.append("imageFiles", e);
+          });
 
-      console.log("formData checking");
-          
+          // formData.append("imgFiles", sendingImg);
+          // formData.append("imgFiles",showImages);
+          console.log("sendingImg: ", typeof sendingImg);
+          console.log("sendingImg: ", sendingImg);
+          // formData.push("imgFiles", showImages);
+        }
 
-      // console.log("type check end");
-      console.log("전송시작");
-      await axios
-        .post("http://3.39.156.161:8080/boards/post", formData, {
-          method: "POST",
-          headers: { "Content-Type": "multipart/form-data" },
-          data: formData,
-        })
-        .then((response) => {
-          console.log(response.data.isSuccess);
+        console.log("formData checking");
 
-          if (response.data.isSuccess) {
-            console.log("게시물이 저장되었습니다.");
-            alert("게시물이 등록되었습니다!");
-            setPostId(response.data.result.postId);
-          } else {
+
+        // console.log("type check end");
+        console.log("전송시작");
+        await axios
+          .post("http://3.39.156.161:8080/boards/post", formData, {
+            method: "POST",
+            headers: { "Content-Type": "multipart/form-data" },
+            data: formData,
+          })
+          .then((response) => {
             console.log(response.data.isSuccess);
-            console.log(response.data.message);
-          }
-        });
-    } catch (e) {
-      console.log(e.response);
+
+            if (response.data.isSuccess) {
+              console.log("게시물이 저장되었습니다.");
+              alert("게시물이 등록되었습니다!");
+              setPostId(response.data.result.postId);
+            } else {
+              console.log(response.data.isSuccess);
+              console.log(response.data.message);
+            }
+          });
+      } catch (e) {
+        console.log(e.response);
+      }
+      console.log("전송끝");
     }
-    console.log("전송끝");
+    else {
+      console.log("게시물 수정 시작 코드");
+
+      
+
+
+    }
 
   };
 
@@ -165,11 +191,12 @@ export const BoardEditor = () => {
   // }
 
   useEffect(() => {
-    if (postId != 999) {
+
+    if (postId != 999 && patchState == false) {
       navigate(`/board/detail/${postId}`);
       console.log("==포스트 이동==")
     }
-  }, [postId]);
+  }, [postId, patchState]);
 
   return (
     <div className={styles.frag}>
@@ -282,4 +309,13 @@ export const BoardEditor = () => {
       </div>
     </div>
   );
+};
+
+BoardEditor.defaultProps = {
+  patchPostId: 999,
+  patchState: false,
+  title: "",
+  content: "",
+  region: "",
+  imgList: "",
 };
