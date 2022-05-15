@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { Fragment } from "react";
 import OptionTab from "../components/OptionTab";
-import { Link } from "react-router-dom";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
 import API from "../utils/api";
@@ -19,20 +18,37 @@ export const Board = () => {
   const postId = 92;
   var size = 5;
   const [postCount, setPostCount] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     API.get("/boards/count").then((response) => {
       if (response.data.isSuccess) {
         console.log(response.data.result);
         setPostCount(response.data.result);
+        const lastPage = Math.ceil(response.data.result / size);
+        setPageCount(lastPage ? lastPage : 1);
+        console.log("페이지개수", lastPage);
       } else {
         alert("인터넷 연결에 실패했습니다.");
       }
     });
   }, []);
 
-  console.log("현재 페이지",page);
+  useEffect(() => {
+    console.log("useeffect 페이지바뀜", page);
+    API.get("/boards", { params: { page: page, size: size } }).then(
+      (response) => {
+        if (response.data.isSuccess) {
+          console.log(response.data.result);
+          setData(response.data.result);
+        } else {
+          alert("인터넷 연결에 실패했습니다.");
+        }
+      }
+    );
+  }, [page]);
 
   return (
     <div>
@@ -45,21 +61,18 @@ export const Board = () => {
           ></OptionTab>
         </Fragment>
         <BoardBody>
-          <Link
-            to={"/board/detail/" + postId}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <BoardBox />
-          </Link>
+          {data.map((item) => {
+            return (
+              <div>
+                <BoardBox item={item}></BoardBox>
+              </div>
+            );
+          })}
         </BoardBody>
       </BoardContainer>
 
       <footer>
-        <Pagination
-          total={postCount}
-          page={page}
-          setPage={setPage}
-        />
+        <Pagination total={pageCount} page={page} setPage={setPage} />
       </footer>
     </div>
   );
