@@ -18,7 +18,7 @@ export const BoardDetail = () => {
                 <BoardContent postId={postId}/>
             </div>
             <div>
-                {/* <BoardComment postId={postId}/> */}
+                <BoardComment postId={postId}/>
             </div>
         </Fragment>
     );

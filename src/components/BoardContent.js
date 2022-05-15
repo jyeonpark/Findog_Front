@@ -70,6 +70,7 @@ const Title = styled.div`
   line-height: 50px;
 `;
 const ContentBox = styled.div`
+  text-align: start;
   font-size: 20px;
   text-align: left;
   white-space: pre-wrap;
@@ -107,6 +108,7 @@ const ImgBox = styled.div`
 `;
 
 const Img = styled.img`
+
     width: 300px;
     height: 300px;
 `;
@@ -370,11 +372,9 @@ export const BoardContent = ({ postId }) => {
             </ExtraBox>
         </Fragment>
     );
+
 };
 
-
-
-
 BoardContent.defaultProps = {
-    postId: 1,
+  postId: 1,
 };
