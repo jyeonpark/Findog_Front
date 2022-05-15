@@ -60,15 +60,17 @@ const BoxProfile = styled.div`
   display: flex;
   text-align: center;
   font-size: small;
+  margin-bottom: 10px;
 `;
 
 const TextInfo = styled.div`
-  margin-right: 5px;
+  margin-right: 15px;
   margin-top: 3px;
 `;
 
 const BoxProfilePhoto = styled.div`
-  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-right: 5px;
 `;
 
 const BoxPhoto = styled.div``;
@@ -80,19 +82,23 @@ const Photo = styled.img`
 `;
 
 const ProfileImage = styled.img`
-  width: 20px;
+  width: 40px;
+  height: 40px;
+  vertical-align: baseline;
+  border-radius: 40%;
+  margin-bottom: 10px;
 `;
 
 const popUp = (event) => {
-    if (sessionStorage.getItem("userID") === null) {
-      alert("로그인을 하신 후에 게시물을 조회할 수 있습니다.");
-      event.preventDefault();
-    }
-}
+  if (sessionStorage.getItem("userID") === null) {
+    alert("로그인을 하신 후에 게시물을 등록할 수 있습니다.");
+    event.preventDefault();
+  }
+};
 
 export const BoardBox = ({ item }) => {
-    const postLike = (item.likeCount === null ? 0 : item.likeCount)
-    const commentLike = (item.commentCount === null ? 0 : item.commentCount)
+  const postLike = item.likeCount === null ? 0 : item.likeCount;
+  const commentLike = item.commentCount === null ? 0 : item.commentCount;
   return (
     <Link
       to={"/board/detail/" + item.postId}
@@ -106,9 +112,11 @@ export const BoardBox = ({ item }) => {
             <Content>{item.content}</Content>
             <BoxProfile>
               <BoxProfilePhoto>
-                <ProfileImage alt="profile" src={item.userImgUrl} />
+                <ProfileImage src={item.userImgUrl} />
               </BoxProfilePhoto>
-              <TextInfo>{item.nickname}</TextInfo>
+              <TextInfo style={{ marginRight: "20px", fontWeight: "bold" }}>
+                {item.nickname}
+              </TextInfo>
               <TextInfo>좋아요 {postLike}</TextInfo>
               <TextInfo>댓글 {commentLike}</TextInfo>
               <TextInfo>조회수 {item.hits}</TextInfo>
