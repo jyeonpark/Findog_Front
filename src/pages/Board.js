@@ -7,7 +7,7 @@ import API from "../utils/api";
 import Pagination from "./../components/Pagination";
 
 const BoardContainer = styled.div`
-  padding-bottom: 100px;
+ 
 `;
 
 const BoardBody = styled.div`
