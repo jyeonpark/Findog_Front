@@ -6,9 +6,10 @@ import axios from "axios";
 // import { getAllByPlaceholderText } from "@testing-library/react";
 import API from "./../utils/api";
 import dogImg from "../images/dog.jpeg";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { BoardUpdate } from "./BoardUpdate";
 
 
 const Container = styled.div`
@@ -116,9 +117,11 @@ export const BoardContent = ({ postId }) => {
     // 3: "봤어요",
     // 4: "도와주세요",
 
+    const [postData, setPostData] = useState(1);    // update 시 보내줄 postId
     const [categoryText, setCategoryText] = useState("기타");
-    const [checkState, setCheckState] = useState(true);
+    const [checkState, setCheckState] = useState(false);
     const [deleteCheck, setDeleteCheck] = useState(false);
+    const navigate = useNavigate();
 
     const WEEKDAY = ['월', '화', '수', '목', '금', '토', '일'];
 
@@ -164,24 +167,32 @@ export const BoardContent = ({ postId }) => {
                     commentCount: response.data.result.board.commentCount,
                     hits: response.data.result.board.hits,
                 });
+                setPostData(response.data.result.board.postId);
                 setUserLiked(response.data.result.userLiked);
                 setImgList(response.data.result.imgList);
 
                 console.log("BoardContent inputs test");
                 console.log(response.data);
-                console.log(inputs);
+                // console.log(inputs);
             })
             .catch((err) => console.log("error:", err));
 
         // console.log("inputs : ", inputs);
+        // if (inputs.userId == sessionStorage.getItem("userID")) {
+        //     setCheckState(true);
+        // } else {
+        //     setCheckState(false);
+        // }
 
+    }, []);
+
+    useEffect(() => {
         if (inputs.userId == sessionStorage.getItem("userID")) {
             setCheckState(true);
         } else {
             setCheckState(false);
         }
-
-    }, []);
+    }, [inputs.userId]);
 
     useEffect(() => {
         // 카테고리
@@ -228,8 +239,23 @@ export const BoardContent = ({ postId }) => {
         return date;
     }
 
-    const onClickPatch = () => {
+    const onClickUpdate = () => {
 
+        const data = {
+            locPostId: inputs.postId,
+            locTitle: inputs.title,
+            locCategory: inputs.category,
+            // locRegion: inputs.region,
+            locContent: inputs.content,
+            locImgList: imgList
+        }
+// inputPostId,
+    // inputTitle,
+    // inputCategory,
+    // inputRegion,
+    // inputContent,
+    // inputImgList,
+        navigate("/board/update", { state: data });
     }
 
     const onClickLiked = () => {
@@ -325,7 +351,18 @@ export const BoardContent = ({ postId }) => {
                 </ExtraInfo>
                 
                 <ExtraButton>
-                    {checkState ? (<Button>수정</Button>) : null}
+                    {checkState && (
+                            <Button
+                                // inputPostId={inputs.postId}
+                                // inputTitle={inputs.title}
+                                // inputCategory={inputs.category}
+                                // // inputRegion = {inputs.}
+                                // inputContent={inputs.content}
+                                // inputImgList={imgList}
+                                onClick={onClickUpdate}
+                            >수정</Button>
+                        )}
+
                     <Link to="/board">
                     {checkState ? (<Button onClick={onClickDelete}>삭제</Button>) : null}
                     </Link>
