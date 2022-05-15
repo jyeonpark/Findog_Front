@@ -4,6 +4,7 @@ import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
 import axios from "axios";
 import { BoardDetail } from "../pages/BoardDetail";
+import API from "../utils/api";
 
 const InputPicker = styled.select`
   width: 955px;
@@ -25,7 +26,6 @@ export const BoardUpdate = () => {
     console.log("===location===")
     console.log(location.state);
 
-
     let [showImages, setShowImages] = useState([]);
     const [sendingImg, setSendingImg] = useState([]);
     const navigate = useNavigate();
@@ -38,6 +38,8 @@ export const BoardUpdate = () => {
         userId: sessionStorage.getItem("userID"),
     });
 
+    const [postId, setPostId] = useState(location.state.locPostId);
+
     // const [inputs, setInputs] = useState({
     //     category: 1,
     //     region: 1,
@@ -46,8 +48,6 @@ export const BoardUpdate = () => {
     //     userId: sessionStorage.getItem("userID"),
     // });
 
-
-    const [postId, setPostId] = useState(location.state.postId);
     //   const [patchState, setPatchState] = useState(props.patchState);
 
 
@@ -109,9 +109,50 @@ export const BoardUpdate = () => {
         setSendingImg(sendingImg.filter((_, index) => index !== id));
     };
 
+    // const data = {
+    //     "title": inputs.title,
+    //     "category": inputs.category,
+    //     "region": inputs.region,
+    //     "content": inputs.content,
+    //     "imgFiles": sendingImg
+    // }
+
     /** 확인버튼 누르면 데이터 서버로 전송 */
     const onClickUpload = async () => {
 
+        // console.log(postId);
+        // console.log(inputs);
+
+        try {
+            let data = {
+                title: String(inputs.title),
+                category: Number(inputs.category),
+                region: Number(inputs.region),
+                content: String(inputs.content),
+                imgFiles: sendingImg
+            };
+            // JSON.stringify(data)
+            await API.patch(`/boards/update/${postId}`, data, {
+              headers: {
+                "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                if (response.data.isSuccess) {
+                  alert("게시물이 수정되었습니다.");
+                  navigate("/board/" + postId);
+                } else {
+                  console.log(response);
+                  alert("게시물 수정에 실패했습니다.");
+                }
+              })
+              .catch((error) => {
+                console.log(error.response);
+              });
+          } catch (e) {
+            console.log(e.response);
+          }
     };
 
     return (
@@ -227,13 +268,4 @@ export const BoardUpdate = () => {
             </div>
         </div>
     );
-};
-
-BoardUpdate.defaultProps = {
-    inputPostId: 1,
-    inputTitle: "",
-    inputCategory: 1,
-    inputRegion: 1,
-    inputContent: "",
-    inputImgList: [],
 };

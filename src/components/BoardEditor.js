@@ -169,13 +169,6 @@ export const BoardEditor = (props) => {
       }
       console.log("전송끝");
     }
-    else {
-      console.log("게시물 수정 시작 코드");
-
-      
-
-
-    }
 
   };
 
