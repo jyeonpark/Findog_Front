@@ -118,12 +118,12 @@ export const BoardEditor = (props) => {
         formData.append("content", inputs.content);
         formData.append("region", inputs.region);
 
-        console.log("type check start");
+        // console.log("type check start");
 
-        console.log("cate: ", typeof Number(inputs.category));
-        console.log("title: ", typeof inputs.title);
-        console.log("content: ", typeof inputs.content);
-        console.log("userId: ", typeof inputs.userId);
+        // console.log("cate: ", typeof Number(inputs.category));
+        // console.log("title: ", typeof inputs.title);
+        // console.log("content: ", typeof inputs.content);
+        // console.log("userId: ", typeof inputs.userId);
 
         // showImages.map((eachfile) => {
         //   formData.append("imgFiles", eachfile)

@@ -70,7 +70,6 @@ const Title = styled.div`
   line-height: 50px;
 `;
 const ContentBox = styled.div`
-  text-align: start;
   font-size: 20px;
   text-align: left;
   white-space: pre-wrap;
@@ -108,7 +107,6 @@ const ImgBox = styled.div`
 `;
 
 const Img = styled.img`
-
     width: 300px;
     height: 300px;
 `;
@@ -241,6 +239,7 @@ export const BoardContent = ({ postId }) => {
         return date;
     }
 
+    // 수정버튼 클릭 시
     const onClickUpdate = () => {
 
         const data = {
@@ -251,12 +250,7 @@ export const BoardContent = ({ postId }) => {
             locContent: inputs.content,
             locImgList: imgList
         }
-// inputPostId,
-    // inputTitle,
-    // inputCategory,
-    // inputRegion,
-    // inputContent,
-    // inputImgList,
+
         navigate("/board/update", { state: data });
     }
 
@@ -372,9 +366,11 @@ export const BoardContent = ({ postId }) => {
             </ExtraBox>
         </Fragment>
     );
-
 };
 
+
+
+
 BoardContent.defaultProps = {
-  postId: 1,
+    postId: 1,
 };
