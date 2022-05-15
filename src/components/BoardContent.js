@@ -137,7 +137,7 @@ export const BoardContent = ({ postId }) => {
         hits: 0,
     });
 
-    const [userLiked, setUserLiked] = useState(false);
+    const [userLiked, setUserLiked] = useState(true);
     const [imgList, setImgList] = useState([]);
 
     useEffect(() => {
@@ -234,7 +234,7 @@ export const BoardContent = ({ postId }) => {
     const onClickLiked = () => {
 
         const data = {
-            "userId": sessionStorage.getItem("userID")
+            postId: inputs.postId
         }
 
         if(userLiked == true) {
@@ -243,7 +243,7 @@ export const BoardContent = ({ postId }) => {
                     "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT")
                 },
                 body: {
-                    userId: sessionStorage.getItem("userID")
+                    postId: inputs.postId
                 }
             })
             .then((response) => {
