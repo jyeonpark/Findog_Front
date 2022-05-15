@@ -132,7 +132,7 @@ export const BoardUpdate = () => {
                 imgFiles: sendingImg
             };
             // JSON.stringify(data)
-            await API.patch(`/boards/update/${postId}`, data, {
+            await API.patch(`/boards/update/${postId}`, JSON.stringify(data), {
               headers: {
                 "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
                 "Content-Type": "application/json",
@@ -259,11 +259,8 @@ export const BoardUpdate = () => {
                 <Link to="/board">
                     <button className={styles.btn__cancel}>취소</button>
                 </Link>
-                <button className={styles.btn__confirm} onClick={() => {
-                    onClickUpload();
-                    // goToPost();
-                }}>
-                    확인
+                <button className={styles.btn__confirm} onClick={onClickUpload}>
+                    수정
                 </button>
             </div>
         </div>
