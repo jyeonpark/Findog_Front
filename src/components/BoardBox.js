@@ -71,8 +71,6 @@ const BoxProfilePhoto = styled.div`
   margin-right: 5px;
 `;
 
-const BoxPhoto = styled.div``;
-
 const Photo = styled.img`
   object-fit: fill;
   width: 230px;

@@ -72,6 +72,13 @@ const ContentBox = styled.div`
   text-align: start;
   font-size: 20px;
 `;
+
+const Photo = styled.img`
+  object-fit: fill;
+  width: 230px;
+  height: 120px;
+`;
+
 const ExtraBox = styled.div`
   width: 1000px;
   margin-left: auto;
@@ -278,7 +285,7 @@ export const BoardContent = ({ postId }) => {
       }).then((response) => console.log(response.data));
       setInputs({
         ...inputs, // 기존의 input 객체를 복사
-        userLiked: false
+        userLiked: false,
       });
     } else {
       // 좋아요 누르기
@@ -289,7 +296,7 @@ export const BoardContent = ({ postId }) => {
       }).then((response) => console.log(response.data));
       setInputs({
         ...inputs, // 기존의 input 객체를 복사
-        userLiked: true
+        userLiked: true,
       });
     }
   };
@@ -311,8 +318,13 @@ export const BoardContent = ({ postId }) => {
           <Title>{inputs.title}</Title>
         </TitleBox>
         <hr />
-
         <ContentBox>{inputs.content}</ContentBox>
+        <div style={{ display: "flex" }}>
+          {inputs.imgList &&
+            inputs.imgList.map((item) => {
+              return <Photo src={item}></Photo>;
+            })}
+        </div>
       </Container>
       <ExtraBox>
         <div style={{ display: "flex" }}>
