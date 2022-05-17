@@ -117,42 +117,16 @@ export const BoardEditor = (props) => {
         formData.append("content", inputs.content);
         formData.append("region", inputs.region);
 
-        console.log("type check start");
-
-        console.log("cate: ", typeof Number(inputs.category));
-        console.log("title: ", typeof inputs.title);
-        console.log("content: ", typeof inputs.content);
-        console.log("userId: ", typeof inputs.userId);
-
-        // showImages.map((eachfile) => {
-        //   formData.append("imgFiles", eachfile)
-        // })
-
-        // if (sendingImg.length > 0) {
-        //   sendingImg.map((e) => {
-        //     formData.append("imageFiles", e);
-        //   });
-
-        //   // formData.append("imgFiles", sendingImg);
-        //   // formData.append("imgFiles",showImages);
-        //   console.log("sendingImg: ", typeof sendingImg);
-        //   console.log("sendingImg: ", sendingImg);
-        //   // formData.push("imgFiles", showImages);
-        // }
-
+      
         Object.values(sendingImg).forEach((image) =>
           formData.append("imgFiles", image)
         );
-        // );
-        // console.log("formData checking");
-
-        // console.log("type check end");
+   
         console.log("전송시작");
         await axios
           .post("http://3.39.156.161:8080/boards/post", formData, {
             method: "POST",
             headers: { "Content-Type": "multipart/form-data" },
-            data: formData,
           })
           .then((response) => {
             console.log(response.data.isSuccess);

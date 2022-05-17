@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import API from "./../utils/api";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate  } from "react-router-dom";
 import profileImage from "../images/profileImage.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
@@ -87,6 +87,7 @@ const ExtraBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const ExtraInfo = styled.div`
   border: 2px solid rgba(64, 64, 64, 0.2);
   padding-left: 10px;
@@ -120,12 +121,11 @@ export const BoardContent = ({ postId }) => {
   // 3: "봤어요",
   // 4: "도와주세요",
 
+  const navigate = useNavigate();
   const [categoryText, setCategoryText] = useState("기타");
-  const [checkState, setCheckState] = useState(true);
-  const [deleteCheck, setDeleteCheck] = useState(false);
   const WEEKDAY = ["월", "화", "수", "목", "금", "토", "일"];
   const [inputs, setInputs] = useState({
-    userId: 43,
+    userId: 0,
     nickname: "",
     userImgUrl: "",
     title: "",
@@ -167,33 +167,6 @@ export const BoardContent = ({ postId }) => {
         // console.log(inputs);
       })
       .catch((err) => console.log("error:", err));
-
-    // console.log("inputs : ", inputs);
-
-    if (inputs.userId == sessionStorage.getItem("userID")) {
-      setCheckState(true);
-    } else {
-      setCheckState(false);
-    }
-
-    // // 카테고리
-    // switch (inputs.category) {
-    //     case 1:
-    //         setCategoryText("기타");
-    //         break;
-    //     case 2:
-    //         setCategoryText("찾아주세요");
-    //         break;
-    //     case 3:
-    //         setCategoryText("봤어요");
-    //         break;
-    //     case 4:
-    //         setCategoryText("도와주세요");
-    //         break;
-    //     default:
-    //         setCategoryText("default");
-    //         break;
-    // }
   }, []);
 
   useEffect(() => {
@@ -217,26 +190,6 @@ export const BoardContent = ({ postId }) => {
     }
   }, [inputs.category]);
 
-  // useEffect(() => {
-  //     if(deleteCheck == true) {
-  //         API.delete("/boards/" + postId, {
-  //             headers: {
-  //                 "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT")
-  //             },
-  //             body: {
-  //                 userId: sessionStorage.getItem("userID")
-  //             }
-  //         })
-  //         .then((response) => console.log(response.data))
-  //     }
-  //     setDeleteCheck(false);
-
-  //     // console.log("userID Check");
-  //     // console.log(sessionStorage.getItem("userID"));
-  //     // console.log(inputs.userId);
-
-  // }, [deleteCheck]);
-
   // Date객체 내용 빼서 형식에 맞춰서 return
   const dateTrans = () => {
     let date = new Date(inputs.postCreateAt);
@@ -259,7 +212,17 @@ export const BoardContent = ({ postId }) => {
     return date;
   };
 
-  const onClickPatch = () => {};
+  const onClickUpdate = () => {
+    const data = {
+      locPostId: postId,
+      locTitle: inputs.title,
+      locCategory: inputs.category,
+      // locRegion: inputs.region,
+      locContent: inputs.content,
+      locImgList: inputs.imgList,
+    }
+    navigate("/board/update", { state: data });
+  };
 
   const onClickDelete = () => {
     API.delete("/boards/" + postId, {
@@ -269,7 +232,10 @@ export const BoardContent = ({ postId }) => {
       body: {
         userId: sessionStorage.getItem("userID"),
       },
-    }).then((response) => console.log(response.data));
+    }).then((response) => {
+      console.log(response.data);
+      alert("게시물이 삭제되었습니다.");
+    });
   };
 
   const Like = () => {
@@ -338,12 +304,14 @@ export const BoardContent = ({ postId }) => {
             onClick={Like}
           ></LikeIcon>
         </div>
-        <ExtraButton>
-          {checkState ? <Button>수정</Button> : null}
-          <Link to="/board">
-            {checkState ? <Button onClick={onClickDelete}>삭제</Button> : null}
-          </Link>
-        </ExtraButton>
+        {inputs.userId === Number(sessionStorage.getItem("userID")) && (
+          <ExtraButton>
+            <Button onClick={onClickUpdate}>수정</Button>
+            <Link to="/board">
+              <Button onClick={onClickDelete}>삭제</Button>
+            </Link>
+          </ExtraButton>
+        )}
       </ExtraBox>
     </Fragment>
   );
