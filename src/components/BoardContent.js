@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-// import { propTypes } from "react-bootstrap/esm/Image";
-// import setAuthorizationToken from "../utils/setAuthorizationToken";
-// import { getAllByPlaceholderText } from "@testing-library/react";
 import API from "./../utils/api";
-import dogImg from "../images/dog.jpeg";
 import { Link } from "react-router-dom";
+import profileImage from "../images/profileImage.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   width: 1000px;
@@ -14,8 +13,9 @@ const Container = styled.div`
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 100px;
   /* border-color: orange; */
-  border: 2px orange solid;
+  border: 5px orange solid;
 `;
 const ProfileBox = styled.div`
   width: max-content;
@@ -66,6 +66,9 @@ const Title = styled.div`
   line-height: 50px;
 `;
 const ContentBox = styled.div`
+  margin-top: 50px;
+  margin-bottom: 50px;
+  min-height: 300px;
   text-align: start;
   font-size: 20px;
 `;
@@ -73,18 +76,25 @@ const ExtraBox = styled.div`
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
 `;
 const ExtraInfo = styled.div`
-  border: 2px solid rgba(64, 64, 64, 0.5);
+  border: 2px solid rgba(64, 64, 64, 0.2);
   padding-left: 10px;
   padding-right: 10px;
   font-size: 15px;
   font-weight: bold;
   line-height: 30px;
 `;
+
+const LikeIcon = styled(FontAwesomeIcon)`
+  margin-left: 10px;
+  float: right;
+  cursor: pointer;
+`;
+
 const ExtraButton = styled.div``;
 
 const Button = styled.button`
@@ -97,11 +107,6 @@ const Button = styled.button`
   border: 2px solid rgba(64, 64, 64, 0.5);
 `;
 
-const Img = styled.img`
-  width: 50px;
-  height: 50px;
-`;
-
 export const BoardContent = ({ postId }) => {
   // 1: "기타",
   // 2: "찾아주세요",
@@ -111,7 +116,6 @@ export const BoardContent = ({ postId }) => {
   const [categoryText, setCategoryText] = useState("기타");
   const [checkState, setCheckState] = useState(true);
   const [deleteCheck, setDeleteCheck] = useState(false);
-
   const WEEKDAY = ["월", "화", "수", "목", "금", "토", "일"];
   const [inputs, setInputs] = useState({
     userId: 43,
@@ -138,7 +142,10 @@ export const BoardContent = ({ postId }) => {
         setInputs({
           userId: response.data.result.board.userId,
           nickname: response.data.result.board.nickname,
-          userImgUrl: response.data.result.board.userImgUrl,
+          userImgUrl:
+            response.data.result.board.userImgUrl === null
+              ? profileImage
+              : response.data.result.board.userImgUrl,
           title: response.data.result.board.title,
           category: response.data.result.board.category,
           content: response.data.result.board.content,
@@ -149,7 +156,6 @@ export const BoardContent = ({ postId }) => {
           userLiked: response.data.result.board.userLiked,
           imgList: response.data.result.imgList,
         });
-
         console.log(response.data);
         // console.log(inputs);
       })
@@ -259,7 +265,34 @@ export const BoardContent = ({ postId }) => {
     }).then((response) => console.log(response.data));
   };
 
-  // console.log("inputs : ", inputs);
+  const Like = () => {
+    if (inputs.userLiked === true) {
+      // 좋아요 취소
+      API.delete("/boards/like", {
+        headers: {
+          "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+        },
+        body: {
+          postId: postId,
+        },
+      }).then((response) => console.log(response.data));
+      setInputs({
+        ...inputs, // 기존의 input 객체를 복사
+        userLiked: false
+      });
+    } else {
+      // 좋아요 누르기
+      API.post("/boards/like", JSON.stringify({ postId: postId }), {
+        headers: {
+          "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+        },
+      }).then((response) => console.log(response.data));
+      setInputs({
+        ...inputs, // 기존의 input 객체를 복사
+        userLiked: true
+      });
+    }
+  };
 
   return (
     <Fragment>
@@ -282,10 +315,17 @@ export const BoardContent = ({ postId }) => {
         <ContentBox>{inputs.content}</ContentBox>
       </Container>
       <ExtraBox>
-        <ExtraInfo>
-          좋아요 {inputs.likeCount} 댓글 {inputs.commentCount} 조회수{" "}
-          {inputs.hits}
-        </ExtraInfo>
+        <div style={{ display: "flex" }}>
+          <ExtraInfo>
+            좋아요 {inputs.likeCount}&nbsp;&nbsp;&nbsp;&nbsp; 댓글{" "}
+            {inputs.commentCount}&nbsp;&nbsp;&nbsp;&nbsp; 조회수 {inputs.hits}
+          </ExtraInfo>
+          <LikeIcon
+            size="2x"
+            icon={inputs.userLiked ? solidHeart : regularHeart}
+            onClick={Like}
+          ></LikeIcon>
+        </div>
         <ExtraButton>
           {checkState ? <Button>수정</Button> : null}
           <Link to="/board">

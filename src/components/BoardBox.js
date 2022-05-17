@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Fragment } from "react";
 import styled, { keyframes } from "styled-components";
-import myImage from "../images/dog.jpeg";
-import profile from "../images/profileImage.png";
+import profileImage from "../images/profileImage.png";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -53,14 +52,13 @@ const Content = styled.div`
   text-overflow: ellipsis;
   text-align: start;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const BoxProfile = styled.div`
   display: flex;
-  text-align: center;
   font-size: small;
-  margin-bottom: 10px;
+  line-height: 40px;
 `;
 
 const TextInfo = styled.div`
@@ -99,6 +97,7 @@ const popUp = (event) => {
 export const BoardBox = ({ item }) => {
   const postLike = item.likeCount === null ? 0 : item.likeCount;
   const commentLike = item.commentCount === null ? 0 : item.commentCount;
+  const profile = item.userImgUrl === null ? profileImage : item.userImgUrl;
   return (
     <Link
       to={"/board/detail/" + item.postId}
@@ -112,7 +111,7 @@ export const BoardBox = ({ item }) => {
             <Content>{item.content}</Content>
             <BoxProfile>
               <BoxProfilePhoto>
-                <ProfileImage src={item.userImgUrl} />
+                <ProfileImage src={profile} />
               </BoxProfilePhoto>
               <TextInfo style={{ marginRight: "20px", fontWeight: "bold" }}>
                 {item.nickname}
@@ -122,9 +121,11 @@ export const BoardBox = ({ item }) => {
               <TextInfo>조회수 {item.hits}</TextInfo>
             </BoxProfile>
           </Box1>
-          <Box2>
-            <Photo alt="profile" src={myImage} />
-          </Box2>
+          {item.thumbnail && (
+            <Box2>
+              <Photo src={item.thumbnail} />
+            </Box2>
+          )}
         </Container>
       </Fragment>
     </Link>
