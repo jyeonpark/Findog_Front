@@ -112,10 +112,6 @@ export const BoardEditor = () => {
 
         Object.values(sendingImg).forEach(image => formData.append("imgFiles", image));
 
-        // sendingImg.map((e) => {
-        // formData.append("imageFiles", sendingImg);
-        // });
-
         // formData.append("imgFiles", sendingImg);
         // formData.append("imgFiles",showImages);
         console.log("sendingImg: ", typeof sendingImg);
