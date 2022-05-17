@@ -12,6 +12,7 @@ import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 import { BoardDetail } from "./pages/BoardDetail";
 import CenterMap from './pages/CenterMap';
+import { BoardUpdate } from "./components/BoardUpdate";
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/board/edit" element={<BoardEditor />}></Route>
+          <Route path="/board/update" element={<BoardUpdate />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/board/detail/:postId"  element={<BoardDetail />}></Route>
         </Routes>

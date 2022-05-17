@@ -1,6 +1,8 @@
 import React, { Component, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import API from "./../utils/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Title = styled.div`
   margin-top: 100px;
@@ -19,9 +21,9 @@ const Divider = styled.div`
 const Container = styled.div`
   width: 800px;
   height: fit-content;
-
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 200px;
 `;
 
 const Header = styled.div`
@@ -38,8 +40,6 @@ const BoxContainer = styled.div`
   white-space: nowrap;
   display: flex;
   justify-content: space-between;
-  background-color: aliceblue;
-
 `;
 
 const BoxWrapper = styled.div`
@@ -50,7 +50,10 @@ const BoxWrapper = styled.div`
 const Box = styled.div`
   width: 600px;
   text-align: left;
+  display: flex;
   cursor: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 `;
 
 const BoxText = styled.div`
@@ -108,20 +111,69 @@ const EditBtn = styled.button`
   border: none;
   background-color: orange;
   height: 60px;
+  border-radius: 5px;
+  position: relative;
+  color: white;
+  font-weight: bolder;
+  margin-top: auto;
+  margin-bottom: auto;
+`;
 
+const BoxSearch = styled.div`
+  width: fit-content;
+  height: fit-content;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  border-radius: 3px;
+`;
+
+const InputSearch = styled.input`
+  width: 200px;
+  height: 40px;
+  border: none;
+  padding-inline: 10px;
+  margin-right: 3px;
+  :focus {
+    outline: 2px solid gray;
+  }
+`;
+
+const BtnSearch = styled.button`
+  width: 100px;
+  height: 42px;
+  line-height: 42px;
+  border: none;
+  background-color: rgb(255, 224, 166);
+`;
+
+const CheckIcon = styled(FontAwesomeIcon)`
+  margin-left: 10px;
+  line-height: 40px;
 `;
 
 export const EditMyInfo = () => {
+  const [inputs, setInputs] = useState({
+    email: "",
+    nickname: "",
+    password: "",
+    newPassword: "",
+    phoneNumber: "",
+  });
+  const { email, nickname, password, newPassword, phoneNum } = inputs; // 비구조화 할당을 통해 값 추출
+
   /** 사진 관리 변수 */
   const default_profile_img = "https://ifh.cc/g/jLgWsT.png";
-
   const [image, setImage] = useState({
     image_file: "",
     preview_URL: default_profile_img,
   });
-
   const [defaultImg, setDefaultImg] = useState(true);
   const fileInput = useRef(null);
+
+  /** 닉네임 관리 변수 */
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false); // 중복확인 완료
 
   /** 프로필 사진 업로드 */
   const OnProfileChange = (e) => {
@@ -144,6 +196,27 @@ export const EditMyInfo = () => {
     };
   };
 
+  /** 닉네임 중복확인 */
+  const checkDuplicateNickname = async () => {
+    if (nickname.length === 0) {
+      alert("닉네임을 입력해주세요.");
+    } else {
+      try {
+        const params = { nickname: nickname };
+        console.log("파라미터", params);
+        const res = await API.get("/users/chk-nickname", { params }); // API 가 get 해올 때까지 기다리고, 결과 값을 res 에 담음
+        console.log(res.data);
+        if (res.data.isSuccess) {
+          setIsNicknameChecked(true);
+        } else {
+          alert("이미 사용중인 닉네임입니다.");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   useEffect(() => {
     API.get("/users/" + Number(sessionStorage.getItem("userID")), {
       headers: {
@@ -151,15 +224,37 @@ export const EditMyInfo = () => {
       },
     }).then((response) => {
       if (response.data.isSuccess) {
-        console.log(response.data.result);
+        const data = response.data.result;
+        console.log(data);
+        setInputs({
+          ...inputs,
+
+          email: data.email,
+          nickname: nickname,
+          phoneNum: phoneNum,
+        });
+        setImage({profileUrl: data.profileUrl})
       } else {
         console.log(response.data.result);
       }
     });
   }, []);
 
+  const onInputChange = (e) => {
+    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+
+    setInputs({
+      ...inputs, // 기존의 input 객체를 복사한 뒤
+      [name]: value, // name 키를 가진 값을 value 로 설정
+    });
+
+    if (name === "nickname") {
+      setIsNicknameChecked(false);
+    }
+  };
+
   return (
-    <div>
+    <div style={{ marginLeft: "100px" }}>
       <Title> 내 정보 수정</Title>
       <Divider></Divider>
       <Container>
@@ -205,6 +300,83 @@ export const EditMyInfo = () => {
         <BoxContainer>
           <Box>
             <BoxText>닉네임</BoxText>
+            <div style={{ display: "flex", width: "300px" }}>
+              <BoxSearch>
+                <InputSearch
+                  name="nickname"
+                  onChange={onInputChange}
+                  value={nickname}
+                />
+                <BtnSearch onClick={checkDuplicateNickname}>중복확인</BtnSearch>
+              </BoxSearch>
+              {isNicknameChecked && (
+                <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+              )}
+            </div>
+          </Box>
+          <EditBtn>수정하기</EditBtn>
+        </BoxContainer>
+        <Divider></Divider>
+        <BoxContainer>
+          <div>
+            <Box style={{ marginBottom: "20px" }}>
+              <BoxText>현재 비밀번호</BoxText>
+              <div style={{ display: "flex", width: "300px" }}>
+                <BoxSearch>
+                  <InputSearch
+                    name="nickname"
+                    onChange={onInputChange}
+                    value={nickname}
+                  />
+                  <BtnSearch onClick={checkDuplicateNickname}>확인</BtnSearch>
+                </BoxSearch>
+                {isNicknameChecked && (
+                  <CheckIcon
+                    size="2x"
+                    icon={faCheck}
+                    color="orange"
+                  ></CheckIcon>
+                )}
+              </div>
+            </Box>
+            <Box>
+              <BoxText>새 비밀번호</BoxText>
+              <div style={{ display: "flex", width: "300px" }}>
+                <BoxSearch>
+                  <InputSearch
+                    name="nickname"
+                    onChange={onInputChange}
+                    value={nickname}
+                  />
+                </BoxSearch>
+                {isNicknameChecked && (
+                  <CheckIcon
+                    size="2x"
+                    icon={faCheck}
+                    color="orange"
+                  ></CheckIcon>
+                )}
+              </div>
+            </Box>
+          </div>
+          <EditBtn>수정하기</EditBtn>
+        </BoxContainer>
+        <Divider></Divider>
+        <BoxContainer>
+          <Box>
+            <BoxText>연락처</BoxText>
+            <div style={{ display: "flex", width: "300px" }}>
+              <BoxSearch>
+                <InputSearch
+                  name="nickname"
+                  onChange={onInputChange}
+                  value={nickname}
+                />
+              </BoxSearch>
+              {isNicknameChecked && (
+                <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+              )}
+            </div>
           </Box>
           <EditBtn>수정하기</EditBtn>
         </BoxContainer>
