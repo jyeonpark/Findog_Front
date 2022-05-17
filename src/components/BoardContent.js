@@ -160,7 +160,7 @@ export const BoardContent = ({ postId }) => {
           likeCount: response.data.result.board.likeCount,
           commentCount: response.data.result.board.commentCount,
           hits: response.data.result.board.hits,
-          userLiked: response.data.result.board.userLiked,
+          userLiked: response.data.result.userLiked,
           imgList: response.data.result.imgList,
         });
         console.log(response.data);
@@ -273,15 +273,15 @@ export const BoardContent = ({ postId }) => {
   };
 
   const Like = () => {
+    const formData = new FormData();
+    formData.append("postId", Number(postId));
     if (inputs.userLiked === true) {
       // 좋아요 취소
       API.delete("/boards/like", {
         headers: {
           "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
         },
-        body: {
-          postId: postId,
-        },
+        data: formData,
       }).then((response) => console.log(response.data));
       setInputs({
         ...inputs, // 기존의 input 객체를 복사
@@ -289,7 +289,7 @@ export const BoardContent = ({ postId }) => {
       });
     } else {
       // 좋아요 누르기
-      API.post("/boards/like", JSON.stringify({ postId: postId }), {
+      API.post("/boards/like", formData, {
         headers: {
           "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
         },
