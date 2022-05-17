@@ -170,6 +170,7 @@ export const EditMyInfo = () => {
     preview_URL: default_profile_img,
   });
   const [defaultImg, setDefaultImg] = useState(true);
+  const [isProfileChanged,setIsProfileChanged] = useState(false);
   const fileInput = useRef(null);
 
   /** 닉네임 관리 변수 */
@@ -183,9 +184,9 @@ export const EditMyInfo = () => {
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
       setDefaultImg(false);
+      setIsProfileChanged(true);
     } else {
-      //업로드 취소할 시
-      // setImage(image);
+
     }
 
     reader.onload = () => {
@@ -233,7 +234,10 @@ export const EditMyInfo = () => {
           nickname: nickname,
           phoneNum: phoneNum,
         });
-        setImage({profileUrl: data.profileUrl})
+        setImage({
+          image_file: "",
+          preview_URL: data.profileUrl,
+        });
       } else {
         console.log(response.data.result);
       }
@@ -287,6 +291,7 @@ export const EditMyInfo = () => {
                       preview_URL: default_profile_img,
                     });
                     setDefaultImg(true);
+                    setIsProfileChanged(true);
                   }}
                 >
                   삭제

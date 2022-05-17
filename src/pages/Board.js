@@ -15,7 +15,6 @@ const BoardBody = styled.div`
 `;
 
 export const Board = () => {
-  const postId = 92;
   var size = 5;
   const [postCount, setPostCount] = useState(0);
   const [pageCount, setPageCount] = useState(0);
