@@ -4,7 +4,7 @@ import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
 import axios from "axios";
 import { BoardDetail } from "../pages/BoardDetail";
-import API from './../utils/api';
+import API from "./../utils/api";
 
 const InputPicker = styled.select`
   width: 955px;
@@ -41,9 +41,9 @@ export const BoardEditor = () => {
   const onChangeCategory = (e) => {
     setInputs({
       ...inputs,
-      category: e.target.value
+      category: e.target.value,
     });
-  }
+  };
 
   // category select
   const handleSelect = (e) => {
@@ -110,11 +110,11 @@ export const BoardEditor = () => {
         //   sendingImg.push(eachfiles)
         // })
 
-        // sendingImg.forEach(image => formData.append("imgFiles", image));
+        Object.values(sendingImg).forEach(image => formData.append("imgFiles", image));
 
-        sendingImg.map((e) => {
-          formData.append("imageFiles", e);
-        });
+        // sendingImg.map((e) => {
+        // formData.append("imageFiles", sendingImg);
+        // });
 
         // formData.append("imgFiles", sendingImg);
         // formData.append("imgFiles",showImages);
@@ -125,31 +125,28 @@ export const BoardEditor = () => {
 
       // console.log("type check end");
       console.log("전송시작");
-      await API
-        .post("/boards/post", formData, {
-          method: "POST",
-          headers: { "Content-Type": "multipart/form-data" },
-          data: formData,
-        })
-        .then((response) => {
-          console.log(response.data.isSuccess);
+      await API.post("/boards/post", formData, {
+        method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
+        data: formData,
+      }).then((response) => {
+        console.log(response.data.isSuccess);
 
-          if (response.data.isSuccess) {
-            console.log("게시물이 저장되었습니다.");
-            alert("게시물이 등록되었습니다!");
-            setPostId(response.data.result.postId);
-            // console.log("postId ", response.data.result.postId);
-            // console.log("userId", response.data.result.userId);
-          } else {
-            console.log(response.data.isSuccess);
-            console.log(response.data.message);
-          }
-        });
+        if (response.data.isSuccess) {
+          console.log("게시물이 저장되었습니다.");
+          alert("게시물이 등록되었습니다!");
+          setPostId(response.data.result.postId);
+          // console.log("postId ", response.data.result.postId);
+          // console.log("userId", response.data.result.userId);
+        } else {
+          console.log(response.data.isSuccess);
+          console.log(response.data.message);
+        }
+      });
     } catch (e) {
       console.log(e.response);
     }
     console.log("전송끝");
-
   };
 
   // useEffect(() => {
@@ -164,9 +161,9 @@ export const BoardEditor = () => {
   // }
 
   useEffect(() => {
-    if(postId!=999) {
+    if (postId != 999) {
       navigate(`/board/detail/${postId}`);
-      console.log("==포스트 이동==")
+      console.log("==포스트 이동==");
     }
   }, [postId]);
 
@@ -245,12 +242,15 @@ export const BoardEditor = () => {
         <Link to="/board">
           <button className={styles.btn__cancel}>취소</button>
         </Link>
-          <button className={styles.btn__confirm} onClick={() => {
+        <button
+          className={styles.btn__confirm}
+          onClick={() => {
             onClickUpload();
             // goToPost();
-          }}>
-            확인
-          </button>
+          }}
+        >
+          확인
+        </button>
       </div>
     </div>
   );

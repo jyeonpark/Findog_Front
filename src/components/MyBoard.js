@@ -29,11 +29,7 @@ function MyBoard() {
       <Title> 내가 작성한 글</Title>
       <Divider></Divider>
       <Container>
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
+        
       </Container>
     </div>
   );
