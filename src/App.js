@@ -11,13 +11,15 @@ import { Board } from "./pages/Board";
 import AbandonedAnimal from "./pages/AbandonedAnimal";
 import MyPage from "./pages/MyPage";
 import { BoardDetail } from "./pages/BoardDetail";
-import CenterMap from './pages/CenterMap';
+import CenterMap from "./pages/CenterMap";
 import { BoardUpdate } from "./components/BoardUpdate";
 
-
 function App() {
+
   // 로그인 상태 관리
-  const [isLogin, setIsLogin] = useState(sessionStorage.getItem("userJWT") != null ? true : false);
+  const [isLogin, setIsLogin] = useState(
+    sessionStorage.getItem("userJWT") != null ? true : false
+  );
 
   useEffect(() => {
     if (isLogin === false) {
@@ -48,19 +50,24 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header tabMenu={tabMenu} tabMenuChange={tabMenuChange} isLogin={isLogin} isLoginChange={isLoginChange}/>
+        <Header
+          tabMenu={tabMenu}
+          tabMenuChange={tabMenuChange}
+          isLogin={isLogin}
+          isLoginChange={isLoginChange}
+        />
         <Tab tabMenu={tabMenu} tabMenuChange={tabMenuChange} />
         <Routes>
           <Route path="/" element={<AbandonedAnimal />}></Route>
           <Route path="/board" element={<Board />}></Route>
-          <Route path="/centermap" element={<CenterMap/>}></Route>
+          <Route path="/centermap" element={<CenterMap />}></Route>
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/board/edit" element={<BoardEditor />}></Route>
           <Route path="/board/update" element={<BoardUpdate />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/board/detail/:postId"  element={<BoardDetail />}></Route>
+          <Route path="/board/detail/:postId" element={<BoardDetail />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

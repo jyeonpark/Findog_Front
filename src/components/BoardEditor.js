@@ -57,16 +57,16 @@ export const BoardEditor = (props) => {
   const onChangeCategory = (e) => {
     setInputs({
       ...inputs,
-      category: e.target.value
+      category: e.target.value,
     });
-  }
+  };
 
   const onChangeRegion = (e) => {
     setInputs({
       ...inputs,
-      region: e.target.value
-    })
-  }
+      region: e.target.value,
+    });
+  };
 
   // category select
   const handleSelect = (e) => {
@@ -106,7 +106,6 @@ export const BoardEditor = (props) => {
 
   /** 확인버튼 누르면 데이터 서버로 전송 */
   const onClickUpload = async () => {
-
     if (patchState == false) {
       try {
         console.log("클릭");
@@ -118,6 +117,7 @@ export const BoardEditor = (props) => {
         formData.append("content", inputs.content);
         formData.append("region", inputs.region);
 
+<<<<<<< HEAD
         // console.log("type check start");
 
         // console.log("cate: ", typeof Number(inputs.category));
@@ -145,12 +145,18 @@ export const BoardEditor = (props) => {
 
 
         // console.log("type check end");
+=======
+      
+        Object.values(sendingImg).forEach((image) =>
+          formData.append("imgFiles", image)
+        );
+   
+>>>>>>> 077ef96ce75d3e7362db21fddcee1f3ebdb2a901
         console.log("전송시작");
         await axios
           .post("http://3.39.156.161:8080/boards/post", formData, {
             method: "POST",
             headers: { "Content-Type": "multipart/form-data" },
-            data: formData,
           })
           .then((response) => {
             console.log(response.data.isSuccess);
@@ -169,7 +175,6 @@ export const BoardEditor = (props) => {
       }
       console.log("전송끝");
     }
-
   };
 
   // useEffect(() => {
@@ -184,10 +189,9 @@ export const BoardEditor = (props) => {
   // }
 
   useEffect(() => {
-
     if (postId != 999 && patchState == false) {
       navigate(`/board/detail/${postId}`);
-      console.log("==포스트 이동==")
+      console.log("==포스트 이동==");
     }
   }, [postId, patchState]);
 
@@ -206,7 +210,10 @@ export const BoardEditor = (props) => {
           />
         </div>
         <div>
-          <InputPicker style={{marginBottom: "20px"}} onChange={onChangeCategory}>
+          <InputPicker
+            style={{ marginBottom: "20px" }}
+            onChange={onChangeCategory}
+          >
             <option key={1} value={1}>
               기타
             </option>
@@ -245,7 +252,6 @@ export const BoardEditor = (props) => {
             <option key={8} value={8}>
               제주도
             </option>
-            
           </InputPicker>
         </div>
         {/* content */}
@@ -293,10 +299,13 @@ export const BoardEditor = (props) => {
         <Link to="/board">
           <button className={styles.btn__cancel}>취소</button>
         </Link>
-        <button className={styles.btn__confirm} onClick={() => {
-          onClickUpload();
-          // goToPost();
-        }}>
+        <button
+          className={styles.btn__confirm}
+          onClick={() => {
+            onClickUpload();
+            // goToPost();
+          }}
+        >
           확인
         </button>
       </div>

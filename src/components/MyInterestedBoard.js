@@ -30,11 +30,7 @@ function MyInterestedBoard() {
       <Title>관심있는 글</Title>
       <Divider></Divider>
       <Container>
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
-        <BoardBox />
+      
       </Container>
     </div>
   );
