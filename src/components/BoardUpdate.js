@@ -42,19 +42,8 @@ export const BoardUpdate = () => {
   useEffect(() => {
     if (location.state.locImgList != null) {
       location.state.locImgList.map((item) => {
-     
-        // const getFileFromUrl = async (item, defaultType = 'image/jpeg') => {
-        //   const response = await fetch(item,{
-          
-        //   });
-        //   const data = await response.blob();
-      
-        //   return new File([data], item, {
-        //     type: response.headers.get('content-type') || defaultType,
-        //   });
-        // };
 
-         const convertURLtoFile = async (item) => {
+        const convertURLtoFile = async (item) => {
           const response = await fetch(item);
           const data = await response.blob();
           const ext = item.split(".").pop();
@@ -63,16 +52,11 @@ export const BoardUpdate = () => {
           return new File([data], filename, metadata);
         };
 
-        console.log("ㅅㅂ",convertURLtoFile);
-        sendingImg.push(convertURLtoFile(item));
-      
-        // fetch(item,{mode:"no-cors"})
-        //   .then((response) => response.blob())
-        //   .then((myBlob) => {
-        //     var urlCreator = window.URL || window.webkitURL;
-        //     var imageUrl = urlCreator.createObjectURL(myBlob);
-        //     console.log(imageUrl);
-        //   });
+        convertURLtoFile(item)
+          .then((response) => {
+            sendingImg.push(response);
+          }) // 첫번째 then
+        
       });
     }
     // fetch(item,
