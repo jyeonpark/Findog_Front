@@ -15,8 +15,7 @@ const BoardBody = styled.div`
 `;
 
 export const Board = () => {
-  var size = 5;
-  const [postCount, setPostCount] = useState(0);
+  const size = 5;
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -25,7 +24,6 @@ export const Board = () => {
     API.get("/boards/count").then((response) => {
       if (response.data.isSuccess) {
         console.log(response.data.result);
-        setPostCount(response.data.result);
         const lastPage = Math.ceil(response.data.result / size);
         setPageCount(lastPage ? lastPage : 1);
         console.log("페이지개수", lastPage);
