@@ -248,22 +248,30 @@ export const BoardContent = ({ postId }) => {
           "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
         },
         data: formData,
-      }).then((response) => console.log(response.data));
-      setInputs({
-        ...inputs, // 기존의 input 객체를 복사
-        userLiked: false,
+      }).then((response) => {
+        if (response.data.isSuccess) {
+          setInputs({
+            ...inputs, // 기존의 input 객체를 복사
+            userLiked: false,
+          });
+        }
       });
+
     } else {
       // 좋아요 누르기
       API.post("/boards/like", formData, {
         headers: {
           "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
         },
-      }).then((response) => console.log(response.data));
-      setInputs({
-        ...inputs, // 기존의 input 객체를 복사
-        userLiked: true,
+      }).then((response) => {
+        if (response.data.isSuccess) {
+          setInputs({
+            ...inputs, // 기존의 input 객체를 복사
+            userLiked: true,
+          });
+        }
       });
+
     }
   };
 

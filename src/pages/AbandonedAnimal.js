@@ -4,7 +4,7 @@ import AnimalItem from "../components/AnimalItem";
 import styled from "styled-components";
 import AnimalPopup from "../components/AnimalPopup";
 import API from "./../utils/api";
-import Pagination from './../components/Pagination';
+import Pagination from "./../components/Pagination";
 
 export const AbandonedAnimal = () => {
   const size = 6;
@@ -13,39 +13,46 @@ export const AbandonedAnimal = () => {
   const [dialog, setDialog] = useState(false);
   const [animals, setAnimals] = useState([]);
   const [currentAnimal, setCurrentAnimal] = useState([]);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     getAnimalList(page, size);
-  }, [page]);
+  }, [page, reload]);
+
 
   // 유기동물 리스트 조회하기
   const getAnimalList = (page, size) => {
-    API.get("/animals", { params: { page: page, size: size } }).then(
-      (response) => {
-        if (response.data.isSuccess) {
-          const pageCriteria = response.data.result.pageCriteria;
-          const animalSimpleInfo = response.data.result.animalSimpleInfo;
+    API.get("/animals", {
+      params: { page: page, size: size },
+      headers: {
+        "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+      },
+    }).then((response) => {
+      if (response.data.isSuccess) {
+        const pageCriteria = response.data.result.pageCriteria;
+        const animalSimpleInfo = response.data.result.animalSimpleInfo;
 
-          console.log(response.data);
-          setPageCount(pageCriteria.totalPage);
-          setAnimals(animalSimpleInfo);
-        } else {
-          console.log(response);
-        }
+        console.log(response.data);
+        setPageCount(pageCriteria.totalPage);
+        setAnimals(animalSimpleInfo);
+      } else {
+        console.log(response);
       }
-    );
+    });
   };
 
   const onClose = () => {
     setDialog(false);
+    setReload(true);
   };
 
   const onView = (key) => {
-    setCurrentAnimal(animals.find((item) => item.KeyNumber === key));
+    setCurrentAnimal(animals.find((item) => item.animalId === key));
   };
 
   const onClick = () => {
     setDialog(true);
+    setReload(false);
   };
 
   return (
@@ -69,19 +76,17 @@ export const AbandonedAnimal = () => {
           })}
         </Container>
       </Body>
-      <AnimalPopup
-        item={currentAnimal}
-        key={currentAnimal.KeyNumber}
-        onClose={onClose}
-        visible={dialog}
-      ></AnimalPopup>
+      {dialog ? (
+        <AnimalPopup
+          item={currentAnimal}
+          key={currentAnimal.animalId}
+          onClose={onClose}
+          likeFlag={currentAnimal.likeFlag}
+        ></AnimalPopup>
+      ) : null}
 
       <footer>
-        <Pagination
-          total={pageCount}
-          page={page}
-          setPage={setPage}
-        />
+        <Pagination total={pageCount} page={page} setPage={setPage} />
       </footer>
     </div>
   );

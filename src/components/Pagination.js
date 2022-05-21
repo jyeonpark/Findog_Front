@@ -39,7 +39,6 @@ function Pagination({ total, page, setPage }) {
       : setShowingNum((prev) => ({ ...prev, start: 1, end: PAGES_PER_LIST }));
   }, [total]);
 
-
   useEffect(() => {
     setPage(showingNum.start);
   }, [showingNum, setPage]);
@@ -47,20 +46,20 @@ function Pagination({ total, page, setPage }) {
   const isFirstPage = showingNum.start === 1;
   const isLastPage = showingNum.end === total;
   const pages = getEmptyArray(showingNum.start, showingNum.end);
-  
-  function getEmptyArray(start, end){
-      const array = [];
-      for (let i=start; i<=end; i++){
-        array.push(i);
-      }
-      return array;
+
+  function getEmptyArray(start, end) {
+    const array = [];
+    for (let i = start; i <= end; i++) {
+      array.push(i);
+    }
+    return array;
   }
 
   function PageButton({ page, setCurrentPage, isActive }) {
     const handleClickButton = () => {
       setCurrentPage(page);
     };
-  
+
     return (
       <Nav isActive={isActive}>
         <Button onClick={handleClickButton} isActive={isActive}>
@@ -70,7 +69,6 @@ function Pagination({ total, page, setPage }) {
     );
   }
 
-
   return (
     <>
       <Nav>
@@ -78,15 +76,15 @@ function Pagination({ total, page, setPage }) {
           &lt;
         </Button>
         {pages.map((p, idx) => {
-        return (
-          <PageButton
-            key={`pageNumber-${idx + 1}`}
-            page={p}
-            setCurrentPage={setPage}
-            isActive={p === page}
-          />
-        );
-      })}
+          return (
+            <PageButton
+              key={`pageNumber-${idx + 1}`}
+              page={p}
+              setCurrentPage={setPage}
+              isActive={p === page}
+            />
+          );
+        })}
         <Button onClick={changePageNumberForward} disabled={isLastPage}>
           &gt;
         </Button>
@@ -108,10 +106,11 @@ const Button = styled.button`
   border-radius: 8px;
   padding: 12px;
   margin: 0;
-  background: ${(props) => (props.isActive ? "orange" : "rgba(211,211,211,0.5)")};
+  background: ${(props) =>
+    props.isActive ? "orange" : "rgba(211,211,211,0.5)"};
   color: white;
   font-size: 1rem;
-  color:  ${(props) => (props.isActive ? "white" : "black")};
+  color: ${(props) => (props.isActive ? "white" : "black")};
 
   &:hover {
     background: orange;
@@ -120,7 +119,7 @@ const Button = styled.button`
   }
 
   &[disabled] {
-    background: rgba(211,211,211,0.5);
+    background: rgba(211, 211, 211, 0.5);
     cursor: revert;
     transform: revert;
   }

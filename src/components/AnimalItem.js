@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import dogImage from "../images/dog2.jpeg";
+import API from './../utils/api';
 
 const Container = styled.div`
   width: 360px;
@@ -26,6 +27,7 @@ const Box = styled.div`
 const HeaderLeft = styled.div`
   display: flex;
 `;
+
 const RecruitState = styled.div`
   width: 75px;
   height: 40px;
@@ -65,7 +67,7 @@ const DogInfoDetail = styled.div`
   font-weight: 500;
 `;
 
-function AnimalItem({ item, onClick, onView }) {
+function AnimalItem({ item, onClick, onView, reload}) {
   const {
     animalId,
     processState,
@@ -79,8 +81,6 @@ function AnimalItem({ item, onClick, onView }) {
     likeFlag,
   } = item;
 
-  console.log(item);
-
   const gender = sexCd === "M" ? "수컷" : "암컷";
   const neuter = neuterYn === "N" ? "(중성화 X)" : "(중성화 O)";
 
@@ -89,7 +89,7 @@ function AnimalItem({ item, onClick, onView }) {
       processState={processState}
       onClick={() => {
         onClick();
-        onView(item.KeyNumber);
+        onView(item.animalId);
       }}
     >
       <Box>
@@ -105,6 +105,7 @@ function AnimalItem({ item, onClick, onView }) {
         <LikeIcon
           size="2x"
           icon={likeFlag === 1 ? solidHeart : regularHeart}
+       
         ></LikeIcon>
       </Box>
       <Box>
@@ -114,12 +115,6 @@ function AnimalItem({ item, onClick, onView }) {
           <DogInfoDetail>• 등록일 : {happenDt}</DogInfoDetail>
           <DogInfoDetail>• 구조장소 : {happenPlace.slice(0, 10)}</DogInfoDetail>
           <DogInfoDetail>• 담당기관명 : {orgNm}</DogInfoDetail>
-          {/* <DogInfoDetail>
-            구조장소 :{" "}
-            {RescuePlace.length < 30
-              ? RescuePlace
-              : RescuePlace.slice(0, 27) + "..."}
-          </DogInfoDetail> */}
         </DogInfo>
       </Box>
     </Container>
