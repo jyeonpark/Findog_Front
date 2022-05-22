@@ -53,6 +53,7 @@ export const EditMyInfo = () => {
     };
   };
 
+
   /** 닉네임 중복확인 */
   const checkDuplicateNickname = async () => {
     if (nickname.length === 0) {
@@ -60,7 +61,6 @@ export const EditMyInfo = () => {
     } else {
       try {
         const params = { nickname: nickname };
-        console.log("파라미터", params);
         const res = await API.get("/users/chk-nickname", { params }); // API 가 get 해올 때까지 기다리고, 결과 값을 res 에 담음
         console.log(res.data);
         if (res.data.isSuccess) {
@@ -231,10 +231,10 @@ export const EditMyInfo = () => {
         .then((response) => {
           if (response.data.isSuccess) {
             alert("비밀번호가 확인되었습니다.");
-            window.location.reload();
+            setIsPasswordChecked(true);
           } else {
             console.log(response);
-            alert("비밀번호 확인에 실패했습니다.");
+            alert("비밀번호가 일치하지 않습니다.");
           }
         })
         .catch((error) => {

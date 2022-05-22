@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import styled, { keyframes } from "styled-components";
 import profileImage from "../images/profileImage.png";
 import { Link } from "react-router-dom";
+import MyBoard from './MyBoard';
 
 const Container = styled.div`
   width: 850px;
@@ -87,18 +88,20 @@ const ProfileImage = styled.img`
 
 const popUp = (event) => {
   if (sessionStorage.getItem("userID") === null) {
-    alert("로그인을 하신 후에 게시물을 등록할 수 있습니다.");
+    alert("로그인을 하신 후에 게시물을 열람할 수 있습니다.");
     event.preventDefault();
   }
 };
 
-export const BoardBox = ({ item }) => {
+export const BoardBox = ({ item, myBoard }) => {
   const postLike = item.likeCount === null ? 0 : item.likeCount;
   const commentLike = item.commentCount === null ? 0 : item.commentCount;
   const profile = item.userImgUrl === null ? profileImage : item.userImgUrl;
+  const path = "/board/detail/" + item.postId;
   return (
     <Link
-      to={"/board/detail/" + item.postId}
+      to={ "/board/detail/" + item.postId}
+      state={{myBoard : myBoard}}
       style={{ textDecoration: "none", color: "black" }}
       onClick={popUp}
     >

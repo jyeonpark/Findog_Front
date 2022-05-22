@@ -107,43 +107,47 @@ export const BoardEditor = (props) => {
   /** 확인버튼 누르면 데이터 서버로 전송 */
   const onClickUpload = async () => {
     if (patchState == false) {
-      try {
-        console.log("클릭");
-        const formData = new FormData();
+      if (inputs.content === "" || inputs.title === "") {
+        alert("제목과 내용을 모두 입력해주세요.");
+        return;
+      } else {
+        try {
+          console.log("클릭");
+          const formData = new FormData();
 
-        formData.append("userId", Number(inputs.userId));
-        formData.append("title", inputs.title);
-        formData.append("category", Number(inputs.category));
-        formData.append("content", inputs.content);
-        formData.append("region", inputs.region);
+          formData.append("userId", Number(inputs.userId));
+          formData.append("title", inputs.title);
+          formData.append("category", Number(inputs.category));
+          formData.append("content", inputs.content);
+          formData.append("region", inputs.region);
 
-      
-        Object.values(sendingImg).forEach((image) =>
-          formData.append("imgFiles", image)
-        );
-   
-        console.log("전송시작");
-        await axios
-          .post("http://3.39.156.161:8080/boards/post", formData, {
-            method: "POST",
-            headers: { "Content-Type": "multipart/form-data" },
-          })
-          .then((response) => {
-            console.log(response.data.isSuccess);
+          Object.values(sendingImg).forEach((image) =>
+            formData.append("imgFiles", image)
+          );
 
-            if (response.data.isSuccess) {
-              console.log("게시물이 저장되었습니다.");
-              alert("게시물이 등록되었습니다!");
-              setPostId(response.data.result.postId);
-            } else {
+          console.log("전송시작");
+          await axios
+            .post("http://3.39.156.161:8080/boards/post", formData, {
+              method: "POST",
+              headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then((response) => {
               console.log(response.data.isSuccess);
-              console.log(response.data.message);
-            }
-          });
-      } catch (e) {
-        console.log(e.response);
+
+              if (response.data.isSuccess) {
+                console.log("게시물이 저장되었습니다.");
+                alert("게시물이 등록되었습니다!");
+                setPostId(response.data.result.postId);
+              } else {
+                console.log(response.data.isSuccess);
+                console.log(response.data.message);
+              }
+            });
+        } catch (e) {
+          console.log(e.response);
+        }
+        console.log("전송끝");
       }
-      console.log("전송끝");
     }
   };
 
