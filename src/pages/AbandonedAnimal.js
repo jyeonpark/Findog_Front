@@ -1,146 +1,82 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import OptionTab from "../components/OptionTab";
 import AnimalItem from "../components/AnimalItem";
 import styled from "styled-components";
 import AnimalPopup from "../components/AnimalPopup";
+import API from "./../utils/api";
+import Pagination from "./../components/Pagination";
 
-const Container = styled.div`
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-  grid-gap: 30px;
-  grid-template-columns: 1fr 1fr 1fr;
-`;
-
-const Body = styled.div`
-  margin-bottom: 100px;
-`;
-
-function AbandonedAnimal() {
-  const data = [
-    {
-      IsRecruiting: "공고중",
-      KeyNumber: "경기도-화성-2022-00106",
-      PreviewInfo: "암컷(중성화 X) / 흰색 + 크림색 / 3(kg)",
-      NoticePeriod: "2022-04-01 ~ 2022-04-11",
-      SpecialFeature: "L-3-1-8 흰색 + 크림색",
-      ProtectionCenter: "경기도유기동물보호소(Tel: 055-225-5701)",
-      ManageCenter: "경기도 화성 의창성산구청 (Tel:123-345-2324)",
-      Gender: "수컷(중성화 O)",
-      isLike: true,
-      Kind: "[개] 골든리트리버",
-      RegisterDate: "2022-04-01",
-      Location: "경기도 화성",
-      RescuePlace: "경기도 화성 레미안 2차 아파트",
-    },
-    {
-      IsRecruiting: "완료",
-      KeyNumber: "부산-2022-00107",
-      PreviewInfo: "암컷(중성화 X) / 갈색 + 크림색 / 14(kg)",
-      NoticePeriod: "2022-03-15 ~ 2022-03-22",
-      SpecialFeature: "L-3-1-8 흰색 + 크림색",
-      ProtectionCenter: "부산유기동물보호소(Tel: 055-225-5701)",
-      ManageCenter: "부산광역시 의창성산구청 (Tel:123-345-2324)",
-      Gender: "암컷(중성화 X)",
-      isLike: true,
-      Kind: "[개] 비숑",
-      RegisterDate: "2022-03-15",
-      Location: "부산 동래구",
-      RescuePlace: "부산 동래구 사직2동 자이아파트",
-    },
-    {
-      IsRecruiting: "공고중",
-      KeyNumber: "전라남도-화순-2022-00108",
-      PreviewInfo: "암컷(중성화 O) / 검정색 / 3(kg)",
-      NoticePeriod: "2022-04-05 ~ 2022-04-22",
-      SpecialFeature: "L-3-1-8 흰색 + 크림색",
-      ProtectionCenter: "전라남도유기동물보호소(Tel: 055-225-5701)",
-      ManageCenter: "전라남도 화순군 구청 (Tel:123-345-2324)",
-      Gender: "암컷(중성화 O)",
-      isLike: true,
-      Kind: "[개] 푸들",
-      RegisterDate: "2022-04-05",
-      Location: "전남 화순",
-      RescuePlace: "전라남도 화순군 화순읍 부영 6차 아파트",
-    },
-    {
-      IsRecruiting: "공고중",
-      KeyNumber: "경기도-화성-2022-00109",
-      PreviewInfo: "암컷(중성화 X) / 흰색 + 크림색 / 3(kg)",
-      NoticePeriod: "2022-04-01 ~ 2022-04-11",
-      SpecialFeature: "L-3-1-8 흰색 + 크림색",
-      ProtectionCenter: "경기도유기동물보호소(Tel: 055-225-5701)",
-      ManageCenter: "경기도 화성 의창성산구청 (Tel:123-345-2324)",
-      Gender: "수컷(중성화 O)",
-      isLike: true,
-      Kind: "[개] 골든리트리버",
-      RegisterDate: "2022-04-01",
-      Location: "경기도 화성",
-      RescuePlace: "경기도 화성 레미안 2차 아파트",
-    },
-    {
-      IsRecruiting: "완료",
-      KeyNumber: "부산-2022-00110",
-      PreviewInfo: "암컷(중성화 X) / 갈색 + 크림색 / 14(kg)",
-      NoticePeriod: "2022-03-15 ~ 2022-03-22",
-      SpecialFeature: "L-3-1-8 흰색 + 크림색",
-      ProtectionCenter: "부산유기동물보호소(Tel: 055-225-5701)",
-      ManageCenter: "부산광역시 의창성산구청 (Tel:123-345-2324)",
-      Gender: "암컷(중성화 X)",
-      isLike: true,
-      Kind: "[개] 비숑",
-      RegisterDate: "2022-03-15",
-      Location: "부산 동래구",
-      RescuePlace: "부산 동래구 사직2동 자이아파트",
-    },
-    {
-      IsRecruiting: "공고중",
-      KeyNumber: "전라남도-화순-2022-00111",
-      PreviewInfo: "암컷(중성화 O) / 검정색 / 3(kg)",
-      NoticePeriod: "2022-04-05 ~ 2022-04-22",
-      SpecialFeature: "L-3-1-8 흰색 + 크림색",
-      ProtectionCenter: "전라남도유기동물보호소(Tel: 055-225-5701)",
-      ManageCenter: "전라남도 화순군 구청 (Tel:123-345-2324)",
-      Gender: "암컷(중성화 O)",
-      isLike: true,
-      Kind: "[개] 푸들",
-      RegisterDate: "2022-04-05",
-      Location: "전남 화순",
-      RescuePlace: "전라남도 화순군 화순읍 부영 6차 아파트",
-    },
-  ];
-
+export const AbandonedAnimal = ({ myInterest }) => {
+  var size = 6;
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(1);
   const [dialog, setDialog] = useState(false);
-  const [animals, setAnimals] = useState(data);
-  const [currentAnimal, setCurrentAnimal] = useState(data[0]);
+  const [animals, setAnimals] = useState([]);
+  const [currentAnimal, setCurrentAnimal] = useState([]);
+  const [reload, setReload] = useState(false);
+
+  useEffect(() => {
+    getAnimalList(page, size);
+  }, [page, reload]);
+
+  // 유기동물 리스트 조회하기
+  const getAnimalList = (page, size) => {
+    var url = "";
+    if (myInterest === true) {
+      url = "/animals/mypage";
+      size = 4;
+    } else {
+      url = "/animals";
+    }
+
+    API.get(url, {
+      params: { page: page, size: size },
+      headers: {
+        "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+      },
+    }).then((response) => {
+      if (response.data.isSuccess) {
+        const pageCriteria = response.data.result.pageCriteria;
+        const animalSimpleInfo = response.data.result.animalSimpleInfo;
+
+        console.log(response.data);
+        setPageCount(pageCriteria.totalPage);
+        setAnimals(animalSimpleInfo);
+      } else {
+        console.log(response);
+      }
+    });
+  };
 
   const onClose = () => {
     setDialog(false);
+    setReload(true);
   };
 
   const onView = (key) => {
-    setCurrentAnimal(data.find((item) => item.KeyNumber === key));
+    setCurrentAnimal(animals.find((item) => item.animalId === key));
   };
 
   const onClick = () => {
     setDialog(true);
+    setReload(false);
   };
 
   return (
     <div>
-      <OptionTab
-        InterestText="관심 동물 보기"
-        ImgSearchVisibility
-        WriteVisibility={false}
-      ></OptionTab>
+      {!myInterest && (
+        <OptionTab
+          ImgSearchVisibility
+          WriteVisibility={false}
+        ></OptionTab>
+      )}
       <Body>
-        <Container>
+        <Container myInterest={myInterest}>
           {animals.map((item) => {
             return (
               <AnimalItem
                 item={item}
-                key={item.KeyNumber}
+                key={item.animalId}
                 onClick={onClick}
                 onView={onView}
               ></AnimalItem>
@@ -148,14 +84,38 @@ function AbandonedAnimal() {
           })}
         </Container>
       </Body>
-      <AnimalPopup
-        item={currentAnimal}
-        key={currentAnimal.KeyNumber}
-        onClose={onClose}
-        visible={dialog}
-      ></AnimalPopup>
+      {dialog ? (
+        <AnimalPopup
+          item={currentAnimal}
+          key={currentAnimal.animalId}
+          onClose={onClose}
+          likeFlag={currentAnimal.likeFlag}
+        ></AnimalPopup>
+      ) : null}
+
+      <footer>
+        <Pagination total={pageCount} page={page} setPage={setPage} />
+      </footer>
     </div>
   );
-}
+};
 
 export default AbandonedAnimal;
+
+AbandonedAnimal.defaultProps = {
+  myInterest: false,
+};
+
+const Container = styled.div`
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: ${(props) =>
+    props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
+`;
+
+const Body = styled.div`
+  margin-bottom: 100px;
+`;

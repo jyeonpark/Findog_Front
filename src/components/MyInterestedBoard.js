@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { BoardBox } from "../components/BoardBox";
+import { Board } from './../pages/Board';
 
 const Title = styled.div`
   margin-top: 100px;
@@ -26,13 +27,9 @@ const Container = styled.div`
 
 function MyInterestedBoard() {
   return (
-    <div>
-      <Title>관심있는 글</Title>
-      <Divider></Divider>
-      <Container>
-      
-      </Container>
-    </div>
+    <div style={{marginTop:"100px", marginLeft:"100px"}}>
+    <Board myInterestedBoard={true}></Board>
+  </div>
   );
 }
 

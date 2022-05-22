@@ -325,24 +325,13 @@ function SignUp() {
     if (phoneNumber === "") {
       setPhoneNumNotification(false);
     } else {
-      if (phoneNumber.length === 10) {
-        setInputs({
-          ...inputs, // 기존의 input 객체를 복사
-          ["phoneNumber"]: phoneNumber.replace(
-            /(\d{3})(\d{3})(\d{4})/,
-            "$1-$2-$3"
-          ),
-        });
-      }
-
-      if (phoneNumber.length === 13) {
-        setInputs({
-          ...inputs, // 기존의 input 객체를 복사
-          ["phoneNumber"]: phoneNumber
-            .replace(/-/g, "")
-            .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
-        });
-      }
+      phoneNumber
+        .replace(/[^0-9]/g, "")
+        .replace(
+          /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+          "$1-$2-$3"
+        )
+        .replace("--", "-");
 
       if (phoneNumber.length === 13 && /^[0-9\b -]{0,13}$/.test(phoneNumber)) {
         var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -436,13 +425,12 @@ function SignUp() {
         console.log(type(image.image_file));
       }
 
-      await API
-        .post("/users/sign-up", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          data: formData,
-        })
+      await API.post("/users/sign-up", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      })
         .then((response) => {
           if (response.data.isSuccess) {
             alert("회원가입에 성공했습니다.");

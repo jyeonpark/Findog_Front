@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import dogImage from "../images/dog2.jpeg";
+import API from './../utils/api';
 
 const Container = styled.div`
   width: 360px;
   height: 250px;
   background-color: ${(props) =>
-    props.IsRecruiting === "공고중"
+    props.processState === "보호중"
       ? "rgb(251, 223, 169)"
       : "rgba(128, 128, 128, 0.2)"};
 `;
@@ -26,13 +27,14 @@ const Box = styled.div`
 const HeaderLeft = styled.div`
   display: flex;
 `;
+
 const RecruitState = styled.div`
   width: 75px;
   height: 40px;
   line-height: 40px;
   border-radius: 10%;
   background-color: ${(props) =>
-    props.IsRecruiting === "공고중" ? "orange" : "grey"};
+    props.processState === "보호중" ? "orange" : "grey"};
   color: white;
 `;
 
@@ -40,72 +42,79 @@ const AnimalGender = styled.div`
   margin-left: 10px;
   line-height: 40px;
   width: fit-content;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 1000;
 `;
 
 const LikeIcon = styled(FontAwesomeIcon)`
   float: right;
+  object-fit: fill;
 `;
 
 const DogImage = styled.img`
   width: 150px;
-  height: 100px;
+  height: 150px;
 `;
 
 const DogInfo = styled.div`
-  padding-left: 20px;
+  width: 200px;
+  margin-left: 20px;
   text-align: left;
 `;
 
 const DogInfoDetail = styled.div`
   overflow: hidden;
+  font-weight: 500;
 `;
 
-function AnimalItem({ item, onClick, onView }) {
+function AnimalItem({ item, onClick, onView, reload}) {
   const {
-    IsRecruiting,
-    KeyNumber,
-    Gender,
-    isLike,
-    Kind,
-    RegisterDate,
-    Location,
-    RescuePlace,
+    animalId,
+    processState,
+    sexCd,
+    neuterYn,
+    kindCd,
+    happenDt,
+    orgNm,
+    happenPlace,
+    popfile,
+    likeFlag,
   } = item;
+
+  const gender = sexCd === "M" ? "수컷" : "암컷";
+  const neuter = neuterYn === "N" ? "(중성화 X)" : "(중성화 O)";
 
   return (
     <Container
-      IsRecruiting={IsRecruiting}
+      processState={processState}
       onClick={() => {
         onClick();
-        onView(item.KeyNumber);
+        onView(item.animalId);
       }}
     >
       <Box>
         <HeaderLeft>
-          <RecruitState IsRecruiting={IsRecruiting}>
-            {IsRecruiting}
+          <RecruitState processState={processState}>
+            {processState}
           </RecruitState>
-          <AnimalGender>{Gender}</AnimalGender>
+          <div style={{ display: "flex" }}>
+            <AnimalGender>{gender}</AnimalGender>
+            <AnimalGender>{neuter}</AnimalGender>
+          </div>
         </HeaderLeft>
         <LikeIcon
           size="2x"
-          icon={isLike ? solidHeart : regularHeart}
+          icon={likeFlag === 1 ? solidHeart : regularHeart}
+       
         ></LikeIcon>
       </Box>
       <Box>
-        <DogImage src={dogImage}></DogImage>
+        <DogImage src={popfile}></DogImage>
         <DogInfo>
-          <DogInfoDetail>품종 : {Kind}</DogInfoDetail>
-          <DogInfoDetail>등록일 : {RegisterDate}</DogInfoDetail>
-          <DogInfoDetail>지역 : {Location.slice(0, 10)}</DogInfoDetail>
-          <DogInfoDetail>
-            구조장소 :{" "}
-            {RescuePlace.length < 30
-              ? RescuePlace
-              : RescuePlace.slice(0, 27) + "..."}
-          </DogInfoDetail>
+          <DogInfoDetail>• 품종 : {kindCd}</DogInfoDetail>
+          <DogInfoDetail>• 등록일 : {happenDt}</DogInfoDetail>
+          <DogInfoDetail>• 구조장소 : {happenPlace.slice(0, 10)}</DogInfoDetail>
+          <DogInfoDetail>• 담당기관명 : {orgNm}</DogInfoDetail>
         </DogInfo>
       </Box>
     </Container>

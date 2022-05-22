@@ -23,6 +23,14 @@ const Container = styled.div`
 `;
 
 function MyPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("userID") === null) {
+      alert("로그인을 하신 후에 이용하실 수 있습니다.");
+      navigate("/login");
+    }
+  });
   return (
     <Container>
       <MyPageTab></MyPageTab>
