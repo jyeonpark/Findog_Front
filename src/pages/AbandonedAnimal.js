@@ -6,8 +6,8 @@ import AnimalPopup from "../components/AnimalPopup";
 import API from "./../utils/api";
 import Pagination from "./../components/Pagination";
 
-export const AbandonedAnimal = () => {
-  const size = 6;
+export const AbandonedAnimal = ({ myInterest }) => {
+  var size = 6;
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   const [dialog, setDialog] = useState(false);
@@ -19,10 +19,17 @@ export const AbandonedAnimal = () => {
     getAnimalList(page, size);
   }, [page, reload]);
 
-
   // 유기동물 리스트 조회하기
   const getAnimalList = (page, size) => {
-    API.get("/animals", {
+    var url = "";
+    if (myInterest === true) {
+      url = "/animals/mypage";
+      size = 4;
+    } else {
+      url = "/animals";
+    }
+
+    API.get(url, {
       params: { page: page, size: size },
       headers: {
         "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
@@ -57,13 +64,14 @@ export const AbandonedAnimal = () => {
 
   return (
     <div>
-      <OptionTab
-        InterestText="관심 동물 보기"
-        ImgSearchVisibility
-        WriteVisibility={false}
-      ></OptionTab>
+      {!myInterest && (
+        <OptionTab
+          ImgSearchVisibility
+          WriteVisibility={false}
+        ></OptionTab>
+      )}
       <Body>
-        <Container>
+        <Container myInterest={myInterest}>
           {animals.map((item) => {
             return (
               <AnimalItem
@@ -94,13 +102,18 @@ export const AbandonedAnimal = () => {
 
 export default AbandonedAnimal;
 
+AbandonedAnimal.defaultProps = {
+  myInterest: false,
+};
+
 const Container = styled.div`
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
   display: grid;
   grid-gap: 30px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${(props) =>
+    props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
 `;
 
 const Body = styled.div`

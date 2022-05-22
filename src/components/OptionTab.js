@@ -71,21 +71,6 @@ const BtnImgSearch = styled.button`
   display: ${(props) => (props.ImgSearchVisibility ? "inline-block" : "none")};
 `;
 
-const BoxCheckInterest = styled.div`
-  margin-top: auto;
-  margin-bottom: auto;
-`;
-
-const InterestCheckbox = styled.input`
-  width: 17px;
-  height: 17px;
-`;
-
-const LabelCheck = styled.label`
-  margin-left: 10px;
-  font-size: 20px;
-`;
-
 const InputSearch = styled.input`
   width: 450px;
   height: 50px;
@@ -197,13 +182,6 @@ function OptionTab({
             글쓰기
           </BtnWrite>
         </Link>
-        <BoxCheckInterest>
-          <InterestCheckbox
-            type="checkbox"
-            id="interestCheck"
-          ></InterestCheckbox>
-          <LabelCheck htmlFor="interestCheck">{InterestText}</LabelCheck>
-        </BoxCheckInterest>
       </BoxOption>
     </Container>
   );

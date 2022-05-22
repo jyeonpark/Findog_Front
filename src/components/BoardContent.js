@@ -115,7 +115,7 @@ const Button = styled.button`
   border: 2px solid rgba(64, 64, 64, 0.5);
 `;
 
-export const BoardContent = ({ postId }) => {
+export const BoardContent = ({ postId, myBoard}) => {
   // 1: "기타",
   // 2: "찾아주세요",
   // 3: "봤어요",
@@ -235,6 +235,12 @@ export const BoardContent = ({ postId }) => {
     }).then((response) => {
       console.log(response.data);
       alert("게시물이 삭제되었습니다.");
+      if (myBoard === true){
+        navigate("/mypage");
+      } else{
+        window.location.reload();
+      }
+
     });
   };
 
