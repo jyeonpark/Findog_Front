@@ -1,0 +1,19 @@
+{
+  "main.css": "./static/css/main.e59b4ff1.chunk.css",
+  "main.js": "./static/js/main.7d28c0fc.chunk.js",
+  "main.js.map": "./static/js/main.7d28c0fc.chunk.js.map",
+  "runtime~main.js": "./static/js/runtime~main.d434a3ac.js",
+  "runtime~main.js.map": "./static/js/runtime~main.d434a3ac.js.map",
+  "static/js/2.21e706d4.chunk.js": "./static/js/2.21e706d4.chunk.js",
+  "static/js/2.21e706d4.chunk.js.map": "./static/js/2.21e706d4.chunk.js.map",
+  "static/js/3.7eb544a6.chunk.js": "./static/js/3.7eb544a6.chunk.js",
+  "static/js/3.7eb544a6.chunk.js.map": "./static/js/3.7eb544a6.chunk.js.map",
+  "index.html": "./index.html",
+  "precache-manifest.563f9a04f492ca5ad057bdfcb3b43196.js": "./precache-manifest.563f9a04f492ca5ad057bdfcb3b43196.js",
+  "service-worker.js": "./service-worker.js",
+  "static/css/main.e59b4ff1.chunk.css.map": "./static/css/main.e59b4ff1.chunk.css.map",
+  "static/media/dog2.jpeg": "./static/media/dog2.69099a8a.jpeg",
+  "static/media/doghouse.png": "./static/media/doghouse.e6f73a99.png",
+  "static/media/header_dog.jpg": "./static/media/header_dog.85950ef0.jpg",
+  "static/media/profileImage.png": "./static/media/profileImage.5405d77c.png"
+}
