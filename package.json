@@ -1,6 +1,7 @@
 {
   "name": "findog-front",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -75,6 +76,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jyeonpark/Findog_Front/issues"
-  },
-  "homepage": "https://github.com/jyeonpark/Findog_Front#readme"
+  }
 }
