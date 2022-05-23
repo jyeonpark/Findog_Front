@@ -29,23 +29,44 @@ export const AbandonedAnimal = ({ myInterest }) => {
       url = "/animals";
     }
 
-    API.get(url, {
-      params: { page: page, size: size },
-      headers: {
-        "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
-      },
-    }).then((response) => {
-      if (response.data.isSuccess) {
-        const pageCriteria = response.data.result.pageCriteria;
-        const animalSimpleInfo = response.data.result.animalSimpleInfo;
+    if (sessionStorage.getItem("userJWT") === null) {
+      console.log("null");
+      API.get(url, {
+        params: { page: page, size: size },
+        headers: {
+          "X-ACCESS-TOKEN": "",
+        },
+      }).then((response) => {
+        if (response.data.isSuccess) {
+          const pageCriteria = response.data.result.pageCriteria;
+          const animalSimpleInfo = response.data.result.animalSimpleInfo;
 
-        console.log(response.data);
-        setPageCount(pageCriteria.totalPage);
-        setAnimals(animalSimpleInfo);
-      } else {
-        console.log(response);
-      }
-    });
+          console.log(response.data);
+          setPageCount(pageCriteria.totalPage);
+          setAnimals(animalSimpleInfo);
+        } else {
+          console.log(response);
+        }
+      });
+    } else {
+      API.get(url, {
+        params: { page: page, size: size },
+        headers: {
+          "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
+        },
+      }).then((response) => {
+        if (response.data.isSuccess) {
+          const pageCriteria = response.data.result.pageCriteria;
+          const animalSimpleInfo = response.data.result.animalSimpleInfo;
+
+          console.log(response.data);
+          setPageCount(pageCriteria.totalPage);
+          setAnimals(animalSimpleInfo);
+        } else {
+          console.log(response);
+        }
+      });
+    }
   };
 
   const onClose = () => {
@@ -65,10 +86,7 @@ export const AbandonedAnimal = ({ myInterest }) => {
   return (
     <div>
       {!myInterest && (
-        <OptionTab
-          ImgSearchVisibility
-          WriteVisibility={false}
-        ></OptionTab>
+        <OptionTab ImgSearchVisibility WriteVisibility={false}></OptionTab>
       )}
       <Body>
         <Container myInterest={myInterest}>
