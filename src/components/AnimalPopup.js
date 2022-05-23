@@ -51,7 +51,11 @@ function AnimalPopup({ item, onClose, likeFlag }) {
     orgNm: "",
   });
 
-  const Like = () => {
+  const Like = (event) => {
+    if (sessionStorage.getItem("userJWT") === null){
+      alert("로그인을 하신 후 이용하실 수 있습니다.");
+      event.preventDefault();
+    }
     if (like === 1) {
       // 좋아요 취소
       API.delete("/animals/unlike", {
