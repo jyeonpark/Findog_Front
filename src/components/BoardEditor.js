@@ -2,7 +2,7 @@ import React, {  useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
-import axios from "axios";
+import API from './../utils/api';
 
 const InputPicker = styled.select`
   width: 955px;
@@ -97,8 +97,8 @@ export const BoardEditor = (props) => {
           );
 
           console.log("전송시작");
-          await axios
-            .post("http://3.39.156.161:8080/boards/post", formData, {
+          await API
+            .post("/boards/post", formData, {
               method: "POST",
               headers: { "Content-Type": "multipart/form-data" },
             })
