@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "global": "^4.4.0",
     "hoist-non-react-statics": "^3.3.2",
+    "http-proxy-middleware": "^2.0.6",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.2",
