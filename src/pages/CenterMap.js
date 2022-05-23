@@ -1,5 +1,5 @@
 /*global kakao */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import doghouse from "../images/doghouse.png";
 
@@ -170,8 +170,7 @@ export default function CenterMap() {
       var listEl = document.getElementById("placesList"),
         menuEl = document.getElementById("menu_wrap"),
         fragment = document.createDocumentFragment(),
-        bounds = new kakao.maps.LatLngBounds(),
-        listStr = "";
+        bounds = new kakao.maps.LatLngBounds();
 
       // 검색 결과 목록에 추가된 항목들을 제거합니다
       removeAllChildNods(listEl);

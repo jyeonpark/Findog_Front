@@ -1,10 +1,7 @@
-import React, { Component, useState, useRef, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, {  useState } from "react";
+import {  useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-import axios from "axios";
-import setAuthorizationToken from "../utils/setAuthorizationToken";
 import API from './../utils/api';
 
 const Container = styled.div`

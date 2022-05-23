@@ -1,7 +1,5 @@
-import React, { Component, useState } from "react";
-import AnimalItem from "../components/AnimalItem";
-import styled from "styled-components";
-import AnimalPopup from "../components/AnimalPopup";
+import React from "react";
+
 import AbandonedAnimal from "../pages/AbandonedAnimal";
 
 export const MyInterestedAnimal = () => {

@@ -1,13 +1,4 @@
-import React, {
-  Fragment,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  ReactText,
-} from "react";
-import API from "../utils/api";
-import styled from "styled-components";
+import React from "react";
 import { SingleComment } from "./SingleComment";
 
 export const ReplyComments = ({ commentList, parentCommentId, postId }) => {

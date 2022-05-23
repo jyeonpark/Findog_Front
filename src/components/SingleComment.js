@@ -1,10 +1,6 @@
 import React, {
-  Fragment,
+
   useState,
-  useEffect,
-  useCallback,
-  useRef,
-  ReactText,
 } from "react";
 import API from "../utils/api";
 import styled from "styled-components";

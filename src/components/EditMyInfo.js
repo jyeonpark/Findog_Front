@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef, useEffect } from "react";
+import React, {  useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import API from "./../utils/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ export const EditMyInfo = () => {
     image_file: "",
     preview_URL: default_profile_img,
   });
-  const [defaultImg, setDefaultImg] = useState(true);
+ 
   const [isProfileChanged, setIsProfileChanged] = useState(false);
   const fileInput = useRef(null);
 
@@ -33,7 +33,6 @@ export const EditMyInfo = () => {
 
   /** 연락처 관리 변수 */
   const [prevPhoneNum, setPrevPhoneNum] = useState("");
-  const [isPhonenumChecked, setIsPhonenumChecked] = useState(true); // 연락처 형식확인 완료
 
   /** 프로필 사진 업로드 */
   const OnProfileChange = (e) => {
@@ -42,7 +41,6 @@ export const EditMyInfo = () => {
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
-      setDefaultImg(false);
       setIsProfileChanged(true);
     }
     reader.onload = () => {
@@ -125,7 +123,7 @@ export const EditMyInfo = () => {
 
   const onSubmitProfile = async () => {
     var deleteFlag = 0;
-    if (isProfileChanged && image.image_file != "") {
+    if (isProfileChanged && image.image_file !== "") {
       // 수정된 것
       console.log("수정됨(사진변경) 1");
     } else if (isProfileChanged && image.image_file === "") {
@@ -150,7 +148,7 @@ export const EditMyInfo = () => {
       } else {
         formData.append("newProfileImg", image.image_file);
       }
-      if (prevProfileImg != "") {
+      if (prevProfileImg !== "") {
         formData.append("originProfileImgUrl", prevProfileImg);
       }
 
@@ -281,10 +279,7 @@ export const EditMyInfo = () => {
   };
 
   const onSubmitPhonenum = async () => {
-    if (!isPhonenumChecked) {
-      alert("연락처 형식을 확인해주세요.");
-      return;
-    } else if (prevPhoneNum === phoneNum) {
+    if (prevPhoneNum === phoneNum) {
       alert("연락처가 수정되지 않았습니다.");
     } else {
       try {
@@ -350,7 +345,6 @@ export const EditMyInfo = () => {
                       image_file: "",
                       preview_URL: default_profile_img,
                     });
-                    setDefaultImg(true);
                     setIsProfileChanged(true);
                   }}
                 >

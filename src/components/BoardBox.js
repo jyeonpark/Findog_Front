@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { Fragment } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import profileImage from "../images/profileImage.png";
 import { Link } from "react-router-dom";
-import MyBoard from './MyBoard';
 
 const Container = styled.div`
   width: 850px;
