@@ -1,10 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import React, {  useState, useEffect } from "react";
+import styled  from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark as closeBtn } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-import dogImage from "../images/dog2.jpeg";
 import API from "./../utils/api";
 
 function AnimalPopup({ item, onClose, likeFlag }) {

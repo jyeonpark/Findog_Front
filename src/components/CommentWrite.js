@@ -1,11 +1,4 @@
-import React, {
-  Fragment,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  ReactText,
-} from "react";
+import React, { useState } from "react";
 import API from "./../utils/api";
 import styled from "styled-components";
 
@@ -55,12 +48,8 @@ const Box = styled.div`
   margin-bottom: 5px;
 `;
 
-export const CommentWrite = ({
-  parentCommentId,
-  postId,
-  reply
-}) => {
-  const [commentInput, setCommentInput] = useState('');
+export const CommentWrite = ({ parentCommentId, postId, reply }) => {
+  const [commentInput, setCommentInput] = useState("");
   const [textAreaCount, setTextAreaCount] = useState(0);
 
   const onInputChange = (e) => {

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useContext } from "react";
+import React, {  useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
@@ -31,9 +31,9 @@ function App() {
 
   const currentTab = () => {
     let path = window.location.pathname;
-    if (path == "/") return 1;
-    else if (path == "/board") return 2;
-    else if (path == "/*") return 3;
+    if (path === "/") return 1;
+    else if (path === "/board") return 2;
+    else if (path === "/*") return 3;
     else if (path.includes("/mypage/")) return 4;
   };
 

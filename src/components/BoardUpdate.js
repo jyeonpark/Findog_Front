@@ -1,9 +1,7 @@
-import React, { Component, useEffect, useState } from "react";
-import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
-import axios from "axios";
-import { BoardDetail } from "../pages/BoardDetail";
 import API from "../utils/api";
 
 const InputPicker = styled.select`
@@ -42,7 +40,6 @@ export const BoardUpdate = () => {
   useEffect(() => {
     if (location.state.locImgList != null) {
       location.state.locImgList.map((item) => {
-
         const convertURLtoFile = async (item) => {
           const response = await fetch(item);
           const data = await response.blob();
@@ -52,11 +49,9 @@ export const BoardUpdate = () => {
           return new File([data], filename, metadata);
         };
 
-        convertURLtoFile(item)
-          .then((response) => {
-            sendingImg.push(response);
-          }) // 첫번째 then
-        
+        convertURLtoFile(item).then((response) => {
+          sendingImg.push(response);
+        }); // 첫번째 then
       });
     }
     // fetch(item,
@@ -163,7 +158,7 @@ export const BoardUpdate = () => {
         .then((response) => {
           if (response.data.isSuccess) {
             alert("게시물이 수정되었습니다.");
-            navigate("/board/detail/" + postId);
+            navigate("/board/detail/" + postId, { state: { myBoard: false } });
           } else {
             console.log(response);
             alert("게시물 수정에 실패했습니다.");
