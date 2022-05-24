@@ -320,9 +320,9 @@ export const BoardContent = ({ postId, myBoard}) => {
         </div>
         {inputs.userId === Number(sessionStorage.getItem("userID")) && (
           <ExtraButton>
-            <Button onClick={onClickUpdate}>수정</Button>
+            <Button onClick={()=>onClickUpdate()}>수정</Button>
             <Link to="/board">
-              <Button onClick={onClickDelete}>삭제</Button>
+              <Button onClick={()=>onClickDelete()}>삭제</Button>
             </Link>
           </ExtraButton>
         )}

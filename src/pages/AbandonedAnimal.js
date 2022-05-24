@@ -110,10 +110,11 @@ export const AbandonedAnimal = ({ myInterest }) => {
           likeFlag={currentAnimal.likeFlag}
         ></AnimalPopup>
       ) : null}
-
-      <footer>
-        <Pagination total={pageCount} page={page} setPage={setPage} />
-      </footer>
+      {animals.length !== 0 && (
+        <footer>
+          <Pagination total={pageCount} page={page} setPage={setPage} />
+        </footer>
+      )}
     </div>
   );
 };

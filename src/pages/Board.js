@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Fragment } from "react";
 import OptionTab from "../components/OptionTab";
 import { BoardBox } from "../components/BoardBox";
@@ -72,7 +72,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
   return (
     <div>
       <BoardContainer>
-        {(myBoard === false && myInterestedBoard === false)&& (
+        {myBoard === false && myInterestedBoard === false && (
           <Fragment>
             <OptionTab
               FilterVisibility
@@ -95,10 +95,11 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
           })}
         </BoardBody>
       </BoardContainer>
-
-      <footer>
-        <Pagination total={pageCount} page={page} setPage={setPage} />
-      </footer>
+      {data.length !== 0 && (
+        <footer>
+          <Pagination total={pageCount} page={page} setPage={setPage} />
+        </footer>
+      )}
     </div>
   );
 };

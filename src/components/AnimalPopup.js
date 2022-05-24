@@ -151,18 +151,6 @@ function AnimalPopup({ item, onClose, likeFlag }) {
               <DogInfoText>{animal.orgNm}</DogInfoText>
             </DogInfoTextBox>
 
-            {/* <Divider></Divider> */}
-            {/* <DogInfoTextBox>
-              <DogInfoTitle>바로가기 : </DogInfoTitle>
-              <DogInfoText
-                style={{
-                  textDecoration: "underline",
-                  color: "goldenrod",
-                }}
-              >
-                보호소 바로가기 링크
-              </DogInfoText>
-            </DogInfoTextBox> */}
           </TextBox>
         </Body>
       </DialogBlock>

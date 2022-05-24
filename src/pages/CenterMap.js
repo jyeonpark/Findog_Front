@@ -321,36 +321,6 @@ export default function CenterMap() {
       <MapWrapper>
         <Map id="myMap"></Map>
         <ListWrapper id="menu_wrap">
-          {/* <div class="option">
-          <div>
-            <form style={{ textAlign: "center" }} onsubmit={onSubmit}>
-              <input
-                type="text"
-                value={searchPlace}
-                id="keyword"
-                size="20"
-                style={{
-                  width: "200px",
-                  height: "30px",
-                  border: "solid",
-                  borderColor: "rgba(0,0,0,0.2)",
-                  borderWidth: "1px",
-                }}
-                onChange={onInputChange}
-              ></input>
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: "rgb(255, 224, 166)",
-                  borderColor: "rgba(0, 0, 0,0.1)",
-                  height: "30px",
-                }}
-              >
-                검색
-              </button>
-            </form>
-          </div>
-        </div> */}
           <PlacesList id="placesList"></PlacesList>
           <Pagination id="pagination"></Pagination>
         </ListWrapper>
