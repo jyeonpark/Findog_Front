@@ -1,11 +1,10 @@
-import React, { Component, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import API from "./../utils/api";
-import axios from "axios";
 import { type } from "@testing-library/user-event/dist/type";
 import { AuthLogin } from "../utils/utils";
 
@@ -250,7 +249,7 @@ function SignUp() {
       setPwNotification(false);
       setPwCheckNotification(false);
     }
-    if (password != "") {
+    if (password !== "") {
       if (password.length >= 8 && password.length <= 15) {
         if (
           !/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(password)
@@ -263,7 +262,7 @@ function SignUp() {
         setPwNotiText(pwNotiArray[0]);
       }
     }
-    if (passwordCheck != "") {
+    if (passwordCheck !== "") {
       if (password === passwordCheck) {
         console.log("같음");
         setIsPwChecked(true);
@@ -285,7 +284,7 @@ function SignUp() {
     } else {
       var regExp =
         /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-      // 형식에 맞는 경우 true 리턴
+
       if (regExp.test(id)) {
         setIdNotification(false);
         setIsIdValidate(true);

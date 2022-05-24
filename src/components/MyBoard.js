@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { BoardBox } from "../components/BoardBox";
+import React from "react";
 import { Board } from './../pages/Board';
 
 

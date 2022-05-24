@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import React, { Component } from "react";
+import React from "react";
 
 const Container = styled.div`
   width: 1100px;

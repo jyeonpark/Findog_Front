@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import { Fragment } from "react";
 import OptionTab from "../components/OptionTab";
 import { BoardBox } from "../components/BoardBox";

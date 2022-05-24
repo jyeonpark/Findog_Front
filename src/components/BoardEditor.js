@@ -1,9 +1,8 @@
-import React, { Component, useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, {  useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
-import axios from "axios";
-import { BoardDetail } from "../pages/BoardDetail";
+import API from './../utils/api';
 
 const InputPicker = styled.select`
   width: 955px;
@@ -25,26 +24,8 @@ export const BoardEditor = (props) => {
     userId: sessionStorage.getItem("userID"),
   });
 
-  const [editLink, setEditLink] = useState("");
   const [postId, setPostId] = useState(999);
   const [patchState, setPatchState] = useState(props.patchState);
-  const [patchPostId, setPatchPostId] = useState(props.patchPostId);
-
-  // const [postId, setPostId] = useState(0);
-
-  // useEffect(() => {
-  //   if(pathState == true) {
-  //     setInputs({
-  //       category: props.category,
-  //       region: props.region,
-  //       title: props.title,
-  //       content: props.content,
-  //     });
-  //     if(props.imgList.length > 0) {
-  //       setShowImages(props.imgList);
-  //     }
-  //   }
-  // }, [patchState]);
 
   /** input 입력 시 title, content 내용 변경 */
   const onChangeData = (e) => {
@@ -66,16 +47,6 @@ export const BoardEditor = (props) => {
       ...inputs,
       region: e.target.value,
     });
-  };
-
-  // category select
-  const handleSelect = (e) => {
-    setInputs({
-      ...inputs,
-      categoy: e.target.value,
-    });
-    console.log("handle select");
-    console.log(e.target.value);
   };
 
   /** 사진 추가 */
@@ -106,7 +77,7 @@ export const BoardEditor = (props) => {
 
   /** 확인버튼 누르면 데이터 서버로 전송 */
   const onClickUpload = async () => {
-    if (patchState == false) {
+    if (patchState === false) {
       if (inputs.content === "" || inputs.title === "") {
         alert("제목과 내용을 모두 입력해주세요.");
         return;
@@ -126,8 +97,8 @@ export const BoardEditor = (props) => {
           );
 
           console.log("전송시작");
-          await axios
-            .post("http://3.39.156.161:8080/boards/post", formData, {
+          await API
+            .post("/boards/post", formData, {
               method: "POST",
               headers: { "Content-Type": "multipart/form-data" },
             })
@@ -151,20 +122,9 @@ export const BoardEditor = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   navigate(`/board/detail/${postId}`);
-
-  // }, [postId]);
-
-  // const goToPost = () => {
-  //   // setLoading(false);
-  //   navigate(`/board/detail/${postId}`);
-  //   console.log("==포스트 이동==")
-  // }
-
   useEffect(() => {
-    if (postId != 999 && patchState == false) {
-      navigate(`/board/detail/${postId}`);
+    if (postId !== 999 && patchState === false) {
+      navigate(`/board/detail/${postId}`, { state : {myBoard: false }});
       console.log("==포스트 이동==");
     }
   }, [postId, patchState]);

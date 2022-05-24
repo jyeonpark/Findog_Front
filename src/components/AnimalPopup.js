@@ -1,10 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark as closeBtn } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-import dogImage from "../images/dog2.jpeg";
 import API from "./../utils/api";
 
 function AnimalPopup({ item, onClose, likeFlag }) {
@@ -14,17 +13,18 @@ function AnimalPopup({ item, onClose, likeFlag }) {
 
   const [like, setLike] = useState(likeFlag);
 
-
   // 유기동물 상세정보 조회하기
   const getAnimalInfo = (animalId) => {
-    API.get("/animals/" + animalId).then((response) => {
-      if (response.data.isSuccess) {
-        console.log(response.data);
-        setAnimal(response.data.result);
-      } else {
-        console.log(response);
+    API.get( "/animals/" + animalId).then(
+      (response) => {
+        if (response.data.isSuccess) {
+          console.log(response.data);
+          setAnimal(response.data.result);
+        } else {
+          console.log(response);
+        }
       }
-    });
+    );
   };
 
   const [animal, setAnimal] = useState({
@@ -51,7 +51,11 @@ function AnimalPopup({ item, onClose, likeFlag }) {
     orgNm: "",
   });
 
-  const Like = () => {
+  const Like = (event) => {
+    if (sessionStorage.getItem("userJWT") === null) {
+      alert("로그인을 하신 후 이용하실 수 있습니다.");
+      event.preventDefault();
+    }
     if (like === 1) {
       // 좋아요 취소
       API.delete("/animals/unlike", {
@@ -140,7 +144,8 @@ function AnimalPopup({ item, onClose, likeFlag }) {
               <DogInfoTitle>보호센터 :</DogInfoTitle>
               <DogInfoText>
                 {animal.careNm} (Tel : {animal.careTel})
-                <br />주소 : {animal.careAddr}
+                <br />
+                주소 : {animal.careAddr}
               </DogInfoText>
             </DogInfoTextBox>
             <DogInfoTextBox>

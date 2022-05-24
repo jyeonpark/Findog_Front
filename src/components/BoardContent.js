@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import API from "./../utils/api";
-import { Link, Navigate, useNavigate  } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import profileImage from "../images/profileImage.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
