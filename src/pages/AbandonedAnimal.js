@@ -86,7 +86,7 @@ export const AbandonedAnimal = ({ myInterest }) => {
   return (
     <div>
       {!myInterest && (
-        <OptionTab ImgSearchVisibility WriteVisibility={false}></OptionTab>
+        <OptionTab ImgSearchVisibility></OptionTab>
       )}
       <Body>
         <Container myInterest={myInterest}>
@@ -126,15 +126,20 @@ AbandonedAnimal.defaultProps = {
 };
 
 const Container = styled.div`
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+
+  width: 90vw;
+  height: min-content;
+  margin-left: 10vw;
+  margin-right: 5vw;
   display: grid;
-  grid-gap: 30px;
+  grid-row-gap: 4vh;
+  grid-column-gap: 2vw;
   grid-template-columns: ${(props) =>
-    props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
+    props.myInterest === true ? "1fr" : "1fr 1fr"};
+  
 `;
 
 const Body = styled.div`
-  margin-bottom: 100px;
+    height: fit-content;
+  margin-bottom: 30vh;
 `;

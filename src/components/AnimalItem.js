@@ -5,8 +5,9 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 360px;
-  height: 250px;
+  width: 37vw;
+  min-height: 30vh;
+  margin-bottom: 1vh;
   background-color: ${(props) =>
     props.processState === "보호중"
       ? "rgb(251, 223, 169)"
@@ -27,9 +28,10 @@ const HeaderLeft = styled.div`
 `;
 
 const RecruitState = styled.div`
-  width: 75px;
-  height: 40px;
-  line-height: 40px;
+  width: 10vw;
+  font-size: 1.5vw;
+  height: 5vw;
+  line-height: 5vw;
   border-radius: 10%;
   background-color: ${(props) =>
     props.processState === "보호중" ? "orange" : "grey"};
@@ -38,26 +40,30 @@ const RecruitState = styled.div`
 
 const AnimalGender = styled.div`
   margin-left: 10px;
-  line-height: 40px;
+  line-height: 5vw;
   width: fit-content;
-  font-size: 20px;
+  font-size: 1.5vw;
   font-weight: 1000;
 `;
 
 const LikeIcon = styled(FontAwesomeIcon)`
   float: right;
   object-fit: fill;
+  width: 3vw;
+  height: 5vw;
 `;
 
 const DogImage = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 40%;
+  height: 25vh;
+  margin-bottom: 2%;
 `;
 
 const DogInfo = styled.div`
-  width: 200px;
-  margin-left: 20px;
+  width: 50%;
+  margin-left: 10%;
   text-align: left;
+  font-size: 1.5vw;
 `;
 
 const DogInfoDetail = styled.div`
@@ -65,7 +71,7 @@ const DogInfoDetail = styled.div`
   font-weight: 500;
 `;
 
-function AnimalItem({ item, onClick, onView, reload}) {
+function AnimalItem({ item, onClick, onView }) {
   const {
     animalId,
     processState,
@@ -101,9 +107,7 @@ function AnimalItem({ item, onClick, onView, reload}) {
           </div>
         </HeaderLeft>
         <LikeIcon
-          size="2x"
           icon={likeFlag === 1 ? solidHeart : regularHeart}
-       
         ></LikeIcon>
       </Box>
       <Box>

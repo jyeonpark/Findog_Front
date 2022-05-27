@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "homepage": ".",
   "private": true,
-  
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -24,6 +23,7 @@
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.2",
+    "react-calendar": "^3.7.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-native-safe-area-context": "^4.2.4",

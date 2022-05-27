@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
 
 const Container = styled.div`
-  width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100vw;
   margin-top: 30px;
   margin-bottom: 10px;
-  padding-left: 100px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  justify-content: center;
+  text-align: center;
 `;
 
 const ContainerSearch = styled.div`
-  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 
 const BoxSearch = styled.div`
@@ -22,95 +25,121 @@ const BoxSearch = styled.div`
   border-color: rgba(0, 0, 0, 0.2);
   margin-top: auto;
   margin-bottom: auto;
+  display: flex;
+  font-size: 1.5vw;
 `;
 
 const BoxRegion = styled.div`
   margin-top: auto;
   margin-bottom: auto;
+  font-size: 1.5vw;
 `;
 
 const BoxCate = styled.div`
   margin-top: auto;
   margin-bottom: auto;
+  font-size: 1.5vw;
 `;
 
 const BoxFilter = styled.div`
   display: ${(props) => (props.FilterVisibility ? "inline-block" : "none")};
+  font-size: 1.5vw;
 `;
 
 const BoxDate = styled.div`
-  margin-top: 10px;
-  line-height: 20px;
+  margin-top: 3vw;
   display: flex;
+  font-size: 1.5vw;
+  height: 4vw;
 `;
 
 const BoxOption = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 3vw;
+  font-size: 1.5vw;
+  margin-left: 5%;
 `;
 
 const BtnWrite = styled.button`
+  font-size: 1.5vw;
+  font-weight: bolder;
   border: none;
   background-color: orange;
   color: white;
-  width: 150px;
-  height: 70px;
+  width: 10vw;
+  height: 7vh;
   border-radius: 5%;
   visibility: ${(props) => (props.WriteVisibility ? "visible" : "hidden")};
 `;
 
 const BtnImgSearch = styled.button`
-  width: 130px;
-  height: 70px;
+  font-size: 1.5vw;
+  width: 12vw;
+  height: 4vw;
   border: none;
   background-color: orange;
   color: white;
   margin-left: 20px;
   border-radius: 5%;
+  font-size: 1vw;
   display: ${(props) => (props.ImgSearchVisibility ? "inline-block" : "none")};
 `;
 
 const InputSearch = styled.input`
-  width: 450px;
-  height: 50px;
+  width: 25vw;
+  height: 4vw;
   border: none;
   padding-inline: 10px;
+  font-size: 1.5vw;
 `;
 
 const BtnSearch = styled.button`
-  width: 60px;
-  height: 50px;
+  width: 7vw;
+  height: 4vw;
   border: none;
   background-color: rgb(255, 224, 166);
+  font-size: 1.5vw;
 `;
 
 const InputPicker = styled.select`
-  width: 130px;
-  height: 50px;
+  width: 12vw;
+  height: 4vw;
   margin-left: 20px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
 `;
 
 const TextDate = styled.div`
-  font-size: 15px;
+  font-size: 1vw;
+  height: 3vw;
+  line-height: 3vw;
 `;
 
 const InputDate = styled.input`
-  width: 100px;
-  height: 20px;
+  width: 10vw;
+  height: 3vw;
   margin-left: 10px;
   margin-right: 10px;
   border-color: rgba(0, 0, 0, 0.2);
+  font-size: 1vw;
 `;
 
 function OptionTab({
   FilterVisibility,
   WriteVisibility,
-  InterestText,
   ImgSearchVisibility,
+  setOptions,
 }) {
+  const [inputs, setInputs] = useState({
+    category: 0,
+    region: 0,
+    keyword: "",
+    order: 1,
+  });
+
+  const { category, region, keyword, order } = inputs;
+
   const popUp = (event) => {
     if (sessionStorage.getItem("userID") === null) {
       alert("로그인을 하신 후에 게시물을 등록할 수 있습니다.");
@@ -118,63 +147,145 @@ function OptionTab({
     }
   };
 
+  useEffect(() => {
+    console.log(keyword);
+  }, [keyword]);
+
+  useEffect(() => {
+    console.log(category);
+  }, [category]);
+
+  useEffect(() => {
+    console.log(region);
+  }, [region]);
+
   return (
     <Container>
       <ContainerSearch>
-        {/* 검색 */}
-        <BoxSearch>
-          <InputSearch placeholder="내용을 입력해주세요" />
-          <BtnSearch>검색</BtnSearch>
-        </BoxSearch>
-        {/* 지역 카테고리 */}
-        <BoxRegion>
-          <InputPicker>
-            <option>지역</option>
-            <option>서울</option>
-            <option>인천</option>
-            <option>경기</option>
-            <option>대전</option>
-            <option>대구</option>
-            <option>부산</option>
-            <option>강원</option>
-            <option>광주</option>
-            <option>울산</option>
-            <option>경남</option>
-            <option>전남</option>
-            <option>전북</option>
-            <option>제주</option>
-          </InputPicker>
-        </BoxRegion>
-        {/* 게시판 카테고리 */}
-        <BoxCate>
-          <InputPicker>
-            <option>카테고리</option>
-            <option>찾아주세요</option>
-            <option>봤어요</option>
-            <option>도와주세요</option>
-            <option>기타</option>
-          </InputPicker>
-        </BoxCate>
-        {/* 필터 */}
-        <BoxFilter FilterVisibility={FilterVisibility}>
-          <InputPicker>
-            <option>최신순</option>
-            <option>조회순</option>
-            <option>인기순</option>
-          </InputPicker>
-        </BoxFilter>
-        {/* 사진검색 */}
-        <BtnImgSearch ImgSearchVisibility={ImgSearchVisibility}>
-          사진 검색
-        </BtnImgSearch>
+        <div style={{ marginLeft: "5vw", marginRight: "5vw" }}>
+          <div style={{ display: "flex" }}>
+            {/* 검색 */}
+            <BoxSearch>
+              <InputSearch
+                placeholder="내용을 입력해주세요"
+                value={keyword}
+                name="keyword"
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    keyword: e.target.value,
+                  })
+                }
+              ></InputSearch>
+              <BtnSearch>검색</BtnSearch>
+            </BoxSearch>
+            {/* 지역 카테고리 */}
+            <BoxRegion>
+              <InputPicker
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    region: e.target.value,
+                  })
+                }
+              >
+                <option key={0} value={0}>
+                  지역
+                </option>
+                <option key={1} value={1}>
+                  서울
+                </option>
+                <option key={2} value={2}>
+                  인천
+                </option>
+                <option key={3} value={3}>
+                  경기
+                </option>
+                <option key={4} value={4}>
+                  대전
+                </option>
+                <option key={5} value={5}>
+                  대구
+                </option>
+                <option key={6} value={6}>
+                  부산
+                </option>
+                <option key={7} value={7}>
+                  강원
+                </option>
+                <option key={8} value={8}>
+                  광주
+                </option>
+                <option key={9} value={9}>
+                  울산
+                </option>
+                <option key={10} value={10}>
+                  경남
+                </option>
+                <option key={11} value={11}>
+                  전남
+                </option>
+                <option key={12} value={12}>
+                  전북
+                </option>
+                <option key={13} value={13}>
+                  제주
+                </option>
+              </InputPicker>
+            </BoxRegion>
+            {/* 게시판 카테고리 */}
+            <BoxCate>
+              <InputPicker
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    category: e.target.value,
+                  })
+                }
+              >
+                <option key={0} value={0}>
+                  카테고리
+                </option>
+                <option key={1} value={1}>
+                  찾아주세요
+                </option>
+                <option key={2} value={2}>
+                  봤어요
+                </option>
+                <option key={3} value={3}>
+                  도와주세요
+                </option>
+                <option key={4} value={4}>
+                  기타
+                </option>
+              </InputPicker>
+            </BoxCate>
+            {/* 필터 */}
+            <BoxFilter FilterVisibility={FilterVisibility}>
+              <InputPicker>
+                <option key={1} value={1}>
+                  최신순
+                </option>
+                <option key={2} value={2}>
+                  조회순
+                </option>
+                <option>인기순</option>
+              </InputPicker>
+            </BoxFilter>
+            {/* 사진검색 */}
+            <BtnImgSearch ImgSearchVisibility={ImgSearchVisibility}>
+              사진 검색
+            </BtnImgSearch>
+          </div>
+          <BoxDate>
+            <TextDate>기간 :</TextDate>
+            <InputDate placeholder="2021.04.10" />
+            <div>~</div>
+            <InputDate placeholder="2022.04.10" />
+          </BoxDate>
+        </div>
       </ContainerSearch>
-      {/* 기간 */}
-      <BoxDate>
-        <TextDate>기간 :</TextDate>
-        <InputDate placeholder="2021.04.10" />
-        <div>~</div>
-        <InputDate placeholder="2022.04.10" />
-      </BoxDate>
+
       {/* 글쓰기, 관심목록 */}
       <BoxOption>
         <Link to="/board/edit">

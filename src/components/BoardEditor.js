@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
@@ -124,7 +124,7 @@ export const BoardEditor = (props) => {
 
   useEffect(() => {
     if (postId !== 999 && patchState === false) {
-      navigate(`/board/detail/${postId}`, { state : {myBoard: false }});
+      navigate(`/board/detail/${postId}`, { state: { myBoard: false } });
       console.log("==포스트 이동==");
     }
   }, [postId, patchState]);
@@ -149,43 +149,33 @@ export const BoardEditor = (props) => {
             onChange={onChangeCategory}
           >
             <option key={1} value={1}>
-              기타
-            </option>
-            <option key={2} value={2}>
               찾아주세요
             </option>
-            <option key={3} value={3}>
+            <option key={2} value={2}>
               봤어요
             </option>
-            <option key={4} value={4}>
+            <option key={3} value={3}>
               도와주세요
+            </option>
+            <option key={4} value={4}>
+              기타
             </option>
           </InputPicker>
           <InputPicker onChange={onChangeRegion}>
-            <option key={1} value={1}>
-              서울
-            </option>
-            <option key={2} value={2}>
-              경기도
-            </option>
-            <option key={3} value={3}>
-              인천
-            </option>
-            <option key={4} value={4}>
-              강원도
-            </option>
-            <option key={5} value={5}>
-              충청도
-            </option>
-            <option key={6} value={6}>
-              경상도
-            </option>
-            <option key={7} value={7}>
-              전라도
-            </option>
-            <option key={8} value={8}>
-              제주도
-            </option>
+          <option>지역</option>
+                <option  key={1} value={1}>서울</option>
+                <option  key={2} value={2}>인천</option>
+                <option  key={3} value={3}>경기</option>
+                <option  key={4} value={4}>대전</option>
+                <option  key={5} value={5}>대구</option>
+                <option  key={6} value={6}>부산</option>
+                <option  key={7} value={7}>강원</option>
+                <option  key={8} value={8}>광주</option>
+                <option  key={9} value={9}>울산</option>
+                <option  key={10} value={10}>경남</option>
+                <option  key={11} value={11}>전남</option>
+                <option  key={12} value={12}>전북</option>
+                <option  key={13} value={13}>제주</option>
           </InputPicker>
         </div>
         {/* content */}

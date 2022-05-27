@@ -1,5 +1,5 @@
-import React, {  useState, useEffect } from "react";
-import styled  from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark as closeBtn } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
@@ -12,7 +12,6 @@ function AnimalPopup({ item, onClose, likeFlag }) {
   }, []);
 
   const [like, setLike] = useState(likeFlag);
-
 
   // 유기동물 상세정보 조회하기
   const getAnimalInfo = (animalId) => {
@@ -51,7 +50,7 @@ function AnimalPopup({ item, onClose, likeFlag }) {
   });
 
   const Like = (event) => {
-    if (sessionStorage.getItem("userJWT") === null){
+    if (sessionStorage.getItem("userJWT") === null) {
       alert("로그인을 하신 후 이용하실 수 있습니다.");
       event.preventDefault();
     }
@@ -143,14 +142,14 @@ function AnimalPopup({ item, onClose, likeFlag }) {
               <DogInfoTitle>보호센터 :</DogInfoTitle>
               <DogInfoText>
                 {animal.careNm} (Tel : {animal.careTel})
-                <br />주소 : {animal.careAddr}
+                <br />
+                주소 : {animal.careAddr}
               </DogInfoText>
             </DogInfoTextBox>
             <DogInfoTextBox>
               <DogInfoTitle>담당센터 : </DogInfoTitle>
               <DogInfoText>{animal.orgNm}</DogInfoText>
             </DogInfoTextBox>
-
           </TextBox>
         </Body>
       </DialogBlock>
@@ -164,7 +163,7 @@ const DarkBackground = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   align-items: center;
@@ -173,7 +172,7 @@ const DarkBackground = styled.div`
 `;
 
 const DialogBlock = styled.div`
-  width: 700px;
+  width: 80vw;
   height: fit-content;
   padding: 5px;
   background: white;
@@ -187,7 +186,7 @@ const DialogBlock = styled.div`
 `;
 
 const Body = styled.div`
-  width: 85%;
+  width: 80vw;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;

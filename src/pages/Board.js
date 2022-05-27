@@ -9,6 +9,9 @@ import Pagination from "./../components/Pagination";
 const BoardContainer = styled.div``;
 
 const BoardBody = styled.div`
+  width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
   margin-top: 50px;
 `;
 
@@ -74,11 +77,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       <BoardContainer>
         {myBoard === false && myInterestedBoard === false && (
           <Fragment>
-            <OptionTab
-              FilterVisibility
-              WriteVisibility
-              InterestText="관심 목록 보기"
-            ></OptionTab>
+            <OptionTab FilterVisibility WriteVisibility></OptionTab>
           </Fragment>
         )}
         <BoardBody>
