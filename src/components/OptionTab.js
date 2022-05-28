@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { ko } from "date-fns/esm/locale";
 
 const Container = styled.div`
   width: 100vw;
@@ -16,6 +18,8 @@ const Container = styled.div`
 const ContainerSearch = styled.div`
   justify-content: center;
   position: relative;
+  background-color: aliceblue;
+  height: fit-content;
 `;
 
 const BoxSearch = styled.div`
@@ -33,12 +37,14 @@ const BoxRegion = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   font-size: 1.5vw;
+  min-width: fit-content;
 `;
 
 const BoxCate = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   font-size: 1.5vw;
+  min-width: fit-content;
 `;
 
 const BoxFilter = styled.div`
@@ -100,6 +106,7 @@ const BtnSearch = styled.button`
   border: none;
   background-color: rgb(255, 224, 166);
   font-size: 1.5vw;
+  min-width: fit-content;
 `;
 
 const InputPicker = styled.select`
@@ -114,15 +121,14 @@ const TextDate = styled.div`
   font-size: 1vw;
   height: 3vw;
   line-height: 3vw;
+  margin-right: 2vw;
+  min-width: fit-content;
 `;
 
-const InputDate = styled.input`
-  width: 10vw;
-  height: 3vw;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-color: rgba(0, 0, 0, 0.2);
+const SDatePicker = styled(DatePicker)`
+  border-radius: 4px;
   font-size: 1vw;
+  border: 1px solid lightgray;
 `;
 
 function OptionTab({
@@ -132,13 +138,16 @@ function OptionTab({
   setOptions,
 }) {
   const [inputs, setInputs] = useState({
+    start: "",
+    end: "",
     category: 0,
     region: 0,
     keyword: "",
-    order: 1,
+    sort: 1,
   });
 
-  const { category, region, keyword, order } = inputs;
+  const [startDate, setStartDate] = useState(false);
+  const [endDate, setEndDate] = useState(false);
 
   const popUp = (event) => {
     if (sessionStorage.getItem("userID") === null) {
@@ -147,17 +156,10 @@ function OptionTab({
     }
   };
 
-  useEffect(() => {
-    console.log(keyword);
-  }, [keyword]);
 
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
-
-  useEffect(() => {
-    console.log(region);
-  }, [region]);
+  const onSubmit = () => {
+    setOptions(inputs);
+  };
 
   return (
     <Container>
@@ -168,7 +170,7 @@ function OptionTab({
             <BoxSearch>
               <InputSearch
                 placeholder="내용을 입력해주세요"
-                value={keyword}
+                value={inputs.keyword}
                 name="keyword"
                 onChange={(e) =>
                   setInputs({
@@ -177,7 +179,7 @@ function OptionTab({
                   })
                 }
               ></InputSearch>
-              <BtnSearch>검색</BtnSearch>
+              <BtnSearch onClick={onSubmit}>검색</BtnSearch>
             </BoxSearch>
             {/* 지역 카테고리 */}
             <BoxRegion>
@@ -185,7 +187,7 @@ function OptionTab({
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
-                    region: e.target.value,
+                    region: Number(e.target.value),
                   })
                 }
               >
@@ -239,7 +241,7 @@ function OptionTab({
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
-                    category: e.target.value,
+                    category: Number(e.target.value),
                   })
                 }
               >
@@ -262,14 +264,23 @@ function OptionTab({
             </BoxCate>
             {/* 필터 */}
             <BoxFilter FilterVisibility={FilterVisibility}>
-              <InputPicker>
+              <InputPicker
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    sort: Number(e.target.value),
+                  })
+                }
+              >
                 <option key={1} value={1}>
                   최신순
                 </option>
                 <option key={2} value={2}>
                   조회순
                 </option>
-                <option>인기순</option>
+                <option key={3} value={3}>
+                  좋아요순
+                </option>
               </InputPicker>
             </BoxFilter>
             {/* 사진검색 */}
@@ -279,10 +290,46 @@ function OptionTab({
           </div>
           <BoxDate>
             <TextDate>기간 :</TextDate>
-            <InputDate placeholder="2021.04.10" />
-            <div>~</div>
-            <InputDate placeholder="2022.04.10" />
+            <div>
+              <SDatePicker
+                placeholderText="조회 시작 날짜"
+                dateFormat="yyyy/MM/dd"
+                selected={startDate}
+                onChange={(date) => {
+                  setStartDate(date);
+                  var start =
+                  date.getFullYear() +
+                  ("0" + (date.getMonth() + 1)).slice(-2) +
+                  ("0" + date.getDate()).slice(-2);
+                setInputs({ ...inputs, start: start });
+                }}
+                maxDate={new Date()}
+                locale={ko}
+              />
+            </div>
+            <div style={{ marginLeft: "2vw", marginRight: "2vw" }}>~</div>
+            <div>
+              <SDatePicker
+              placeholderText="조회 종료 날짜"
+                dateFormat="yyyy/MM/dd"
+                selected={endDate}
+                onChange={(date) =>{
+                  setEndDate(date);
+                  var end =
+                  date.getFullYear() +
+                  ("0" + (date.getMonth() + 1)).slice(-2) +
+                  ("0" + date.getDate()).slice(-2);
+                setInputs({ ...inputs, end: end });
+                }}
+                maxDate={new Date()}
+                locale={ko}
+              />
+            </div>
           </BoxDate>
+          <div style={{ fontSize: "1vw", color: "grey", textAlign: "left" }}>
+            * yyyy/mm/dd 형식으로 날짜를 입력하거나, 달력으로 날짜를
+            선택해주세요.
+          </div>
         </div>
       </ContainerSearch>
 

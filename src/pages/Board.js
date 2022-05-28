@@ -20,8 +20,36 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  const [inputs, setInputs] = useState({});
+  const params = {};
+
+  const setOptions = (inputs) => {
+    setInputs(inputs);
+    setPage(1);
+  };
 
   useEffect(() => {
+    console.log("inputs 바뀜", inputs);
+    if (inputs.start !== "") {
+      params.s = inputs.start;
+    }
+    if (inputs.end !== "") {
+      params.e = inputs.end;
+    }
+    if (inputs.sort !== 1) {
+      params.sort = inputs.sort;
+    }
+    if (inputs.keyword !== "") {
+      params.keyword = inputs.keyword;
+    }
+    if (inputs.region !== 0) {
+      params.region = inputs.region;
+    }
+    if (inputs.category !== 0) {
+      params.category = inputs.category;
+    }
+    console.log(params);
+
     var url = "";
     if (myBoard === true) {
       url = "/mypage/board/count";
@@ -31,6 +59,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       url = "/boards/count";
     }
     API.get(url, {
+      params,
       headers: {
         "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
       },
@@ -38,46 +67,90 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       if (response.data.isSuccess) {
         console.log(response.data.result);
         const lastPage = Math.ceil(response.data.result / size);
-        setPageCount(lastPage ? lastPage : 1);
-        console.log("페이지개수", lastPage);
+        setPageCount(lastPage ? lastPage : 0);
       } else {
         console.log("페이지 개수 받아오기 실패");
         console.log(response.data);
       }
     });
-  }, []);
+
+    if (page === 1) {
+      console.log("검색필터링 첫번째 페이지");
+      var url = "/boards/search";
+      getBoardsByPage(url);
+    }
+  }, [inputs]);
 
   useEffect(() => {
-    console.log("useeffect 페이지바뀜", page);
-    var url = "";
-    if (myBoard === true) {
-      url = "/mypage/board";
-    } else if (myInterestedBoard === true) {
-      url = "/mypage/like";
+    if (inputs.constructor === Object && Object.keys(inputs).length === 0) {
+      // 필터링 안할 때
+      var url = "";
+      if (myBoard === true) {
+        url = "/mypage/board";
+      } else if (myInterestedBoard === true) {
+        url = "/mypage/like";
+      } else {
+        url = "/boards";
+      }
+      getBoardsByPage(url);
     } else {
-      url = "/boards";
+      // 필터링 할 때
+      // page 1 일때는 pagecount useeffect 에서 호출됨
+      console.log("새로운 검색");
+      var url = "/boards/search";
+      getBoardsByPage(url);
     }
+  }, [page]);
+
+  const getBoardsByPage = (url) => {
+    if (inputs.start !== "") {
+      params.s = inputs.start;
+    }
+    if (inputs.end !== "") {
+      params.e = inputs.end;
+    }
+    if (inputs.sort !== 1) {
+      params.sort = inputs.sort;
+    }
+    if (inputs.keyword !== "") {
+      params.keyword = inputs.keyword;
+    }
+    if (inputs.region !== 0) {
+      params.region = inputs.region;
+    }
+    if (inputs.category !== 0) {
+      params.category = inputs.category;
+    }
+    params.page = page;
+    params.size = size;
+
+    console.log("새로운 페이지 요청 params", params);
+
     API.get(url, {
-      params: { page: page, size: size },
+      params,
       headers: {
         "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
       },
     }).then((response) => {
       if (response.data.isSuccess) {
-        console.log(response.data.result);
+        console.log("새로운 페이지 요청 결과", response.data.result);
         setData(response.data.result);
       } else {
         alert("인터넷 연결에 실패했습니다.");
       }
     });
-  }, [page]);
+  };
 
   return (
     <div>
       <BoardContainer>
         {myBoard === false && myInterestedBoard === false && (
           <Fragment>
-            <OptionTab FilterVisibility WriteVisibility></OptionTab>
+            <OptionTab
+              FilterVisibility
+              WriteVisibility
+              setOptions={setOptions}
+            ></OptionTab>
           </Fragment>
         )}
         <BoardBody>

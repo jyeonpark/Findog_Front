@@ -30,7 +30,7 @@ const HeaderLeft = styled.div`
 const RecruitState = styled.div`
   width: 10vw;
   font-size: 1.5vw;
-  height: 5vw;
+  height: fit-content;
   line-height: 5vw;
   border-radius: 10%;
   background-color: ${(props) =>
