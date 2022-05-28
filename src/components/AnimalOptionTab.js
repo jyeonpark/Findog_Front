@@ -96,13 +96,15 @@ function AnimalOptionTab({ setOptions }) {
     if (b) {
       setOptions(inputs);
     } else {
-      setOptions({
+      const reset = {
         word: "",
         region: "",
         category: "",
         breed: "",
         status: "",
-      });
+      };
+      setInputs(reset);
+      setOptions(reset);
     }
   };
 
@@ -140,6 +142,7 @@ function AnimalOptionTab({ setOptions }) {
             </BoxSearch>
             <BoxFilter>
               <InputPicker
+              value={inputs.category}
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
@@ -179,6 +182,7 @@ function AnimalOptionTab({ setOptions }) {
             )}
             <BoxFilter>
               <InputPicker
+                value={inputs.status}
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
