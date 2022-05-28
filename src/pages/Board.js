@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Fragment } from "react";
-import OptionTab from "../components/OptionTab";
+import OptionTab from "../components/BoardOptionTab";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
 import API from "../utils/api";
@@ -9,10 +9,10 @@ import Pagination from "./../components/Pagination";
 const BoardContainer = styled.div``;
 
 const BoardBody = styled.div`
-  width: 90vw;
-  margin-left: 5vw;
-  margin-right: 5vw;
-  margin-top: 50px;
+  width: ${(props) => (props.myBoard ? "" : "90vw;")};
+  margin-left: ${(props) => (props.myBoard  ? "" : "5vw;")};
+  margin-right: ${(props) => (props.myBoard? "" : "5vw;")};
+  margin-top: ${(props) => (props.myBoard ? "" : "50;")};
 `;
 
 export const Board = ({ myBoard, myInterestedBoard }) => {
@@ -21,7 +21,6 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [inputs, setInputs] = useState({});
-  const params = {};
 
   const setOptions = (inputs) => {
     setInputs(inputs);
@@ -30,25 +29,6 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
 
   useEffect(() => {
     console.log("inputs 바뀜", inputs);
-    if (inputs.start !== "") {
-      params.s = inputs.start;
-    }
-    if (inputs.end !== "") {
-      params.e = inputs.end;
-    }
-    if (inputs.sort !== 1) {
-      params.sort = inputs.sort;
-    }
-    if (inputs.keyword !== "") {
-      params.keyword = inputs.keyword;
-    }
-    if (inputs.region !== 0) {
-      params.region = inputs.region;
-    }
-    if (inputs.category !== 0) {
-      params.category = inputs.category;
-    }
-    console.log(params);
 
     var url = "";
     if (myBoard === true) {
@@ -59,7 +39,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       url = "/boards/count";
     }
     API.get(url, {
-      params,
+      params: inputs,
       headers: {
         "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
       },
@@ -103,26 +83,10 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
   }, [page]);
 
   const getBoardsByPage = (url) => {
-    if (inputs.start !== "") {
-      params.s = inputs.start;
-    }
-    if (inputs.end !== "") {
-      params.e = inputs.end;
-    }
-    if (inputs.sort !== 1) {
-      params.sort = inputs.sort;
-    }
-    if (inputs.keyword !== "") {
-      params.keyword = inputs.keyword;
-    }
-    if (inputs.region !== 0) {
-      params.region = inputs.region;
-    }
-    if (inputs.category !== 0) {
-      params.category = inputs.category;
-    }
+    const params = Object.assign({},inputs);
     params.page = page;
     params.size = size;
+    
 
     console.log("새로운 페이지 요청 params", params);
 
@@ -153,7 +117,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
             ></OptionTab>
           </Fragment>
         )}
-        <BoardBody>
+        <BoardBody myBoard={myBoard} >
           {data.map((item) => {
             return (
               <div>

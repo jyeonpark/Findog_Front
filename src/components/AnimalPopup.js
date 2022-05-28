@@ -164,7 +164,7 @@ const DarkBackground = styled.div`
   left: 0;
   top: 0;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,8 +172,9 @@ const DarkBackground = styled.div`
 `;
 
 const DialogBlock = styled.div`
-  width: 80vw;
+  width: 70vw;
   height: fit-content;
+  max-height: 70vh;
   padding: 5px;
   background: white;
   border-radius: 2px;
@@ -181,12 +182,22 @@ const DialogBlock = styled.div`
   border-color: orange;
   border-width: 10px;
   font-size: 15px;
-  overflow: auto;
-  max-height: 1200px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
+
 `;
 
 const Body = styled.div`
-  width: 80vw;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
@@ -215,7 +226,7 @@ const ImageBox = styled.div`
 `;
 
 const DogImage = styled.img`
-  width: 550px;
+  width: 50vw;
   height: 400px;
 `;
 
@@ -235,6 +246,7 @@ const RecruiteState = styled.div`
 const ImageBottomBox = styled.div`
   height: fit-content;
   display: flex;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   justify-content: space-between;

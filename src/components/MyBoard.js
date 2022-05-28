@@ -4,7 +4,7 @@ import { Board } from './../pages/Board';
 
 function MyBoard() {
   return (
-    <div style={{marginTop:"100px", marginLeft:"100px"}}>
+    <div style={{marginTop:"100px"}}>
       <Board myBoard={true}></Board>
     </div>
   );

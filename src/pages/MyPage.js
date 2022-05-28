@@ -1,10 +1,5 @@
-import React, {useEffect } from "react";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import MyPageTab from "../components/MyPageTab";
 import styled from "styled-components";
 import MyBoard from "./../components/MyBoard";
@@ -14,11 +9,17 @@ import MyInterestedBoard from "./../components/MyInterestedBoard";
 import EditMyInfo from "./../components/EditMyInfo";
 
 const Container = styled.div`
-  width: 1200px;
+  width: 100vw;
   display: flex;
   white-space: nowrap;
   margin-left: auto;
   margin-right: auto;
+`;
+
+const Box = styled.div`
+width: 65vw;
+margin-left: 3vw;
+margin-right: 3vw;
 `;
 
 function MyPage() {
@@ -33,24 +34,26 @@ function MyPage() {
   return (
     <Container>
       <MyPageTab></MyPageTab>
-      <Routes>
-        <Route path="" element={<MyBoard />}></Route>
+      <Box>
+        <Routes>
+          <Route path="" element={<MyBoard />}></Route>
 
-        <Route path="my_comment" element={<MyComment />}></Route>
+          <Route path="my_comment" element={<MyComment />}></Route>
 
-        <Route
-          path="my_interested_animal"
-          element={<MyInterestedAnimal />}
-        ></Route>
+          <Route
+            path="my_interested_animal"
+            element={<MyInterestedAnimal />}
+          ></Route>
 
-        <Route
-          path="my_interested_board"
-          element={<MyInterestedBoard />}
-        ></Route>
-        <Route path="edit_info" element={<EditMyInfo />}></Route>
+          <Route
+            path="my_interested_board"
+            element={<MyInterestedBoard />}
+          ></Route>
+          <Route path="edit_info" element={<EditMyInfo />}></Route>
 
-        <Route path="*" element={<Navigate to="/mypage" replace />} />
-      </Routes>
+          <Route path="*" element={<Navigate to="/mypage" replace />} />
+        </Routes>
+      </Box>
     </Container>
   );
 }

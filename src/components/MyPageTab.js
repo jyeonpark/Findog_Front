@@ -4,17 +4,19 @@ import styled from "styled-components";
 
 const TabBar = styled.div`
   background: transparent;
-  width: max-content;
+  width: fit-content;
+  min-width: fit-content;
   margin-bottom: 1rem;
   white-space: nowrap;
   margin-top: 80px;
-  padding-right: 50px;
+  margin-left: 10px;
+
 `;
 
 const TabUl = styled.ul``;
 
 const TabLi = styled.div`
-  font-size: 1rem;
+  font-size: 1vw;
   font-weight: 300;
   white-space: nowrap;
   color: black;

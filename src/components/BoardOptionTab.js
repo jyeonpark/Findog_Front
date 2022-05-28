@@ -18,7 +18,6 @@ const Container = styled.div`
 const ContainerSearch = styled.div`
   justify-content: center;
   position: relative;
-  background-color: aliceblue;
   height: fit-content;
 `;
 
@@ -59,28 +58,8 @@ const BoxDate = styled.div`
   height: 4vw;
 `;
 
-const BoxOption = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3vw;
-  font-size: 1.5vw;
-  margin-left: 5%;
-`;
-
 const BtnWrite = styled.button`
-  font-size: 1.5vw;
-  font-weight: bolder;
-  border: none;
-  background-color: orange;
-  color: white;
-  width: 10vw;
-  height: 7vh;
-  border-radius: 5%;
-  visibility: ${(props) => (props.WriteVisibility ? "visible" : "hidden")};
-`;
-
-const BtnImgSearch = styled.button`
-  font-size: 1.5vw;
+  font-size: 1.8vw;
   width: 12vw;
   height: 4vw;
   border: none;
@@ -88,8 +67,7 @@ const BtnImgSearch = styled.button`
   color: white;
   margin-left: 20px;
   border-radius: 5%;
-  font-size: 1vw;
-  display: ${(props) => (props.ImgSearchVisibility ? "inline-block" : "none")};
+  font-weight: bold;
 `;
 
 const InputSearch = styled.input`
@@ -131,17 +109,12 @@ const SDatePicker = styled(DatePicker)`
   border: 1px solid lightgray;
 `;
 
-function OptionTab({
-  FilterVisibility,
-  WriteVisibility,
-  ImgSearchVisibility,
-  setOptions,
-}) {
+function BoardOptionTab({ setOptions }) {
   const [inputs, setInputs] = useState({
     start: "",
     end: "",
-    category: 0,
-    region: 0,
+    category: "",
+    region: "",
     keyword: "",
     sort: 1,
   });
@@ -155,7 +128,6 @@ function OptionTab({
       event.preventDefault();
     }
   };
-
 
   const onSubmit = () => {
     setOptions(inputs);
@@ -187,50 +159,50 @@ function OptionTab({
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
-                    region: Number(e.target.value),
+                    region: (e.target.value),
                   })
                 }
               >
-                <option key={0} value={0}>
+                <option key={0} value={""}>
                   지역
                 </option>
-                <option key={1} value={1}>
+                <option key={1} value={Number(1)}>
                   서울
                 </option>
-                <option key={2} value={2}>
+                <option key={2} value={Number(2)}>
                   인천
                 </option>
-                <option key={3} value={3}>
+                <option key={3} value={Number(3)}>
                   경기
                 </option>
-                <option key={4} value={4}>
+                <option key={4} value={Number(4)}>
                   대전
                 </option>
-                <option key={5} value={5}>
+                <option key={5} value={Number(5)}>
                   대구
                 </option>
-                <option key={6} value={6}>
+                <option key={6} value={Number(6)}>
                   부산
                 </option>
-                <option key={7} value={7}>
+                <option key={7} value={Number(7)}>
                   강원
                 </option>
-                <option key={8} value={8}>
+                <option key={8} value={Number(8)}>
                   광주
                 </option>
-                <option key={9} value={9}>
+                <option key={9} value={Number(9)}>
                   울산
                 </option>
-                <option key={10} value={10}>
+                <option key={10} value={Number(10)}>
                   경남
                 </option>
-                <option key={11} value={11}>
+                <option key={11} value={Number(11)}>
                   전남
                 </option>
-                <option key={12} value={12}>
+                <option key={12} value={Number(12)}>
                   전북
                 </option>
-                <option key={13} value={13}>
+                <option key={13} value={Number(13)}>
                   제주
                 </option>
               </InputPicker>
@@ -241,29 +213,29 @@ function OptionTab({
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
-                    category: Number(e.target.value),
+                    category: (e.target.value),
                   })
                 }
               >
-                <option key={0} value={0}>
+                <option key={0} value={""}>
                   카테고리
                 </option>
-                <option key={1} value={1}>
+                <option key={1} value={Number(1)}>
                   찾아주세요
                 </option>
-                <option key={2} value={2}>
+                <option key={2} value={Number(2)}>
                   봤어요
                 </option>
-                <option key={3} value={3}>
+                <option key={3} value={Number(3)}>
                   도와주세요
                 </option>
-                <option key={4} value={4}>
+                <option key={4} value={Number(4)}>
                   기타
                 </option>
               </InputPicker>
             </BoxCate>
             {/* 필터 */}
-            <BoxFilter FilterVisibility={FilterVisibility}>
+            <BoxFilter>
               <InputPicker
                 onChange={(e) =>
                   setInputs({
@@ -283,10 +255,10 @@ function OptionTab({
                 </option>
               </InputPicker>
             </BoxFilter>
-            {/* 사진검색 */}
-            <BtnImgSearch ImgSearchVisibility={ImgSearchVisibility}>
-              사진 검색
-            </BtnImgSearch>
+            {/* 글쓰기, 관심목록 */}
+            <Link to="/board/edit">
+              <BtnWrite onClick={popUp}>글쓰기</BtnWrite>
+            </Link>
           </div>
           <BoxDate>
             <TextDate>기간 :</TextDate>
@@ -298,10 +270,10 @@ function OptionTab({
                 onChange={(date) => {
                   setStartDate(date);
                   var start =
-                  date.getFullYear() +
-                  ("0" + (date.getMonth() + 1)).slice(-2) +
-                  ("0" + date.getDate()).slice(-2);
-                setInputs({ ...inputs, start: start });
+                    date.getFullYear() +
+                    ("0" + (date.getMonth() + 1)).slice(-2) +
+                    ("0" + date.getDate()).slice(-2);
+                  setInputs({ ...inputs, start: start });
                 }}
                 maxDate={new Date()}
                 locale={ko}
@@ -310,16 +282,16 @@ function OptionTab({
             <div style={{ marginLeft: "2vw", marginRight: "2vw" }}>~</div>
             <div>
               <SDatePicker
-              placeholderText="조회 종료 날짜"
+                placeholderText="조회 종료 날짜"
                 dateFormat="yyyy/MM/dd"
                 selected={endDate}
-                onChange={(date) =>{
+                onChange={(date) => {
                   setEndDate(date);
                   var end =
-                  date.getFullYear() +
-                  ("0" + (date.getMonth() + 1)).slice(-2) +
-                  ("0" + date.getDate()).slice(-2);
-                setInputs({ ...inputs, end: end });
+                    date.getFullYear() +
+                    ("0" + (date.getMonth() + 1)).slice(-2) +
+                    ("0" + date.getDate()).slice(-2);
+                  setInputs({ ...inputs, end: end });
                 }}
                 maxDate={new Date()}
                 locale={ko}
@@ -327,22 +299,13 @@ function OptionTab({
             </div>
           </BoxDate>
           <div style={{ fontSize: "1vw", color: "grey", textAlign: "left" }}>
-            * yyyy/mm/dd 형식으로 날짜를 입력하거나, 달력으로 날짜를
-            선택해주세요.
+            * 년/월/일 형식으로 날짜를 입력한 후 엔터를 입력하거나, 달력에서
+            날짜를 선택해주세요.
           </div>
         </div>
       </ContainerSearch>
-
-      {/* 글쓰기, 관심목록 */}
-      <BoxOption>
-        <Link to="/board/edit">
-          <BtnWrite WriteVisibility={WriteVisibility} onClick={popUp}>
-            글쓰기
-          </BtnWrite>
-        </Link>
-      </BoxOption>
     </Container>
   );
 }
 
-export default OptionTab;
+export default BoardOptionTab;

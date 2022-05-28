@@ -3,15 +3,18 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import profileImage from "../images/profileImage.png";
 import { Link } from "react-router-dom";
+import { AbandonedAnimal } from './../pages/AbandonedAnimal';
 
 const Container = styled.div`
-  width: 80vw;
+  width: 80%;
   min-height: 30vh;
   background-color: rgb(251, 223, 169);
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  padding: 2vh;
+  padding-left: 1vw;
+  padding-top: 1vw;
+  padding-right: 1vw;
   margin-bottom: 5vh;
   overflow: hidden;
 `;
@@ -30,7 +33,7 @@ const Box2 = styled.div`
 const Title = styled.div`
   height: 7vh;
   font-weight: bolder;
-  font-size: 1.5vw;
+  font-size: 1.6vw;
   text-align: start;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,9 +56,10 @@ const Content = styled.div`
 `;
 
 const BoxProfile = styled.div`
+ width: max-content;
   display: flex;
-  height: 7vh;
-  line-height: 7vh;
+  height: 6vh;
+  line-height: 6vh;
   font-size: 1vw;
 `;
 
@@ -71,7 +75,7 @@ const BoxProfilePhoto = styled.div`
 const Photo = styled.img`
   object-fit: fill;
   width: 100%;
-  height: 27vh;
+  height: 24vh;
   margin-left: 5vw;
 `;
 
@@ -111,7 +115,7 @@ export const BoardBox = ({ item, myBoard }) => {
               </BoxProfilePhoto>
               <TextInfo style={{ marginRight: "20px", fontWeight: "bold" }}>
                 {item.nickname}
-              </TextInfo>
+              </TextInfo>{(props) => (props.myBoard ? "" : "5vw")}
               <TextInfo>좋아요 {postLike}</TextInfo>
               <TextInfo>댓글 {commentLike}</TextInfo>
               <TextInfo>조회수 {item.hits}</TextInfo>

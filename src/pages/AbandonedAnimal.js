@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import OptionTab from "../components/OptionTab";
 import AnimalItem from "../components/AnimalItem";
 import styled from "styled-components";
 import AnimalPopup from "../components/AnimalPopup";
 import API from "./../utils/api";
 import Pagination from "./../components/Pagination";
+import AnimalOptionTab from "./../components/AnimalOptionTab";
 
 export const AbandonedAnimal = ({ myInterest }) => {
   var size = 6;
@@ -14,13 +14,9 @@ export const AbandonedAnimal = ({ myInterest }) => {
   const [animals, setAnimals] = useState([]);
   const [currentAnimal, setCurrentAnimal] = useState([]);
   const [reload, setReload] = useState(false);
+  const [inputs, setInputs] = useState({});
 
   useEffect(() => {
-    getAnimalList(page, size);
-  }, [page, reload]);
-
-  // 유기동물 리스트 조회하기
-  const getAnimalList = (page, size) => {
     var url = "";
     if (myInterest === true) {
       url = "/animals/mypage";
@@ -29,10 +25,30 @@ export const AbandonedAnimal = ({ myInterest }) => {
       url = "/animals";
     }
 
+    getAnimalList(page, size, url);
+  }, [page, reload]);
+
+  const setOptions = (inputs) => {
+    setInputs(inputs);
+    setPage(1);
+  };
+
+  useEffect(() => {
+    var url = "/animals/search";
+    console.log("useeeffect", inputs);
+    getAnimalList(page, size, url);
+  }, [inputs]);
+
+  // 유기동물 리스트 조회하기
+  const getAnimalList = (page, size, url) => {
+    const params = Object.assign({}, inputs);
+    params.page = page;
+    params.size = size;
+
     if (sessionStorage.getItem("userJWT") === null) {
       console.log("null");
       API.get(url, {
-        params: { page: page, size: size },
+        params,
         headers: {
           "X-ACCESS-TOKEN": "",
         },
@@ -50,7 +66,7 @@ export const AbandonedAnimal = ({ myInterest }) => {
       });
     } else {
       API.get(url, {
-        params: { page: page, size: size },
+        params,
         headers: {
           "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
         },
@@ -86,7 +102,7 @@ export const AbandonedAnimal = ({ myInterest }) => {
   return (
     <div>
       {!myInterest && (
-        <OptionTab ImgSearchVisibility></OptionTab>
+        <AnimalOptionTab setOptions={setOptions}></AnimalOptionTab>
       )}
       <Body>
         <Container myInterest={myInterest}>
@@ -126,7 +142,6 @@ AbandonedAnimal.defaultProps = {
 };
 
 const Container = styled.div`
-
   width: 90vw;
   height: min-content;
   margin-left: 10vw;
@@ -136,10 +151,9 @@ const Container = styled.div`
   grid-column-gap: 2vw;
   grid-template-columns: ${(props) =>
     props.myInterest === true ? "1fr" : "1fr 1fr"};
-  
 `;
 
 const Body = styled.div`
-    height: fit-content;
+  height: fit-content;
   margin-bottom: 30vh;
 `;
