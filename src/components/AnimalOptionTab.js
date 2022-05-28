@@ -11,7 +11,6 @@ const Container = styled.div`
   margin-bottom: 100px;
   margin-left: auto;
   margin-right: auto;
-
 `;
 
 const ContainerSearch = styled.div`
@@ -32,7 +31,6 @@ const BoxSearch = styled.div`
   font-size: 1.5vw;
 `;
 
-
 const BoxFilter = styled.div`
   font-size: 1.5vw;
 `;
@@ -52,7 +50,7 @@ const BtnImgSearch = styled.button`
 `;
 
 const InputSearch = styled.input`
-  width: 18vw;
+  width: 15vw;
   height: 4vw;
   border: none;
   padding-inline: 10px;
@@ -94,16 +92,24 @@ function AnimalOptionTab({ setOptions }) {
     status: "",
   });
 
-  const onSubmit = () => {
-    setOptions(inputs);
+  const onSubmit = (b) => {
+    if (b) {
+      setOptions(inputs);
+    } else {
+      setOptions({
+        word: "",
+        region: "",
+        category: "",
+        breed: "",
+        status: "",
+      });
+    }
   };
-
-
 
   return (
     <Container>
       <ContainerSearch>
-        <div >
+        <div>
           <div style={{ display: "flex" }}>
             {/* 검색 */}
             <BoxSearch>
@@ -158,7 +164,7 @@ function AnimalOptionTab({ setOptions }) {
             {inputs.category !== "" && (
               <BoxSearch style={{ marginLeft: "2vw" }}>
                 <InputOption
-                  style={{ width: "20vw" }}
+                  style={{ width: "15vw" }}
                   placeholder="품종 ex) 믹스견, 시츄"
                   value={inputs.breed}
                   name="breed"
@@ -191,13 +197,24 @@ function AnimalOptionTab({ setOptions }) {
                 </option>
               </InputPicker>
             </BoxFilter>
-            <BtnSearch onClick={onSubmit}>검색</BtnSearch>
-            
+            <BtnSearch
+              onClick={() => {
+                onSubmit(true);
+              }}
+            >
+              검색
+            </BtnSearch>
+            <BtnSearch
+              onClick={() => {
+                onSubmit(false);
+              }}
+            >
+              필터 초기화
+            </BtnSearch>
           </div>
           <BtnImgSearch>사진 검색</BtnImgSearch>
         </div>
       </ContainerSearch>
-
     </Container>
   );
 }
