@@ -107,7 +107,7 @@ function MyComment() {
   };
 
   return (
-    <div style={{ marginTop: "100px", marginLeft: "100px" }}>
+    <div style={{ marginTop: "100px", marginLeft:"20px"}}>
       {comments.map((item) => {
         return (
           <Container>

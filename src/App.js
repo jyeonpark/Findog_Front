@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{width:"100vw",overflow : "hidden"}}>
       <BrowserRouter>
         <Header
           tabMenu={tabMenu}

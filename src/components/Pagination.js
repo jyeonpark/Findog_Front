@@ -99,23 +99,24 @@ const Nav = styled.nav`
   align-items: center;
   gap: 4px;
   margin: 16px;
+  text-align: center;
 `;
 
 const Button = styled.button`
   border: none;
   border-radius: 8px;
-  padding: 12px;
+  padding: 1vw;
   margin: 0;
   background: ${(props) =>
     props.isActive ? "orange" : "rgba(211,211,211,0.5)"};
   color: white;
-  font-size: 1rem;
+  font-size: 2vw;
   color: ${(props) => (props.isActive ? "white" : "black")};
 
   &:hover {
     background: orange;
     cursor: pointer;
-    transform: translateY(-2px);
+    transform: translateY(-5px);
   }
 
   &[disabled] {

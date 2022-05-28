@@ -6,11 +6,10 @@ import headerImage from "../images/header_dog.jpg";
 const Top = styled.div`
   position: relative;
   white-space: nowrap;
-  width: 1200px;
+  width: 100vw;
   min-width: 100%;
   max-width: 1000%;
-  height: 300px;
-  overflow: visible;
+  height: 30vh;
   text-align: center;
   object-fit: fill;
 
@@ -27,7 +26,7 @@ const Top = styled.div`
 
 const HeaderText = styled.div`
   position: absolute;
-  top: 15%;
+  top: 2rem;
   left: 50%;
   color: rgb(243, 156, 18);
   font-weight: 800;
@@ -44,7 +43,7 @@ const Container = styled.div`
 
 const ContainerText = styled.div`
   padding-left: 10px;
-  font-size: 23px;
+  font-size: 1rem;
   font-weight: 800;
   display: inline-block;
   color: rgb(243, 156, 18);

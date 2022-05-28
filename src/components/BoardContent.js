@@ -275,6 +275,7 @@ export const BoardContent = ({ postId, myBoard}) => {
             ...inputs, // 기존의 input 객체를 복사
             userLiked: true,
           });
+          console.log(response.data);
         }
       });
 

@@ -1,4 +1,4 @@
-import React, {  useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import API from "./../utils/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ export const EditMyInfo = () => {
     image_file: "",
     preview_URL: default_profile_img,
   });
- 
+
   const [isProfileChanged, setIsProfileChanged] = useState(false);
   const fileInput = useRef(null);
 
@@ -50,7 +50,6 @@ export const EditMyInfo = () => {
       });
     };
   };
-
 
   /** 닉네임 중복확인 */
   const checkDuplicateNickname = async () => {
@@ -116,8 +115,14 @@ export const EditMyInfo = () => {
     } else if (name === "phoneNum") {
       setInputs({
         ...inputs,
-        [name]: value.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-")
-      })
+        [name]: value
+          .replace(/[^0-9]/g, "")
+          .replace(
+            /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+            "$1-$2-$3"
+          )
+          .replace("--", "-"),
+      });
     }
   };
 
@@ -313,7 +318,7 @@ export const EditMyInfo = () => {
   };
 
   return (
-    <div style={{ marginLeft: "100px" }}>
+    <div style={{marginLeft:"5vw"}}>
       <Title> 내 정보 수정</Title>
       <Divider></Divider>
       <Container>
@@ -359,7 +364,7 @@ export const EditMyInfo = () => {
         <BoxContainer>
           <Box>
             <BoxText>닉네임</BoxText>
-            <div style={{ display: "flex", width: "300px" }}>
+            <div style={{ display: "flex" }}>
               <BoxSearch>
                 <InputSearch
                   name="nickname"
@@ -380,7 +385,7 @@ export const EditMyInfo = () => {
           <div>
             <Box style={{ marginBottom: "20px" }}>
               <BoxText>현재 비밀번호</BoxText>
-              <div style={{ display: "flex", width: "300px" }}>
+              <div style={{ display: "flex" }}>
                 <BoxSearch>
                   <InputSearch
                     name="password"
@@ -400,7 +405,7 @@ export const EditMyInfo = () => {
             </Box>
             <Box>
               <BoxText>새 비밀번호</BoxText>
-              <div style={{ display: "flex", width: "300px" }}>
+              <div style={{ display: "flex" }}>
                 <BoxSearch>
                   <InputSearch
                     name="newPassword"
@@ -417,7 +422,7 @@ export const EditMyInfo = () => {
         <BoxContainer>
           <Box>
             <BoxText>연락처</BoxText>
-            <div style={{ display: "flex", width: "300px" }}>
+            <div style={{ display: "flex" }}>
               <BoxSearch>
                 <InputSearch
                   name="phoneNum"
@@ -452,21 +457,9 @@ const Divider = styled.div`
 `;
 
 const Container = styled.div`
-  width: 800px;
+  width: 100%;
   height: fit-content;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 200px;
-`;
-
-const Header = styled.div`
-  text-align: center;
-  white-space: nowrap;
-  color: orange;
-  font-size: 40px;
-  padding: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
 `;
 
 const BoxContainer = styled.div`
@@ -475,30 +468,28 @@ const BoxContainer = styled.div`
   justify-content: space-between;
 `;
 
-const BoxWrapper = styled.div`
-  height: 70px;
-  margin-top: 10px;
-`;
-
 const Box = styled.div`
-  width: 600px;
+  width: 80%;
   text-align: left;
   display: flex;
   cursor: auto;
   margin-top: auto;
   margin-bottom: auto;
+  border: none;
 `;
 
 const BoxText = styled.div`
-  width: 150px;
+  min-width: 13vw;
+  width: 13vw;
   text-align: left;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 2vw;
   font-weight: bold;
+  font-size: 1vw;
 `;
 
 const Profile = styled.div`
-  width: 600px;
+  width: fit-content;
   text-align: left;
   display: flex;
   flex-direction: row;
@@ -506,33 +497,36 @@ const Profile = styled.div`
 `;
 
 const ProfileText = styled.div`
-  width: 150px;
+  min-width: 13vw;
+  width: 13vw;
   text-align: left;
-  vertical-align: top;
-  margin-right: 10px;
+  display: inline-block;
+  margin-right: 2vw;
   font-weight: bold;
+  font-size: 1vw;
+
 `;
 
 const SelectProfileBox = styled.div`
-  width: 100px;
+  width: fit-content;
   text-align: left;
   vertical-align: top;
   margin-top: 5px;
-  margin-right: 15px;
-  padding: 5px;
+  padding: 1vw;
+  font-size: 1vw;
 
   cursor: pointer;
 `;
 
 const ProfileImageWrap = styled.div`
-  width: 200px;
+  width: 15vw;
   display: inline-block;
   text-align: left;
 `;
 
 const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 15vw;
+  height: 15vw;
   display: inline-block;
   justify-content: center;
   padding: 3px;
@@ -540,45 +534,51 @@ const ProfileImage = styled.img`
 `;
 
 const EditBtn = styled.button`
-  width: 150px;
+  width: 10vw;
+  max-width: fit-content;
   border: none;
   background-color: orange;
-  height: 60px;
+  height: 5vh;
   border-radius: 5px;
   position: relative;
   color: white;
   font-weight: bolder;
   margin-top: auto;
   margin-bottom: auto;
+  font-size: 1vw;
 `;
 
 const BoxSearch = styled.div`
   width: fit-content;
   height: fit-content;
+
+`;
+
+const InputSearch = styled.input`
+  width: 13vw;
+  height: 5vh;
   border: solid;
   border-width: 1px;
   border-color: rgba(0, 0, 0, 0.2);
   display: inline-block;
   border-radius: 3px;
-`;
-
-const InputSearch = styled.input`
-  width: 200px;
-  height: 40px;
-  border: none;
-  padding-inline: 10px;
-  margin-right: 3px;
+  padding-inline: 1vw;
+  font-size: 1vw;
   :focus {
     outline: 2px solid gray;
   }
 `;
 
 const BtnSearch = styled.button`
-  width: 100px;
-  height: 42px;
-  line-height: 42px;
-  border: none;
+  min-width: fit-content;
+  height: 5vh;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  border-radius: 3px;
   background-color: rgb(255, 224, 166);
+  font-size: 1vw;
 `;
 
 const CheckIcon = styled(FontAwesomeIcon)`
