@@ -15,10 +15,13 @@ export const AbandonedAnimal = ({ myInterest }) => {
   const [currentAnimal, setCurrentAnimal] = useState([]);
   const [reload, setReload] = useState(false);
   const [inputs, setInputs] = useState({});
+  const [isFiltered, setIsFiltered] = useState(false);
 
   useEffect(() => {
     var url = "";
-    if (myInterest === true) {
+    if (isFiltered) {
+      url = "/animals/search";
+    } else if (myInterest === true) {
       url = "/animals/mypage";
       size = 4;
     } else {
@@ -34,7 +37,19 @@ export const AbandonedAnimal = ({ myInterest }) => {
   };
 
   useEffect(() => {
-    var url = "/animals/search";
+    // filter 안된 것
+    var url = "";
+    if (!Object.values(inputs).some(element => element !== "")) {
+      url = "/animals";
+      console.log("필터안됨");
+    }
+    // filter 된것 
+    else {
+      url = "/animals/search";
+      console.log("필터됨");
+
+    }
+    setIsFiltered(Object.values(inputs).some(element => element !== ""));
     console.log("useeeffect", inputs);
     getAnimalList(page, size, url);
   }, [inputs]);
