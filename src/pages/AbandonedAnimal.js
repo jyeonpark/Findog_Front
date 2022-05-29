@@ -46,7 +46,11 @@ export const AbandonedAnimal = ({ myInterest }) => {
     // filter 안된 것
     var url = "";
     if (!Object.values(inputs).some((element) => element !== "")) {
-      url = "/animals";
+      if (myInterest === true) {
+        url = "/animals/mypage";
+      } else {
+        url = "/animals";
+      }
       console.log("필터안됨");
     }
     // filter 된것

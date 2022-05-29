@@ -10,8 +10,8 @@ const BoardContainer = styled.div``;
 
 const BoardBody = styled.div`
   width: ${(props) => (props.myBoard ? "" : "90vw;")};
-  margin-left: ${(props) => (props.myBoard  ? "" : "5vw;")};
-  margin-right: ${(props) => (props.myBoard? "" : "5vw;")};
+  margin-left: ${(props) => (props.myBoard ? "" : "5vw;")};
+  margin-right: ${(props) => (props.myBoard ? "" : "5vw;")};
   margin-top: ${(props) => (props.myBoard ? "" : "50;")};
 `;
 
@@ -55,9 +55,13 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
     });
 
     if (page === 1) {
-      console.log("검색필터링 첫번째 페이지");
-      var url = "/boards/search";
-      getBoardsByPage(url);
+      if (
+        !(inputs.constructor === Object && Object.keys(inputs).length === 0)
+      ) {
+        console.log("검색필터링 첫번째 페이지");
+        var url = "/boards/search";
+        getBoardsByPage(url);
+      }
     }
   }, [inputs]);
 
@@ -83,10 +87,9 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
   }, [page]);
 
   const getBoardsByPage = (url) => {
-    const params = Object.assign({},inputs);
+    const params = Object.assign({}, inputs);
     params.page = page;
     params.size = size;
-    
 
     console.log("새로운 페이지 요청 params", params);
 
@@ -117,7 +120,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
             ></OptionTab>
           </Fragment>
         )}
-        <BoardBody myBoard={myBoard} >
+        <BoardBody myBoard={myBoard}>
           {data.map((item) => {
             return (
               <div>
