@@ -4,7 +4,7 @@ import AbandonedAnimal from "../pages/AbandonedAnimal";
 
 export const MyInterestedAnimal = () => {
   return (
-    <div style={{marginTop:"100px", marginLeft:"100px"}}>
+    <div style={{marginTop:"100px"}}>
       <AbandonedAnimal myInterest={true}></AbandonedAnimal>
     </div>
   );

@@ -1,6 +1,6 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Fragment } from "react";
-import OptionTab from "../components/OptionTab";
+import OptionTab from "../components/BoardOptionTab";
 import { BoardBox } from "../components/BoardBox";
 import styled from "styled-components";
 import API from "../utils/api";
@@ -9,7 +9,10 @@ import Pagination from "./../components/Pagination";
 const BoardContainer = styled.div``;
 
 const BoardBody = styled.div`
-  margin-top: 50px;
+  width: ${(props) => (props.myBoard ? "" : "90vw;")};
+  margin-left: ${(props) => (props.myBoard ? "" : "5vw;")};
+  margin-right: ${(props) => (props.myBoard ? "" : "5vw;")};
+  margin-top: ${(props) => (props.myBoard ? "" : "50;")};
 `;
 
 export const Board = ({ myBoard, myInterestedBoard }) => {
@@ -17,8 +20,16 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  const [inputs, setInputs] = useState({});
+
+  const setOptions = (inputs) => {
+    setInputs(inputs);
+    setPage(1);
+  };
 
   useEffect(() => {
+    console.log("inputs 바뀜", inputs);
+
     var url = "";
     if (myBoard === true) {
       url = "/mypage/board/count";
@@ -28,6 +39,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       url = "/boards/count";
     }
     API.get(url, {
+      params: inputs,
       headers: {
         "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
       },
@@ -35,53 +47,80 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       if (response.data.isSuccess) {
         console.log(response.data.result);
         const lastPage = Math.ceil(response.data.result / size);
-        setPageCount(lastPage ? lastPage : 1);
-        console.log("페이지개수", lastPage);
+        setPageCount(lastPage ? lastPage : 0);
       } else {
         console.log("페이지 개수 받아오기 실패");
         console.log(response.data);
       }
     });
-  }, []);
+
+    if (page === 1) {
+      if (
+        !(inputs.constructor === Object && Object.keys(inputs).length === 0)
+      ) {
+        console.log("검색필터링 첫번째 페이지");
+        var url = "/boards/search";
+        getBoardsByPage(url);
+      }
+    }
+  }, [inputs]);
 
   useEffect(() => {
-    console.log("useeffect 페이지바뀜", page);
-    var url = "";
-    if (myBoard === true) {
-      url = "/mypage/board";
-    } else if (myInterestedBoard === true) {
-      url = "/mypage/like";
+    if (inputs.constructor === Object && Object.keys(inputs).length === 0) {
+      // 필터링 안할 때
+      var url = "";
+      if (myBoard === true) {
+        url = "/mypage/board";
+      } else if (myInterestedBoard === true) {
+        url = "/mypage/like";
+      } else {
+        url = "/boards";
+      }
+      getBoardsByPage(url);
     } else {
-      url = "/boards";
+      // 필터링 할 때
+      // page 1 일때는 pagecount useeffect 에서 호출됨
+      console.log("새로운 검색");
+      var url = "/boards/search";
+      getBoardsByPage(url);
     }
+  }, [page]);
+
+  const getBoardsByPage = (url) => {
+    const params = Object.assign({}, inputs);
+    params.page = page;
+    params.size = size;
+
+    console.log("새로운 페이지 요청 params", params);
+
     API.get(url, {
-      params: { page: page, size: size },
+      params,
       headers: {
         "X-ACCESS-TOKEN": sessionStorage.getItem("userJWT"),
       },
     }).then((response) => {
       if (response.data.isSuccess) {
-        console.log(response.data.result);
+        console.log("새로운 페이지 요청 결과", response.data.result);
         setData(response.data.result);
       } else {
         alert("인터넷 연결에 실패했습니다.");
       }
     });
-  }, [page]);
+  };
 
   return (
     <div>
       <BoardContainer>
-        {(myBoard === false && myInterestedBoard === false)&& (
+        {myBoard === false && myInterestedBoard === false && (
           <Fragment>
             <OptionTab
               FilterVisibility
               WriteVisibility
-              InterestText="관심 목록 보기"
+              setOptions={setOptions}
             ></OptionTab>
           </Fragment>
         )}
-        <BoardBody>
+        <BoardBody myBoard={myBoard}>
           {data.map((item) => {
             return (
               <div>
@@ -95,10 +134,11 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
           })}
         </BoardBody>
       </BoardContainer>
-
-      <footer>
-        <Pagination total={pageCount} page={page} setPage={setPage} />
-      </footer>
+      {data.length !== 0 && (
+        <footer>
+          <Pagination total={pageCount} page={page} setPage={setPage} />
+        </footer>
+      )}
     </div>
   );
 };

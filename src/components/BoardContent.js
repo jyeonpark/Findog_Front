@@ -275,6 +275,7 @@ export const BoardContent = ({ postId, myBoard}) => {
             ...inputs, // 기존의 input 객체를 복사
             userLiked: true,
           });
+          console.log(response.data);
         }
       });
 
@@ -320,9 +321,9 @@ export const BoardContent = ({ postId, myBoard}) => {
         </div>
         {inputs.userId === Number(sessionStorage.getItem("userID")) && (
           <ExtraButton>
-            <Button onClick={onClickUpdate}>수정</Button>
+            <Button onClick={()=>onClickUpdate()}>수정</Button>
             <Link to="/board">
-              <Button onClick={onClickDelete}>삭제</Button>
+              <Button onClick={()=>onClickDelete()}>삭제</Button>
             </Link>
           </ExtraButton>
         )}

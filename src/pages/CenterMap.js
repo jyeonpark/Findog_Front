@@ -6,7 +6,10 @@ import doghouse from "../images/doghouse.png";
 const Container = styled.div`
   margin-top: 100px;
   display: flex;
-  margin-left: 15%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100vw;
+  justify-content: center;
   margin-bottom: 10px;
 `;
 const HomeImg = styled.img`
@@ -19,6 +22,7 @@ const Intro = styled.div`
   font-size: x-large;
   font-weight: bolder;
   text-align: left;
+  padding-top: 1vh;
   color: orange;
 `;
 
@@ -26,7 +30,7 @@ const MapWrapper = styled.div`
   /* position: sticky; */
   margin-bottom: 100px;
   position: relative;
-  width: 70%;
+  width: 90vw;
   height: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -37,7 +41,7 @@ const ListWrapper = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 350px;
+  width: 35vw;
   margin: 10px 0 30px 10px;
   padding: 5px;
   overflow-y: auto;
@@ -66,6 +70,7 @@ const Pagination = styled.div`
     font-size: 20px;
     text-decoration: none;
     margin: 0 10px;
+    cursor: pointer;
 
     &.on {
       color: orange;
@@ -76,6 +81,7 @@ const Pagination = styled.div`
 
 const PlacesList = styled.ul`
   margin-top: 20px;
+  
 
   li {
     list-style: none;
@@ -83,10 +89,10 @@ const PlacesList = styled.ul`
     &.item {
       position: relative;
       border-bottom: 1px solid #888;
-      overflow: hidden;
+ 
       cursor: pointer;
       min-height: 65px;
-
+ 
       span {
         display: block;
         margin-top: 4px;
@@ -147,7 +153,6 @@ export default function CenterMap() {
 
       for (i = 1; i <= pagination.last; i++) {
         var el = document.createElement("a");
-        el.href = "#";
         el.innerHTML = i;
 
         if (i === pagination.current) {
@@ -227,20 +232,20 @@ export default function CenterMap() {
         itemStr =
           '<span class="markerbg marker_' +
           (index + 1) +
-          '" style="float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;  background-position: 0 -' +
+          '" style="float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 0px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;  background-position: 0 -' +
           imgHeight +
           'px;"></span>' +
-          '<div class="info" style="padding:10px 0 10px 55px;">' +
-          "   <h5>" +
+          '<div class="info" style="padding:10px 0px 10px 55px; font-size:1vw">' +
+          "   <h6>" +
           place.place_name +
-          "</h5>";
+          "</h6>";
 
       if (place.road_address_name) {
         itemStr +=
           "    <span>" +
           place.road_address_name +
           "</span>" +
-          '   <span class="jibun gray" style="color:#8a8a8a; padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;">' +
+          '   <span class="jibun gray" style="color:#8a8a8a;padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;">' +
           place.address_name +
           "</span>";
       } else {
@@ -321,36 +326,6 @@ export default function CenterMap() {
       <MapWrapper>
         <Map id="myMap"></Map>
         <ListWrapper id="menu_wrap">
-          {/* <div class="option">
-          <div>
-            <form style={{ textAlign: "center" }} onsubmit={onSubmit}>
-              <input
-                type="text"
-                value={searchPlace}
-                id="keyword"
-                size="20"
-                style={{
-                  width: "200px",
-                  height: "30px",
-                  border: "solid",
-                  borderColor: "rgba(0,0,0,0.2)",
-                  borderWidth: "1px",
-                }}
-                onChange={onInputChange}
-              ></input>
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: "rgb(255, 224, 166)",
-                  borderColor: "rgba(0, 0, 0,0.1)",
-                  height: "30px",
-                }}
-              >
-                검색
-              </button>
-            </form>
-          </div>
-        </div> */}
           <PlacesList id="placesList"></PlacesList>
           <Pagination id="pagination"></Pagination>
         </ListWrapper>

@@ -4,29 +4,33 @@ import styled from "styled-components";
 
 const TabBar = styled.div`
   background: transparent;
-  width: 100%;
+  width: 50vw;
   margin-bottom: 1rem;
+  margin-left: 10vw;
+  margin-right: 10vw;
   text-align: center;
+  justify-content: center;
   white-space: nowrap;
-  margin-top: 80px;
+  margin-top: 10vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
 const TabUl = styled.ul``;
 
 const TabLi = styled.div`
-  font-size: 1rem;
+  font-size: 2vw;
   font-weight: 300;
   display: inline-block;
   color: black;
-  padding: 1rem;
-  margin-left: 50px;
-  margin-right: 50px;
+  padding: 1vw;
+  margin: 10%;
+  width: 10vw;
   border-top: 5px;
   border-top-style: solid;
   border-top-color: rgba(243, 156, 18, 0.22);
 
   &.active {
-    width: fit-content;
     height: 100%;
     border-top: 5px;
     border-top-style: solid;
