@@ -76,7 +76,7 @@ const ContentBox = styled.div`
   margin-bottom: 50px;
   min-height: 30vh;
   text-align: start;
-  font-size: 1.5vw;
+  font-size: 2vw;
 `;
 
 const Photo = styled.img`

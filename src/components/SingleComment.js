@@ -34,7 +34,7 @@ const ProfileName = styled.div`
 `;
 
 const ContentBox = styled.div`
-  font-size: 20px;
+  font-size: 2vw;
   width: ${(props) => (props.reply ? "850px" : "900px")};
   margin-top: 5px;
   color: ${(props) => (props.deleted ? "lightgrey" : "")};
@@ -53,6 +53,7 @@ const Box = styled.div`
 const BoxContent = styled.div`
   margin-right: 20px;
   color: grey;
+  font-size: 1.5vw;
 `;
 
 const Divider = styled.div`
