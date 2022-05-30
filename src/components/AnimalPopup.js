@@ -15,14 +15,16 @@ function AnimalPopup({ item, onClose, likeFlag }) {
 
   // 유기동물 상세정보 조회하기
   const getAnimalInfo = (animalId) => {
-    API.get("/animals/" + animalId).then((response) => {
-      if (response.data.isSuccess) {
-        console.log(response.data);
-        setAnimal(response.data.result);
-      } else {
-        console.log(response);
+    API.get( "/animals/" + animalId).then(
+      (response) => {
+        if (response.data.isSuccess) {
+          console.log(response.data);
+          setAnimal(response.data.result);
+        } else {
+          console.log(response);
+        }
       }
-    });
+    );
   };
 
   const [animal, setAnimal] = useState({

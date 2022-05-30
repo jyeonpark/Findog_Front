@@ -334,6 +334,9 @@ export const BoardContent = ({ postId, myBoard }) => {
   );
 };
 
+
+
+
 BoardContent.defaultProps = {
-  postId: 1,
+    postId: 1,
 };
