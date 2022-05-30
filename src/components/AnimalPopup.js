@@ -136,7 +136,14 @@ function AnimalPopup({ item, onClose, likeFlag }) {
             </DogInfoTextBox>
             <DogInfoTextBox>
               <DogInfoTitle>특이사항 :</DogInfoTitle>
-              <DogInfoText>{animal.specialMark}</DogInfoText>
+              <DogInfoText
+                style={{
+                  color: "orange",
+                  fontWeight: "bolder",
+                }}
+              >
+                {animal.specialMark}
+              </DogInfoText>
             </DogInfoTextBox>
             <DogInfoTextBox>
               <DogInfoTitle>보호센터 :</DogInfoTitle>
@@ -193,7 +200,6 @@ const DialogBlock = styled.div`
     background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
   }
-
 `;
 
 const Body = styled.div`
@@ -209,13 +215,12 @@ const TextBox = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  height: 50px;
-  margin-bottom: 30px;
+  height: 10vw;
 `;
 
 const CloseBtn = styled(FontAwesomeIcon)`
-  width: 50px;
-  height: 50px;
+  width: 5vw;
+  height: 5vw;
   float: right;
   cursor: pointer;
 `;
@@ -227,13 +232,15 @@ const ImageBox = styled.div`
 
 const DogImage = styled.img`
   width: 50vw;
-  height: 400px;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  height: 50vw;
 `;
 
 const RecruiteState = styled.div`
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 3vw;
+  left: 8vw;
   width: 75px;
   height: 30px;
   line-height: 30px;
@@ -257,20 +264,20 @@ const DogKind = styled.div`
   padding: 3px;
   font-weight: bolder;
   margin-bottom: 5px;
-  font-size: xx-large;
+  font-size: 3vw;
   background-color: rgba(255, 166, 0, 0.3);
 `;
 
 const DogInfoTitle = styled.div`
-  width: 100px;
+  width: 30%;
   text-align: left;
-  font-size: large;
+  font-size: 3vw;
 `;
 
 const DogInfoText = styled.div`
-  width: 500px;
+  width: 60%;
   text-align: left;
-  font-size: large;
+  font-size: 3vw;
 `;
 
 const DogInfoTextBox = styled.div`

@@ -27,7 +27,7 @@ const Top = styled.div`
 const HeaderText = styled.div`
   position: absolute;
   top: 2rem;
-  left: 50%;
+  left: 43%;
   color: rgb(243, 156, 18);
   font-weight: 800;
   font-size: 30px;
@@ -37,7 +37,7 @@ const Container = styled.div`
   display: flex;
   position: absolute;
   top: 10%;
-  left: 90%;
+  left: 80%;
   font-weight: 500;
 `;
 
