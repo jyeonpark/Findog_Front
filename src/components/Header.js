@@ -7,8 +7,6 @@ const Top = styled.div`
   position: relative;
   white-space: nowrap;
   width: 100vw;
-  min-width: 100%;
-  max-width: 1000%;
   height: 30vh;
   text-align: center;
   object-fit: fill;

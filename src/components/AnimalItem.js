@@ -6,7 +6,7 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   width: 37vw;
-  min-height: 30vh;
+  min-height: 30vw;
   margin-bottom: 1vh;
   background-color: ${(props) =>
     props.processState === "보호중"

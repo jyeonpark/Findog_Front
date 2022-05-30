@@ -273,13 +273,13 @@ const DogKind = styled.div`
 const DogInfoTitle = styled.div`
   width: 30%;
   text-align: left;
-  font-size: 3vw;
+  font-size: 2vw;
 `;
 
 const DogInfoText = styled.div`
   width: 60%;
   text-align: left;
-  font-size: 3vw;
+  font-size: 2vw;
 `;
 
 const DogInfoTextBox = styled.div`
