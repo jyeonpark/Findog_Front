@@ -107,7 +107,7 @@ function MyComment() {
   };
 
   return (
-    <div style={{ marginTop: "100px", marginLeft:"20px"}}>
+    <div style={{ marginTop: "100px", marginLeft: "20px" }}>
       {comments.map((item) => {
         return (
           <Container>
@@ -122,7 +122,9 @@ function MyComment() {
               <Option>{item.date}</Option>
               <div style={{ display: "flex" }}>
                 <Option>{item.postTitle}</Option>
-                <Option style={{ color: "orange" }}>[8]</Option>
+                <Option style={{ color: "orange" }}>
+                  [{item.postCommentCount}]
+                </Option>
               </div>
             </Box>
           </Container>

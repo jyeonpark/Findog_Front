@@ -3,6 +3,7 @@ import API from "../utils/api";
 import styled from "styled-components";
 import { CommentWrite } from "./CommentWrite";
 import { CommentUpdate } from "./CommentUpdate";
+import profileImage from "../images/profileImage.png";
 
 const Container = styled.div`
   width: 90vw;
@@ -113,7 +114,11 @@ export const SingleComment = ({ comment, postId, reply }) => {
         <Container reply={reply}>
           <ProfileImage>
             <ProfileImageShow
-              src={comment.profileImgUrl}
+              src={
+                comment.profileImgUrl === null
+                  ? profileImage
+                  : comment.profileImgUrl
+              }
               referrerpolicy="no-referrer"
             />
           </ProfileImage>
