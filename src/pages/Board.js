@@ -9,10 +9,14 @@ import Pagination from "./../components/Pagination";
 const BoardContainer = styled.div``;
 
 const BoardBody = styled.div`
-  width: ${(props) => (props.myBoard ? "" : "90vw;")};
-  margin-left: ${(props) => (props.myBoard ? "" : "5vw;")};
-  margin-right: ${(props) => (props.myBoard ? "" : "5vw;")};
-  margin-top: ${(props) => (props.myBoard ? "" : "50;")};
+  width: ${(props) =>
+    props.myBoard || props.myInterestedBoard ? "" : "90vw;"};
+  margin-left: ${(props) =>
+    props.myBoard || props.myInterestedBoard ? "" : "5vw;"};
+  margin-right: ${(props) =>
+    props.myBoard || props.myInterestedBoard ? "" : "5vw;"};
+  margin-top: ${(props) =>
+    props.myBoard || props.myInterestedBoard ? "" : "50;"};
 `;
 
 export const Board = ({ myBoard, myInterestedBoard }) => {
@@ -120,7 +124,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
             ></OptionTab>
           </Fragment>
         )}
-        <BoardBody myBoard={myBoard}>
+        <BoardBody myBoard={myBoard} myInterestedBoard={myInterestedBoard}>
           {data.map((item) => {
             return (
               <div>

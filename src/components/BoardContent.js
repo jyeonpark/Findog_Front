@@ -86,7 +86,7 @@ const Photo = styled.img`
 `;
 
 const ExtraBox = styled.div`
-  width: 100vw;
+  width: 90vw;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
@@ -96,7 +96,6 @@ const ExtraBox = styled.div`
 
 const ExtraInfo = styled.div`
   border: 2px solid rgba(64, 64, 64, 0.2);
-  margin-left: 5vw;
   font-size: 1.5vw;
   font-weight: bold;
   line-height: 30px;
@@ -334,9 +333,6 @@ export const BoardContent = ({ postId, myBoard }) => {
   );
 };
 
-
-
-
 BoardContent.defaultProps = {
-    postId: 1,
+  postId: 1,
 };
