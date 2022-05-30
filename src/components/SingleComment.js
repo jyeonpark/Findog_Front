@@ -37,6 +37,7 @@ const ContentBox = styled.div`
   font-size: 20px;
   width: ${(props) => (props.reply ? "850px" : "900px")};
   margin-top: 5px;
+  color: ${(props) => (props.deleted ? "lightgrey" : "")};
 `;
 
 const ExtraInfo = styled.div`
@@ -65,6 +66,8 @@ const Divider = styled.div`
 export const SingleComment = ({ comment, postId, reply }) => {
   const [isEditChecked, setIsEditChecked] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
+  const content = comment.commentStatus === 'active' ? comment.content : "삭제된 댓글입니다.";
+  const deleted = comment.commentStatus === 'active' ? false : true;
 
   const onClickEdit = () => {
     setIsEditChecked(!isEditChecked);
@@ -124,7 +127,9 @@ export const SingleComment = ({ comment, postId, reply }) => {
           </ProfileImage>
           <div>
             <ProfileName>{comment.nickname}</ProfileName>
-            <ContentBox reply={reply}>{comment.content}</ContentBox>
+
+            <ContentBox reply={reply} deleted={deleted}>{content}</ContentBox>
+
             <ExtraInfo>
               <Box>
                 <BoxContent>{comment.commentUpdateAt}</BoxContent>
@@ -137,7 +142,7 @@ export const SingleComment = ({ comment, postId, reply }) => {
                   </BoxContent>
                 )}
               </Box>
-              {Number(sessionStorage.getItem("userID")) === comment.userId && (
+              {Number(sessionStorage.getItem("userID")) === comment.userId && !deleted && (
                 <Box>
                   <BoxContent
                     style={{ cursor: "pointer" }}
