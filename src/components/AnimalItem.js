@@ -5,8 +5,8 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 37vw;
-  min-height: 30vw;
+  width: 35vw;
+  height: 30vw;
   margin-bottom: 1vh;
   background-color: ${(props) =>
     props.processState === "보호중"
@@ -16,7 +16,6 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 100%;
-  height: fit-content;
   display: flex;
   padding: 12px;
   justify-content: space-between;
@@ -55,20 +54,20 @@ const LikeIcon = styled(FontAwesomeIcon)`
 
 const DogImage = styled.img`
   width: 40%;
-  height: 25vh;
+  height: 100%;
   margin-bottom: 2%;
 `;
 
 const DogInfo = styled.div`
   width: 50%;
+  height: 100%;
   margin-left: 10%;
   text-align: left;
   font-size: 1.5vw;
 `;
 
 const DogInfoDetail = styled.div`
-  overflow: hidden;
-  font-weight: 500;
+  font-size: 1.5vw;
 `;
 
 function AnimalItem({ item, onClick, onView }) {
@@ -96,7 +95,7 @@ function AnimalItem({ item, onClick, onView }) {
         onView(item.animalId);
       }}
     >
-      <Box>
+      <Box style={{ height: "20%" }}>
         <HeaderLeft>
           <RecruitState processState={processState}>
             {processState}
@@ -106,11 +105,9 @@ function AnimalItem({ item, onClick, onView }) {
             <AnimalGender>{neuter}</AnimalGender>
           </div>
         </HeaderLeft>
-        <LikeIcon
-          icon={likeFlag === 1 ? solidHeart : regularHeart}
-        ></LikeIcon>
+        <LikeIcon icon={likeFlag === 1 ? solidHeart : regularHeart}></LikeIcon>
       </Box>
-      <Box>
+      <Box style={{ height: "80%", overflowY: "scroll" }}>
         <DogImage src={popfile}></DogImage>
         <DogInfo>
           <DogInfoDetail>• 품종 : {kindCd}</DogInfoDetail>

@@ -8,7 +8,7 @@ import { ko } from "date-fns/esm/locale";
 const Container = styled.div`
   width: 80vw;
   margin-top: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 10vw;
   margin-left: auto;
   margin-right: auto;
 `;
