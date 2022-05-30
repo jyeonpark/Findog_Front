@@ -244,7 +244,7 @@ const RecruiteState = styled.div`
   top: 3vw;
   left: 8vw;
   width: 75px;
-  min-height: fit-content;
+  min-width: fit-content;
   height: 30px;
   line-height: 30px;
   border-radius: 10%;
