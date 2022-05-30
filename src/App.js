@@ -18,14 +18,14 @@ function App() {
 
   // 로그인 상태 관리
   const [isLogin, setIsLogin] = useState(
-    sessionStorage.getItem("userJWT") != null ? true : false
+    sessionStorage.getItem("userJWT") !== null ? true : false
   );
 
   useEffect(() => {
     if (isLogin === false) {
-      console.log("false");
+      console.log("로그인안됨");
     } else {
-      console.log("true");
+      console.log("로그인됨");
     }
   });
 

@@ -194,16 +194,16 @@ export const BoardUpdate = () => {
             defaultValue={inputs.category}
           >
             <option key={1} value={1}>
-              기타
-            </option>
-            <option key={2} value={2}>
               찾아주세요
             </option>
-            <option key={3} value={3}>
+            <option key={2} value={2}>
               봤어요
             </option>
-            <option key={4} value={4}>
+            <option key={3} value={3}>
               도와주세요
+            </option>
+            <option key={4} value={4}>
+              기타
             </option>
           </InputPicker>
           <InputPicker onChange={onChangeRegion} defaultValue={inputs.region}>
@@ -211,25 +211,40 @@ export const BoardUpdate = () => {
               서울
             </option>
             <option key={2} value={2}>
-              경기도
-            </option>
-            <option key={3} value={3}>
               인천
             </option>
+            <option key={3} value={3}>
+              경기
+            </option>
             <option key={4} value={4}>
-              강원도
+              대전
             </option>
             <option key={5} value={5}>
-              충청도
+              대구
             </option>
             <option key={6} value={6}>
-              경상도
+              부산
             </option>
             <option key={7} value={7}>
-              전라도
+              강원
             </option>
             <option key={8} value={8}>
-              제주도
+              광주
+            </option>
+            <option key={9} value={9}>
+              울산
+            </option>
+            <option key={10} value={10}>
+              경남
+            </option>
+            <option key={11} value={11}>
+              전남
+            </option>
+            <option key={12} value={12}>
+              전북
+            </option>
+            <option key={13} value={13}>
+              제주
             </option>
           </InputPicker>
         </div>
