@@ -9,7 +9,7 @@ import { type } from "@testing-library/user-event/dist/type";
 import { AuthLogin } from "../utils/utils";
 
 const Container = styled.div`
-  width: 800px;
+  width: 80vw;
   height: fit-content;
   margin-top: 100px;
   margin-left: auto;
@@ -32,43 +32,43 @@ const BoxContainer = styled.div`
 `;
 
 const BoxWrapper = styled.div`
-  height: 70px;
+  height: 10vh;
   margin-top: 10px;
 `;
 
 const Box = styled.div`
-  width: 700px;
+  width: 70vw;
   text-align: left;
-  margin-left: 50px;
   cursor: auto;
 `;
 
 const BoxText = styled.div`
-  width: 150px;
+  width: 15vw;
   text-align: left;
   display: inline-block;
   margin-right: 10px;
+  font-size: 2vw;
 `;
 
 const Profile = styled.div`
-  width: 600px;
+  width: 70vw;
   text-align: left;
-  margin-left: 50px;
   margin-top: 30px;
   display: flex;
   flex-direction: row;
+  font-size: 2vw;
   cursor: auto;
 `;
 
 const ProfileText = styled.div`
-  width: 150px;
+  width: 15vw;
   text-align: left;
   vertical-align: top;
   margin-right: 10px;
 `;
 
 const SelectProfileBox = styled.div`
-  width: 100px;
+  width: 10vw;
   text-align: left;
   vertical-align: top;
   margin-top: 5px;
@@ -79,7 +79,7 @@ const SelectProfileBox = styled.div`
 `;
 
 const ProfileImageWrap = styled.div`
-  width: 200px;
+  width: 30vw;
   display: inline-block;
   text-align: left;
 `;
@@ -102,10 +102,10 @@ const BtnWrap = styled.div`
 `;
 
 const Btn = styled.button`
-  width: 380px;
-  height: 60px;
+  width: 35vw;
+  height: 50px;
   margin-top: 80px;
-  font-size: 20px;
+  font-size: 2vw;
   color: white;
   font-weight: bold;
   margin-bottom: 300px;
@@ -118,40 +118,43 @@ const Btn = styled.button`
 const BoxSearch = styled.div`
   width: fit-content;
   height: fit-content;
-  border: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
   margin-top: auto;
   margin-bottom: auto;
   display: inline-block;
-  border-radius: 3px;
 `;
 
 const InputSearch = styled.input`
-  width: 400px;
+  width: 30vw;
   height: 40px;
-  border: none;
-  padding-inline: 10px;
-  margin-right: 3px;
+  line-height: 40px;
+  font-size: 1.5vw;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
   :focus {
-    outline: 2px solid gray;
+    outline: 1px solid gray;
+  }
+  ::placeholder {
+    font-size: 1.5vw;
   }
 `;
 
 const ErrorNotification = styled.div`
-  width: 400px;
+  width: 50vw;
   height: 40px;
   border: none;
   display: inline-block;
   text-align: left;
   margin-top: 2px;
-  margin-left: 20px;
   font-size: smaller;
   color: red;
+  margin-left: 4vw;
+  font-size: 1.5vw;
 `;
 
 const BtnSearch = styled.button`
-  width: 100px;
+  width: 15vw;
   height: 40px;
   border: none;
   background-color: rgb(255, 224, 166);
@@ -490,17 +493,16 @@ function SignUp() {
         <BoxWrapper>
           <Box>
             <BoxText>아이디(이메일)</BoxText>
-            <BoxSearch>
-              <InputSearch name="id" onChange={onInputChange} value={id} />
 
-              <BtnSearch
-                disabled={!isIdValidate}
-                style={{ opacity: idOpacity }}
-                onClick={checkDuplicateId}
-              >
-                중복확인
-              </BtnSearch>
-            </BoxSearch>
+            <InputSearch name="id" onChange={onInputChange} value={id} />
+            <BtnSearch
+              disabled={!isIdValidate}
+              style={{ opacity: idOpacity }}
+              onClick={checkDuplicateId}
+            >
+              중복확인
+            </BtnSearch>
+
             {isIdChecked && (
               <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
             )}
@@ -539,7 +541,7 @@ function SignUp() {
             <BoxText>비밀번호</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "500px" }}
+                style={{ width: "50vw" }}
                 name={"password"}
                 onChange={onInputChange}
                 value={password}
@@ -557,7 +559,7 @@ function SignUp() {
             <BoxText>비밀번호 확인</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "500px" }}
+                style={{ width: "50vw" }}
                 name={"passwordCheck"}
                 onChange={onInputChange}
                 value={passwordCheck}
@@ -577,7 +579,7 @@ function SignUp() {
             <BoxText>연락처</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "500px" }}
+                style={{ width: "50vw" }}
                 name={"phoneNumber"}
                 onChange={onInputChange}
                 value={phoneNumber}

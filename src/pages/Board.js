@@ -103,7 +103,7 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
         console.log("새로운 페이지 요청 결과", response.data.result);
         setData(response.data.result);
       } else {
-        alert("인터넷 연결에 실패했습니다.");
+        // alert("인터넷 연결에 실패했습니다.");
       }
     });
   };

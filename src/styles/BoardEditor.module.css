@@ -3,7 +3,7 @@
 }
 
 .container {
-    width: 1000px;
+    width: 90vw;
     margin: 0 auto;
     padding: 20px;
     border-color: orange;
@@ -13,14 +13,14 @@
 }
 
 .title {
-    width: 955px;
+    width: 80vw;
     height: 40px;
     margin-bottom: 20px;
     border-color: rgba(0, 0, 0, 0.2);
 }
 
 .content {
-    width: 955px;
+    width: 80vw;
     height: 440px;
     margin-top: 20px;
     border-color: rgba(0, 0, 0, 0.2);
@@ -36,7 +36,7 @@
 }
 
 .btn__cancel {
-    width: 480px;
+    width: 40vw;
     height: 50px;
     margin-right: 20px;
     border: none;
@@ -45,7 +45,7 @@
 }
 
 .btn__confirm {
-    width: 480px;
+    width: 40vw;
     height: 50px;
     margin-left: 20px;
     border: none;

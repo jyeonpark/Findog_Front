@@ -3,7 +3,7 @@ import API from "./../utils/api";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 950px;
+  width: 90vw;
   height: fit-content;
   margin-top: 10px;
   margin-left: auto;
@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 const CommentInput = styled.textarea`
-  width: 900px;
+  width: 80vw;
   line-height: 30px;
   border: none;
   size: 10;
