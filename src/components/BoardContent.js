@@ -262,6 +262,7 @@ export const BoardContent = ({ postId, myBoard }) => {
           setInputs({
             ...inputs, // 기존의 input 객체를 복사
             userLiked: false,
+            likeCount: inputs.likeCount - 1,
           });
         }
       });
@@ -276,7 +277,9 @@ export const BoardContent = ({ postId, myBoard }) => {
           setInputs({
             ...inputs, // 기존의 input 객체를 복사
             userLiked: true,
+            likeCount: inputs.likeCount + 1,
           });
+
           console.log(response.data);
         }
       });
