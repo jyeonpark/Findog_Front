@@ -179,5 +179,5 @@ const Container = styled.div`
 
 const Body = styled.div`
   height: fit-content;
-  margin-bottom: 30vh;
+  margin-bottom: 10vh;
 `;

@@ -6,12 +6,23 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   width: 35vw;
-  height: 30vw;
+  height: max-content;
   margin-bottom: 1vh;
   background-color: ${(props) =>
     props.processState === "보호중"
       ? "rgb(251, 223, 169)"
       : "rgba(128, 128, 128, 0.2)"};
+  /* overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  } */
 `;
 
 const Box = styled.div`
@@ -38,7 +49,7 @@ const RecruitState = styled.div`
 `;
 
 const AnimalGender = styled.div`
-  margin-left: 10px;
+  margin-left: 1vw;
   line-height: 5vw;
   width: fit-content;
   font-size: 1.5vw;
@@ -107,7 +118,7 @@ function AnimalItem({ item, onClick, onView }) {
         </HeaderLeft>
         <LikeIcon icon={likeFlag === 1 ? solidHeart : regularHeart}></LikeIcon>
       </Box>
-      <Box style={{ height: "80%", overflowY: "scroll" }}>
+      <Box style={{ height: "80%" }}>
         <DogImage src={popfile}></DogImage>
         <DogInfo>
           <DogInfoDetail>• 품종 : {kindCd}</DogInfoDetail>
