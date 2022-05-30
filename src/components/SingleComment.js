@@ -1,14 +1,11 @@
-import React, {
-
-  useState,
-} from "react";
+import React, { useState } from "react";
 import API from "../utils/api";
 import styled from "styled-components";
 import { CommentWrite } from "./CommentWrite";
 import { CommentUpdate } from "./CommentUpdate";
 
 const Container = styled.div`
-  width: 1000px;
+  width: 90vw;
   height: auto;
   margin-left: auto;
   margin-right: auto;
@@ -42,6 +39,7 @@ const ContentBox = styled.div`
 `;
 
 const ExtraInfo = styled.div`
+  width: 80vw;
   display: flex;
   justify-content: space-between;
 `;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import API from './../utils/api';
 
 const Container = styled.div`
-  width: 800px;
+  width: 80vw;
   height: fit-content;
   margin-top: 100px;
   margin-left: auto;
@@ -16,21 +16,20 @@ const Container = styled.div`
 const Header = styled.div`
   text-align: center;
   color: orange;
-  font-size: 40px;
+  font-size: 4vw;
   padding: 20px;
   font-weight: bold;
   margin-bottom: 15px;
 `;
 
 const BoxContainer = styled.div`
-  width: 600px;
+  width: 90vw;
   border-left: orange;
   text-align: left;
-  margin-left: 100px;
 `;
 
 const Box = styled.input`
-  width: 600px;
+  width: 80vw;
   height: 60px;
   margin-top: 10px;
   border-color: rgba(0, 0, 0, 0.2);
@@ -41,7 +40,7 @@ const Box = styled.input`
 `;
 
 const LoginBtn = styled.button`
-  width: 610px;
+  width: 80vw;
   height: 60px;
   margin-top: 15px;
   font-size: 20px;
@@ -50,13 +49,11 @@ const LoginBtn = styled.button`
   font-weight: bold;
   margin-bottom: 20px;
   border: none;
-  margin-left: 100px;
 `;
 
 const Bottom = styled.div`
-  width: 610px;
+  width: 80vw;
   display: flex;
-  margin-left: 100px;
   font-size: 20px;
   margin-bottom: 300px;
   justify-content: space-between;

@@ -10,7 +10,7 @@ import { ReplyComments } from "./ReplyComments";
 
 
 const Container = styled.div`
-  width: 1000px;
+  width: 90vw;
   height: auto;
   margin-left: auto;
   margin-right: auto;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const InputPicker = styled.select`
-  width: 955px;
+  width: 80vw;
   height: 50px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);

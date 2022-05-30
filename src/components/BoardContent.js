@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import API from "./../utils/api";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import profileImage from "../images/profileImage.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 1000px;
+  width: 90vw;
   height: auto;
   padding: 30px;
   margin-left: auto;
@@ -49,38 +49,44 @@ const TitleBox = styled.div`
   margin-top: 15px;
 `;
 const Category = styled.div`
-  height: 50px;
+  min-width: fit-content;
+  height: 10vh;
+  line-height: 10vh;
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;
-  line-height: 50px;
-  font-size: 35px;
+  font-size: 3vw;
   color: gray;
   background-color: rgba(243, 156, 18, 0.22);
 `;
 const Title = styled.div`
-  height: 50px;
+  min-width: fit-content;
+  height: 10vh;
+  line-height: 10vh;
+  margin-right: 10%;
   margin-left: 15px;
-  font-size: 25px;
+  font-size: 3vw;
   font-weight: bold;
-  line-height: 50px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
 `;
 const ContentBox = styled.div`
   margin-top: 50px;
   margin-bottom: 50px;
-  min-height: 300px;
+  min-height: 30vh;
   text-align: start;
-  font-size: 20px;
+  font-size: 1.5vw;
 `;
 
 const Photo = styled.img`
   object-fit: fill;
-  width: 230px;
-  height: 120px;
+  width: 50vw;
+  height: 30vw;
 `;
 
 const ExtraBox = styled.div`
-  width: 1000px;
+  width: 100vw;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
@@ -90,9 +96,8 @@ const ExtraBox = styled.div`
 
 const ExtraInfo = styled.div`
   border: 2px solid rgba(64, 64, 64, 0.2);
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 15px;
+  margin-left: 5vw;
+  font-size: 1.5vw;
   font-weight: bold;
   line-height: 30px;
 `;
@@ -115,7 +120,7 @@ const Button = styled.button`
   border: 2px solid rgba(64, 64, 64, 0.5);
 `;
 
-export const BoardContent = ({ postId, myBoard}) => {
+export const BoardContent = ({ postId, myBoard }) => {
   // 1: "기타",
   // 2: "찾아주세요",
   // 3: "봤어요",
@@ -220,7 +225,7 @@ export const BoardContent = ({ postId, myBoard}) => {
       // locRegion: inputs.region,
       locContent: inputs.content,
       locImgList: inputs.imgList,
-    }
+    };
     navigate("/board/update", { state: data });
   };
 
@@ -235,12 +240,11 @@ export const BoardContent = ({ postId, myBoard}) => {
     }).then((response) => {
       console.log(response.data);
       alert("게시물이 삭제되었습니다.");
-      if (myBoard === true){
+      if (myBoard === true) {
         navigate("/mypage");
-      } else{
+      } else {
         window.location.reload();
       }
-
     });
   };
 
@@ -262,7 +266,6 @@ export const BoardContent = ({ postId, myBoard}) => {
           });
         }
       });
-
     } else {
       // 좋아요 누르기
       API.post("/boards/like", formData, {
@@ -278,7 +281,6 @@ export const BoardContent = ({ postId, myBoard}) => {
           console.log(response.data);
         }
       });
-
     }
   };
 
@@ -321,9 +323,9 @@ export const BoardContent = ({ postId, myBoard}) => {
         </div>
         {inputs.userId === Number(sessionStorage.getItem("userID")) && (
           <ExtraButton>
-            <Button onClick={()=>onClickUpdate()}>수정</Button>
+            <Button onClick={() => onClickUpdate()}>수정</Button>
             <Link to="/board">
-              <Button onClick={()=>onClickDelete()}>삭제</Button>
+              <Button onClick={() => onClickDelete()}>삭제</Button>
             </Link>
           </ExtraButton>
         )}
