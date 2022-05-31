@@ -568,7 +568,7 @@ function SignUp() {
             <BoxText>비밀번호</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "25vw" }}
+           
                 type={"password"}
                 name={"password"}
                 onChange={onInputChange}
@@ -588,7 +588,7 @@ function SignUp() {
             <BoxText>비밀번호 확인</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "25vw" }}
+           
                 name={"passwordCheck"}
                 onChange={onInputChange}
                 value={passwordCheck}
