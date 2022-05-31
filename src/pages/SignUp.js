@@ -9,45 +9,55 @@ import { type } from "@testing-library/user-event/dist/type";
 import { AuthLogin } from "../utils/utils";
 
 const Container = styled.div`
-  width: 80vw;
+  width: 60vw;
   height: fit-content;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgb(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
   text-align: center;
   white-space: nowrap;
-  color: #FFA45B;
-  font-size: 40px;
+  color: #ffa45b;
+  font-size: 25px;
   padding: 20px;
   font-weight: bold;
-  margin-bottom: 15px;
 `;
 
 const BoxContainer = styled.div`
   white-space: nowrap;
-  border-left: #FFA45B;
+  border-left: #ffa45b;
+  margin-left: 10%;
 `;
 
 const BoxWrapper = styled.div`
-  height: 10vh;
+
   margin-top: 10px;
 `;
 
 const Box = styled.div`
-  width: 70vw;
+  width: 100%;
   text-align: left;
   cursor: auto;
 `;
 
 const BoxText = styled.div`
-  width: 15vw;
+  min-width: 13vw;
+  width: 13vw;
   text-align: left;
   display: inline-block;
-  margin-right: 10px;
-  font-size: 2vw;
+  margin-right: 2vw;
+  font-weight: bold;
+  font-size: 1vw;
 `;
 
 const Profile = styled.div`
@@ -61,19 +71,22 @@ const Profile = styled.div`
 `;
 
 const ProfileText = styled.div`
-  width: 15vw;
+  min-width: 13vw;
+  width: 13vw;
   text-align: left;
-  vertical-align: top;
-  margin-right: 10px;
+  display: inline-block;
+  margin-right: 2vw;
+  font-weight: bold;
+  font-size: 1vw;
 `;
 
 const SelectProfileBox = styled.div`
-  width: 10vw;
+  width: fit-content;
   text-align: left;
   vertical-align: top;
   margin-top: 5px;
-  margin-right: 15px;
-  padding: 5px;
+  padding: 1vw;
+  font-size: 1vw;
 
   cursor: pointer;
 `;
@@ -82,15 +95,18 @@ const ProfileImageWrap = styled.div`
   width: 30vw;
   display: inline-block;
   text-align: left;
+  border: none;
 `;
 
 const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
+  min-width: 50px;
+  min-height: 50px;
+  width: 5vw;
+  height: 5vw;
   display: inline-block;
   justify-content: center;
   padding: 3px;
-  border: 1px solid lightgray;
+  border: none;
 `;
 
 const CheckIcon = styled(FontAwesomeIcon)`
@@ -102,14 +118,16 @@ const BtnWrap = styled.div`
 `;
 
 const Btn = styled.button`
-  width: 35vw;
-  height: 50px;
-  margin-top: 80px;
+  width: 30%;
+  height: 40px;
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
   font-size: 2vw;
   color: white;
+  border-radius: 5px;
   font-weight: bold;
-  margin-bottom: 300px;
-  margin-right: 20px;
+  margin-bottom: 100px;
   border: none;
   cursor: pointer;
   background-color: ${(props) => props.background};
@@ -124,19 +142,16 @@ const BoxSearch = styled.div`
 `;
 
 const InputSearch = styled.input`
-  width: 30vw;
-  height: 40px;
-  line-height: 40px;
-  font-size: 1.5vw;
-  border: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
+  width: 20vw;
+  min-width: fit-content;
+  height: 5vh;
+  border: none;
+  display: inline-block;
   border-radius: 3px;
+  padding-inline: 1vw;
+  font-size: 1vw;
   :focus {
-    outline: 1px solid gray;
-  }
-  ::placeholder {
-    font-size: 1.5vw;
+    outline: 1px solid #ffa45b;
   }
 `;
 
@@ -154,10 +169,13 @@ const ErrorNotification = styled.div`
 `;
 
 const BtnSearch = styled.button`
-  width: 15vw;
-  height: 40px;
+  min-width: fit-content;
+  height: 5vh;
   border: none;
-  background-color: rgb(255, 164, 91);
+  display: inline-block;
+  border-radius: 3px;
+  background-color: rgba(255, 164, 91, 0.3);
+  font-size: 1vw;
 `;
 
 function SignUp() {
@@ -454,7 +472,9 @@ function SignUp() {
   return (
     <Container>
       <Header>회원가입</Header>
+   
       <BoxContainer>
+        <Divider></Divider>
         <Profile>
           <ProfileText>프로필사진</ProfileText>
           <ProfileImageWrap>
@@ -490,6 +510,7 @@ function SignUp() {
             </div>
           </ProfileImageWrap>
         </Profile>
+        <Divider></Divider>
         <BoxWrapper>
           <Box>
             <BoxText>아이디(이메일)</BoxText>
@@ -511,6 +532,7 @@ function SignUp() {
             <ErrorNotification>{idNotiText}</ErrorNotification>
           )}
         </BoxWrapper>
+        <Divider></Divider>
         <BoxWrapper>
           <Box>
             <BoxText>닉네임</BoxText>
@@ -536,12 +558,13 @@ function SignUp() {
             <ErrorNotification>{nicknameNotiText}</ErrorNotification>
           )}
         </BoxWrapper>
+        <Divider></Divider>
         <BoxWrapper>
           <Box>
             <BoxText>비밀번호</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "50vw" }}
+                type={"password"}
                 name={"password"}
                 onChange={onInputChange}
                 value={password}
@@ -555,11 +578,11 @@ function SignUp() {
           )}
         </BoxWrapper>
         <BoxWrapper>
+          <Divider></Divider>
           <Box>
             <BoxText>비밀번호 확인</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "50vw" }}
                 name={"passwordCheck"}
                 onChange={onInputChange}
                 value={passwordCheck}
@@ -575,11 +598,11 @@ function SignUp() {
           )}
         </BoxWrapper>
         <BoxWrapper>
+          <Divider></Divider>
           <Box>
             <BoxText>연락처</BoxText>
             <BoxSearch>
               <InputSearch
-                style={{ width: "50vw" }}
                 name={"phoneNumber"}
                 onChange={onInputChange}
                 value={phoneNumber}

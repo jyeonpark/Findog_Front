@@ -318,7 +318,7 @@ export const EditMyInfo = () => {
   };
 
   return (
-    <div style={{marginLeft:"5vw"}}>
+    <div style={{ marginLeft: "5vw" }}>
       <Title> 내 정보 수정</Title>
       <Divider></Divider>
       <Container>
@@ -388,6 +388,7 @@ export const EditMyInfo = () => {
               <div style={{ display: "flex" }}>
                 <BoxSearch>
                   <InputSearch
+                    type={"password"}
                     name="password"
                     onChange={onInputChange}
                     value={password}
@@ -408,6 +409,7 @@ export const EditMyInfo = () => {
               <div style={{ display: "flex" }}>
                 <BoxSearch>
                   <InputSearch
+                    type={"password"}
                     name="newPassword"
                     onChange={onInputChange}
                     value={newPassword}
@@ -504,7 +506,6 @@ const ProfileText = styled.div`
   margin-right: 2vw;
   font-weight: bold;
   font-size: 1vw;
-
 `;
 
 const SelectProfileBox = styled.div`
@@ -514,7 +515,6 @@ const SelectProfileBox = styled.div`
   margin-top: 5px;
   padding: 1vw;
   font-size: 1vw;
-
   cursor: pointer;
 `;
 
@@ -525,8 +525,10 @@ const ProfileImageWrap = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: 15vw;
-  height: 15vw;
+  min-width: 50px;
+  min-height: 50px;
+  width: 5vw;
+  height: 5vw;
   display: inline-block;
   justify-content: center;
   padding: 3px;
@@ -537,7 +539,7 @@ const EditBtn = styled.button`
   width: 10vw;
   max-width: fit-content;
   border: none;
-  background-color: #FFA45B;
+  background-color: #ffa45b;
   height: 5vh;
   border-radius: 5px;
   position: relative;
@@ -551,7 +553,6 @@ const EditBtn = styled.button`
 const BoxSearch = styled.div`
   width: fit-content;
   height: fit-content;
-
 `;
 
 const InputSearch = styled.input`

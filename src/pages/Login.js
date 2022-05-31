@@ -1,22 +1,25 @@
-import React, {  useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import API from './../utils/api';
+import API from "./../utils/api";
 
 const Container = styled.div`
   width: 40vw;
   height: fit-content;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  @media screen and (max-width: 650px) {
+    width: 60vw;
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
-  color: #FFA45B;
-  font-size: 4vw;
+  color: #ffa45b;
+  font-size: 25px;
   padding: 20px;
   font-weight: bold;
   margin-bottom: 15px;
@@ -24,7 +27,7 @@ const Header = styled.div`
 
 const BoxContainer = styled.div`
   width: 100%;
-  border-left: #FFA45B;
+  border-left: #ffa45b;
   text-align: left;
 `;
 
@@ -40,11 +43,11 @@ const Box = styled.input`
 `;
 
 const LoginBtn = styled.button`
-  width:  100%;
+  width: 100%;
   height: 60px;
   margin-top: 15px;
   font-size: 20px;
-  background-color: #FFA45B;
+  background-color: #ffa45b;
   color: black;
   font-weight: bold;
   margin-bottom: 20px;
@@ -52,10 +55,10 @@ const LoginBtn = styled.button`
 `;
 
 const Bottom = styled.div`
-  width:  100%;
+  width: 100%;
   display: flex;
   font-size: 20px;
-  margin-bottom: 300px;
+  margin-bottom: 100px;
   justify-content: space-between;
 `;
 
@@ -109,12 +112,11 @@ function Login() {
         email: email,
         password: password,
       };
-      await API
-        .post("/users/log-in", JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+      await API.post("/users/log-in", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (response.data.isSuccess) {
             alert("로그인 되었습니다.");
@@ -152,6 +154,7 @@ function Login() {
         </div>
         <div>
           <Box
+            type={"password"}
             placeholder="비밀번호"
             name={"password"}
             onChange={onInputChange}
