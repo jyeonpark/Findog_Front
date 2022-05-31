@@ -4,9 +4,9 @@ import like from "../images/like.png";
 import unlike from "../images/unlike.png";
 
 const Container = styled.div`
-  @media screen and (max-width: 500px) {
-    width:40vw;
-    height: 40vw;
+  @media screen and (max-width: 650px) {
+    width: 35vw;
+    height: 35vw;
   }
   width: 27vw;
   height: 27vw;
@@ -23,7 +23,7 @@ const Container = styled.div`
         : "rgba(128, 128, 128, 0.8)"};
     border-radius: 6px;
   }
-  margin-bottom: 5vh;
+  margin-bottom: 20px;
   border-width: 2px;
   box-shadow: ${(props) =>
     props.processState === "보호중"
@@ -66,6 +66,9 @@ const RecruitState = styled.div`
   border-width: 2px;
   border-color: ${(props) =>
     props.processState === "보호중" ? "rgb(255, 164, 91)" : "lightgrey"};
+  @media screen and (max-width: 650px) {
+    font-size: 3vw;
+  }
 `;
 
 const AnimalGender = styled.div`
@@ -73,6 +76,9 @@ const AnimalGender = styled.div`
   line-height: 3vw;
   width: fit-content;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
   font-weight: 1000;
 `;
 
@@ -95,10 +101,16 @@ const DogInfo = styled.div`
   height: 50%;
   text-align: left;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 3vw;
+  }
 `;
 
 const DogInfoDetail = styled.div`
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 3vw;
+  }
 `;
 
 function AnimalItem({ item, onClick, onView }) {
@@ -143,7 +155,7 @@ function AnimalItem({ item, onClick, onView }) {
         <DogInfo>
           <DogInfoDetail>• 품종 : {kindCd}</DogInfoDetail>
           <DogInfoDetail>• 등록일 : {happenDt}</DogInfoDetail>
-          <DogInfoDetail>• 구조장소 : {happenPlace.slice(0, 10)}</DogInfoDetail>
+          <DogInfoDetail>• 구조장소 : {happenPlace}</DogInfoDetail>
           <DogInfoDetail>• 담당기관명 : {orgNm}</DogInfoDetail>
         </DogInfo>
       </BoxContainer>

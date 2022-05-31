@@ -10,7 +10,6 @@ const TabBar = styled.div`
 `;
 
 const TabUl = styled.ul`
-
   `;
 
 const TabLi = styled.div`
@@ -19,6 +18,10 @@ const TabLi = styled.div`
   color: black;
   margin-right: 2.5vw;
   width: fit-content;
+
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 
 
   &.active {

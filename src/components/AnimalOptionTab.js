@@ -21,10 +21,16 @@ const BoxSearch = styled.div`
   font-size: 1.2vw;
   line-height: 3vw;
   height: 3vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BoxFilter = styled.div`
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BtnImgSearch = styled.button`
@@ -37,6 +43,9 @@ const BtnImgSearch = styled.button`
   font-size: 1.2vw;
   min-width: fit-content;
   margin-left: 2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const InputSearch = styled.input`
@@ -45,6 +54,9 @@ const InputSearch = styled.input`
   border: none;
   padding-inline: 10px;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const InputOption = styled.input`
@@ -53,6 +65,9 @@ const InputOption = styled.input`
   border: none;
   padding-inline: 10px;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BtnSearch = styled.button`
@@ -70,6 +85,9 @@ const InputPicker = styled.select`
   height: 3vw;
   border: none;
   margin-left: 2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
   text-align: left;
 `;
 

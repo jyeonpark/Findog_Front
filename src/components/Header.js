@@ -10,6 +10,9 @@ const Top = styled.div`
   justify-content: left;
   margin-bottom: 5vh;
   margin-top: 2vh;
+  @media screen and (max-width: 650px) {
+    margin-bottom: 1vh;
+  }
 `;
 
 const HeaderText = styled.div`
@@ -17,8 +20,11 @@ const HeaderText = styled.div`
   width: 20vw;
   font-weight: 900;
   font-size: 3vw;
-  height: 4vw;
-  line-height: 4vw;
+  height: 3vw;
+  line-height: 3vw;
+  @media screen and (max-width: 650px) {
+    font-size: 4vw;
+  }
 `;
 
 const Container = styled.div`
@@ -29,8 +35,8 @@ const Container = styled.div`
 
 const ContainerText = styled.div`
   width: 8vw;
-  height: 4vw;
-  line-height: 4vw;
+  height: 3vw;
+  line-height: 3vw;
   font-size: 1.2vw;
   cursor: pointer;
   border-radius: 30px;
@@ -38,12 +44,15 @@ const ContainerText = styled.div`
   border-color: rgb(255, 164, 91);
   border-width: 2px;
   color: black;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const TabContainer = styled.div`
   width: fit-content;
-  height: 4vw;
-  line-height: 4vw;
+  height: 3vw;
+  line-height: 3vw;
   margin-right: 5%;
 `;
 

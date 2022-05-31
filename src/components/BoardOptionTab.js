@@ -27,6 +27,9 @@ const BoxSearch = styled.div`
   margin-bottom: auto;
   display: flex;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BoxRegion = styled.div`
@@ -34,6 +37,9 @@ const BoxRegion = styled.div`
   margin-bottom: auto;
   font-size: 1.2vw;
   min-width: fit-content;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BoxCate = styled.div`
@@ -42,11 +48,17 @@ const BoxCate = styled.div`
   font-size: 1.2vw;
   min-width: fit-content;
   border: none;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BoxFilter = styled.div`
   display: ${(props) => (props.FilterVisibility ? "inline-block" : "none")};
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const BoxDate = styled.div`
@@ -54,6 +66,10 @@ const BoxDate = styled.div`
   display: flex;
   font-size: 1.2vw;
   height: 3vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+    height: 4vw;
+  }
 `;
 
 const BtnWrite = styled.button`
@@ -66,6 +82,10 @@ const BtnWrite = styled.button`
   margin-left: 20px;
   border-radius: 5%;
   font-weight: bold;
+  @media screen and (max-width: 650px) {
+    font-size: 3vw;
+    height: 4vw;
+  }
 `;
 
 const InputSearch = styled.input`
@@ -74,6 +94,10 @@ const InputSearch = styled.input`
   border: none;
   padding-inline: 10px;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+    height: 4vw;
+  }
 `;
 
 const BtnSearch = styled.button`
@@ -82,6 +106,10 @@ const BtnSearch = styled.button`
   border: none;
   background-color: rgb(255, 164, 91);
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+    height: 4vw;
+  }
   min-width: fit-content;
 `;
 
@@ -92,6 +120,9 @@ const InputPicker = styled.select`
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
   border: none;
+  @media screen and (max-width: 650px) {
+    height: 4vw;
+  }
 `;
 
 const TextDate = styled.div`
@@ -100,6 +131,9 @@ const TextDate = styled.div`
   line-height: 3vw;
   margin-right: 2vw;
   min-width: fit-content;
+  @media screen and (max-width: 650px) {
+    height: 4vw;
+  }
 `;
 
 const SDatePicker = styled(DatePicker)`

@@ -157,7 +157,7 @@ const BtnSearch = styled.button`
   width: 15vw;
   height: 40px;
   border: none;
-  background-color: rgb(255, 224, 166);
+  background-color: rgb(255, 164, 91);
 `;
 
 function SignUp() {
