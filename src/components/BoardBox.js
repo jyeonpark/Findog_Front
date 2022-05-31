@@ -5,8 +5,8 @@ import profileImage from "../images/profileImage.png";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 80%;
-  min-height: 30vh;
+  width: 100%;
+  height: 18vw;
   box-shadow: 5px 5px 5px rgba(255, 164, 91, 0.1);
   background-color: white;
   margin-left: auto;
@@ -15,13 +15,19 @@ const Container = styled.div`
   padding-left: 1vw;
   padding-top: 1vw;
   padding-right: 1vw;
-  margin-bottom: 5vh;
+  margin-bottom: 30px;
   overflow: hidden;
+  @media screen and (max-width: 650px) {
+    height: 30vw;
+    margin-bottom: 30px;
+    min-height: 200px;
+  }
 `;
 
 const Box1 = styled.div`
   padding-inline-start: 1vw;
   width: 65%;
+  text-overflow: ellipsis;
 `;
 
 const Box2 = styled.div`
@@ -43,16 +49,17 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
+
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  height: 14vh;
-  overflow: hidden;
+  height: 60%;
   text-overflow: ellipsis;
   text-align: start;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   margin-top: 1vh;
   margin-bottom: 1vh;
+  white-space: normal;
 `;
 
 const BoxProfile = styled.div`

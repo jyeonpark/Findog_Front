@@ -8,11 +8,10 @@ import { ko } from "date-fns/esm/locale";
 const Container = styled.div`
   width: 100vw;
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
   text-align: center;
-
 `;
 
 const ContainerSearch = styled.div`
@@ -76,14 +75,14 @@ const BtnWrite = styled.button`
   font-size: 1.5vw;
   width: 12vw;
   height: 3vw;
+  font-weight: bold;
   border: none;
-  background-color: #FFA45B;
+  background-color: #ffa45b;
   color: white;
   margin-left: 20px;
   border-radius: 5%;
-  font-weight: bold;
   @media screen and (max-width: 650px) {
-    font-size: 2.5vw;
+    font-size: 2vw;
     height: 4vw;
   }
 `;
@@ -191,7 +190,7 @@ function BoardOptionTab({ setOptions }) {
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
-                    region: (e.target.value),
+                    region: e.target.value,
                   })
                 }
               >
@@ -245,7 +244,7 @@ function BoardOptionTab({ setOptions }) {
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
-                    category: (e.target.value),
+                    category: e.target.value,
                   })
                 }
               >

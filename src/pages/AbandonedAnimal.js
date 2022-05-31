@@ -84,7 +84,6 @@ export const AbandonedAnimal = ({ myInterest, Notice }) => {
           console.log(response.data);
           setPageCount(pageCriteria.totalPage);
           setAnimals(animalSimpleInfo);
-        
         } else {
           console.log(response);
         }
@@ -110,7 +109,7 @@ export const AbandonedAnimal = ({ myInterest, Notice }) => {
           ) {
             Notice();
             console.log("ㅠㅠ");
-          } 
+          }
         } else {
           console.log(response);
         }
@@ -175,17 +174,18 @@ AbandonedAnimal.defaultProps = {
 };
 
 const Container = styled.div`
-  width: 95vw;
+  width: 90%;
   height: min-content;
-  margin-left: 2.5vw;
-  margin-right: 2.5vw;
+  margin-left: 5%;
+  margin-right: 5%;
   display: grid;
   grid-row-gap: 4vh;
   grid-column-gap: 2vw;
   grid-template-columns: ${(props) =>
     props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
   @media screen and (max-width: 650px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: ${(props) =>
+    props.myInterest === true ? "1fr" : "1fr 1fr"};
   }
 `;
 

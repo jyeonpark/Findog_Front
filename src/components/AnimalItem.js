@@ -5,11 +5,11 @@ import unlike from "../images/unlike.png";
 
 const Container = styled.div`
   @media screen and (max-width: 650px) {
-    width: 35vw;
-    height: 35vw;
+    width: 30vw;
+    height: 30vw;
   }
   width: 27vw;
-  height: 27vw;
+  height: 24vw;
   min-width: 200px;
   overflow: scroll;
   background-color: rgb(255,255,255);
@@ -68,7 +68,7 @@ const RecruitState = styled.div`
   border-color: ${(props) =>
     props.processState === "보호중" ? "rgb(255, 164, 91)" : "lightgrey"};
   @media screen and (max-width: 650px) {
-    font-size: 3vw;
+    font-size: 2vw;
   }
 `;
 
@@ -103,14 +103,14 @@ const DogInfo = styled.div`
   text-align: left;
   font-size: 1.2vw;
   @media screen and (max-width: 650px) {
-    font-size: 3vw;
+    font-size: 2vw;
   }
 `;
 
 const DogInfoDetail = styled.div`
   font-size: 1.2vw;
   @media screen and (max-width: 650px) {
-    font-size: 3vw;
+    font-size: 2vw;
   }
 `;
 

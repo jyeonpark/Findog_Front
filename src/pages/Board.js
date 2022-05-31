@@ -6,17 +6,23 @@ import styled from "styled-components";
 import API from "../utils/api";
 import Pagination from "./../components/Pagination";
 
-const BoardContainer = styled.div``;
+const BoardContainer = styled.div`
+  justify-content: center;
+`;
 
 const BoardBody = styled.div`
   width: ${(props) =>
-    props.myBoard || props.myInterestedBoard ? "" : "90vw;"};
+    props.myBoard === true || props.myInterestedBoard === true
+      ? "60vw"
+      : "70vw"};
   margin-left: ${(props) =>
-    props.myBoard || props.myInterestedBoard ? "" : "5vw;"};
+    props.myBoard === true || props.myInterestedBoard ? "" : "15vw"};
   margin-right: ${(props) =>
-    props.myBoard || props.myInterestedBoard ? "" : "5vw;"};
-  margin-top: ${(props) =>
-    props.myBoard || props.myInterestedBoard ? "" : "50px;"};
+    props.myBoard === true || props.myInterestedBoard ? "" : "15vw"};
+  /* margin-top:  ${(props) =>
+    props.myBoard === true || props.myInterestedBoard ? "" : "50px"};
+background-color: yellow; */
+
 `;
 
 export const Board = ({ myBoard, myInterestedBoard, Notice }) => {

@@ -8,13 +8,14 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  width: 90vw;
+  width: 70vw;
   height: auto;
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
-  border: 5px #FFA45B solid;
+  margin-top: 50px;
+  box-shadow: 5px 5px 5px rgba(255, 164, 91, 0.1);
+  background-color: white;
 `;
 const ProfileBox = styled.div`
   width: max-content;
@@ -26,8 +27,8 @@ const ProfileImage = styled.div`
 `;
 
 const ProfileImageShow = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 30%;
   object-fit: fill;
 `;
@@ -37,11 +38,11 @@ const ProfileInfo = styled.div`
 `;
 const ProfileName = styled.div`
   text-align: left;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 `;
 const ProfileDate = styled.div`
-  font-size: 15px;
+  font-size: 12px;
 `;
 const TitleBox = styled.div`
   display: flex;
@@ -49,81 +50,74 @@ const TitleBox = styled.div`
 `;
 const Category = styled.div`
   min-width: fit-content;
-  height: 10vh;
-  line-height: 10vh;
+  height: 5vh;
+  line-height: 5vh;
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;
-  font-size: 3vw;
+  font-size: 2vw;
   color: gray;
   background-color: rgba(255, 164, 91, 0.22);
 `;
 const Title = styled.div`
   min-width: fit-content;
-  height: 10vh;
-  line-height: 10vh;
+  height: 5vh;
+  line-height: 5vh;
   margin-right: 10%;
   margin-left: 15px;
-  font-size: 3vw;
+  font-size: 2vw;
   font-weight: bold;
   text-overflow: ellipsis;
   -webkit-line-clamp: 1;
   display: -webkit-box;
 `;
 const ContentBox = styled.div`
-  margin-top: 50px;
-  margin-bottom: 50px;
-  min-height: 30vh;
+  margin-top: 30px;
+  margin-bottom: 10px;
   text-align: start;
-  font-size: 2vw;
+  font-size: 1.5vw;
 `;
 
 const Photo = styled.img`
   object-fit: fill;
-  width: 50vw;
-  height: 30vw;
+  width: 20vw;
+  height: 20vw;
 `;
 
 const ExtraBox = styled.div`
-  width: 90vw;
+  width: 70vw;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
 `;
 
 const ExtraInfo = styled.div`
-  border: 2px solid rgba(64, 64, 64, 0.2);
-  font-size: 1.5vw;
-  font-weight: bold;
+  border: none;
+  font-size: 1.2vw;
   line-height: 30px;
 `;
 
 const LikeIcon = styled(FontAwesomeIcon)`
   margin-left: 10px;
   float: right;
+  height: 30px;
   cursor: pointer;
 `;
 
 const ExtraButton = styled.div``;
 
 const Button = styled.button`
-  font-size: large;
-  font-weight: bold;
+  font-size: 1.2vw;
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 10px;
   background-color: white;
-  border: 2px solid rgba(64, 64, 64, 0.5);
+  border: none;
 `;
 
 export const BoardContent = ({ postId, myBoard }) => {
-  // 1: "기타",
-  // 2: "찾아주세요",
-  // 3: "봤어요",
-  // 4: "도와주세요",
-
   const navigate = useNavigate();
   const [categoryText, setCategoryText] = useState("기타");
   const WEEKDAY = ["월", "화", "수", "목", "금", "토", "일"];
@@ -317,7 +311,7 @@ export const BoardContent = ({ postId, myBoard }) => {
             {inputs.commentCount}&nbsp;&nbsp;&nbsp;&nbsp; 조회수 {inputs.hits}
           </ExtraInfo>
           <LikeIcon
-            size="2x"
+          size="1x"
             icon={inputs.userLiked ? solidHeart : regularHeart}
             onClick={Like}
           ></LikeIcon>

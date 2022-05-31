@@ -135,6 +135,7 @@ function MyComment() {
       {comments.length === 0 && (
         <div style={{ fontSize: "5px" }}>내가 작성한 댓글이 없습니다.</div>
       )}
+      <Divider></Divider>
       {comments.length !== 0 && (
         <BottomBox>
           <div style={{ display: "flex" }}>

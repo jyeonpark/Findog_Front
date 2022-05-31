@@ -5,7 +5,7 @@ import AnimalImageSearch from "./AnimalImageSearch";
 const Container = styled.div`
   width: 95vw;
   margin-top: 30px;
-  margin-bottom: 10vw;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
 `;
@@ -36,6 +36,7 @@ const BoxFilter = styled.div`
 const BtnImgSearch = styled.button`
   width: 7vw;
   height: 3vw;
+  line-height: 3vw;
   border-radius: 30px;
   border: solid;
   background-color: white;

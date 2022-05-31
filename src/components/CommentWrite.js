@@ -3,7 +3,7 @@ import API from "./../utils/api";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 90vw;
+  width: 70vw;
   height: fit-content;
   margin-top: 10px;
   margin-left: auto;
@@ -11,13 +11,15 @@ const Container = styled.div`
   border: 1px solid lightgray;
   border-radius: 3px;
   text-align: left;
+  background-color: white;
 `;
 
 const CommentInput = styled.textarea`
-  width: 80vw;
+  width: 70vw;
   line-height: 30px;
+  background: none;
   border: none;
-  size: 10;
+  font-size: 1.5vw;
   word-break: break-all;
   resize: none;
   :focus {
@@ -27,7 +29,7 @@ const CommentInput = styled.textarea`
 `;
 
 const Btn = styled.button`
-  font-size: 20px;
+  font-size: 1.5vw;
   color: grey;
   font-weight: bolder;
   border: none;
@@ -40,6 +42,7 @@ const Count = styled.div`
   text-align: end;
   margin-top: 10px;
   margin-right: 10px;
+  font-size: 1.5vw;
 `;
 
 const Box = styled.div`

@@ -19,7 +19,7 @@ const Container = styled.div`
 const Header = styled.div`
   text-align: center;
   color: #ffa45b;
-  font-size: 25px;
+  font-size: 1.5vw;
   padding: 20px;
   font-weight: bold;
   margin-bottom: 15px;
@@ -35,6 +35,7 @@ const Box = styled.input`
   width: 100%;
   height: 60px;
   margin-top: 10px;
+  font-size: 1.5vw;
   border-color: rgba(0, 0, 0, 0.2);
   :focus {
     outline: 2px solid gray;
@@ -46,12 +47,20 @@ const LoginBtn = styled.button`
   width: 100%;
   height: 60px;
   margin-top: 15px;
-  font-size: 20px;
+  font-size: 1.5vw;
   background-color: #ffa45b;
   color: black;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: none;
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgb(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const Bottom = styled.div`
@@ -59,33 +68,15 @@ const Bottom = styled.div`
   display: flex;
   font-size: 20px;
   margin-bottom: 100px;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const Signup = styled.span`
-  font-size: 1rem;
+  font-size: 1.2vw;
   font-weight: 300;
   display: inline-block;
   color: black;
-`;
-
-const IdSearch = styled.div`
-  font-size: 1rem;
-  font-weight: 300;
-  display: inline-block;
-  color: black;
-`;
-
-const PwSearch = styled.div`
-  font-size: 1rem;
-  font-weight: 300;
-  display: inline-block;
-  color: black;
-`;
-
-const BottomRight = styled.div`
-  float: right;
-  display: flex;
+  justify-content: right;
 `;
 
 function Login() {
@@ -163,15 +154,11 @@ function Login() {
         </div>
       </BoxContainer>
       <LoginBtn onClick={onSubmit}>로그인</LoginBtn>
+      <Divider></Divider>
       <Bottom>
-        <Link to="/signup">
+        <Link to="/signup" style={{justifyContent:"right"}}>
           <Signup>회원가입</Signup>
         </Link>
-        <BottomRight>
-          <IdSearch>아이디 찾기</IdSearch>
-          <div>&nbsp;&nbsp;|&nbsp;&nbsp;</div>
-          <PwSearch>비밀번호 찾기</PwSearch>
-        </BottomRight>
       </Bottom>
     </Container>
   );

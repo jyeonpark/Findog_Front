@@ -6,42 +6,43 @@ import { CommentUpdate } from "./CommentUpdate";
 import profileImage from "../images/profileImage.png";
 
 const Container = styled.div`
-  width: 90vw;
+  width: 70vw;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
   display: flex;
-  margin-top: 20px;
   padding-left: ${(props) => (props.reply ? "50px" : "0px")};
 `;
 
 const ProfileImage = styled.div`
-  margin-right: 10px;
+  width: 10%;
+  height: 10%;
+
 `;
 
 const ProfileImageShow = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 5vw;
+  height: 5vw;
   border-radius: 30%;
   object-fit: fill;
 `;
 
 const ProfileName = styled.div`
-  font-size: 17px;
+  font-size: 1.5vw;
   font-weight: bold;
   vertical-align: middle;
 `;
 
 const ContentBox = styled.div`
-  font-size: 2vw;
-  width: ${(props) => (props.reply ? "850px" : "900px")};
+  font-size: 1.2vw;
+  width: ${(props) => (props.reply ? "70%" : "100%")};
   margin-top: 5px;
   color: ${(props) => (props.deleted ? "lightgrey" : "")};
 `;
 
 const ExtraInfo = styled.div`
-  width: 80vw;
+
   display: flex;
   justify-content: space-between;
 `;
@@ -53,12 +54,14 @@ const Box = styled.div`
 const BoxContent = styled.div`
   margin-right: 20px;
   color: grey;
-  font-size: 1.5vw;
+  font-size: 1vw;
 `;
 
 const Divider = styled.div`
-  width: 100%;
+  width: 70vw;
   height: 1px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: rgb(0, 0, 0, 0.1);
@@ -67,8 +70,9 @@ const Divider = styled.div`
 export const SingleComment = ({ comment, postId, reply }) => {
   const [isEditChecked, setIsEditChecked] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
-  const content = comment.commentStatus === 'active' ? comment.content : "삭제된 댓글입니다.";
-  const deleted = comment.commentStatus === 'active' ? false : true;
+  const content =
+    comment.commentStatus === "active" ? comment.content : "삭제된 댓글입니다.";
+  const deleted = comment.commentStatus === "active" ? false : true;
 
   const onClickEdit = () => {
     setIsEditChecked(!isEditChecked);
@@ -129,7 +133,9 @@ export const SingleComment = ({ comment, postId, reply }) => {
           <div>
             <ProfileName>{comment.nickname}</ProfileName>
 
-            <ContentBox reply={reply} deleted={deleted}>{content}</ContentBox>
+            <ContentBox reply={reply} deleted={deleted}>
+              {content}
+            </ContentBox>
 
             <ExtraInfo>
               <Box>
@@ -143,19 +149,23 @@ export const SingleComment = ({ comment, postId, reply }) => {
                   </BoxContent>
                 )}
               </Box>
-              {Number(sessionStorage.getItem("userID")) === comment.userId && !deleted && (
-                <Box>
-                  <BoxContent
-                    style={{ cursor: "pointer" }}
-                    onClick={onClickEdit}
-                  >
-                    수정
-                  </BoxContent>
-                  <BoxContent style={{ cursor: "pointer" }} onClick={onDelete}>
-                    삭제
-                  </BoxContent>
-                </Box>
-              )}
+              {Number(sessionStorage.getItem("userID")) === comment.userId &&
+                !deleted && (
+                  <Box>
+                    <BoxContent
+                      style={{ cursor: "pointer" }}
+                      onClick={onClickEdit}
+                    >
+                      수정
+                    </BoxContent>
+                    <BoxContent
+                      style={{ cursor: "pointer" }}
+                      onClick={onDelete}
+                    >
+                      삭제
+                    </BoxContent>
+                  </Box>
+                )}
             </ExtraInfo>
           </div>
         </Container>

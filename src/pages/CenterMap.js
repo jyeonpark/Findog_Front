@@ -34,6 +34,7 @@ const MapWrapper = styled.div`
   height: 600px;
   margin-left: auto;
   margin-right: auto;
+  
 `;
 
 const ListWrapper = styled.div`
@@ -60,10 +61,11 @@ const Map = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  /* border-radius: 10px;
   border: solid;
   border-color: #FFA45B;
-  border-width: 5px;
+  border-width: 5px; */
+  /* box-shadow: 5px 5px 5px rgba(255, 164, 91, 0.1); */
 `;
 
 const Pagination = styled.div`
