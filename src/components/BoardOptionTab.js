@@ -53,7 +53,10 @@ const BoxCate = styled.div`
 `;
 
 const BoxFilter = styled.div`
+  margin-top: auto;
+  margin-bottom: auto;
   font-size: 1.2vw;
+  min-width: fit-content;
   @media screen and (max-width: 650px) {
     font-size: 2vw;
   }

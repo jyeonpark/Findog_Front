@@ -17,10 +17,10 @@ const Container = styled.div`
   padding-right: 1vw;
   margin-bottom: 30px;
   overflow: hidden;
+  text-overflow: ellipsis;
   @media screen and (max-width: 650px) {
     height: 20vw;
     margin-bottom: 30px;
-    min-height: 200px;
   }
 `;
 
@@ -52,7 +52,9 @@ const Content = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  height: 50%;
+  word-wrap: break-word;
+  height: 45%;
+  overflow: hidden;
   text-overflow: ellipsis;
   text-align: start;
   font-size: 1.3vw;
