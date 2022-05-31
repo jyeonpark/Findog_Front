@@ -6,7 +6,7 @@ import API from "./../utils/api";
 import Pagination from "./../components/Pagination";
 import AnimalOptionTab from "./../components/AnimalOptionTab";
 
-export const AbandonedAnimal = ({ myInterest }) => {
+export const AbandonedAnimal = ({ myInterest, Notice }) => {
   var size = 6;
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -84,6 +84,7 @@ export const AbandonedAnimal = ({ myInterest }) => {
           console.log(response.data);
           setPageCount(pageCriteria.totalPage);
           setAnimals(animalSimpleInfo);
+        
         } else {
           console.log(response);
         }
@@ -102,6 +103,14 @@ export const AbandonedAnimal = ({ myInterest }) => {
           console.log(response.data);
           setPageCount(pageCriteria.totalPage);
           setAnimals(animalSimpleInfo);
+
+          if (
+            myInterest === true &&
+            response.data.result.animalSimpleInfo.length === 0
+          ) {
+            Notice();
+            console.log("ㅠㅠ");
+          } 
         } else {
           console.log(response);
         }
@@ -176,11 +185,10 @@ const Container = styled.div`
   grid-template-columns: ${(props) =>
     props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
   @media screen and (max-width: 650px) {
-    grid-template-columns: 1fr 1fr
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
 const Body = styled.div`
   height: fit-content;
-  margin-bottom: 10vh;
 `;

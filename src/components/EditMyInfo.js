@@ -443,7 +443,7 @@ export const EditMyInfo = () => {
 export default EditMyInfo;
 
 const Title = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   font-weight: 700;
   margin-bottom: 30px;
 `;
@@ -452,8 +452,8 @@ const Divider = styled.div`
   width: 100%;
   height: 1px;
   background-color: rgb(0, 0, 0, 0.1);
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const Container = styled.div`
@@ -530,7 +530,7 @@ const ProfileImage = styled.img`
   display: inline-block;
   justify-content: center;
   padding: 3px;
-  border: 1px solid lightgray;
+  border: none;
 `;
 
 const EditBtn = styled.button`
@@ -557,9 +557,7 @@ const BoxSearch = styled.div`
 const InputSearch = styled.input`
   width: 13vw;
   height: 5vh;
-  border: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
+  border: none;
   display: inline-block;
   border-radius: 3px;
   padding-inline: 1vw;
@@ -572,12 +570,10 @@ const InputSearch = styled.input`
 const BtnSearch = styled.button`
   min-width: fit-content;
   height: 5vh;
-  border: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
+  border: none;
   display: inline-block;
   border-radius: 3px;
-  background-color: rgb(255, 224, 166);
+  background-color: rgba(255, 164, 91, 0.3);
   font-size: 1vw;
 `;
 

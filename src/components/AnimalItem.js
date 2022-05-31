@@ -12,6 +12,7 @@ const Container = styled.div`
   height: 27vw;
   min-width: 200px;
   overflow: scroll;
+  background-color: rgb(255,255,255);
   &::-webkit-scrollbar {
     width: 2px;
     height: 2px;
@@ -27,8 +28,8 @@ const Container = styled.div`
   border-width: 2px;
   box-shadow: ${(props) =>
     props.processState === "보호중"
-      ? " 10px 5px 5px rgba(255, 164, 91, 0.1)"
-      : "10px 5px 5px rgba(128, 128, 128, 0.2)"};
+      ? " 5px 5px 5px rgba(255, 164, 91, 0.1)"
+      : "5px 5px 5px rgba(128, 128, 128, 0.2)"};
 `;
 
 const Box = styled.div`
@@ -121,7 +122,7 @@ function AnimalItem({ item, onClick, onView }) {
     neuterYn,
     kindCd,
     happenDt,
-    orgNm,
+    careNm,
     happenPlace,
     popfile,
     likeFlag,
@@ -156,7 +157,7 @@ function AnimalItem({ item, onClick, onView }) {
           <DogInfoDetail>• 품종 : {kindCd}</DogInfoDetail>
           <DogInfoDetail>• 등록일 : {happenDt}</DogInfoDetail>
           <DogInfoDetail>• 구조장소 : {happenPlace}</DogInfoDetail>
-          <DogInfoDetail>• 담당기관명 : {orgNm}</DogInfoDetail>
+          <DogInfoDetail>• 담당기관명 : {careNm}</DogInfoDetail>
         </DogInfo>
       </BoxContainer>
     </Container>

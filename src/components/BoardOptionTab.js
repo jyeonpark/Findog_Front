@@ -73,7 +73,7 @@ const BoxDate = styled.div`
 `;
 
 const BtnWrite = styled.button`
-  font-size: 1.8vw;
+  font-size: 1.5vw;
   width: 12vw;
   height: 3vw;
   border: none;
@@ -83,7 +83,7 @@ const BtnWrite = styled.button`
   border-radius: 5%;
   font-weight: bold;
   @media screen and (max-width: 650px) {
-    font-size: 3vw;
+    font-size: 2.5vw;
     height: 4vw;
   }
 `;

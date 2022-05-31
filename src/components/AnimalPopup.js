@@ -47,7 +47,7 @@ function AnimalPopup({ item, onClose, likeFlag }) {
     careNm: "",
     careTe: "",
     careAddr: "",
-    orgNm: "",
+    careNm: "",
   });
 
   const Like = (event) => {
@@ -155,7 +155,7 @@ function AnimalPopup({ item, onClose, likeFlag }) {
             </DogInfoTextBox>
             <DogInfoTextBox>
               <DogInfoTitle>담당센터 : </DogInfoTitle>
-              <DogInfoText>{animal.orgNm}</DogInfoText>
+              <DogInfoText>{animal.careNm}</DogInfoText>
             </DogInfoTextBox>
           </TextBox>
         </Body>

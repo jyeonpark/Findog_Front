@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={{width:"100vw",minHeight:"100vh",overflow : "hidden", backgroundColor:"rgba(220,220,220,0.5)"}}>
+    <div className="App" style={{width:"100vw",minHeight:"100vh",overflow : "hidden", backgroundColor:"rgba(220,220,220,0.2)"}}>
       <BrowserRouter>
         <Header
           tabMenu={tabMenu}

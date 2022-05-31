@@ -104,12 +104,13 @@ const Nav = styled.nav`
 `;
 
 const Button = styled.button`
+  box-shadow: 5px 5px 5px rgba(255, 164, 91, 0.1);
   border: none;
   border-radius: 8px;
   padding: 1vw;
   margin: 5px;
   background: ${(props) =>
-    props.isActive ? "#FFA45B" : "rgba(255, 164, 91, 0.3)"};
+    props.isActive ? "#FFA45B" : "white"};
   color: white;
   font-size: 2vw;
   color: ${(props) => (props.isActive ? "white" : "black")};
@@ -121,7 +122,7 @@ const Button = styled.button`
   }
 
   &[disabled] {
-    background: rgba(255, 164, 91, 0.3);
+    background: white;
     cursor: revert;
     transform: revert;
   }

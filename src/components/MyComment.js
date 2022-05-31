@@ -107,7 +107,9 @@ function MyComment() {
   };
 
   return (
-    <div style={{ marginTop: "100px", marginLeft: "20px" }}>
+    <div style={{ marginLeft: "5vw" }}>
+      <Title> 내가 작성한 댓글</Title>
+      <Divider></Divider>
       {comments.map((item) => {
         return (
           <Container>
@@ -130,26 +132,29 @@ function MyComment() {
           </Container>
         );
       })}
-
-      <Divider></Divider>
-      <BottomBox>
-        <div style={{ display: "flex" }}>
-          <Checkbox
-            type={"checkbox"}
-            style={{ marginRight: "7px" }}
-            onChange={(e) => onCheckedAll(e.target.checked)}
-            checked={
-              checkedComments.length === 0
-                ? false
-                : checkedComments.length === comments.length
-                ? true
-                : false
-            }
-          ></Checkbox>
-          <div style={{ fontSize: "0.8rem", marginTop: "5px" }}>전체선택</div>
-        </div>
-        <Button onClick={() => onDelete()}>삭제</Button>
-      </BottomBox>
+      {comments.length === 0 && (
+        <div style={{ fontSize: "5px" }}>내가 작성한 댓글이 없습니다.</div>
+      )}
+      {comments.length !== 0 && (
+        <BottomBox>
+          <div style={{ display: "flex" }}>
+            <Checkbox
+              type={"checkbox"}
+              style={{ marginRight: "7px" }}
+              onChange={(e) => onCheckedAll(e.target.checked)}
+              checked={
+                checkedComments.length === 0
+                  ? false
+                  : checkedComments.length === comments.length
+                  ? true
+                  : false
+              }
+            ></Checkbox>
+            <div style={{ fontSize: "0.8rem", marginTop: "5px" }}>전체선택</div>
+          </div>
+          <Button onClick={() => onDelete()}>삭제</Button>
+        </BottomBox>
+      )}
 
       {comments.length !== 0 && (
         <footer>
@@ -193,14 +198,6 @@ const Checkbox = styled.input`
   margin-right: 20px;
 `;
 
-const Divider = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: rgb(0, 0, 0, 0.1);
-`;
-
 const BottomBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -214,4 +211,18 @@ const Button = styled.button`
   margin-left: 10px;
   background-color: white;
   border: 1px solid rgba(64, 64, 64, 0.5);
+`;
+
+const Title = styled.div`
+  margin-top: 50px;
+  font-weight: 700;
+  margin-bottom: 30px;
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgb(0, 0, 0, 0.1);
+  margin-top: 50px;
+  margin-bottom: 50px;
 `;

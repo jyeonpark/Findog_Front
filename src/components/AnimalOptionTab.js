@@ -38,6 +38,7 @@ const BtnImgSearch = styled.button`
   height: 3vw;
   border-radius: 30px;
   border: solid;
+  background-color: white;
   border-color: rgba(255, 164, 91);
   border-width: 2px;
   font-size: 1.2vw;

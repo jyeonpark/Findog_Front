@@ -3,12 +3,12 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import profileImage from "../images/profileImage.png";
 import { Link } from "react-router-dom";
-import { AbandonedAnimal } from './../pages/AbandonedAnimal';
 
 const Container = styled.div`
   width: 80%;
   min-height: 30vh;
-  background-color: rgb(251, 223, 169);
+  box-shadow: 5px 5px 5px rgba(255, 164, 91, 0.1);
+  background-color: white;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -56,7 +56,7 @@ const Content = styled.div`
 `;
 
 const BoxProfile = styled.div`
- width: max-content;
+  width: max-content;
   display: flex;
   height: 6vh;
   line-height: 6vh;
@@ -115,7 +115,8 @@ export const BoardBox = ({ item, myBoard }) => {
               </BoxProfilePhoto>
               <TextInfo style={{ marginRight: "20px", fontWeight: "bold" }}>
                 {item.nickname}
-              </TextInfo>{(props) => (props.myBoard ? "" : "5vw")}
+              </TextInfo>
+              {(props) => (props.myBoard ? "" : "5vw")}
               <TextInfo>좋아요 {postLike}</TextInfo>
               <TextInfo>댓글 {commentLike}</TextInfo>
               <TextInfo>조회수 {item.hits}</TextInfo>

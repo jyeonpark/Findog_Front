@@ -4,7 +4,7 @@ import styled from "styled-components";
 import doghouse from "../images/doghouse.png";
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -30,7 +30,7 @@ const MapWrapper = styled.div`
   /* position: sticky; */
   margin-bottom: 100px;
   position: relative;
-  width: 90vw;
+  width: 70vw;
   height: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -41,7 +41,10 @@ const ListWrapper = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 35vw;
+  width: 30vw;
+  @media screen and (max-width: 650px) {
+    width: 50vw;
+  }
   margin: 10px 0 30px 10px;
   padding: 5px;
   overflow-y: auto;

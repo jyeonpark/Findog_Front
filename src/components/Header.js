@@ -39,6 +39,7 @@ const ContainerText = styled.div`
   line-height: 3vw;
   font-size: 1.2vw;
   cursor: pointer;
+  background-color: white;
   border-radius: 30px;
   border: solid;
   border-color: rgb(255, 164, 91);

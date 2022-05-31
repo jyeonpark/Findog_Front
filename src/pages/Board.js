@@ -16,10 +16,10 @@ const BoardBody = styled.div`
   margin-right: ${(props) =>
     props.myBoard || props.myInterestedBoard ? "" : "5vw;"};
   margin-top: ${(props) =>
-    props.myBoard || props.myInterestedBoard ? "" : "50;"};
+    props.myBoard || props.myInterestedBoard ? "" : "50px;"};
 `;
 
-export const Board = ({ myBoard, myInterestedBoard }) => {
+export const Board = ({ myBoard, myInterestedBoard, Notice }) => {
   const size = 5;
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -106,6 +106,12 @@ export const Board = ({ myBoard, myInterestedBoard }) => {
       if (response.data.isSuccess) {
         console.log("새로운 페이지 요청 결과", response.data.result);
         setData(response.data.result);
+        if (
+          (myBoard === true || myInterestedBoard === true) &&
+          response.data.result.length === 0
+        ) {
+          Notice();
+        }
       } else {
         // alert("인터넷 연결에 실패했습니다.");
       }
