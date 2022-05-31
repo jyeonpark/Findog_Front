@@ -18,7 +18,7 @@ const Container = styled.div`
   margin-bottom: 30px;
   overflow: hidden;
   @media screen and (max-width: 650px) {
-    height: 30vw;
+    height: 20vw;
     margin-bottom: 30px;
     min-height: 200px;
   }
@@ -37,7 +37,7 @@ const Box2 = styled.div`
 `;
 
 const Title = styled.div`
-  height: 7vh;
+  height: 20%;
   font-weight: bolder;
   font-size: 1.6vw;
   text-align: start;
@@ -49,11 +49,10 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  height: 60%;
+  height: 50%;
   text-overflow: ellipsis;
   text-align: start;
   font-size: 1.3vw;
@@ -65,14 +64,16 @@ const Content = styled.div`
 const BoxProfile = styled.div`
   width: max-content;
   display: flex;
-  height: 6vh;
-  line-height: 6vh;
+  height: 15%;
+  line-height: 20%;
   font-size: 1vw;
 `;
 
 const TextInfo = styled.div`
   margin-right: 15px;
   font-size: 1.2vw;
+  line-height: 90%;
+  margin-top: 3%;
 `;
 
 const BoxProfilePhoto = styled.div`
@@ -82,12 +83,13 @@ const BoxProfilePhoto = styled.div`
 const Photo = styled.img`
   object-fit: fill;
   width: 100%;
-  height: 24vh;
+  height: 80%;
+  margin-top: 10%;
   margin-left: 5vw;
 `;
 
 const ProfileImage = styled.img`
-  height: 5vh;
+  height: 100%;
   vertical-align: baseline;
   border-radius: 40%;
 `;
@@ -123,7 +125,6 @@ export const BoardBox = ({ item, myBoard }) => {
               <TextInfo style={{ marginRight: "20px", fontWeight: "bold" }}>
                 {item.nickname}
               </TextInfo>
-              {(props) => (props.myBoard ? "" : "5vw")}
               <TextInfo>좋아요 {postLike}</TextInfo>
               <TextInfo>댓글 {commentLike}</TextInfo>
               <TextInfo>조회수 {item.hits}</TextInfo>
