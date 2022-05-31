@@ -38,14 +38,14 @@ export const BoardEditor = (props) => {
   const onChangeCategory = (e) => {
     setInputs({
       ...inputs,
-      category: e.target.value,
+      category: Number(e.target.value),
     });
   };
 
   const onChangeRegion = (e) => {
     setInputs({
       ...inputs,
-      region: e.target.value,
+      region: Number(e.target.value),
     });
   };
 
@@ -90,7 +90,7 @@ export const BoardEditor = (props) => {
           formData.append("title", inputs.title);
           formData.append("category", Number(inputs.category));
           formData.append("content", inputs.content);
-          formData.append("region", inputs.region);
+          formData.append("region", Number(inputs.region));
 
           Object.values(sendingImg).forEach((image) =>
             formData.append("imgFiles", image)

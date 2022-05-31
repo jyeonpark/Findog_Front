@@ -10,7 +10,6 @@ const Container = styled.div`
   }
   width: 27vw;
   height: 24vw;
-  min-width: 200px;
   overflow: scroll;
   background-color: rgb(255,255,255);
   &::-webkit-scrollbar {

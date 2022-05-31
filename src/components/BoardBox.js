@@ -46,6 +46,9 @@ const Title = styled.div`
   -webkit-line-clamp: 1;
   display: -webkit-box;
   padding-top: 1vh;
+  @media screen and (max-width: 650px) {
+    height: 25%;
+  }
 `;
 
 const Content = styled.div`
@@ -61,6 +64,9 @@ const Content = styled.div`
   margin-top: 1vh;
   margin-bottom: 1vh;
   white-space: normal;
+  @media screen and (max-width: 650px) {
+    height: 40%;
+  }
 `;
 
 const BoxProfile = styled.div`
@@ -69,6 +75,9 @@ const BoxProfile = styled.div`
   height: 15%;
   line-height: 20%;
   font-size: 1vw;
+  @media screen and (max-width: 650px) {
+    height: 20%;
+  }
 `;
 
 const TextInfo = styled.div`

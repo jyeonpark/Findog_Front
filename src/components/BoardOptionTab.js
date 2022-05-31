@@ -75,17 +75,19 @@ const BoxDate = styled.div`
 
 const BtnWrite = styled.button`
   font-size: 1.5vw;
-  width: 12vw;
+  width: 8vw;
   height: 3vw;
   border: none;
   background-color: #ffa45b;
   color: white;
-  margin-left: 20px;
+  margin-left: 7px;
+  margin-right: 7px;
   border-radius: 5%;
   @media screen and (max-width: 650px) {
     font-size: 2vw;
     height: 4vw;
   }
+  display: inline-block;
 `;
 
 const InputSearch = styled.input`
@@ -116,10 +118,25 @@ const BtnSearch = styled.button`
 const InputPicker = styled.select`
   width: 10vw;
   height: 3vw;
-  margin-left: 20px;
+  margin-left: 7px;
+  margin-right: 7px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
   border: none;
+  @media screen and (max-width: 650px) {
+    height: 4vw;
+  }
+`;
+
+const Sort = styled.select`
+  width: 10vw;
+  height: 3vw;
+  margin-left: 7px;
+  margin-right: 7px;
+  text-align: left;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(255, 164, 91, 0.3);
   @media screen and (max-width: 650px) {
     height: 4vw;
   }
@@ -143,8 +160,8 @@ const SDatePicker = styled(DatePicker)`
 
 function BoardOptionTab({ setOptions }) {
   const [inputs, setInputs] = useState({
-    start: "",
-    end: "",
+    s: "",
+    e: "",
     category: "",
     region: "",
     keyword: "",
@@ -170,21 +187,6 @@ function BoardOptionTab({ setOptions }) {
       <ContainerSearch>
         <div style={{ marginLeft: "5vw", marginRight: "5vw" }}>
           <div style={{ display: "flex" }}>
-            {/* 검색 */}
-            <BoxSearch>
-              <InputSearch
-                placeholder="내용을 입력해주세요"
-                value={inputs.keyword}
-                name="keyword"
-                onChange={(e) =>
-                  setInputs({
-                    ...inputs,
-                    keyword: e.target.value,
-                  })
-                }
-              ></InputSearch>
-              <BtnSearch onClick={onSubmit}>검색</BtnSearch>
-            </BoxSearch>
             {/* 지역 카테고리 */}
             <BoxRegion>
               <InputPicker
@@ -267,11 +269,32 @@ function BoardOptionTab({ setOptions }) {
               </InputPicker>
             </BoxCate>
             {/* 필터 */}
-            <BoxFilter>
-              <InputPicker
+
+            {/* 검색 */}
+            <BoxSearch>
+              <InputSearch
+                placeholder="내용을 입력해주세요"
+                value={inputs.keyword}
+                name="keyword"
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
+                    keyword: e.target.value,
+                  })
+                }
+              ></InputSearch>
+              <BtnSearch onClick={onSubmit}>검색</BtnSearch>
+            </BoxSearch>
+
+            <BoxFilter>
+              <Sort
+                onChange={(e) =>
+                  setOptions({
+                    s: inputs.s,
+                    e: inputs.e,
+                    category: inputs.category,
+                    region: inputs.region,
+                    keyword: inputs.keyword,
                     sort: Number(e.target.value),
                   })
                 }
@@ -285,12 +308,8 @@ function BoardOptionTab({ setOptions }) {
                 <option key={3} value={3}>
                   좋아요순
                 </option>
-              </InputPicker>
+              </Sort>
             </BoxFilter>
-            {/* 글쓰기, 관심목록 */}
-            <Link to="/board/edit">
-              <BtnWrite onClick={popUp}>글쓰기</BtnWrite>
-            </Link>
           </div>
           <BoxDate>
             <TextDate>기간 :</TextDate>
@@ -305,7 +324,7 @@ function BoardOptionTab({ setOptions }) {
                     date.getFullYear() +
                     ("0" + (date.getMonth() + 1)).slice(-2) +
                     ("0" + date.getDate()).slice(-2);
-                  setInputs({ ...inputs, start: start });
+                  setInputs({ ...inputs, s: start });
                 }}
                 maxDate={new Date()}
                 locale={ko}
@@ -323,7 +342,7 @@ function BoardOptionTab({ setOptions }) {
                     date.getFullYear() +
                     ("0" + (date.getMonth() + 1)).slice(-2) +
                     ("0" + date.getDate()).slice(-2);
-                  setInputs({ ...inputs, end: end });
+                  setInputs({ ...inputs, e: end });
                 }}
                 maxDate={new Date()}
                 locale={ko}
@@ -334,6 +353,10 @@ function BoardOptionTab({ setOptions }) {
             * 년/월/일 형식으로 날짜를 입력한 후 엔터를 입력하거나, 달력에서
             날짜를 선택해주세요.
           </div>
+          {/* 글쓰기, 관심목록 */}
+          <Link to="/board/edit" style={{justifyContent:"right", display:"flex", textDecorationLine:"none"}}>
+            <BtnWrite onClick={popUp}>글쓰기</BtnWrite>
+          </Link>
         </div>
       </ContainerSearch>
     </Container>

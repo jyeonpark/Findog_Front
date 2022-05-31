@@ -5,6 +5,7 @@ import { faRectangleXmark as closeBtn } from "@fortawesome/free-solid-svg-icons"
 import { faImage as imgIcon } from "@fortawesome/free-solid-svg-icons";
 import defaultImage from "../images/defaultImage.png";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function AnimalImageSearch({ onClose }) {
   const [image, setImage] = useState({
@@ -28,6 +29,34 @@ function AnimalImageSearch({ onClose }) {
         preview_URL: reader.result,
       });
     };
+  };
+
+  const onSubmit = () => {
+    const formData = new FormData();
+
+    formData.append("input", image.image_file);
+
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log("ㅈㅂ", value);
+    }
+    axios
+      .post("https://8e27-34-73-138-110.ngrok.io/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        if (response.data.isSuccess) {
+          alert("사진이 등록되었습니다.");
+        } else {
+          alert("사진 등록에 실패했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.log("ㅅㅂ");
+        console.log(error.response);
+      });
   };
 
   return (
@@ -68,9 +97,7 @@ function AnimalImageSearch({ onClose }) {
             }}
           ></FontAwesomeIcon>
         </SelectImg>
-        <Search >
-            검색하기
-        </Search>
+        <Search onClick={onSubmit}>검색하기</Search>
       </DialogBlock>
     </DarkBackground>
   );
@@ -97,7 +124,7 @@ const DialogBlock = styled.div`
   background: white;
   border-radius: 2px;
   border: solid;
-  border-color: #FFA45B;
+  border-color: #ffa45b;
   border-width: 10px;
   font-size: 15px;
   overflow: scroll;
@@ -136,7 +163,7 @@ const SelectImg = styled.div`
   vertical-align: top;
   font-weight: bolder;
   padding: 1vw;
-  color: #FFA45B;
+  color: #ffa45b;
   font-size: 1.5vw;
   justify-content: center;
   cursor: pointer;
@@ -150,13 +177,13 @@ const Search = styled.div`
   margin-right: auto;
   margin-bottom: 1vh;
   border: solid;
-  border-color:  rgb(255, 224, 166);
+  border-color: rgb(255, 224, 166);
   border-radius: 5px;
   text-align: center;
   vertical-align: top;
   font-weight: bolder;
   padding: 1vw;
-  color: #FFA45B;
+  color: #ffa45b;
   font-size: 1.5vw;
   justify-content: center;
   cursor: pointer;
