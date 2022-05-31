@@ -4,8 +4,13 @@ import like from "../images/like.png";
 import unlike from "../images/unlike.png";
 
 const Container = styled.div`
+  @media screen and (max-width: 500px) {
+    width:40vw;
+    height: 40vw;
+  }
   width: 27vw;
   height: 27vw;
+  min-width: 200px;
   overflow: scroll;
   &::-webkit-scrollbar {
     width: 2px;

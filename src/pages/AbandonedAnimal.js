@@ -175,6 +175,9 @@ const Container = styled.div`
   grid-column-gap: 2vw;
   grid-template-columns: ${(props) =>
     props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr 1fr
+  }
 `;
 
 const Body = styled.div`

@@ -8,7 +8,7 @@ const Top = styled.div`
   height: 10vh;
   display: flex;
   justify-content: left;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
   margin-top: 2vh;
 `;
 
@@ -97,7 +97,7 @@ function Header(props) {
                 }}
               >
                 {" "}
-                로그인
+                Login
               </ContainerText>
             </Link>
           )}
@@ -110,7 +110,7 @@ function Header(props) {
               }}
             >
               {" "}
-              로그아웃
+              Logout
             </ContainerText>
           )}
         </Container>

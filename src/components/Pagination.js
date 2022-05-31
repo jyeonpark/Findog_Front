@@ -70,7 +70,7 @@ function Pagination({ total, page, setPage }) {
   }
 
   return (
-    <>
+    <div style={{marginBottom:"20px"}}>
       <Nav>
         <Button onClick={changePageNumbersBackward} disabled={isFirstPage}>
           &lt;
@@ -89,7 +89,7 @@ function Pagination({ total, page, setPage }) {
           &gt;
         </Button>
       </Nav>
-    </>
+    </div>
   );
 }
 
@@ -97,16 +97,17 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  margin: 16px;
+  gap: 0px;
+  margin: 0px;
   text-align: center;
+
 `;
 
 const Button = styled.button`
   border: none;
   border-radius: 8px;
   padding: 1vw;
-  margin: 0;
+  margin: 5px;
   background: ${(props) =>
     props.isActive ? "#FFA45B" : "rgba(255, 164, 91, 0.3)"};
   color: white;
