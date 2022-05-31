@@ -1,86 +1,76 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
+import AnimalImageSearch from "./AnimalImageSearch";
 
 const Container = styled.div`
-  width: 80vw;
+  width: 95vw;
   margin-top: 30px;
   margin-bottom: 10vw;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: center;
 `;
 
 const ContainerSearch = styled.div`
-  justify-content: center;
   position: relative;
   width: fit-content;
   height: fit-content;
 `;
 
 const BoxSearch = styled.div`
-  height: fit-content;
-  border: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
-  margin-top: auto;
-  margin-bottom: auto;
   display: flex;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
+  line-height: 3vw;
+  height: 3vw;
 `;
 
 const BoxFilter = styled.div`
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const BtnImgSearch = styled.button`
-  font-size: 2vw;
-  width: 12vw;
-  height: 4vw;
-  text-align: center;
-  border: none;
-  background-color: orange;
-  color: white;
-  border-radius: 5%;
-  font-weight: bold;
-  display: flex;
-  margin-top: 3vw;
+  width: 7vw;
+  height: 3vw;
+  border-radius: 30px;
+  border: solid;
+  border-color: rgba(255, 164, 91);
+  border-width: 2px;
+  font-size: 1.2vw;
+  min-width: fit-content;
+  margin-left: 2vw;
 `;
 
 const InputSearch = styled.input`
   width: 15vw;
-  height: 4vw;
+  height: 3vw;
   border: none;
   padding-inline: 10px;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const InputOption = styled.input`
   width: 8vw;
-  height: 4vw;
+  height: 3vw;
   border: none;
   padding-inline: 10px;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const BtnSearch = styled.button`
   width: 7vw;
-  height: 4vw;
+  height: 3vw;
   border: none;
-  background-color: rgb(255, 224, 166);
-  font-size: 1.5vw;
+  background-color: rgba(255, 164, 91);
+  font-size: 1.2vw;
   min-width: fit-content;
   margin-left: 2vw;
 `;
 
 const InputPicker = styled.select`
   width: 10vw;
-  height: 4vw;
+  height: 3vw;
+  border: none;
   margin-left: 2vw;
   text-align: left;
-  border-color: rgba(0, 0, 0, 0.2);
 `;
 
 function AnimalOptionTab({ setOptions }) {
@@ -91,6 +81,7 @@ function AnimalOptionTab({ setOptions }) {
     breed: "",
     status: "",
   });
+  const [dialog, setDialog] = useState(false);
 
   const onSubmit = (b) => {
     if (b) {
@@ -106,6 +97,14 @@ function AnimalOptionTab({ setOptions }) {
       setInputs(reset);
       setOptions(reset);
     }
+  };
+
+  const onClose = () => {
+    setDialog(false);
+  };
+
+  const onClick = () => {
+    setDialog(true);
   };
 
   return (
@@ -142,7 +141,7 @@ function AnimalOptionTab({ setOptions }) {
             </BoxSearch>
             <BoxFilter>
               <InputPicker
-              value={inputs.category}
+                value={inputs.category}
                 onChange={(e) =>
                   setInputs({
                     ...inputs,
@@ -215,10 +214,13 @@ function AnimalOptionTab({ setOptions }) {
             >
               필터 초기화
             </BtnSearch>
+            <BtnImgSearch onClick={onClick}>사진 검색</BtnImgSearch>
           </div>
-          <BtnImgSearch>사진 검색</BtnImgSearch>
         </div>
       </ContainerSearch>
+      {dialog ? (
+        <AnimalImageSearch onClose={onClose}></AnimalImageSearch>
+      ) : null}
     </Container>
   );
 }

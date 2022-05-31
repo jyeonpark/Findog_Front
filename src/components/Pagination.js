@@ -108,19 +108,19 @@ const Button = styled.button`
   padding: 1vw;
   margin: 0;
   background: ${(props) =>
-    props.isActive ? "orange" : "rgba(211,211,211,0.5)"};
+    props.isActive ? "#FFA45B" : "rgba(255, 164, 91, 0.3)"};
   color: white;
   font-size: 2vw;
   color: ${(props) => (props.isActive ? "white" : "black")};
 
   &:hover {
-    background: orange;
+    background: #FFA45B;
     cursor: pointer;
     transform: translateY(-5px);
   }
 
   &[disabled] {
-    background: rgba(211, 211, 211, 0.5);
+    background: rgba(255, 164, 91, 0.3);
     cursor: revert;
     transform: revert;
   }

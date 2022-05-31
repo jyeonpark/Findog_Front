@@ -19,7 +19,7 @@ const Container = styled.div`
 const Header = styled.div`
   text-align: center;
   white-space: nowrap;
-  color: orange;
+  color: #FFA45B;
   font-size: 40px;
   padding: 20px;
   font-weight: bold;
@@ -28,7 +28,7 @@ const Header = styled.div`
 
 const BoxContainer = styled.div`
   white-space: nowrap;
-  border-left: orange;
+  border-left: #FFA45B;
 `;
 
 const BoxWrapper = styled.div`
@@ -504,7 +504,7 @@ function SignUp() {
             </BtnSearch>
 
             {isIdChecked && (
-              <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+              <CheckIcon size="2x" icon={faCheck} color="#FFA45B"></CheckIcon>
             )}
           </Box>
           {idNotification && (
@@ -529,7 +529,7 @@ function SignUp() {
               </BtnSearch>
             </BoxSearch>
             {isNicknameChecked && (
-              <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+              <CheckIcon size="2x" icon={faCheck} color="#FFA45B"></CheckIcon>
             )}
           </Box>
           {nicknameNotification && (
@@ -567,7 +567,7 @@ function SignUp() {
               />
             </BoxSearch>
             {isPwChecked && (
-              <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+              <CheckIcon size="2x" icon={faCheck} color="#FFA45B"></CheckIcon>
             )}
           </Box>
           {pwCheckNotification && (
@@ -587,7 +587,7 @@ function SignUp() {
               />
             </BoxSearch>
             {isPhonenumChecked && (
-              <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+              <CheckIcon size="2x" icon={faCheck} color="#FFA45B"></CheckIcon>
             )}
           </Box>
           {phoneNumNotification && (
@@ -601,7 +601,7 @@ function SignUp() {
           <Btn background="lightgrey">취소</Btn>
         </Link>
 
-        <Btn background="orange" disabled={!isAllChecked} onClick={onSubmit}>
+        <Btn background="#FFA45B" disabled={!isAllChecked} onClick={onSubmit}>
           회원가입
         </Btn>
       </BtnWrap>

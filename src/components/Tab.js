@@ -3,38 +3,27 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const TabBar = styled.div`
-  background: transparent;
-  width: 50vw;
-  margin-bottom: 1rem;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  text-align: center;
-  justify-content: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   white-space: nowrap;
-  margin-top: 10vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-const TabUl = styled.ul``;
+const TabUl = styled.ul`
+
+  `;
 
 const TabLi = styled.div`
-  font-size: 2vw;
-  font-weight: 300;
+  font-size: 1.2vw;
   display: inline-block;
   color: black;
-  padding: 1vw;
-  margin: 10%;
-  width: 10vw;
-  border-top: 5px;
-  border-top-style: solid;
-  border-top-color: rgba(243, 156, 18, 0.22);
+  margin-right: 2.5vw;
+  width: fit-content;
+
 
   &.active {
-    height: 100%;
-    border-top: 5px;
-    border-top-style: solid;
-    border-top-color: rgb(243, 156, 18);
+    color: rgb(255, 164, 91);
+    font-weight: bold;
   }
 `;
 

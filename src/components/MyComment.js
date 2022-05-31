@@ -122,7 +122,7 @@ function MyComment() {
               <Option>{item.date}</Option>
               <div style={{ display: "flex" }}>
                 <Option>{item.postTitle}</Option>
-                <Option style={{ color: "orange" }}>
+                <Option style={{ color: "#FFA45B" }}>
                   [{item.postCommentCount}]
                 </Option>
               </div>

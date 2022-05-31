@@ -1,33 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import like from "../images/like.png";
+import unlike from "../images/unlike.png";
 
 const Container = styled.div`
-  width: 35vw;
-  height: 28vw;
-  margin-bottom: 1vh;
-  background-color: ${(props) =>
-    props.processState === "보호중"
-      ? "rgb(251, 223, 169)"
-      : "rgba(128, 128, 128, 0.2)"};
-  /* overflow: scroll;
+  width: 27vw;
+  height: 27vw;
+  overflow: scroll;
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.4);
+    width: 2px;
+    height: 2px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3);
+    background: ${(props) =>
+      props.processState === "보호중"
+        ? "rgba(255, 164, 91,0.5)"
+        : "rgba(128, 128, 128, 0.8)"};
     border-radius: 6px;
-  } */
+  }
+  margin-bottom: 5vh;
+  border-width: 2px;
+  box-shadow: ${(props) =>
+    props.processState === "보호중"
+      ? " 10px 5px 5px rgba(255, 164, 91, 0.1)"
+      : "10px 5px 5px rgba(128, 128, 128, 0.2)"};
 `;
 
 const Box = styled.div`
   width: 100%;
+  height: 10%;
   display: flex;
+  padding: 12px;
+  margin-bottom: 1%;
+  justify-content: space-between;
+  white-space: normal;
+`;
+
+const BoxContainer = styled.div`
+  width: 100%;
+  height: 84%;
+  margin-top: 5%;
   padding: 12px;
   justify-content: space-between;
   white-space: normal;
@@ -38,47 +50,50 @@ const HeaderLeft = styled.div`
 `;
 
 const RecruitState = styled.div`
-  width: 10vw;
-  font-size: 1.5vw;
+  width: fit-content;
+  font-size: 1.2vw;
   height: fit-content;
-  line-height: 5vw;
-  border-radius: 10%;
-  background-color: ${(props) =>
-    props.processState === "보호중" ? "orange" : "grey"};
-  color: white;
+  line-height: 3vw;
+  padding-inline-start: 5px;
+  padding-inline-end: 5px;
+  border-radius: 20px;
+  border: solid;
+  border-width: 2px;
+  border-color: ${(props) =>
+    props.processState === "보호중" ? "rgb(255, 164, 91)" : "lightgrey"};
 `;
 
 const AnimalGender = styled.div`
   margin-left: 1vw;
-  line-height: 5vw;
+  line-height: 3vw;
   width: fit-content;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   font-weight: 1000;
 `;
 
-const LikeIcon = styled(FontAwesomeIcon)`
+const LikeIcon = styled.img`
   float: right;
   object-fit: fill;
   width: 3vw;
-  height: 5vw;
+  height: 3vw;
+  line-height: 3vw;
 `;
 
 const DogImage = styled.img`
-  width: 40%;
-  height: 100%;
+  width: 100%;
+  height: 50%;
   margin-bottom: 2%;
 `;
 
 const DogInfo = styled.div`
-  width: 50%;
-  height: 100%;
-  margin-left: 10%;
+  width: 100%;
+  height: 50%;
   text-align: left;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const DogInfoDetail = styled.div`
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 function AnimalItem({ item, onClick, onView }) {
@@ -106,7 +121,7 @@ function AnimalItem({ item, onClick, onView }) {
         onView(item.animalId);
       }}
     >
-      <Box style={{ height: "20%" }}>
+      <Box>
         <HeaderLeft>
           <RecruitState processState={processState}>
             {processState}
@@ -116,9 +131,9 @@ function AnimalItem({ item, onClick, onView }) {
             <AnimalGender>{neuter}</AnimalGender>
           </div>
         </HeaderLeft>
-        <LikeIcon icon={likeFlag === 1 ? solidHeart : regularHeart}></LikeIcon>
+        <LikeIcon src={likeFlag === 1 ? like : unlike}></LikeIcon>
       </Box>
-      <Box style={{ height: "80%" }}>
+      <BoxContainer>
         <DogImage src={popfile}></DogImage>
         <DogInfo>
           <DogInfoDetail>• 품종 : {kindCd}</DogInfoDetail>
@@ -126,7 +141,7 @@ function AnimalItem({ item, onClick, onView }) {
           <DogInfoDetail>• 구조장소 : {happenPlace.slice(0, 10)}</DogInfoDetail>
           <DogInfoDetail>• 담당기관명 : {orgNm}</DogInfoDetail>
         </DogInfo>
-      </Box>
+      </BoxContainer>
     </Container>
   );
 }

@@ -166,15 +166,15 @@ AbandonedAnimal.defaultProps = {
 };
 
 const Container = styled.div`
-  width: 90vw;
+  width: 95vw;
   height: min-content;
-  margin-left: 10vw;
-  margin-right: 5vw;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
   display: grid;
   grid-row-gap: 4vh;
   grid-column-gap: 2vw;
   grid-template-columns: ${(props) =>
-    props.myInterest === true ? "1fr" : "1fr 1fr"};
+    props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
 `;
 
 const Body = styled.div`

@@ -1,51 +1,56 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import headerImage from "../images/header_dog.jpg";
+import Tab from "./Tab";
 
 const Top = styled.div`
-  position: relative;
-  white-space: nowrap;
   width: 100vw;
-  height: 30vh;
-  text-align: center;
-  object-fit: fill;
-
-  background: linear-gradient(
-      rgba(239, 239, 239, 0.6),
-      rgba(239, 239, 239, 0.6)
-    ),
-    url(${headerImage});
-  background-position: center;
-  background-size: cover;
-  background-color: rgba(0, 0, 0, 0.3);
-  background-attachment: scroll;
+  height: 10vh;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 10vh;
+  margin-top: 2vh;
 `;
 
 const HeaderText = styled.div`
-  position: absolute;
-  top: 2rem;
-  left: 43%;
-  color: rgb(243, 156, 18);
-  font-weight: 800;
-  font-size: 30px;
+  color: rgb(255, 164, 91);
+  width: 20vw;
+  font-weight: 900;
+  font-size: 3vw;
+  height: 4vw;
+  line-height: 4vw;
 `;
 
 const Container = styled.div`
-  display: flex;
-  position: absolute;
-  top: 10%;
-  left: 80%;
+  width: 10%;
+  height: fit-content;
   font-weight: 500;
 `;
 
 const ContainerText = styled.div`
-  padding-left: 10px;
-  font-size: 1rem;
-  font-weight: 800;
-  display: inline-block;
-  color: rgb(243, 156, 18);
+  width: 8vw;
+  height: 4vw;
+  line-height: 4vw;
+  font-size: 1.2vw;
   cursor: pointer;
+  border-radius: 30px;
+  border: solid;
+  border-color: rgb(255, 164, 91);
+  border-width: 2px;
+  color: black;
+`;
+
+const TabContainer = styled.div`
+  width: fit-content;
+  height: 4vw;
+  line-height: 4vw;
+  margin-right: 5%;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  width: 70vw;
+  justify-content: right;
 `;
 
 function Header(props) {
@@ -53,32 +58,50 @@ function Header(props) {
     props.tabMenuChange(menu);
   }
 
-  function logout(){
+  function logout() {
     sessionStorage.removeItem("userJWT");
     sessionStorage.removeItem("userID");
-    sessionStorage.removeItem(
-      "profileImgUrl"
-    );
+    sessionStorage.removeItem("profileImgUrl");
     props.isLoginChange(false);
     alert("로그아웃 되었습니다.");
   }
 
   return (
     <Top>
-      <Container>
-        {!props.isLogin && (
-          <Link to="/login">
-            <ContainerText
-              onClick={() => {
-                setTabMenu(0);
-              }}
-            >
-              {" "}
-              로그인
-            </ContainerText>
-          </Link>
-        )}
-        {props.isLogin && (
+      <div
+        style={{
+          width: "20vw",
+        }}
+      >
+        <Link to="/" style={{ textDecorationLine: "none" }}>
+          <HeaderText
+            onClick={() => {
+              setTabMenu(1);
+            }}
+          >
+            {" "}
+            Findog
+          </HeaderText>
+        </Link>
+      </div>
+      <Wrap>
+        <TabContainer>
+          <Tab tabMenu={props.tabMenu} tabMenuChange={props.tabMenuChange} />
+        </TabContainer>
+        <Container>
+          {!props.isLogin && (
+            <Link to="/login" style={{ textDecorationLine: "none" }}>
+              <ContainerText
+                onClick={() => {
+                  setTabMenu(0);
+                }}
+              >
+                {" "}
+                로그인
+              </ContainerText>
+            </Link>
+          )}
+          {props.isLogin && (
             <ContainerText
               onClick={() => {
                 setTabMenu(0);
@@ -89,18 +112,9 @@ function Header(props) {
               {" "}
               로그아웃
             </ContainerText>
-        )}
-      </Container>
-      <Link to="/">
-        <HeaderText
-          onClick={() => {
-            setTabMenu(1);
-          }}
-        >
-          {" "}
-          Findog
-        </HeaderText>
-      </Link>
+          )}
+        </Container>
+      </Wrap>
     </Top>
   );
 }

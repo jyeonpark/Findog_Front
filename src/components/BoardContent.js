@@ -14,8 +14,7 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
-  /* border-color: orange; */
-  border: 5px orange solid;
+  border: 5px #FFA45B solid;
 `;
 const ProfileBox = styled.div`
   width: max-content;
@@ -57,7 +56,7 @@ const Category = styled.div`
   text-align: center;
   font-size: 3vw;
   color: gray;
-  background-color: rgba(243, 156, 18, 0.22);
+  background-color: rgba(255, 164, 91, 0.22);
 `;
 const Title = styled.div`
   min-width: fit-content;

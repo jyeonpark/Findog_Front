@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={{width:"100vw",overflow : "hidden"}}>
+    <div className="App" style={{width:"100vw",minHeight:"100vh",overflow : "hidden", backgroundColor:"rgba(220,220,220,0.5)"}}>
       <BrowserRouter>
         <Header
           tabMenu={tabMenu}
@@ -56,7 +56,7 @@ function App() {
           isLogin={isLogin}
           isLoginChange={isLoginChange}
         />
-        <Tab tabMenu={tabMenu} tabMenuChange={tabMenuChange} />
+        {/* <Tab tabMenu={tabMenu} tabMenuChange={tabMenuChange} /> */}
         <Routes>
           <Route path="/" element={<AbandonedAnimal />}></Route>
           <Route path="/board" element={<Board />}></Route>

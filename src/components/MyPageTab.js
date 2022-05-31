@@ -31,7 +31,7 @@ const TabLi = styled.div`
   text-align: center;
 
   &.active {
-    background-color: rgb(243, 156, 18, 0.2);
+    background-color: rgb(255, 164, 91);
   }
 `;
 

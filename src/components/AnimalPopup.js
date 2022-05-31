@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark as closeBtn } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import likeIcon from "../images/like.png";
+import unlikeIcon from "../images/unlike.png";
+
 import API from "./../utils/api";
 
 function AnimalPopup({ item, onClose, likeFlag }) {
@@ -15,16 +16,14 @@ function AnimalPopup({ item, onClose, likeFlag }) {
 
   // 유기동물 상세정보 조회하기
   const getAnimalInfo = (animalId) => {
-    API.get( "/animals/" + animalId).then(
-      (response) => {
-        if (response.data.isSuccess) {
-          console.log(response.data);
-          setAnimal(response.data.result);
-        } else {
-          console.log(response);
-        }
+    API.get("/animals/" + animalId).then((response) => {
+      if (response.data.isSuccess) {
+        console.log(response.data);
+        setAnimal(response.data.result);
+      } else {
+        console.log(response);
       }
-    );
+    });
   };
 
   const [animal, setAnimal] = useState({
@@ -108,8 +107,7 @@ function AnimalPopup({ item, onClose, likeFlag }) {
             <ImageBottomBox>
               <DogKind>{animal.kindCd}</DogKind>
               <LikeIcon
-                size="2x"
-                icon={like === 1 ? solidHeart : regularHeart}
+                src={like === 1 ? likeIcon : unlikeIcon}
                 onClick={Like}
               ></LikeIcon>
             </ImageBottomBox>
@@ -119,7 +117,7 @@ function AnimalPopup({ item, onClose, likeFlag }) {
               <DogInfoTitle>공고번호 :</DogInfoTitle>
               <DogInfoText
                 style={{
-                  color: "orange",
+                  color: "#FFA45B",
                   fontWeight: "bolder",
                 }}
               >
@@ -140,7 +138,7 @@ function AnimalPopup({ item, onClose, likeFlag }) {
               <DogInfoTitle>특이사항 :</DogInfoTitle>
               <DogInfoText
                 style={{
-                  color: "orange",
+                  color: "#FFA45B",
                   fontWeight: "bolder",
                 }}
               >
@@ -177,7 +175,7 @@ const DarkBackground = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
 `;
 
 const DialogBlock = styled.div`
@@ -188,8 +186,8 @@ const DialogBlock = styled.div`
   background: white;
   border-radius: 2px;
   border: solid;
-  border-color: orange;
-  border-width: 10px;
+  border-color: #FFA45B;
+  border-width: 5px;
   font-size: 15px;
   overflow: scroll;
   &::-webkit-scrollbar {
@@ -205,51 +203,52 @@ const DialogBlock = styled.div`
 `;
 
 const Body = styled.div`
-  width: 95%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  display: flex;
 `;
 
 const TextBox = styled.div`
-  width: 100%;
+  width: 50%;
 `;
 
 const Header = styled.div`
   width: 100%;
-  height: 10vw;
+  height: 5vh;
 `;
 
 const CloseBtn = styled(FontAwesomeIcon)`
-  width: 5vw;
-  height: 5vw;
+  width: 3vw;
+  height: 3vw;
   float: right;
   cursor: pointer;
 `;
 
 const ImageBox = styled.div`
-  width: fit-content;
+  width: 50%;
   position: relative;
 `;
 
 const DogImage = styled.img`
-  width: 50vw;
-  margin-left: 5vw;
-  margin-right: 5vw;
-  height: 50vw;
+  width: 90%;
+  height: 27vw;
+  min-height: 50vh;
 `;
 
 const RecruiteState = styled.div`
   position: absolute;
-  top: 3vw;
-  left: 8vw;
-  width: 75px;
-  min-width: fit-content;
+  top: 4%;
+  left: 8%;
+  width: fit-content;
+  padding-inline-start: 5%;
+  padding-inline-end: 5%;
   height: 30px;
   line-height: 30px;
-  border-radius: 10%;
+  border-radius: 20px;
   background-color: ${(props) =>
-    props.processState === "보호중" ? "orange" : "grey"};
+    props.processState === "보호중" ? "#FFA45B" : "grey"};
   color: white;
 `;
 
@@ -260,27 +259,27 @@ const ImageBottomBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   justify-content: space-between;
-  margin-top: 15px;
 `;
 
 const DogKind = styled.div`
-  padding: 3px;
+height: fit-content;
   font-weight: bolder;
-  margin-bottom: 5px;
-  font-size: 3vw;
-  background-color: rgba(255, 166, 0, 0.3);
+  font-size: 2vw;
+  padding-inline-start: 3px;
+  padding-inline-end: 3px;
+  background-color: rgb(255, 164, 91);
 `;
 
 const DogInfoTitle = styled.div`
   width: 30%;
   text-align: left;
-  font-size: 2vw;
+  font-size: 1.2vw;
 `;
 
 const DogInfoText = styled.div`
-  width: 60%;
+  width: 70%;
   text-align: left;
-  font-size: 2vw;
+  font-size: 1.2vw;
 `;
 
 const DogInfoTextBox = styled.div`
@@ -292,12 +291,14 @@ const DogInfoTextBox = styled.div`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: rgb(0, 0, 0, 0.3);
 `;
 
-const LikeIcon = styled(FontAwesomeIcon)`
+const LikeIcon = styled.img`
+width: 5vw;
+height: 5vw;
   float: right;
   cursor: pointer;
 `;

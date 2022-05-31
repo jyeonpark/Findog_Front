@@ -9,10 +9,10 @@ const Container = styled.div`
   width: 100vw;
   margin-top: 30px;
   margin-bottom: 10px;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  display: flex;
   justify-content: center;
   text-align: center;
+
 `;
 
 const ContainerSearch = styled.div`
@@ -23,47 +23,45 @@ const ContainerSearch = styled.div`
 
 const BoxSearch = styled.div`
   height: fit-content;
-  border: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
   margin-top: auto;
   margin-bottom: auto;
   display: flex;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const BoxRegion = styled.div`
   margin-top: auto;
   margin-bottom: auto;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   min-width: fit-content;
 `;
 
 const BoxCate = styled.div`
   margin-top: auto;
   margin-bottom: auto;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   min-width: fit-content;
+  border: none;
 `;
 
 const BoxFilter = styled.div`
   display: ${(props) => (props.FilterVisibility ? "inline-block" : "none")};
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const BoxDate = styled.div`
-  margin-top: 3vw;
+  margin-top: 1vw;
   display: flex;
-  font-size: 1.5vw;
-  height: 4vw;
+  font-size: 1.2vw;
+  height: 3vw;
 `;
 
 const BtnWrite = styled.button`
   font-size: 1.8vw;
   width: 12vw;
-  height: 4vw;
+  height: 3vw;
   border: none;
-  background-color: orange;
+  background-color: #FFA45B;
   color: white;
   margin-left: 20px;
   border-radius: 5%;
@@ -72,27 +70,28 @@ const BtnWrite = styled.button`
 
 const InputSearch = styled.input`
   width: 25vw;
-  height: 4vw;
+  height: 3vw;
   border: none;
   padding-inline: 10px;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 `;
 
 const BtnSearch = styled.button`
   width: 7vw;
-  height: 4vw;
+  height: 3vw;
   border: none;
-  background-color: rgb(255, 224, 166);
-  font-size: 1.5vw;
+  background-color: rgb(255, 164, 91);
+  font-size: 1.2vw;
   min-width: fit-content;
 `;
 
 const InputPicker = styled.select`
   width: 12vw;
-  height: 4vw;
+  height: 3vw;
   margin-left: 20px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
+  border: none;
 `;
 
 const TextDate = styled.div`
@@ -104,9 +103,8 @@ const TextDate = styled.div`
 `;
 
 const SDatePicker = styled(DatePicker)`
-  border-radius: 4px;
   font-size: 1vw;
-  border: 1px solid lightgray;
+  border: none;
 `;
 
 function BoardOptionTab({ setOptions }) {
@@ -298,7 +296,7 @@ function BoardOptionTab({ setOptions }) {
               />
             </div>
           </BoxDate>
-          <div style={{ fontSize: "1vw", color: "grey", textAlign: "left" }}>
+          <div style={{ fontSize: "1px", color: "grey", textAlign: "left" }}>
             * 년/월/일 형식으로 날짜를 입력한 후 엔터를 입력하거나, 달력에서
             날짜를 선택해주세요.
           </div>

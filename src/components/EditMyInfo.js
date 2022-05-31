@@ -374,7 +374,7 @@ export const EditMyInfo = () => {
                 <BtnSearch onClick={checkDuplicateNickname}>중복확인</BtnSearch>
               </BoxSearch>
               {isNicknameChecked && (
-                <CheckIcon size="2x" icon={faCheck} color="orange"></CheckIcon>
+                <CheckIcon size="2x" icon={faCheck} color="#FFA45B"></CheckIcon>
               )}
             </div>
           </Box>
@@ -398,7 +398,7 @@ export const EditMyInfo = () => {
                   <CheckIcon
                     size="2x"
                     icon={faCheck}
-                    color="orange"
+                    color="#FFA45B"
                   ></CheckIcon>
                 )}
               </div>
@@ -537,7 +537,7 @@ const EditBtn = styled.button`
   width: 10vw;
   max-width: fit-content;
   border: none;
-  background-color: orange;
+  background-color: #FFA45B;
   height: 5vh;
   border-radius: 5px;
   position: relative;

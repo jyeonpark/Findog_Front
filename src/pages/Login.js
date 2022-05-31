@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   text-align: center;
-  color: orange;
+  color: #FFA45B;
   font-size: 4vw;
   padding: 20px;
   font-weight: bold;
@@ -24,7 +24,7 @@ const Header = styled.div`
 
 const BoxContainer = styled.div`
   width: 90vw;
-  border-left: orange;
+  border-left: #FFA45B;
   text-align: left;
 `;
 
@@ -44,8 +44,8 @@ const LoginBtn = styled.button`
   height: 60px;
   margin-top: 15px;
   font-size: 20px;
-  background-color: orange;
-  color: white;
+  background-color: #FFA45B;
+  color: black;
   font-weight: bold;
   margin-bottom: 20px;
   border: none;

@@ -23,7 +23,7 @@ const Intro = styled.div`
   font-weight: bolder;
   text-align: left;
   padding-top: 1vh;
-  color: orange;
+  color: #FFA45B;
 `;
 
 const MapWrapper = styled.div`
@@ -59,7 +59,7 @@ const Map = styled.div`
   overflow: hidden;
   border-radius: 10px;
   border: solid;
-  border-color: orange;
+  border-color: #FFA45B;
   border-width: 5px;
 `;
 
@@ -73,7 +73,7 @@ const Pagination = styled.div`
     cursor: pointer;
 
     &.on {
-      color: orange;
+      color: #FFA45B;
       font-weight: bold;
     }
   }
