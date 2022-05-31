@@ -22,7 +22,7 @@ const Header = styled.div`
   font-size: 1.5vw;
   padding: 20px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 const BoxContainer = styled.div`
@@ -36,9 +36,10 @@ const Box = styled.input`
   height: 60px;
   margin-top: 10px;
   font-size: 1.5vw;
-  border-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  background-color: white;
   :focus {
-    outline: 2px solid gray;
+    outline: 1px solid #ffa45b;
   }
   cursor: auto;
 `;
@@ -49,7 +50,7 @@ const LoginBtn = styled.button`
   margin-top: 15px;
   font-size: 1.5vw;
   background-color: #ffa45b;
-  color: black;
+  color: white;
   font-weight: bold;
   margin-bottom: 10px;
   border: none;
@@ -58,7 +59,7 @@ const LoginBtn = styled.button`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgba(255, 164, 91, 0.1);
   margin-top: 20px;
   margin-bottom: 20px;
 `;
@@ -75,7 +76,7 @@ const Signup = styled.span`
   font-size: 1.2vw;
   font-weight: 300;
   display: inline-block;
-  color: black;
+  color: #FFA45B;
   justify-content: right;
 `;
 
@@ -133,7 +134,8 @@ function Login() {
 
   return (
     <Container>
-      <Header>로그인</Header>
+      <Header>Login</Header>
+      <Divider></Divider>
       <BoxContainer>
         <div>
           <Box

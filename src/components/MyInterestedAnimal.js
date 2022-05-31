@@ -11,7 +11,7 @@ const Title = styled.div`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgba(255, 164, 91, 0.1);
   margin-top: 50px;
   margin-bottom: 50px;
 `;

@@ -53,7 +53,6 @@ const BoxCate = styled.div`
 `;
 
 const BoxFilter = styled.div`
-  display: ${(props) => (props.FilterVisibility ? "inline-block" : "none")};
   font-size: 1.2vw;
   @media screen and (max-width: 650px) {
     font-size: 2vw;
@@ -75,7 +74,6 @@ const BtnWrite = styled.button`
   font-size: 1.5vw;
   width: 12vw;
   height: 3vw;
-  font-weight: bold;
   border: none;
   background-color: #ffa45b;
   color: white;
@@ -88,7 +86,7 @@ const BtnWrite = styled.button`
 `;
 
 const InputSearch = styled.input`
-  width: 25vw;
+  width: 20vw;
   height: 3vw;
   border: none;
   padding-inline: 10px;
@@ -113,7 +111,7 @@ const BtnSearch = styled.button`
 `;
 
 const InputPicker = styled.select`
-  width: 12vw;
+  width: 10vw;
   height: 3vw;
   margin-left: 20px;
   text-align: left;

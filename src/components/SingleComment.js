@@ -64,7 +64,7 @@ const Divider = styled.div`
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgba(255, 164, 91, 0.1);
 `;
 
 export const SingleComment = ({ comment, postId, reply }) => {

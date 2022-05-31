@@ -293,7 +293,7 @@ const Divider = styled.div`
   height: 1px;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: rgb(0, 0, 0, 0.3);
+  background-color: rgba(255, 164, 91, 0.1);
 `;
 
 const LikeIcon = styled.img`

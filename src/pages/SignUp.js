@@ -19,7 +19,7 @@ const Container = styled.div`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background-color: rgb(0, 0, 0, 0.1);
+  background-color: rgba(255, 164, 91, 0.1);
   margin-top: 20px;
   margin-bottom: 20px;
 `;
@@ -40,7 +40,6 @@ const BoxContainer = styled.div`
 `;
 
 const BoxWrapper = styled.div`
-
   margin-top: 10px;
 `;
 
@@ -123,10 +122,9 @@ const Btn = styled.button`
   margin-top: 50px;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 2vw;
+  font-size: 1.5vw;
   color: white;
   border-radius: 5px;
-  font-weight: bold;
   margin-bottom: 100px;
   border: none;
   cursor: pointer;
@@ -472,7 +470,7 @@ function SignUp() {
   return (
     <Container>
       <Header>회원가입</Header>
-   
+
       <BoxContainer>
         <Divider></Divider>
         <Profile>
@@ -621,9 +619,9 @@ function SignUp() {
 
       <BtnWrap>
         <Link to="/login">
-          <Btn background="lightgrey">취소</Btn>
+          <Btn background="white" style={{color:"black",
+        border:"solid", borderColor:"rgba(255, 164, 91, 0.3)"}}>취소</Btn>
         </Link>
-
         <Btn background="#FFA45B" disabled={!isAllChecked} onClick={onSubmit}>
           회원가입
         </Btn>
