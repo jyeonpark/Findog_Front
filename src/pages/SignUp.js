@@ -151,6 +151,9 @@ const InputSearch = styled.input`
   :focus {
     outline: 1px solid #ffa45b;
   }
+  ::placeholder {
+    font-size: 1px;
+  }
 `;
 
 const ErrorNotification = styled.div`
@@ -162,8 +165,8 @@ const ErrorNotification = styled.div`
   margin-top: 2px;
   font-size: smaller;
   color: red;
-  margin-left: 4vw;
-  font-size: 1.5vw;
+  margin-left: 15vw;
+  font-size: 1px;
 `;
 
 const BtnSearch = styled.button`
@@ -343,13 +346,16 @@ function SignUp() {
     if (phoneNumber === "") {
       setPhoneNumNotification(false);
     } else {
-      phoneNumber
-        .replace(/[^0-9]/g, "")
-        .replace(
-          /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
-          "$1-$2-$3"
-        )
-        .replace("--", "-");
+      setInputs({
+        ...inputs,
+        phoneNumber: phoneNumber
+          .replace(/[^0-9]/g, "")
+          .replace(
+            /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+            "$1-$2-$3"
+          )
+          .replace("--", "-"),
+      });
 
       if (phoneNumber.length === 13 && /^[0-9\b -]{0,13}$/.test(phoneNumber)) {
         var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -562,6 +568,7 @@ function SignUp() {
             <BoxText>비밀번호</BoxText>
             <BoxSearch>
               <InputSearch
+                style={{ width: "25vw" }}
                 type={"password"}
                 name={"password"}
                 onChange={onInputChange}
@@ -581,6 +588,7 @@ function SignUp() {
             <BoxText>비밀번호 확인</BoxText>
             <BoxSearch>
               <InputSearch
+                style={{ width: "25vw" }}
                 name={"passwordCheck"}
                 onChange={onInputChange}
                 value={passwordCheck}
@@ -619,8 +627,16 @@ function SignUp() {
 
       <BtnWrap>
         <Link to="/login">
-          <Btn background="white" style={{color:"black",
-        border:"solid", borderColor:"rgba(255, 164, 91, 0.3)"}}>취소</Btn>
+          <Btn
+            background="white"
+            style={{
+              color: "black",
+              border: "solid",
+              borderColor: "rgba(255, 164, 91, 0.3)",
+            }}
+          >
+            취소
+          </Btn>
         </Link>
         <Btn background="#FFA45B" disabled={!isAllChecked} onClick={onSubmit}>
           회원가입
