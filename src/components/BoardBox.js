@@ -38,7 +38,7 @@ const Box2 = styled.div`
 `;
 
 const Title = styled.div`
-  height: 20%;
+  height: 25%;
   font-weight: bolder;
   font-size: 1.6vw;
   text-align: start;
@@ -47,15 +47,12 @@ const Title = styled.div`
   -webkit-line-clamp: 1;
   display: -webkit-box;
   padding-top: 1vh;
-  @media screen and (max-width: 650px) {
-    height: 20%;
-  }
 
 `;
 
 const Content = styled.div`
   display: -webkit-inline-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-wrap: break-word;
@@ -71,19 +68,15 @@ const Content = styled.div`
 const BoxProfile = styled.div`
   width: max-content;
   display: flex;
-  height: 20%;
-  line-height: 20%;
+  height: 25%;
+  line-height: 25%;
   font-size: 1vw;
-  @media screen and (max-width: 650px) {
-    height: 20%;
-  }
 
 `;
 
 const TextInfo = styled.div`
   margin-right: 15px;
   font-size: 1.2vw;
-
   margin-top: 3%;
 `;
 
@@ -93,12 +86,12 @@ const BoxProfilePhoto = styled.div`
 
 const Photo = styled.img`
   object-fit: fill;
-  width: 100%;
+  width: 95%;
   height: 100%;
 `;
 
 const ProfileImage = styled.img`
-  height: 80%;
+  height: 3vw;
   vertical-align: baseline;
   border-radius: 40%;
 `;
@@ -114,7 +107,7 @@ export const BoardBox = ({ item, myBoard }) => {
   const postLike = item.likeCount === null ? 0 : item.likeCount;
   const commentLike = item.commentCount === null ? 0 : item.commentCount;
   const profile = item.userImgUrl === null ? profileImage : item.userImgUrl;
-  const path = "/board/detail/" + item.postId;
+
   return (
     <Link
       to={"/board/detail/" + item.postId}

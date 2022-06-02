@@ -236,7 +236,7 @@ const ImageBox = styled.div`
 const DogImage = styled.img`
   width: 90%;
   height: 27vw;
-  min-height: 50vh;
+  max-height: max-content;
 `;
 
 const RecruiteState = styled.div`
