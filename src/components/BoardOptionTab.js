@@ -92,6 +92,10 @@ const BtnWrite = styled.button`
     height: 4vw;
   }
   display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: black;
 `;
 
 const InputSearch = styled.input`
@@ -149,6 +153,7 @@ const Sort = styled.select`
   @media screen and (max-width: 650px) {
     height: 4vw;
   }
+  color: black;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
