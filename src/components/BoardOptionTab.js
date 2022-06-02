@@ -77,13 +77,15 @@ const BtnWrite = styled.button`
   font-size: 1.5vw;
   width: 8vw;
   height: 3vw;
-  border: none;
-  background-color: #ffa45b;
-  color: white;
+  border: solid;
+  border-width: 1px;
+  border-color: #ffa45b;
+  background-color: white;
   margin-left: 7px;
   margin-right: 7px;
   border-radius: 5%;
   @media screen and (max-width: 650px) {
+    width: fit-content;
     font-size: 2vw;
     height: 4vw;
   }
@@ -354,7 +356,14 @@ function BoardOptionTab({ setOptions }) {
             날짜를 선택해주세요.
           </div>
           {/* 글쓰기, 관심목록 */}
-          <Link to="/board/edit" style={{justifyContent:"right", display:"flex", textDecorationLine:"none"}}>
+          <Link
+            to="/board/edit"
+            style={{
+              justifyContent: "right",
+              display: "flex",
+              textDecorationLine: "none",
+            }}
+          >
             <BtnWrite onClick={popUp}>글쓰기</BtnWrite>
           </Link>
         </div>

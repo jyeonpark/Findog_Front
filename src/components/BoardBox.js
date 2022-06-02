@@ -19,7 +19,7 @@ const Container = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   @media screen and (max-width: 650px) {
-    height: 20vw;
+    height: 30vw;
     margin-bottom: 30px;
   }
 `;
@@ -52,12 +52,12 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
+  display: -webkit-inline-box;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  height: 45%;
   overflow: hidden;
+  word-wrap: break-word;
+
   text-overflow: ellipsis;
   text-align: start;
   font-size: 1.3vw;
@@ -65,7 +65,7 @@ const Content = styled.div`
   margin-bottom: 1vh;
   white-space: normal;
   @media screen and (max-width: 650px) {
-    height: 40%;
+    -webkit-line-clamp: 3;
   }
 `;
 

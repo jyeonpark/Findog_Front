@@ -5,8 +5,8 @@ import unlike from "../images/unlike.png";
 
 const Container = styled.div`
   @media screen and (max-width: 650px) {
-    width: 30vw;
-    height: 30vw;
+    width: 35vw;
+    height: 35vw;
   }
   width: 27vw;
   height: 24vw;

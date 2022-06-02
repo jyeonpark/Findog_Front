@@ -36,10 +36,6 @@ function AnimalImageSearch({ onClose }) {
 
     formData.append("input", image.image_file);
 
-    // FormData의 value 확인
-    for (let value of formData.values()) {
-      console.log("ㅈㅂ", value);
-    }
     axios
       .post("https://8e27-34-73-138-110.ngrok.io/", formData, {
         headers: {
@@ -54,7 +50,6 @@ function AnimalImageSearch({ onClose }) {
         }
       })
       .catch((error) => {
-        console.log("ㅅㅂ");
         console.log(error.response);
       });
   };
@@ -118,14 +113,14 @@ const DarkBackground = styled.div`
 `;
 
 const DialogBlock = styled.div`
-  width: 50vw;
-  height: 70vh;
+  width: 30vw;
+  max-height: fit-content;
   padding: 5px;
   background: white;
   border-radius: 2px;
   border: solid;
   border-color: #ffa45b;
-  border-width: 10px;
+  border-width: 5px;
   font-size: 15px;
   overflow: scroll;
   &::-webkit-scrollbar {
@@ -152,50 +147,50 @@ const CloseBtn = styled(FontAwesomeIcon)`
 `;
 const SelectImg = styled.div`
   display: flex;
-  width: 30vw;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 1vh;
-  background-color: rgb(255, 224, 166);
   border-radius: 5px;
   text-align: center;
+  background-color: rgb(255, 224, 166) ;
   vertical-align: top;
-  font-weight: bolder;
-  padding: 1vw;
+  font-weight: bold;
+  width: 20vw;
   color: #ffa45b;
-  font-size: 1.5vw;
+  padding: 1px;
+  font-size: 1.2vw;
   justify-content: center;
   cursor: pointer;
+  text-decoration-line: underline;
+  margin-bottom: 5px;
 `;
 
 const Search = styled.div`
   display: flex;
-  width: 30vw;
+  width: 20vw;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 1vh;
+  margin-bottom: 2vh;
   border: solid;
   border-color: rgb(255, 224, 166);
   border-radius: 5px;
   text-align: center;
+  padding: 1px;
   vertical-align: top;
-  font-weight: bolder;
-  padding: 1vw;
+  font-weight: bold;
   color: #ffa45b;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   justify-content: center;
   cursor: pointer;
 `;
 
 const Img = styled.img`
   position: relative;
-  width: 25vw;
-  height: 40vh;
+  width: 12vw;
+  height:12vw;
   display: inline-block;
   justify-content: center;
-  padding: 3px;
   color: white;
   background-color: lightgrey;
   cursor: pointer;

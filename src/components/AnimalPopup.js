@@ -188,7 +188,6 @@ const DialogBlock = styled.div`
   border: solid;
   border-color: #FFA45B;
   border-width: 5px;
-  font-size: 15px;
   overflow: scroll;
   &::-webkit-scrollbar {
     width: 8px;
@@ -199,6 +198,9 @@ const DialogBlock = styled.div`
   &::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
+  }
+  @media screen and (max-width: 650px) {
+    height: fit-content;
   }
 `;
 
