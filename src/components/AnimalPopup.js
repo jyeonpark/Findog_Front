@@ -234,13 +234,13 @@ const CloseBtn = styled(FontAwesomeIcon)`
 
 const ImageBox = styled.div`
   width: 50%;
+
   position: relative;
 `;
 
 const DogImage = styled.img`
   width: 90%;
-  height: 30vh;
-  min-height: fit-content;
+  height: 100%;
 `;
 
 const RecruiteState = styled.div`
