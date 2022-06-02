@@ -1,14 +1,101 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
 import API from "../utils/api";
 
+
 const InputPicker = styled.select`
-  width: 80vw;
+  @media screen and (max-width: 650px) {
+    width: 80vw;
+  }
+  width: 45vw;
   height: 50px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
+`;
+
+const Title = styled.input`
+  @media screen and (max-width: 650px) {
+    width: 80vw;
+  }
+  width: 45vw;
+  height: 40px;
+  margin-bottom: 20px;
+  border-color: rgba(0, 0, 0, 0.2);
+`;
+const Content = styled.textarea`
+  @media screen and (max-width: 650px) {
+    width: 80vw;
+  }
+  width: 45vw;
+  height: 440px;
+  margin-top: 20px;
+  border-color: rgba(0, 0, 0, 0.2);
+  text-align: left;
+  padding: 10px;
+`;
+
+const BtnContainer = styled.div`
+  margin-top: 50px;
+  margin-bottom: 100px;
+`;
+
+const BtnCancel = styled.button`
+  @media screen and (max-width: 650px) {
+    width: 40vw;
+  }
+  width: 20vw;
+  height: 50px;
+  margin-right: 20px;
+  border: none;
+  background-color: #ecececdc;
+`;
+
+const Container = styled.div`
+  width: 50vw;
+  @media screen and (max-width: 650px) {
+    width: 90vw;
+  }
+  margin: 0 auto;
+  padding: 20px;
+  border-color: #ffa45b;
+  background-color: white;
+  border: 3px solid #ffa45b;
+  margin-top: 100px;
+`;
+
+const BtnConfirm = styled.button`
+  @media screen and (max-width: 650px) {
+    width: 40vw;
+  }
+  width: 20vw;
+  height: 50px;
+  margin-left: 20px;
+  border: none;
+  background-color: #ffa45b;
+  color: white;
+`;
+
+const ImageSelect = styled.form`
+  text-align: center;
+  padding-left: 100px;
+`;
+
+const FileContainer = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+  text-align: center;
+`;
+
+const ImageContainer = styled.img`
+  width: 200px;
+  height: 200px;
+  object-fit: fill;
+  margin: 10px;
+`;
+
+const ImageBox = styled.div`
+  flex-direction: column;
 `;
 
 export const BoardUpdate = () => {
@@ -173,12 +260,11 @@ export const BoardUpdate = () => {
   };
 
   return (
-    <div className={styles.frag}>
-      <div className={styles.container}>
+    <div>
+      <Container>
         {/* title */}
         <div>
-          <input
-            className={styles.title}
+          <Title
             type="text"
             placeholder=" 제목"
             id="title"
@@ -250,9 +336,8 @@ export const BoardUpdate = () => {
         </div>
         {/* content */}
         <div>
-          <textarea
+          <Content
             type="textarea"
-            className={styles.content}
             id="content"
             name="content"
             onChange={onChangeData}
@@ -263,22 +348,18 @@ export const BoardUpdate = () => {
         <div>
           <div>
             {/* <strong>업로드 이미지</strong> */}
-            <div className={styles.file__container}>
+            <FileContainer>
               {showImages.map((image, id) => (
-                <div className={styles.ImageBox} key={id}>
-                  <img
-                    className={styles.imageContainer}
-                    src={image}
-                    alt={`${image}`}
-                  />
+                <ImageBox key={id}>
+                  <ImageContainer src={image} alt={`${image}`} />
                   <div>
                     <button onClick={() => handleDeleteImage(id)}>삭제</button>
                   </div>
-                </div>
+                </ImageBox>
               ))}
-            </div>
+            </FileContainer>
           </div>
-          <form className={styles.ImageSelect}>
+          <ImageSelect>
             <input
               type="file"
               id="image"
@@ -287,17 +368,15 @@ export const BoardUpdate = () => {
               onChange={handleAddImages}
             />
             <label htmlFor="image"></label>
-          </form>
+          </ImageSelect>
         </div>
-      </div>
-      <div className={styles.btn__container}>
+      </Container>
+      <BtnContainer>
         <Link to="/board">
-          <button className={styles.btn__cancel}>취소</button>
+          <BtnCancel>취소</BtnCancel>
         </Link>
-        <button className={styles.btn__confirm} onClick={onClickUpload}>
-          수정
-        </button>
-      </div>
+        <BtnConfirm onClick={onClickUpload}>수정</BtnConfirm>
+      </BtnContainer>
     </div>
   );
 };

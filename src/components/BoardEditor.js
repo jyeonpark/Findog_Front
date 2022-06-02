@@ -1,14 +1,100 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "../styles/BoardEditor.module.css";
 import styled from "styled-components";
-import API from './../utils/api';
+import API from "./../utils/api";
 
 const InputPicker = styled.select`
-  width: 80vw;
+  @media screen and (max-width: 650px) {
+    width: 80vw;
+  }
+  width: 45vw;
   height: 50px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
+`;
+
+const Title = styled.input`
+  @media screen and (max-width: 650px) {
+    width: 80vw;
+  }
+  width: 45vw;
+  height: 40px;
+  margin-bottom: 20px;
+  border-color: rgba(0, 0, 0, 0.2);
+`;
+const Content = styled.textarea`
+  @media screen and (max-width: 650px) {
+    width: 80vw;
+  }
+  width: 45vw;
+  height: 440px;
+  margin-top: 20px;
+  border-color: rgba(0, 0, 0, 0.2);
+  text-align: left;
+  padding: 10px;
+`;
+
+const BtnContainer = styled.div`
+  margin-top: 50px;
+  margin-bottom: 100px;
+`;
+
+const BtnCancel = styled.button`
+  @media screen and (max-width: 650px) {
+    width: 40vw;
+  }
+  width: 20vw;
+  height: 50px;
+  margin-right: 20px;
+  border: none;
+  background-color: #ecececdc;
+`;
+
+const Container = styled.div`
+  width: 50vw;
+  @media screen and (max-width: 650px) {
+    width: 90vw;
+  }
+  margin: 0 auto;
+  padding: 20px;
+  border-color: #ffa45b;
+  background-color: white;
+  border: 3px solid #ffa45b;
+  margin-top: 100px;
+`;
+
+const BtnConfirm = styled.button`
+  @media screen and (max-width: 650px) {
+    width: 40vw;
+  }
+  width: 20vw;
+  height: 50px;
+  margin-left: 20px;
+  border: none;
+  background-color: #ffa45b;
+  color: white;
+`;
+
+const ImageSelect = styled.form`
+  text-align: center;
+  padding-left: 100px;
+`;
+
+const FileContainer = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+  text-align: center;
+`;
+
+const ImageContainer = styled.img`
+  width: 200px;
+  height: 200px;
+  object-fit: fill;
+  margin: 10px;
+`;
+
+const ImageBox = styled.div`
+  flex-direction: column;
 `;
 
 export const BoardEditor = (props) => {
@@ -97,23 +183,21 @@ export const BoardEditor = (props) => {
           );
 
           console.log("전송시작");
-          await API
-            .post("/boards/post", formData, {
-              method: "POST",
-              headers: { "Content-Type": "multipart/form-data" },
-            })
-            .then((response) => {
-              console.log(response.data.isSuccess);
+          await API.post("/boards/post", formData, {
+            method: "POST",
+            headers: { "Content-Type": "multipart/form-data" },
+          }).then((response) => {
+            console.log(response.data.isSuccess);
 
-              if (response.data.isSuccess) {
-                console.log("게시물이 저장되었습니다.");
-                alert("게시물이 등록되었습니다!");
-                setPostId(response.data.result.postId);
-              } else {
-                console.log(response.data.isSuccess);
-                console.log(response.data.message);
-              }
-            });
+            if (response.data.isSuccess) {
+              console.log("게시물이 저장되었습니다.");
+              alert("게시물이 등록되었습니다!");
+              setPostId(response.data.result.postId);
+            } else {
+              console.log(response.data.isSuccess);
+              console.log(response.data.message);
+            }
+          });
         } catch (e) {
           console.log(e.response);
         }
@@ -130,12 +214,11 @@ export const BoardEditor = (props) => {
   }, [postId, patchState]);
 
   return (
-    <div className={styles.frag}>
-      <div className={styles.container}>
+    <div>
+      <Container>
         {/* title */}
         <div>
-          <input
-            className={styles.title}
+          <Title
             type="text"
             placeholder=" 제목"
             id="title"
@@ -162,27 +245,52 @@ export const BoardEditor = (props) => {
             </option>
           </InputPicker>
           <InputPicker onChange={onChangeRegion}>
-          <option>지역</option>
-                <option  key={1} value={1}>서울</option>
-                <option  key={2} value={2}>인천</option>
-                <option  key={3} value={3}>경기</option>
-                <option  key={4} value={4}>대전</option>
-                <option  key={5} value={5}>대구</option>
-                <option  key={6} value={6}>부산</option>
-                <option  key={7} value={7}>강원</option>
-                <option  key={8} value={8}>광주</option>
-                <option  key={9} value={9}>울산</option>
-                <option  key={10} value={10}>경남</option>
-                <option  key={11} value={11}>전남</option>
-                <option  key={12} value={12}>전북</option>
-                <option  key={13} value={13}>제주</option>
+            <option>지역</option>
+            <option key={1} value={1}>
+              서울
+            </option>
+            <option key={2} value={2}>
+              인천
+            </option>
+            <option key={3} value={3}>
+              경기
+            </option>
+            <option key={4} value={4}>
+              대전
+            </option>
+            <option key={5} value={5}>
+              대구
+            </option>
+            <option key={6} value={6}>
+              부산
+            </option>
+            <option key={7} value={7}>
+              강원
+            </option>
+            <option key={8} value={8}>
+              광주
+            </option>
+            <option key={9} value={9}>
+              울산
+            </option>
+            <option key={10} value={10}>
+              경남
+            </option>
+            <option key={11} value={11}>
+              전남
+            </option>
+            <option key={12} value={12}>
+              전북
+            </option>
+            <option key={13} value={13}>
+              제주
+            </option>
           </InputPicker>
         </div>
         {/* content */}
         <div>
-          <textarea
+          <Content
             type="textarea"
-            className={styles.content}
             id="content"
             name="content"
             onChange={onChangeData}
@@ -192,22 +300,18 @@ export const BoardEditor = (props) => {
         <div>
           <div>
             {/* <strong>업로드 이미지</strong> */}
-            <div className={styles.file__container}>
+            <FileContainer>
               {showImages.map((image, id) => (
-                <div className={styles.ImageBox} key={id}>
-                  <img
-                    className={styles.imageContainer}
-                    src={image}
-                    alt={`${image}-${id}`}
-                  />
+                <ImageBox>
+                  <ImageContainer src={image} alt={`${image}-${id}`} />
                   <div>
                     <button onClick={() => handleDeleteImage(id)}>삭제</button>
                   </div>
-                </div>
+                </ImageBox>
               ))}
-            </div>
+            </FileContainer>
           </div>
-          <form className={styles.ImageSelect}>
+          <ImageSelect>
             <input
               type="file"
               id="image"
@@ -216,23 +320,22 @@ export const BoardEditor = (props) => {
               onChange={handleAddImages}
             />
             <label htmlFor="image"></label>
-          </form>
+          </ImageSelect>
         </div>
-      </div>
-      <div className={styles.btn__container}>
+      </Container>
+      <BtnContainer>
         <Link to="/board">
-          <button className={styles.btn__cancel}>취소</button>
+          <BtnCancel>취소</BtnCancel>
         </Link>
-        <button
-          className={styles.btn__confirm}
+        <BtnConfirm
           onClick={() => {
             onClickUpload();
             // goToPost();
           }}
         >
           확인
-        </button>
-      </div>
+        </BtnConfirm>
+      </BtnContainer>
     </div>
   );
 };

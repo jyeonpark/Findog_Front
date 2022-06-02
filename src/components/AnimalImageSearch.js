@@ -113,7 +113,8 @@ const DarkBackground = styled.div`
 `;
 
 const DialogBlock = styled.div`
-  width: 30vw;
+  width: 35vw;
+  min-width: fit-content;
   max-height: fit-content;
   padding: 5px;
   background: white;
@@ -146,7 +147,8 @@ const CloseBtn = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 const SelectImg = styled.div`
-  display: flex;
+   -webkit-line-clamp: 1;
+  display: -webkit-box;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -155,19 +157,19 @@ const SelectImg = styled.div`
   background-color: rgb(255, 224, 166) ;
   vertical-align: top;
   font-weight: bold;
-  width: 20vw;
+  width: 25vw;
+  min-width: fit-content;
   color: #ffa45b;
-  padding: 1px;
+  padding: 3px;
   font-size: 1.2vw;
   justify-content: center;
   cursor: pointer;
-  text-decoration-line: underline;
   margin-bottom: 5px;
 `;
 
 const Search = styled.div`
   display: flex;
-  width: 20vw;
+  width: 25vw;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;

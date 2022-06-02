@@ -26,6 +26,7 @@ const Container = styled.div`
 
 const Box1 = styled.div`
   padding-inline-start: 1vw;
+  height: 100%;
   width: 70%;
   text-overflow: ellipsis;
 `;
@@ -33,6 +34,7 @@ const Box1 = styled.div`
 const Box2 = styled.div`
   width: 30%;
   height: 95%;
+
 `;
 
 const Title = styled.div`
@@ -48,6 +50,7 @@ const Title = styled.div`
   @media screen and (max-width: 650px) {
     height: 20%;
   }
+
 `;
 
 const Content = styled.div`
@@ -62,24 +65,25 @@ const Content = styled.div`
   margin-top: 1vh;
   margin-bottom: 1vh;
   white-space: normal;
+
 `;
 
 const BoxProfile = styled.div`
   width: max-content;
   display: flex;
-  height: 15%;
+  height: 20%;
   line-height: 20%;
   font-size: 1vw;
-  background-color: yellow;
   @media screen and (max-width: 650px) {
-    height: 15%;
+    height: 20%;
   }
+
 `;
 
 const TextInfo = styled.div`
   margin-right: 15px;
   font-size: 1.2vw;
-  line-height: 90%;
+
   margin-top: 3%;
 `;
 
@@ -122,7 +126,9 @@ export const BoardBox = ({ item, myBoard }) => {
         <Container>
           <Box1>
             <Title>{item.title}</Title>
-            <Content>{item.content}</Content>
+            <div style={{minHeight:"50%"}}>
+              <Content>{item.content}</Content>
+            </div>
             <BoxProfile>
               <BoxProfilePhoto>
                 <ProfileImage src={profile} />
