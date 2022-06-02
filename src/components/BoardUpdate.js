@@ -3,7 +3,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import API from "../utils/api";
 
-
 const InputPicker = styled.select`
   @media screen and (max-width: 650px) {
     width: 80vw;
@@ -12,6 +11,9 @@ const InputPicker = styled.select`
   height: 50px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 const Title = styled.input`

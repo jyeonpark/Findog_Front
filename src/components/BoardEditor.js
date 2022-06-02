@@ -11,6 +11,9 @@ const InputPicker = styled.select`
   height: 50px;
   text-align: left;
   border-color: rgba(0, 0, 0, 0.2);
+  -webkit-appearance: none;
+-moz-appearance: none; 
+appearance: none;
 `;
 
 const Title = styled.input`

@@ -132,6 +132,9 @@ const InputPicker = styled.select`
   @media screen and (max-width: 650px) {
     height: 4vw;
   }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 const Sort = styled.select`
@@ -146,6 +149,9 @@ const Sort = styled.select`
   @media screen and (max-width: 650px) {
     height: 4vw;
   }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 const TextDate = styled.div`
@@ -165,16 +171,16 @@ const SDatePicker = styled(DatePicker)`
   border: none;
 
   @media screen and (max-width: 650px) {
-  font-size: 1.3vw;
+    font-size: 1.5vw;
   }
 `;
 
 const Notice = styled.div`
-font-size: 1px;
-color:grey;
-text-align: left;
-@media screen and (max-width: 650px) {
-  font-size: 1vw;
+  font-size: 1px;
+  color: grey;
+  text-align: left;
+  @media screen and (max-width: 650px) {
+    font-size: 1.2vw;
   }
 `;
 

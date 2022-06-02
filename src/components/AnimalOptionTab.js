@@ -94,6 +94,9 @@ const InputPicker = styled.select`
     font-size: 2vw;
   }
   text-align: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 function AnimalOptionTab({ setOptions }) {
