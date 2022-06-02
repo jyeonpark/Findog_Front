@@ -26,13 +26,12 @@ const Container = styled.div`
 
 const Box1 = styled.div`
   padding-inline-start: 1vw;
-  width: 65%;
+  width: 70%;
   text-overflow: ellipsis;
 `;
 
 const Box2 = styled.div`
   width: 30%;
-  margin-right: 5vw;
   height: 95%;
 `;
 
@@ -47,7 +46,7 @@ const Title = styled.div`
   display: -webkit-box;
   padding-top: 1vh;
   @media screen and (max-width: 650px) {
-    height: 25%;
+    height: 20%;
   }
 `;
 
@@ -57,16 +56,12 @@ const Content = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-wrap: break-word;
-
   text-overflow: ellipsis;
   text-align: start;
   font-size: 1.3vw;
   margin-top: 1vh;
   margin-bottom: 1vh;
   white-space: normal;
-  @media screen and (max-width: 650px) {
-    -webkit-line-clamp: 3;
-  }
 `;
 
 const BoxProfile = styled.div`
@@ -75,8 +70,9 @@ const BoxProfile = styled.div`
   height: 15%;
   line-height: 20%;
   font-size: 1vw;
+  background-color: yellow;
   @media screen and (max-width: 650px) {
-    height: 20%;
+    height: 15%;
   }
 `;
 
@@ -94,13 +90,11 @@ const BoxProfilePhoto = styled.div`
 const Photo = styled.img`
   object-fit: fill;
   width: 100%;
-  height: 80%;
-  margin-top: 10%;
-  margin-left: 5vw;
+  height: 100%;
 `;
 
 const ProfileImage = styled.img`
-  height: 100%;
+  height: 80%;
   vertical-align: baseline;
   border-radius: 40%;
 `;
