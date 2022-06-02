@@ -226,6 +226,10 @@ const CloseBtn = styled(FontAwesomeIcon)`
   height: 3vw;
   float: right;
   cursor: pointer;
+  @media screen and (max-width: 650px) {
+    width: 5vw;
+  height: 5vw;
+  }
 `;
 
 const ImageBox = styled.div`
@@ -235,8 +239,8 @@ const ImageBox = styled.div`
 
 const DogImage = styled.img`
   width: 90%;
-  height: 27vw;
-  max-height: max-content;
+  height: 30vh;
+  min-height: fit-content;
 `;
 
 const RecruiteState = styled.div`
@@ -244,6 +248,7 @@ const RecruiteState = styled.div`
   top: 4%;
   left: 8%;
   width: fit-content;
+  font-size: 1.5vw;
   padding-inline-start: 5%;
   padding-inline-end: 5%;
   height: 30px;
@@ -252,6 +257,9 @@ const RecruiteState = styled.div`
   background-color: ${(props) =>
     props.processState === "보호중" ? "#FFA45B" : "grey"};
   color: white;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const ImageBottomBox = styled.div`
@@ -270,18 +278,27 @@ height: fit-content;
   padding-inline-start: 3px;
   padding-inline-end: 3px;
   background-color: rgb(255, 164, 91);
+  @media screen and (max-width: 650px) {
+    font-size: 4vw;
+  }
 `;
 
 const DogInfoTitle = styled.div`
   width: 30%;
   text-align: left;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const DogInfoText = styled.div`
   width: 70%;
   text-align: left;
   font-size: 1.2vw;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 `;
 
 const DogInfoTextBox = styled.div`

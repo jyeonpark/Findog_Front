@@ -62,6 +62,9 @@ const Content = styled.div`
   margin-top: 1vh;
   margin-bottom: 1vh;
   white-space: normal;
+  @media screen and (max-width: 650px) {
+    font-size: 2vw;
+  }
 
 `;
 
@@ -70,7 +73,7 @@ const BoxProfile = styled.div`
   display: flex;
   height: 25%;
   line-height: 25%;
-  font-size: 1vw;
+
 
 `;
 
@@ -78,6 +81,9 @@ const TextInfo = styled.div`
   margin-right: 15px;
   font-size: 1.2vw;
   margin-top: 3%;
+  @media screen and (max-width: 650px) {
+    font-size: 1.6vw;
+  }
 `;
 
 const BoxProfilePhoto = styled.div`
