@@ -2,29 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Tab from "./Tab";
+import logo from "../images/logo.png";
 
 const Top = styled.div`
   width: 100vw;
   height: 10vh;
   display: flex;
   justify-content: left;
-  margin-bottom: 5vh;
-  margin-top: 2vh;
+  margin-bottom: 10vw;
+
   @media screen and (max-width: 650px) {
     margin-bottom: 1vh;
   }
 `;
 
-const HeaderText = styled.div`
-  color: rgb(255, 164, 91);
+const HeaderText = styled.img`
+margin-top: 1vw;
+  margin-left: 2vw;
   width: 20vw;
-  font-weight: 900;
-  font-size: 3vw;
-  height: 3vw;
-  line-height: 3vw;
+  height: 8vw;
   @media screen and (max-width: 650px) {
     font-size: 4vw;
   }
+
 `;
 
 const Container = styled.div`
@@ -61,6 +61,7 @@ const Wrap = styled.div`
   display: flex;
   width: 70vw;
   justify-content: right;
+  margin-top: 3vw;
 `;
 
 function Header(props) {
@@ -88,10 +89,8 @@ function Header(props) {
             onClick={() => {
               setTabMenu(1);
             }}
-          >
-            {" "}
-            Findog
-          </HeaderText>
+            src={logo}
+          ></HeaderText>
         </Link>
       </div>
       <Wrap>

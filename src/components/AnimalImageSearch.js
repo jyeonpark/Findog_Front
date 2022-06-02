@@ -37,7 +37,7 @@ function AnimalImageSearch({ onClose }) {
     formData.append("input", image.image_file);
 
     axios
-      .post("https://8e27-34-73-138-110.ngrok.io/", formData, {
+      .post("http://35d9-34-70-28-3.ngrok.io/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
