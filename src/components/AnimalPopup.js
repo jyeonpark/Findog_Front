@@ -186,7 +186,7 @@ const DialogBlock = styled.div`
   background: white;
   border-radius: 2px;
   border: solid;
-  border-color: #FFA45B;
+  border-color: #ffa45b;
   border-width: 5px;
   overflow: scroll;
   &::-webkit-scrollbar {
@@ -228,7 +228,7 @@ const CloseBtn = styled(FontAwesomeIcon)`
   cursor: pointer;
   @media screen and (max-width: 650px) {
     width: 5vw;
-  height: 5vw;
+    height: 5vw;
   }
 `;
 
@@ -272,14 +272,14 @@ const ImageBottomBox = styled.div`
 `;
 
 const DogKind = styled.div`
-height: fit-content;
+  height: fit-content;
   font-weight: bolder;
   font-size: 2vw;
   padding-inline-start: 3px;
   padding-inline-end: 3px;
   background-color: rgb(255, 164, 91);
   @media screen and (max-width: 650px) {
-    font-size: 4vw;
+    font-size: 3vw;
   }
 `;
 
@@ -316,8 +316,8 @@ const Divider = styled.div`
 `;
 
 const LikeIcon = styled.img`
-width: 5vw;
-height: 5vw;
+  width: 5vw;
+  height: 5vw;
   float: right;
   cursor: pointer;
 `;
