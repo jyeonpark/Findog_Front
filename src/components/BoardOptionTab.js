@@ -36,12 +36,14 @@ const BoxRegion = styled.div`
   margin-bottom: auto;
   font-size: 1.2vw;
   min-width: fit-content;
+  color: black;
   @media screen and (max-width: 650px) {
     font-size: 2vw;
   }
 `;
 
 const BoxCate = styled.div`
+  color: black;
   margin-top: auto;
   margin-bottom: auto;
   font-size: 1.2vw;
@@ -108,6 +110,7 @@ const BtnSearch = styled.button`
   width: 7vw;
   height: 3vw;
   border: none;
+  color: black;
   background-color: rgb(255, 164, 91);
   font-size: 1.2vw;
   @media screen and (max-width: 650px) {
@@ -120,6 +123,7 @@ const BtnSearch = styled.button`
 const InputPicker = styled.select`
   width: 10vw;
   height: 3vw;
+  color: black;
   margin-left: 7px;
   margin-right: 7px;
   text-align: left;
@@ -151,6 +155,7 @@ const TextDate = styled.div`
   margin-right: 2vw;
   min-width: fit-content;
   @media screen and (max-width: 650px) {
+    font-size: 1.3vw;
     height: 4vw;
   }
 `;
@@ -158,6 +163,19 @@ const TextDate = styled.div`
 const SDatePicker = styled(DatePicker)`
   font-size: 1vw;
   border: none;
+
+  @media screen and (max-width: 650px) {
+  font-size: 1.3vw;
+  }
+`;
+
+const Notice = styled.div`
+font-size: 1px;
+color:grey;
+text-align: left;
+@media screen and (max-width: 650px) {
+  font-size: 1vw;
+  }
 `;
 
 function BoardOptionTab({ setOptions }) {
@@ -351,10 +369,10 @@ function BoardOptionTab({ setOptions }) {
               />
             </div>
           </BoxDate>
-          <div style={{ fontSize: "1px", color: "grey", textAlign: "left" }}>
+          <Notice>
             * 년/월/일 형식으로 날짜를 입력한 후 엔터를 입력하거나, 달력에서
             날짜를 선택해주세요.
-          </div>
+          </Notice>
           {/* 글쓰기, 관심목록 */}
           <Link
             to="/board/edit"

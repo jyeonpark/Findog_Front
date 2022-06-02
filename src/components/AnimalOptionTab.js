@@ -39,6 +39,7 @@ const BtnImgSearch = styled.button`
   line-height: 3vw;
   border-radius: 30px;
   border: solid;
+  color: black;
   background-color: white;
   border-color: rgba(255, 164, 91);
   border-width: 2px;
@@ -80,11 +81,13 @@ const BtnSearch = styled.button`
   font-size: 1.2vw;
   min-width: fit-content;
   margin-left: 2vw;
+  color: black;
 `;
 
 const InputPicker = styled.select`
   width: 10vw;
   height: 3vw;
+  color: black;
   border: none;
   margin-left: 2vw;
   @media screen and (max-width: 650px) {
