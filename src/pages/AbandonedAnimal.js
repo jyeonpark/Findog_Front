@@ -108,7 +108,6 @@ export const AbandonedAnimal = ({ myInterest, Notice }) => {
             response.data.result.animalSimpleInfo.length === 0
           ) {
             Notice();
-            console.log("ㅠㅠ");
           }
         } else {
           console.log(response);
@@ -134,7 +133,9 @@ export const AbandonedAnimal = ({ myInterest, Notice }) => {
   return (
     <div>
       {!myInterest && (
-        <AnimalOptionTab setOptions={setOptions}></AnimalOptionTab>
+        <AnimalOptionTab
+          setOptions={setOptions}
+        ></AnimalOptionTab>
       )}
       <Body>
         <Container myInterest={myInterest}>
@@ -185,7 +186,7 @@ const Container = styled.div`
     props.myInterest === true ? "1fr 1fr" : "1fr 1fr 1fr"};
   @media screen and (max-width: 650px) {
     grid-template-columns: ${(props) =>
-    props.myInterest === true ? "1fr" : "1fr 1fr"};
+      props.myInterest === true ? "1fr" : "1fr 1fr"};
   }
 `;
 

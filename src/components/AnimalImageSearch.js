@@ -6,8 +6,9 @@ import { faImage as imgIcon } from "@fortawesome/free-solid-svg-icons";
 import defaultImage from "../images/defaultImage.png";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import API from "./../utils/api";
 
-function AnimalImageSearch({ onClose }) {
+function AnimalImageSearch({ onClose, ImageSearch }) {
   const [image, setImage] = useState({
     image_file: "",
     preview_URL: defaultImage,
@@ -35,23 +36,25 @@ function AnimalImageSearch({ onClose }) {
     const formData = new FormData();
 
     formData.append("input", image.image_file);
+    formData.append("serverUrl", "http://e126-34-140-77-64.ngrok.io/");
 
-    axios
-      .post("http://35d9-34-70-28-3.ngrok.io/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    API.post("/animals/searchImage", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
       .then((response) => {
-        if (response.data.isSuccess) {
-          alert("사진이 등록되었습니다.");
-        } else {
-          alert("사진 등록에 실패했습니다.");
-        }
+        onClose();
+        const breed = response.data.class_name;
+        const reset = {
+          word: breed,
+          region: "",
+          category: "",
+          breed: "",
+          status: "",
+        };
+        ImageSearch(reset);
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
   };
 
   return (
@@ -147,14 +150,14 @@ const CloseBtn = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 const SelectImg = styled.div`
-   -webkit-line-clamp: 1;
+  -webkit-line-clamp: 1;
   display: -webkit-box;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
   text-align: center;
-  background-color: rgb(255, 224, 166) ;
+  background-color: rgb(255, 224, 166);
   vertical-align: top;
   font-weight: bold;
   width: 25vw;
@@ -190,7 +193,7 @@ const Search = styled.div`
 const Img = styled.img`
   position: relative;
   width: 12vw;
-  height:12vw;
+  height: 12vw;
   display: inline-block;
   justify-content: center;
   color: white;

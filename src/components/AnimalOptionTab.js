@@ -120,8 +120,7 @@ function AnimalOptionTab({ setOptions }) {
         breed: "",
         status: "",
       };
-      setInputs(reset);
-      setOptions(reset);
+      ImageSearch(reset);
     }
   };
 
@@ -131,6 +130,11 @@ function AnimalOptionTab({ setOptions }) {
 
   const onClick = () => {
     setDialog(true);
+  };
+
+  const ImageSearch = (reset) => {
+    setInputs(reset);
+    setOptions(reset);
   };
 
   return (
@@ -245,7 +249,10 @@ function AnimalOptionTab({ setOptions }) {
         </div>
       </ContainerSearch>
       {dialog ? (
-        <AnimalImageSearch onClose={onClose}></AnimalImageSearch>
+        <AnimalImageSearch
+          onClose={onClose}
+          ImageSearch={ImageSearch}
+        ></AnimalImageSearch>
       ) : null}
     </Container>
   );
