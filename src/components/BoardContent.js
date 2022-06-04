@@ -170,16 +170,16 @@ export const BoardContent = ({ postId, myBoard }) => {
     // 카테고리
     switch (inputs.category) {
       case 1:
-        setCategoryText("기타");
-        break;
-      case 2:
         setCategoryText("찾아주세요");
         break;
-      case 3:
+      case 2:
         setCategoryText("봤어요");
         break;
-      case 4:
+      case 3:
         setCategoryText("도와주세요");
+        break;
+      case 4:
+        setCategoryText("기타");
         break;
       default:
         setCategoryText("default");
@@ -311,7 +311,7 @@ export const BoardContent = ({ postId, myBoard }) => {
             {inputs.commentCount}&nbsp;&nbsp;&nbsp;&nbsp; 조회수 {inputs.hits}
           </ExtraInfo>
           <LikeIcon
-          size="1x"
+            size="1x"
             icon={inputs.userLiked ? solidHeart : regularHeart}
             onClick={Like}
           ></LikeIcon>

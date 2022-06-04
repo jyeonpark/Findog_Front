@@ -181,7 +181,7 @@ const SDatePicker = styled(DatePicker)`
 `;
 
 const Notice = styled.div`
-  font-size: 1px;
+  font-size: 3px;
   color: grey;
   text-align: left;
   @media screen and (max-width: 650px) {
@@ -385,16 +385,20 @@ function BoardOptionTab({ setOptions }) {
             날짜를 선택해주세요.
           </Notice>
           {/* 글쓰기, 관심목록 */}
-          <Link
-            to="/board/edit"
+          <div></div>
+          <div
             style={{
+              backgroundColor: "yello",
               justifyContent: "right",
               display: "flex",
               textDecorationLine: "none",
             }}
           >
-            <BtnWrite onClick={popUp}>글쓰기</BtnWrite>
-          </Link>
+            {" "}
+            <Link to="/board/edit">
+              <BtnWrite onClick={popUp}>글쓰기</BtnWrite>
+            </Link>
+          </div>
         </div>
       </ContainerSearch>
     </Container>

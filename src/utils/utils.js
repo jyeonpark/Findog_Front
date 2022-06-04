@@ -11,7 +11,7 @@ export function AuthLogin(jwt) {
         },
       })
       .then((response) => {
-        console.log("자동로그인",response);
+        console.log("자동로그인 됨",response);
         if (response.data.isSuccess) {
           sessionStorage.setItem("userJWT", response.data.result.userJWT);
           sessionStorage.setItem("userID", response.data.result.userId);
