@@ -457,8 +457,9 @@ function SignUp() {
       })
         .then((response) => {
           if (response.data.isSuccess) {
-            alert("회원가입에 성공했습니다.");
             AuthLogin(response.data.result.userJWT);
+            alert("회원가입에 성공했습니다.");
+            setTimeout(() => console.log("after"), 1000);
             navigate("/");
             window.location.reload();
           } else {
@@ -568,7 +569,6 @@ function SignUp() {
             <BoxText>비밀번호</BoxText>
             <BoxSearch>
               <InputSearch
-           
                 type={"password"}
                 name={"password"}
                 onChange={onInputChange}
@@ -588,7 +588,6 @@ function SignUp() {
             <BoxText>비밀번호 확인</BoxText>
             <BoxSearch>
               <InputSearch
-           
                 name={"passwordCheck"}
                 onChange={onInputChange}
                 value={passwordCheck}
