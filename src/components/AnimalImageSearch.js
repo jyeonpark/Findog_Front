@@ -23,6 +23,12 @@ function AnimalImageSearch({ onClose, ImageSearch }) {
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
+
+      var ext = e.target.files[0].name.split(".").pop().toLowerCase();
+      if (ext === "png") {
+        alert(ext + "파일은 업로드 하실 수 없습니다.");
+        return;
+      }
     }
     reader.onload = () => {
       setImage({
@@ -33,11 +39,11 @@ function AnimalImageSearch({ onClose, ImageSearch }) {
   };
 
   const onSubmit = (event) => {
-    if (image.image_file === null || image.image_file === ""){
+    if (image.image_file === null || image.image_file === "") {
       alert("사진을 등록해주세요.");
       event.preventDefault();
       return;
-    } 
+    }
     const formData = new FormData();
 
     formData.append("input", image.image_file);
@@ -47,19 +53,18 @@ function AnimalImageSearch({ onClose, ImageSearch }) {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    })
-      .then((response) => {
-        onClose();
-        const breed = response.data.class_name;
-        const reset = {
-          word: breed,
-          region: "",
-          category: "",
-          breed: "",
-          status: "",
-        };
-        ImageSearch(reset);
-      })
+    }).then((response) => {
+      onClose();
+      const breed = response.data.class_name;
+      const reset = {
+        word: breed,
+        region: "",
+        category: "",
+        breed: "",
+        status: "",
+      };
+      ImageSearch(reset);
+    });
   };
 
   return (
@@ -77,7 +82,7 @@ function AnimalImageSearch({ onClose, ImageSearch }) {
         <input
           type="file"
           style={{ display: "none" }}
-          accept="image/*"
+          accept="image/jpg, image/jpeg"
           name="profile_img"
           onChange={OnProfileChange}
           ref={fileInput}
