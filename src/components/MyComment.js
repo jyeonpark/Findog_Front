@@ -178,13 +178,15 @@ const Container = styled.div`
 
 const Box = styled.div`
   cursor: pointer;
-  width: 50%;
+  width: 90%;
   text-align: start;
 `;
 
 const Comment = styled.div`
   font-size: 1em;
   padding: 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const Option = styled.div`

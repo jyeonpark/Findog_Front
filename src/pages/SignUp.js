@@ -459,7 +459,7 @@ function SignUp() {
           if (response.data.isSuccess) {
             AuthLogin(response.data.result.userJWT);
             alert("회원가입에 성공했습니다.");
-            setTimeout(() => console.log("after"), 1000);
+            setTimeout(() => console.log("after"), 2000);
             navigate("/");
             window.location.reload();
           } else {
