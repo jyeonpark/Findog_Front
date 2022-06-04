@@ -32,7 +32,12 @@ function AnimalImageSearch({ onClose, ImageSearch }) {
     };
   };
 
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    if (image.image_file === null || image.image_file === ""){
+      alert("사진을 등록해주세요.");
+      event.preventDefault();
+      return;
+    } 
     const formData = new FormData();
 
     formData.append("input", image.image_file);

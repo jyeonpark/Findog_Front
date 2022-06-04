@@ -12,13 +12,12 @@ const Container = styled.div`
   margin-right: auto;
   text-align: left;
   display: flex;
-  padding-left: ${(props) => (props.reply ? "50px" : "0px")};
+  padding-left: ${(props) => (props.reply ? "7%" : "0px")};
 `;
 
 const ProfileImage = styled.div`
   width: 10%;
   height: 10%;
-
 `;
 
 const ProfileImageShow = styled.img`
@@ -36,13 +35,12 @@ const ProfileName = styled.div`
 
 const ContentBox = styled.div`
   font-size: 1.2vw;
-  width: ${(props) => (props.reply ? "70%" : "100%")};
   margin-top: 5px;
   color: ${(props) => (props.deleted ? "lightgrey" : "")};
 `;
 
 const ExtraInfo = styled.div`
-
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
@@ -130,7 +128,7 @@ export const SingleComment = ({ comment, postId, reply }) => {
               referrerpolicy="no-referrer"
             />
           </ProfileImage>
-          <div>
+          <div style={{width:"90%"}}>
             <ProfileName>{comment.nickname}</ProfileName>
 
             <ContentBox reply={reply} deleted={deleted}>

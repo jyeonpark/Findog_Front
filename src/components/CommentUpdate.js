@@ -14,6 +14,7 @@ const Container = styled.div`
   border: 1px solid lightgray;
   border-radius: 3px;
   text-align: left;
+  background-color: white;
 `;
 
 const CommentInput = styled.textarea`
