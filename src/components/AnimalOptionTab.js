@@ -193,7 +193,7 @@ function AnimalOptionTab({ setOptions }) {
                 </option>
               </InputPicker>
             </BoxFilter>
-            {inputs.category !== "" && (
+            {/* {inputs.category !== "" && (
               <BoxSearch style={{ marginLeft: "2vw" }}>
                 <InputOption
                   style={{ width: "15vw" }}
@@ -208,7 +208,7 @@ function AnimalOptionTab({ setOptions }) {
                   }
                 ></InputOption>
               </BoxSearch>
-            )}
+            )} */}
             <BoxFilter>
               <InputPicker
                 value={inputs.status}
