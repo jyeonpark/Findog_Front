@@ -47,7 +47,7 @@ function AnimalImageSearch({ onClose, ImageSearch }) {
     const formData = new FormData();
 
     formData.append("input", image.image_file);
-    formData.append("serverUrl", "http://e126-34-140-77-64.ngrok.io/");
+    formData.append("serverUrl", "http://5b44-34-90-27-84.ngrok.io/");
 
     API.post("/animals/searchImage", formData, {
       headers: {
